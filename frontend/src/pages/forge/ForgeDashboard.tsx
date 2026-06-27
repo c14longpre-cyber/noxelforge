@@ -51,7 +51,7 @@ export default function ForgeDashboard() {
     </div>
   );
 
-  const { membre, trust_score, points, badge, flux_actuel, etapes_manquantes } = statut;
+  const { trust_score, points, badge, flux_actuel, etapes_manquantes } = statut;
   const tier = trust_score?.tier_forge ?? 'bronze';
   const tierColor = TIER_COLORS[tier];
 
