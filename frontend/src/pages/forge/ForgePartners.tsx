@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-const NICHES = ['SEO','Marketing','IA','E-commerce','Dev Web','Business','Design','Finance','Santé','Éducation'];
+const NICHES = ['SEO','Marketing','AI','E-commerce','Web Dev','Business','Design','Finance','Health','Education'];
 const TIER_COLORS: Record<string,string> = { bronze:'#CD7F32', silver:'#A8A9AD', gold:'#FFD700', platinum:'#E5E4E2', diamond:'#B9F2FF' };
 const TIER_ICONS: Record<string,string> = { bronze:'🥉', silver:'🥈', gold:'🥇', platinum:'⬡', diamond:'💎' };
 
@@ -32,16 +32,14 @@ export default function ForgePartners() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <Link to="/forge" style={{ color: 'var(--muted)', fontSize: 13 }}>← Forge</Link>
           <span style={{ color: 'var(--soft)' }}>·</span>
-          <span style={{ fontWeight: 900, fontSize: 15 }}>Partenaires Forge</span>
+          <span style={{ fontWeight: 900, fontSize: 15 }}>Forge Partners</span>
         </div>
-        <Link to="/forge/submit" className="nx-pill" style={{ padding: '7px 16px', fontSize: 13 }}>+ Soumettre</Link>
+        <Link to="/forge/submit" className="nx-pill" style={{ padding: '7px 16px', fontSize: 13 }}>+ Submit</Link>
       </nav>
 
       <div style={{ maxWidth: 960, margin: '0 auto', padding: '32px 32px 80px' }}>
-
-        {/* POINTS EXPLAINER */}
         <div className="nx-card" style={{ marginBottom: 24, display: 'flex', gap: 32, flexWrap: 'wrap' }}>
-          {[['🔗','Backlink reçu','+100 pts'],['⚒️','Backlink donné','+75 pts'],['✅','Soumission approuvée','+50 pts']].map(([icon,label,pts]) => (
+          {[['🔗','Backlink received','+100 pts'],['⚒️','Backlink given','+75 pts'],['✅','Submission approved','+50 pts']].map(([icon,label,pts]) => (
             <div key={String(label)} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <span style={{ fontSize: 20 }}>{icon}</span>
               <div>
@@ -52,22 +50,20 @@ export default function ForgePartners() {
           ))}
         </div>
 
-        {/* FILTRES */}
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 20 }}>
-          <button onClick={() => { setNicheFilter(''); setPage(1); }} style={{ padding: '5px 12px', borderRadius: 8, border: '1px solid var(--border)', background: !nicheFilter ? 'var(--g)' : 'transparent', color: !nicheFilter ? '#07090f' : 'var(--muted)', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>Tous</button>
+          <button onClick={() => { setNicheFilter(''); setPage(1); }} style={{ padding: '5px 12px', borderRadius: 8, border: '1px solid var(--border)', background: !nicheFilter ? 'var(--g)' : 'transparent', color: !nicheFilter ? '#07090f' : 'var(--muted)', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>All</button>
           {NICHES.map(n => (
             <button key={n} onClick={() => { setNicheFilter(n); setPage(1); }} style={{ padding: '5px 12px', borderRadius: 8, border: '1px solid var(--border)', background: nicheFilter === n ? 'var(--g)' : 'transparent', color: nicheFilter === n ? '#07090f' : 'var(--muted)', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>{n}</button>
           ))}
         </div>
 
-        {/* LISTE */}
         {loading ? (
-          <div style={{ textAlign: 'center', color: 'var(--muted)', padding: 60, fontSize: 14 }}>⚒️ Chargement des partenaires...</div>
+          <div style={{ textAlign: 'center', color: 'var(--muted)', padding: 60, fontSize: 14 }}>⚒️ Loading partners...</div>
         ) : partenaires.length === 0 ? (
           <div className="nx-card" style={{ textAlign: 'center', padding: 60 }}>
             <div style={{ fontSize: 40, marginBottom: 12 }}>🤝</div>
-            <div style={{ fontWeight: 800, marginBottom: 8, fontSize: 15 }}>Aucun partenaire dans cette niche</div>
-            <Link to="/forge/submit" className="nx-pill" style={{ display: 'inline-block', marginTop: 16 }}>Soumettre mon site</Link>
+            <div style={{ fontWeight: 800, marginBottom: 8, fontSize: 15 }}>No partners in this niche yet</div>
+            <Link to="/forge/submit" className="nx-pill" style={{ display: 'inline-block', marginTop: 16 }}>Submit my site</Link>
           </div>
         ) : (
           <div style={{ display: 'grid', gap: 10 }}>
@@ -86,7 +82,7 @@ export default function ForgePartners() {
                   <p style={{ margin: '0 0 8px', color: 'var(--muted)', fontSize: 13, lineHeight: 1.5 }}>{p.description}</p>
                   <a href={p.url_soumise} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--g)', fontSize: 12 }}>{p.url_soumise} ↗</a>
                 </div>
-                <div style={{ fontSize: 11, color: 'var(--soft)', whiteSpace: 'nowrap' }}>{new Date(p.created_at).toLocaleDateString('fr-CA')}</div>
+                <div style={{ fontSize: 11, color: 'var(--soft)', whiteSpace: 'nowrap' }}>{new Date(p.created_at).toLocaleDateString('en-CA')}</div>
               </div>
             ))}
           </div>
@@ -94,9 +90,9 @@ export default function ForgePartners() {
 
         {partenaires.length > 0 && (
           <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginTop: 28 }}>
-            <button onClick={() => setPage(p => Math.max(1,p-1))} disabled={page===1} style={{ padding: '7px 16px', borderRadius: 8, border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', cursor: page===1?'not-allowed':'pointer', opacity: page===1?0.4:1, fontSize: 13 }}>← Précédent</button>
+            <button onClick={() => setPage(p => Math.max(1,p-1))} disabled={page===1} style={{ padding: '7px 16px', borderRadius: 8, border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', cursor: page===1?'not-allowed':'pointer', opacity: page===1?0.4:1, fontSize: 13 }}>← Previous</button>
             <span style={{ padding: '7px 14px', color: 'var(--muted)', fontSize: 13 }}>Page {page}</span>
-            <button onClick={() => setPage(p => p+1)} disabled={partenaires.length<20} style={{ padding: '7px 16px', borderRadius: 8, border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', cursor: partenaires.length<20?'not-allowed':'pointer', opacity: partenaires.length<20?0.4:1, fontSize: 13 }}>Suivant →</button>
+            <button onClick={() => setPage(p => p+1)} disabled={partenaires.length<20} style={{ padding: '7px 16px', borderRadius: 8, border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', cursor: partenaires.length<20?'not-allowed':'pointer', opacity: partenaires.length<20?0.4:1, fontSize: 13 }}>Next →</button>
           </div>
         )}
       </div>

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-const NICHES = ['SEO','Marketing','IA','E-commerce','Dev Web','Business','Design'];
+const NICHES = ['SEO','Marketing','AI','E-commerce','Web Dev','Business','Design'];
 
 const TIER_CONFIG: Record<string, { color: string; icon: string; label: string }> = {
   bronze:   { color: '#CD7F32', icon: '🥉', label: 'Bronze' },
@@ -43,7 +43,7 @@ export default function ForgeLanding() {
         </div>
         <div style={{ display: 'flex', gap: 8 }}>
           <Link to="/forge/dashboard" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>Dashboard</Link>
-          <Link to="/forge/submit" className="nx-pill" style={{ padding: '7px 16px', fontSize: 13 }}>⚒️ Soumettre</Link>
+          <Link to="/forge/submit" className="nx-pill" style={{ padding: '7px 16px', fontSize: 13 }}>⚒️ Submit</Link>
         </div>
       </nav>
 
@@ -51,23 +51,23 @@ export default function ForgeLanding() {
       <section style={{ padding: '72px 32px 56px', textAlign: 'center', borderBottom: '1px solid var(--border)', background: 'linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%)' }}>
         <div className="nx-kicker" style={{ marginBottom: 16 }}>⚒️ NOXEL Forge™ — Backlink Exchange Ecosystem</div>
         <h1 className="nx-title" style={{ fontSize: 'clamp(2rem,5vw,3.5rem)', textAlign: 'center', marginBottom: 20 }}>
-          Forge ton{' '}
-          <span style={{ color: 'var(--g)' }}>autorité</span>
+          Forge your{' '}
+          <span style={{ color: 'var(--g)' }}>authority</span>
         </h1>
         <p className="nx-subtitle" style={{ textAlign: 'center', margin: '0 auto 40px' }}>
-          Échange des backlinks avec des sites vérifiés par Alfred. Qualité garantie, spam impossible. Donnant-donnant.
+          Exchange backlinks with verified sites filtered by Alfred. Quality guaranteed, spam impossible. Give one, get one.
         </p>
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link to="/forge/submit" className="nx-pill">⚒️ Soumettre mon site</Link>
-          <Link to="/forge/dashboard" style={{ padding: '12px 22px', borderRadius: 'var(--r)', border: '1px solid var(--g-border)', color: 'var(--g)', fontSize: 14, fontWeight: 700, background: 'var(--g-dim)' }}>Mon Dashboard →</Link>
+          <Link to="/forge/submit" className="nx-pill">⚒️ Submit my site</Link>
+          <Link to="/forge/dashboard" style={{ padding: '12px 22px', borderRadius: 'var(--r)', border: '1px solid var(--g-border)', color: 'var(--g)', fontSize: 14, fontWeight: 700, background: 'var(--g-dim)' }}>My Dashboard →</Link>
         </div>
 
         {/* STATS */}
         <div style={{ display: 'flex', gap: 48, justifyContent: 'center', marginTop: 56, flexWrap: 'wrap' }}>
           {[
-            { icon: '⚒️', title: 'Forge Points', desc: 'Gagne des points à chaque échange' },
-            { icon: '🤵', title: 'Alfred filtre', desc: 'Zéro spam, zéro contenu générique' },
-            { icon: '🔗', title: 'Donnant-donnant', desc: 'Tu donnes un backlink, tu en reçois un' },
+            { icon: '⚒️', title: 'Forge Points', desc: 'Earn points on every exchange' },
+            { icon: '🤵', title: 'Alfred filters', desc: 'Zero spam, zero generic content' },
+            { icon: '🔗', title: 'Give one, get one', desc: 'You give a backlink, you get one back' },
           ].map(({ icon, title, desc }) => (
             <div key={title} style={{ textAlign: 'center' }}>
               <div style={{ fontSize: 28, marginBottom: 8 }}>{icon}</div>
@@ -81,14 +81,14 @@ export default function ForgeLanding() {
       {/* TRUST SCORE TIERS */}
       <section style={{ padding: '56px 32px', maxWidth: 960, margin: '0 auto' }}>
         <div className="nx-kicker" style={{ marginBottom: 8, textAlign: 'center' }}>Trust Score Forge™</div>
-        <p style={{ textAlign: 'center', color: 'var(--muted)', marginBottom: 32, fontSize: 14 }}>Chaque site reçoit un score /100 basé sur 6 signaux de qualité</p>
+        <p style={{ textAlign: 'center', color: 'var(--muted)', marginBottom: 32, fontSize: 14 }}>Every site receives a score out of 100 based on 6 quality signals</p>
         <div className="nx-grid nx-grid--5">
           {[
-            { tier: 'bronze',   range: '0–40',   desc: 'Accès lecture' },
-            { tier: 'silver',   range: '41–65',  desc: 'Soumission active' },
-            { tier: 'gold',     range: '66–85',  desc: 'Partenaire vérifié' },
-            { tier: 'platinum', range: '86–94',  desc: 'Autorité confirmée' },
-            { tier: 'diamond',  range: '95–100', desc: 'Élite Forge' },
+            { tier: 'bronze',   range: '0–40',   desc: 'Read-only access' },
+            { tier: 'silver',   range: '41–65',  desc: 'Submission active' },
+            { tier: 'gold',     range: '66–85',  desc: 'Verified partner' },
+            { tier: 'platinum', range: '86–94',  desc: 'Confirmed authority' },
+            { tier: 'diamond',  range: '95–100', desc: 'Forge Elite' },
           ].map(({ tier, range, desc }) => {
             const t = TIER_CONFIG[tier];
             return (
@@ -106,11 +106,11 @@ export default function ForgeLanding() {
       <section style={{ padding: '0 32px 80px', maxWidth: 960, margin: '0 auto' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20, flexWrap: 'wrap', gap: 12 }}>
           <div>
-            <div className="nx-kicker" style={{ marginBottom: 4 }}>Annuaire</div>
-            <h2 style={{ fontSize: 20, fontWeight: 900, margin: 0 }}>Sites vérifiés Forge</h2>
+            <div className="nx-kicker" style={{ marginBottom: 4 }}>Directory</div>
+            <h2 style={{ fontSize: 20, fontWeight: 900, margin: 0 }}>Verified Forge Sites</h2>
           </div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            <button onClick={() => { setNicheFilter(''); setPage(1); }} style={{ padding: '5px 12px', borderRadius: 8, border: '1px solid var(--border)', background: !nicheFilter ? 'var(--g)' : 'transparent', color: !nicheFilter ? '#07090f' : 'var(--muted)', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>Tous</button>
+            <button onClick={() => { setNicheFilter(''); setPage(1); }} style={{ padding: '5px 12px', borderRadius: 8, border: '1px solid var(--border)', background: !nicheFilter ? 'var(--g)' : 'transparent', color: !nicheFilter ? '#07090f' : 'var(--muted)', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>All</button>
             {NICHES.map(n => (
               <button key={n} onClick={() => { setNicheFilter(n); setPage(1); }} style={{ padding: '5px 12px', borderRadius: 8, border: '1px solid var(--border)', background: nicheFilter === n ? 'var(--g)' : 'transparent', color: nicheFilter === n ? '#07090f' : 'var(--muted)', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>{n}</button>
             ))}
@@ -118,13 +118,13 @@ export default function ForgeLanding() {
         </div>
 
         {loading ? (
-          <div style={{ textAlign: 'center', color: 'var(--muted)', padding: 60, fontSize: 14 }}>⚒️ Chargement de l'annuaire...</div>
+          <div style={{ textAlign: 'center', color: 'var(--muted)', padding: 60, fontSize: 14 }}>⚒️ Loading directory...</div>
         ) : annuaire.length === 0 ? (
           <div className="nx-card" style={{ textAlign: 'center', padding: 60 }}>
             <div style={{ fontSize: 40, marginBottom: 12 }}>⚒️</div>
-            <div style={{ fontWeight: 800, marginBottom: 8, fontSize: 15 }}>L'annuaire est vide pour l'instant</div>
-            <div style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 24 }}>Sois le premier à soumettre ton site.</div>
-            <Link to="/forge/submit" className="nx-pill" style={{ display: 'inline-block' }}>Soumettre mon site</Link>
+            <div style={{ fontWeight: 800, marginBottom: 8, fontSize: 15 }}>The directory is empty for now</div>
+            <div style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 24 }}>Be the first to submit your site.</div>
+            <Link to="/forge/submit" className="nx-pill" style={{ display: 'inline-block' }}>Submit my site</Link>
           </div>
         ) : (
           <div style={{ display: 'grid', gap: 10 }}>
@@ -136,7 +136,7 @@ export default function ForgeLanding() {
                   <p style={{ margin: '0 0 8px', color: 'var(--muted)', fontSize: 13, lineHeight: 1.5 }}>{item.description}</p>
                   <a href={item.url_soumise} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--g)', fontSize: 12 }}>{item.url_soumise} ↗</a>
                 </div>
-                <div style={{ fontSize: 11, color: 'var(--soft)' }}>{new Date(item.created_at).toLocaleDateString('fr-CA')}</div>
+                <div style={{ fontSize: 11, color: 'var(--soft)' }}>{new Date(item.created_at).toLocaleDateString('en-CA')}</div>
               </div>
             ))}
           </div>
@@ -144,19 +144,19 @@ export default function ForgeLanding() {
 
         {annuaire.length > 0 && (
           <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginTop: 28 }}>
-            <button onClick={() => setPage(p => Math.max(1, p-1))} disabled={page === 1} style={{ padding: '7px 16px', borderRadius: 8, border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', cursor: page === 1 ? 'not-allowed' : 'pointer', opacity: page === 1 ? 0.4 : 1, fontSize: 13 }}>← Précédent</button>
+            <button onClick={() => setPage(p => Math.max(1,p-1))} disabled={page===1} style={{ padding: '7px 16px', borderRadius: 8, border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', cursor: page===1?'not-allowed':'pointer', opacity: page===1?0.4:1, fontSize: 13 }}>← Previous</button>
             <span style={{ padding: '7px 14px', color: 'var(--muted)', fontSize: 13 }}>Page {page}</span>
-            <button onClick={() => setPage(p => p+1)} disabled={annuaire.length < 20} style={{ padding: '7px 16px', borderRadius: 8, border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', cursor: annuaire.length < 20 ? 'not-allowed' : 'pointer', opacity: annuaire.length < 20 ? 0.4 : 1, fontSize: 13 }}>Suivant →</button>
+            <button onClick={() => setPage(p => p+1)} disabled={annuaire.length<20} style={{ padding: '7px 16px', borderRadius: 8, border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', cursor: annuaire.length<20?'not-allowed':'pointer', opacity: annuaire.length<20?0.4:1, fontSize: 13 }}>Next →</button>
           </div>
         )}
       </section>
 
       {/* CTA BOTTOM */}
       <section style={{ padding: '56px 32px', background: 'var(--bg2)', borderTop: '1px solid var(--border)', textAlign: 'center' }}>
-        <div className="nx-kicker" style={{ marginBottom: 12 }}>Prêt à forger?</div>
-        <h2 style={{ fontSize: 28, fontWeight: 900, marginBottom: 12, letterSpacing: '-0.5px' }}>Rejoins NOXEL Forge™</h2>
-        <p style={{ color: 'var(--muted)', marginBottom: 28, fontSize: 14 }}>Commence à bâtir ton réseau de backlinks vérifiés dès aujourd'hui.</p>
-        <Link to="/forge/submit" className="nx-pill">⚒️ Rejoindre NOXEL Forge</Link>
+        <div className="nx-kicker" style={{ marginBottom: 12 }}>Ready to forge?</div>
+        <h2 style={{ fontSize: 28, fontWeight: 900, marginBottom: 12, letterSpacing: '-0.5px' }}>Join NOXEL Forge™</h2>
+        <p style={{ color: 'var(--muted)', marginBottom: 28, fontSize: 14 }}>Start building your verified backlink network today.</p>
+        <Link to="/forge/submit" className="nx-pill">⚒️ Join NOXEL Forge</Link>
       </section>
     </div>
   );
