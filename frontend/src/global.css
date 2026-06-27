@@ -1,0 +1,174 @@
+/* ============================================================
+   NOXEL SEO — Global Design System
+   Brand: Green #3CDE6A · Purple #702AA5
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Brand */
+  --g: #3cde6a;
+  --g-dim: rgba(60, 222, 106, 0.12);
+  --g-border: rgba(60, 222, 106, 0.28);
+  --p: #702aa5;
+  --p-dim: rgba(112, 42, 165, 0.15);
+  --p-border: rgba(112, 42, 165, 0.3);
+
+  /* Status */
+  --ok: #3cde6a;
+  --warn: #ffb74d;
+  --danger: #ff5c7a;
+  --info: #4a9eff;
+
+  /* Backgrounds */
+  --bg: #07090f;
+  --bg2: #0c0f1a;
+  --surface: rgba(255, 255, 255, 0.045);
+  --surface2: rgba(255, 255, 255, 0.07);
+
+  /* Text */
+  --text: rgba(255, 255, 255, 0.93);
+  --muted: rgba(255, 255, 255, 0.58);
+  --soft: rgba(255, 255, 255, 0.35);
+
+  /* Borders */
+  --border: #10dada59;
+  --border2: rgba(216, 19, 19, 0.14);
+
+  /* Radius */
+  --r: 12px;
+  --r2: 18px;
+  --r3: 24px;
+
+  /* Shadows */
+  --shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
+
+  /* Glows */
+  --glow-g: 0 0 20px rgba(60, 222, 106, 0.25);
+  --glow-p: 0 0 20px rgba(112, 42, 165, 0.3);
+
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+}
+
+button { cursor: pointer; font-family: inherit; }
+input, textarea { font-family: inherit; }
+a { color: inherit; text-decoration: none; }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fillBar { from { width: 0; } to { width: var(--target-width); } }
+
+/* ── NOXEL360 Design Tokens (nx-*) ──────────────────────────
+   Compatible avec SeoPage.tsx et le système de modules NOXEL360
+   ─────────────────────────────────────────────────────────── */
+
+.nx-wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px 24px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.nx-hero {
+  padding: 32px 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nx-kicker {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--g);
+}
+
+.nx-title {
+  font-size: clamp(24px, 3.5vw, 40px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  color: rgba(255, 255, 255, 0.96);
+  margin: 0;
+}
+
+.nx-subtitle {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+  max-width: 640px;
+  margin: 0;
+}
+
+.nx-card {
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.nx-pill {
+  padding: 12px 22px;
+  border-radius: 12px;
+  background: var(--g);
+  border: none;
+  color: #07090f;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.12s;
+  white-space: nowrap;
+  font-family: inherit;
+}
+.nx-pill:hover { opacity: 0.88; transform: translateY(-1px); }
+.nx-pill:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+.nx-grid {
+  display: grid;
+  gap: 12px;
+}
+.nx-grid--2 { grid-template-columns: repeat(2, 1fr); }
+.nx-grid--3 { grid-template-columns: repeat(3, 1fr); }
+.nx-grid--4 { grid-template-columns: repeat(4, 1fr); }
+.nx-grid--5 { grid-template-columns: repeat(5, 1fr); }
+
+@media (max-width: 900px) {
+  .nx-grid--5 { grid-template-columns: repeat(3, 1fr); }
+  .nx-grid--4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .nx-grid--5, .nx-grid--4, .nx-grid--3 { grid-template-columns: repeat(2, 1fr); }
+  .nx-wrap { padding: 16px 16px 32px; }
+}
