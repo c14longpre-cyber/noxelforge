@@ -41,13 +41,17 @@ export default function ForgeDashboard() {
     finally { setVerifyingBadge(false); }
   }
 
-  if (loading) return <div style={{ minHeight: '100vh', background: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#666' }}>⚒️ Chargement...</div>;
+  if (loading) return (
+    <div style={{ minHeight: '100vh', background: 'var(--bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--muted)', fontSize: 14 }}>
+      ⚒️ Chargement du dashboard...
+    </div>
+  );
 
   if (!statut?.membre) return (
-    <div style={{ minHeight: '100vh', background: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16, color: '#f0f0f0' }}>
+    <div style={{ minHeight: '100vh', background: 'var(--bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
       <div style={{ fontSize: 48 }}>⚒️</div>
-      <h2>Tu n'es pas encore membre de NOXEL Forge</h2>
-      <Link to="/forge" style={{ background: '#7c6af7', color: '#fff', padding: '12px 24px', borderRadius: 10, textDecoration: 'none', fontWeight: 700 }}>Rejoindre Forge</Link>
+      <h2 style={{ fontWeight: 900, fontSize: 20 }}>Tu n'es pas encore membre de NOXEL Forge</h2>
+      <Link to="/forge" className="nx-pill">Rejoindre Forge</Link>
     </div>
   );
 
@@ -56,77 +60,96 @@ export default function ForgeDashboard() {
   const tierColor = TIER_COLORS[tier];
 
   return (
-    <div style={{ minHeight: '100vh', background: '#0a0a0f', color: '#f0f0f0', fontFamily: 'Inter, sans-serif' }}>
-      <div style={{ background: '#0f0a1f', borderBottom: '1px solid #1a1a2e', padding: '20px 24px' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-          <div>
-            <div style={{ fontSize: '0.8rem', color: '#666', marginBottom: 4 }}>⚒️ NOXEL Forge™</div>
-            <h1 style={{ margin: 0, fontSize: '1.4rem', fontWeight: 800 }}>Mon Dashboard</h1>
-          </div>
-          <Link to="/forge/submit" style={{ background: 'linear-gradient(135deg,#7c6af7,#6d28d9)', color: '#fff', padding: '10px 20px', borderRadius: 10, textDecoration: 'none', fontWeight: 700, fontSize: '0.9rem' }}>+ Soumettre un site</Link>
-        </div>
-      </div>
+    <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', overflowY: 'auto' }}>
 
-      <div style={{ maxWidth: 900, margin: '0 auto', padding: '32px 24px' }}>
+      {/* NAV */}
+      <nav style={{ borderBottom: '1px solid var(--border)', padding: '0 32px', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--bg2)', position: 'sticky', top: 0, zIndex: 100 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <Link to="/forge" style={{ color: 'var(--muted)', fontSize: 13 }}>← Forge</Link>
+          <span style={{ color: 'var(--soft)', margin: '0 4px' }}>·</span>
+          <span style={{ fontWeight: 900, fontSize: 15 }}>Dashboard</span>
+        </div>
+        <Link to="/forge/submit" className="nx-pill" style={{ padding: '7px 16px', fontSize: 13 }}>+ Soumettre</Link>
+      </nav>
+
+      <div style={{ maxWidth: 960, margin: '0 auto', padding: '32px 32px 80px' }}>
+
+        {/* ÉTAPES MANQUANTES */}
         {etapes_manquantes?.length > 0 && (
-          <div style={{ background: '#1a0f00', border: '1px solid #7c6af733', borderRadius: 12, padding: '20px 24px', marginBottom: 24 }}>
-            <div style={{ fontWeight: 700, marginBottom: 12, color: '#f59e0b' }}>⚠️ Actions requises pour débloquer la soumission</div>
-            {etapes_manquantes.map((e: string) => <div key={e} style={{ color: '#888', fontSize: '0.9rem', marginBottom: 6 }}>→ {e}</div>)}
+          <div className="nx-card" style={{ marginBottom: 24, borderColor: 'rgba(255,183,77,0.3)', background: 'rgba(255,183,77,0.06)' }}>
+            <div style={{ fontWeight: 800, marginBottom: 10, color: 'var(--warn)', fontSize: 13 }}>⚠️ Actions requises pour débloquer la soumission</div>
+            {etapes_manquantes.map((e: string) => (
+              <div key={e} style={{ color: 'var(--muted)', fontSize: 13, marginBottom: 4 }}>→ {e}</div>
+            ))}
           </div>
         )}
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: 16, marginBottom: 32 }}>
-          <div style={{ background: '#111', border: `1px solid ${tierColor}44`, borderRadius: 12, padding: '20px 24px' }}>
-            <div style={{ fontSize: '0.78rem', color: '#666', marginBottom: 8, textTransform: 'uppercase' }}>Trust Score</div>
-            <div style={{ fontSize: '2.5rem', fontWeight: 800, color: tierColor, lineHeight: 1 }}>{trust_score?.score ?? 0}</div>
-            <div style={{ fontSize: '0.85rem', color: '#888', marginTop: 4 }}>/100</div>
-            <div style={{ marginTop: 10, display: 'inline-flex', alignItems: 'center', gap: 6, background: `${tierColor}22`, borderRadius: 20, padding: '4px 12px' }}>
-              <span>{TIER_ICONS[tier]}</span>
-              <span style={{ color: tierColor, fontWeight: 700, fontSize: '0.82rem', textTransform: 'uppercase' }}>{tier}</span>
+        {/* STATS CARDS */}
+        <div className="nx-grid nx-grid--4" style={{ marginBottom: 24 }}>
+
+          {/* Trust Score */}
+          <div className="nx-card" style={{ borderColor: `${tierColor}44` }}>
+            <div className="nx-kicker" style={{ marginBottom: 8 }}>Trust Score</div>
+            <div style={{ fontSize: 40, fontWeight: 900, color: tierColor, lineHeight: 1 }}>{trust_score?.score ?? 0}</div>
+            <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 2 }}>/100</div>
+            <div style={{ marginTop: 10, display: 'inline-flex', alignItems: 'center', gap: 6, background: `${tierColor}22`, borderRadius: 20, padding: '3px 10px' }}>
+              <span style={{ fontSize: 12 }}>{TIER_ICONS[tier]}</span>
+              <span style={{ color: tierColor, fontWeight: 800, fontSize: 11, textTransform: 'uppercase' }}>{tier}</span>
             </div>
           </div>
 
-          <div style={{ background: '#111', border: '1px solid #1a1a2e', borderRadius: 12, padding: '20px 24px' }}>
-            <div style={{ fontSize: '0.78rem', color: '#666', marginBottom: 8, textTransform: 'uppercase' }}>Forge Points</div>
-            <div style={{ fontSize: '2.5rem', fontWeight: 800, color: '#7c6af7', lineHeight: 1 }}>{points?.solde ?? 0}</div>
-            <div style={{ fontSize: '0.85rem', color: '#888', marginTop: 4 }}>pts disponibles</div>
-            <div style={{ marginTop: 10, fontSize: '0.78rem', color: '#555' }}>Total gagné : {points?.total_gagne ?? 0} pts</div>
+          {/* Forge Points */}
+          <div className="nx-card">
+            <div className="nx-kicker" style={{ marginBottom: 8 }}>Forge Points</div>
+            <div style={{ fontSize: 40, fontWeight: 900, color: 'var(--g)', lineHeight: 1 }}>{points?.solde ?? 0}</div>
+            <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 2 }}>pts disponibles</div>
+            <div style={{ marginTop: 10, fontSize: 11, color: 'var(--soft)' }}>Total gagné : {points?.total_gagne ?? 0} pts</div>
           </div>
 
-          <div style={{ background: '#111', border: '1px solid #1a1a2e', borderRadius: 12, padding: '20px 24px' }}>
-            <div style={{ fontSize: '0.78rem', color: '#666', marginBottom: 8, textTransform: 'uppercase' }}>Flux soumission</div>
-            <div style={{ fontSize: '1.3rem', fontWeight: 800, color: flux_actuel === 'auto_share' ? '#10b981' : flux_actuel === 'alfred' ? '#7c6af7' : '#ef4444', lineHeight: 1 }}>
+          {/* Flux */}
+          <div className="nx-card">
+            <div className="nx-kicker" style={{ marginBottom: 8 }}>Flux soumission</div>
+            <div style={{ fontSize: 20, fontWeight: 900, color: flux_actuel === 'auto_share' ? 'var(--ok)' : flux_actuel === 'alfred' ? 'var(--p)' : 'var(--danger)', lineHeight: 1 }}>
               {flux_actuel === 'auto_share' ? '⚡ Auto' : flux_actuel === 'alfred' ? '🤵 Alfred' : '🔒 Bloqué'}
             </div>
-            <div style={{ fontSize: '0.78rem', color: '#555', marginTop: 8 }}>
-              {flux_actuel === 'auto_share' ? 'Publication immédiate' : flux_actuel === 'alfred' ? 'Filtrage Alfred actif' : 'Complète les étapes'}
+            <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 8 }}>
+              {flux_actuel === 'auto_share' ? 'Publication immédiate' : flux_actuel === 'alfred' ? 'Filtrage Alfred actif' : 'Complète les étapes ci-dessus'}
             </div>
           </div>
 
-          <div style={{ background: '#111', border: '1px solid #1a1a2e', borderRadius: 12, padding: '20px 24px' }}>
-            <div style={{ fontSize: '0.78rem', color: '#666', marginBottom: 8, textTransform: 'uppercase' }}>Badge NOXEL</div>
-            <div style={{ fontSize: '1.5rem', fontWeight: 800, color: badge?.statut === 'verifie' ? '#10b981' : '#ef4444', lineHeight: 1 }}>
+          {/* Badge */}
+          <div className="nx-card">
+            <div className="nx-kicker" style={{ marginBottom: 8 }}>Badge NOXEL</div>
+            <div style={{ fontSize: 20, fontWeight: 900, color: badge?.statut === 'verifie' ? 'var(--ok)' : badge?.statut === 'grace' ? 'var(--warn)' : 'var(--danger)', lineHeight: 1 }}>
               {badge?.statut === 'verifie' ? '✅ Vérifié' : badge?.statut === 'grace' ? '⚠️ Grâce' : '❌ Absent'}
             </div>
-            <button onClick={verifierBadge} disabled={verifyingBadge} style={{ marginTop: 12, background: '#1a1a2e', color: '#7c6af7', border: 'none', borderRadius: 8, padding: '6px 14px', cursor: 'pointer', fontSize: '0.78rem', fontWeight: 600 }}>
+            <button onClick={verifierBadge} disabled={verifyingBadge} style={{ marginTop: 10, background: 'var(--g-dim)', color: 'var(--g)', border: '1px solid var(--g-border)', borderRadius: 8, padding: '5px 12px', cursor: 'pointer', fontSize: 11, fontWeight: 700 }}>
               {verifyingBadge ? 'Vérification...' : 'Vérifier badge'}
             </button>
-            {badgeMsg && <div style={{ marginTop: 8, fontSize: '0.75rem', color: '#888' }}>{badgeMsg}</div>}
+            {badgeMsg && <div style={{ marginTop: 6, fontSize: 11, color: 'var(--muted)' }}>{badgeMsg}</div>}
           </div>
         </div>
 
+        {/* TRUST SCORE DÉTAIL */}
         {trust_score && (
-          <div style={{ background: '#111', border: '1px solid #1a1a2e', borderRadius: 12, padding: '24px', marginBottom: 32 }}>
-            <h3 style={{ margin: '0 0 20px', fontSize: '1rem', fontWeight: 700 }}>Détail Trust Score Forge™</h3>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(140px,1fr))', gap: 16 }}>
-              {[{label:'Technique',val:trust_score.signal_technique,max:25},{label:'Autorité',val:trust_score.signal_autorite,max:25},{label:'Spam',val:trust_score.signal_spam,max:20},{label:'Contenu',val:trust_score.signal_contenu,max:15},{label:'Ancienneté',val:trust_score.signal_anciennete,max:10},{label:'Fréquence',val:trust_score.signal_frequence,max:5}].map(({label,val,max}) => (
+          <div className="nx-card" style={{ marginBottom: 24 }}>
+            <div className="nx-kicker" style={{ marginBottom: 16 }}>Détail Trust Score Forge™</div>
+            <div className="nx-grid nx-grid--3">
+              {[
+                { label: 'Technique',  val: trust_score.signal_technique,  max: 25 },
+                { label: 'Autorité',   val: trust_score.signal_autorite,   max: 25 },
+                { label: 'Spam',       val: trust_score.signal_spam,       max: 20 },
+                { label: 'Contenu',    val: trust_score.signal_contenu,    max: 15 },
+                { label: 'Ancienneté', val: trust_score.signal_anciennete, max: 10 },
+                { label: 'Fréquence',  val: trust_score.signal_frequence,  max: 5  },
+              ].map(({ label, val, max }) => (
                 <div key={label}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6, fontSize: '0.8rem' }}>
-                    <span style={{ color: '#888' }}>{label}</span>
-                    <span style={{ color: '#f0f0f0', fontWeight: 700 }}>{val}/{max}</span>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6, fontSize: 12 }}>
+                    <span style={{ color: 'var(--muted)' }}>{label}</span>
+                    <span style={{ color: 'var(--text)', fontWeight: 700 }}>{val}/{max}</span>
                   </div>
-                  <div style={{ background: '#1a1a2e', borderRadius: 4, height: 6 }}>
-                    <div style={{ background: tierColor, borderRadius: 4, height: 6, width: `${(val/max)*100}%`, transition: 'width 0.6s ease' }} />
+                  <div style={{ background: 'var(--surface2)', borderRadius: 4, height: 5 }}>
+                    <div style={{ background: tierColor, borderRadius: 4, height: 5, width: `${(val/max)*100}%`, transition: 'width 0.6s ease' }} />
                   </div>
                 </div>
               ))}
@@ -134,21 +157,25 @@ export default function ForgeDashboard() {
           </div>
         )}
 
-        <div>
-          <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: 16 }}>Mes soumissions</h3>
+        {/* SOUMISSIONS */}
+        <div className="nx-card">
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+            <div className="nx-kicker">Mes soumissions</div>
+            <Link to="/forge/submit" style={{ fontSize: 12, color: 'var(--g)', fontWeight: 700 }}>+ Nouvelle →</Link>
+          </div>
           {soumissions.length === 0 ? (
-            <div style={{ textAlign: 'center', color: '#555', padding: '40px', border: '1px dashed #1a1a2e', borderRadius: 12, fontSize: '0.85rem' }}>
-              Aucune soumission encore. <Link to="/forge/submit" style={{ color: '#7c6af7' }}>Soumettre mon premier site →</Link>
+            <div style={{ textAlign: 'center', color: 'var(--muted)', padding: '32px 0', fontSize: 13 }}>
+              Aucune soumission encore. <Link to="/forge/submit" style={{ color: 'var(--g)' }}>Soumettre mon premier site →</Link>
             </div>
           ) : (
-            <div style={{ display: 'grid', gap: 10 }}>
+            <div style={{ display: 'grid', gap: 8 }}>
               {soumissions.map((s: any) => (
-                <div key={s.id} style={{ background: '#111', border: '1px solid #1a1a2e', borderRadius: 10, padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
+                <div key={s.id} style={{ background: 'var(--surface)', borderRadius: 10, padding: '12px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10, border: '1px solid var(--border)' }}>
                   <div>
-                    <div style={{ fontWeight: 700, fontSize: '0.95rem', marginBottom: 4 }}>{s.titre}</div>
-                    <a href={s.url_soumise} target="_blank" rel="noopener noreferrer" style={{ color: '#7c6af7', fontSize: '0.8rem', textDecoration: 'none' }}>{s.url_soumise}</a>
+                    <div style={{ fontWeight: 700, fontSize: 13, marginBottom: 2 }}>{s.titre}</div>
+                    <a href={s.url_soumise} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--g)', fontSize: 11 }}>{s.url_soumise}</a>
                   </div>
-                  <span style={{ background: s.statut === 'approuve' || s.statut === 'auto_share' ? '#10b98122' : s.statut === 'pending' ? '#f59e0b22' : '#ef444422', color: s.statut === 'approuve' || s.statut === 'auto_share' ? '#10b981' : s.statut === 'pending' ? '#f59e0b' : '#ef4444', padding: '4px 12px', borderRadius: 20, fontSize: '0.78rem', fontWeight: 700 }}>
+                  <span style={{ background: s.statut === 'approuve' || s.statut === 'auto_share' ? 'var(--g-dim)' : s.statut === 'pending' ? 'rgba(255,183,77,0.12)' : 'rgba(255,92,122,0.12)', color: s.statut === 'approuve' || s.statut === 'auto_share' ? 'var(--ok)' : s.statut === 'pending' ? 'var(--warn)' : 'var(--danger)', padding: '3px 10px', borderRadius: 20, fontSize: 11, fontWeight: 800 }}>
                     {s.statut === 'auto_share' ? '⚡ Publié' : s.statut === 'approuve' ? '✅ Approuvé' : s.statut === 'pending' ? '⏳ En analyse' : '❌ Rejeté'}
                   </span>
                 </div>
