@@ -43,7 +43,7 @@ export default function ForgeDashboard() {
 
   if (loading) return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--muted)', fontSize: 14 }}>
-      ⚒️ Loading dashboard...
+      Loading dashboard...
     </div>
   );
 
@@ -174,3 +174,4 @@ export default function ForgeDashboard() {
     </div>
   );
 }
+

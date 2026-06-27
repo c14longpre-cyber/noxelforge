@@ -39,7 +39,7 @@ export default function ForgePartners() {
 
       <div style={{ maxWidth: 960, margin: '0 auto', padding: '32px 32px 80px' }}>
         <div className="nx-card" style={{ marginBottom: 24, display: 'flex', gap: 32, flexWrap: 'wrap' }}>
-          {[['🔗','Backlink received','+100 pts'],['⚒️','Backlink given','+75 pts'],['✅','Submission approved','+50 pts']].map(([icon,label,pts]) => (
+          {[['🔗','Backlink received','+100 pts'],['','Backlink given','+75 pts'],['✅','Submission approved','+50 pts']].map(([icon,label,pts]) => (
             <div key={String(label)} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <span style={{ fontSize: 20 }}>{icon}</span>
               <div>
@@ -58,7 +58,7 @@ export default function ForgePartners() {
         </div>
 
         {loading ? (
-          <div style={{ textAlign: 'center', color: 'var(--muted)', padding: 60, fontSize: 14 }}>⚒️ Loading partners...</div>
+          <div style={{ textAlign: 'center', color: 'var(--muted)', padding: 60, fontSize: 14 }}>Loading partners...</div>
         ) : partenaires.length === 0 ? (
           <div className="nx-card" style={{ textAlign: 'center', padding: 60 }}>
             <div style={{ fontSize: 40, marginBottom: 12 }}>🤝</div>
@@ -99,3 +99,4 @@ export default function ForgePartners() {
     </div>
   );
 }
+

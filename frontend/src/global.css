@@ -7,12 +7,12 @@
 
 :root {
   /* Brand */
-  --g: #3cde6a;
-  --g-dim: rgba(60, 222, 106, 0.12);
-  --g-border: rgba(60, 222, 106, 0.28);
-  --p: #702aa5;
-  --p-dim: rgba(112, 42, 165, 0.15);
-  --p-border: rgba(112, 42, 165, 0.3);
+--g: #3cde6a;
+--g-dim: rgba(60, 222, 106, 0.08);
+--g-border: rgba(60, 222, 106, 0.28);
+--p: #702AA5;
+--p-dim: rgba(112, 42, 165, 0.12);
+--p-border: rgba(112, 42, 165, 0.35);
 
   /* Status */
   --ok: #3cde6a;

@@ -48,7 +48,7 @@ export default function ForgePoints() {
 
       <div style={{ maxWidth: 960, margin: '0 auto', padding: '32px 32px 80px' }}>
         {loading ? (
-          <div style={{ textAlign: 'center', color: 'var(--muted)', padding: 60, fontSize: 14 }}>⚒️ Loading...</div>
+          <div style={{ textAlign: 'center', color: 'var(--muted)', padding: 60, fontSize: 14 }}>Loading...</div>
         ) : (
           <>
             <div className="nx-card" style={{ textAlign: 'center', padding: '48px 32px', marginBottom: 24, borderColor: 'var(--g-border)', background: 'var(--g-dim)' }}>
@@ -69,7 +69,7 @@ export default function ForgePoints() {
 
             <div className="nx-grid nx-grid--2" style={{ marginBottom: 24 }}>
               <div className="nx-card">
-                <div className="nx-kicker" style={{ marginBottom: 14 }}>⚒️ How to earn points</div>
+                <div className="nx-kicker" style={{ marginBottom: 14 }}>How to earn points</div>
                 <div style={{ display: 'grid', gap: 8 }}>
                   {EARN_RULES.map(({ action, pts, icon }) => (
                     <div key={action} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '9px 12px', background: 'var(--surface)', borderRadius: 8, border: '1px solid var(--border)' }}>
@@ -133,3 +133,4 @@ export default function ForgePoints() {
     </div>
   );
 }
+
