@@ -27,67 +27,76 @@ export default function ForgePartners() {
   }
 
   return (
-    <div style={{ minHeight:'100vh', background:'#0a0a0f', color:'#f0f0f0', fontFamily:'Inter, sans-serif' }}>
-      <div style={{ background:'#0f0a1f', borderBottom:'1px solid #1a1a2e', padding:'20px 24px' }}>
-        <div style={{ maxWidth:900, margin:'0 auto', display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:12 }}>
-          <div>
-            <div style={{ fontSize:'0.8rem', color:'#666' }}>⚒️ NOXEL Forge™</div>
-            <h1 style={{ margin:0, fontSize:'1.3rem', fontWeight:800 }}>Partenaires Forge</h1>
-          </div>
-          <Link to="/forge/submit" style={{ background:'linear-gradient(135deg,#7c6af7,#6d28d9)', color:'#fff', padding:'10px 20px', borderRadius:10, textDecoration:'none', fontWeight:700, fontSize:'0.9rem' }}>+ Soumettre mon site</Link>
+    <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', overflowY: 'auto' }}>
+      <nav style={{ borderBottom: '1px solid var(--border)', padding: '0 32px', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--bg2)', position: 'sticky', top: 0, zIndex: 100 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <Link to="/forge" style={{ color: 'var(--muted)', fontSize: 13 }}>← Forge</Link>
+          <span style={{ color: 'var(--soft)' }}>·</span>
+          <span style={{ fontWeight: 900, fontSize: 15 }}>Partenaires Forge</span>
         </div>
-      </div>
+        <Link to="/forge/submit" className="nx-pill" style={{ padding: '7px 16px', fontSize: 13 }}>+ Soumettre</Link>
+      </nav>
 
-      <div style={{ maxWidth:900, margin:'0 auto', padding:'32px 24px' }}>
-        <div style={{ background:'#111', border:'1px solid #1a1a2e', borderRadius:12, padding:'20px 24px', marginBottom:28, display:'flex', gap:32, flexWrap:'wrap' }}>
+      <div style={{ maxWidth: 960, margin: '0 auto', padding: '32px 32px 80px' }}>
+
+        {/* POINTS EXPLAINER */}
+        <div className="nx-card" style={{ marginBottom: 24, display: 'flex', gap: 32, flexWrap: 'wrap' }}>
           {[['🔗','Backlink reçu','+100 pts'],['⚒️','Backlink donné','+75 pts'],['✅','Soumission approuvée','+50 pts']].map(([icon,label,pts]) => (
-            <div key={String(label)} style={{ display:'flex', alignItems:'center', gap:10 }}>
-              <span style={{ fontSize:22 }}>{icon}</span>
+            <div key={String(label)} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <span style={{ fontSize: 20 }}>{icon}</span>
               <div>
-                <div style={{ fontSize:'0.82rem', color:'#888' }}>{label}</div>
-                <div style={{ fontWeight:700, color:'#7c6af7', fontSize:'0.95rem' }}>{pts}</div>
+                <div style={{ fontSize: 11, color: 'var(--muted)' }}>{label}</div>
+                <div style={{ fontWeight: 800, color: 'var(--g)', fontSize: 13 }}>{pts}</div>
               </div>
             </div>
           ))}
         </div>
 
-        <div style={{ display:'flex', gap:8, flexWrap:'wrap', marginBottom:24 }}>
-          <button onClick={() => { setNicheFilter(''); setPage(1); }} style={{ background:!nicheFilter?'#7c6af7':'#1a1a2e', color:'#fff', border:'none', borderRadius:8, padding:'6px 14px', cursor:'pointer', fontSize:'0.82rem' }}>Tous</button>
-          {NICHES.map(n => <button key={n} onClick={() => { setNicheFilter(n); setPage(1); }} style={{ background:nicheFilter===n?'#7c6af7':'#1a1a2e', color:'#fff', border:'none', borderRadius:8, padding:'6px 14px', cursor:'pointer', fontSize:'0.82rem' }}>{n}</button>)}
+        {/* FILTRES */}
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 20 }}>
+          <button onClick={() => { setNicheFilter(''); setPage(1); }} style={{ padding: '5px 12px', borderRadius: 8, border: '1px solid var(--border)', background: !nicheFilter ? 'var(--g)' : 'transparent', color: !nicheFilter ? '#07090f' : 'var(--muted)', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>Tous</button>
+          {NICHES.map(n => (
+            <button key={n} onClick={() => { setNicheFilter(n); setPage(1); }} style={{ padding: '5px 12px', borderRadius: 8, border: '1px solid var(--border)', background: nicheFilter === n ? 'var(--g)' : 'transparent', color: nicheFilter === n ? '#07090f' : 'var(--muted)', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>{n}</button>
+          ))}
         </div>
 
+        {/* LISTE */}
         {loading ? (
-          <div style={{ textAlign:'center', color:'#666', padding:60 }}>⚒️ Chargement des partenaires...</div>
+          <div style={{ textAlign: 'center', color: 'var(--muted)', padding: 60, fontSize: 14 }}>⚒️ Chargement des partenaires...</div>
         ) : partenaires.length === 0 ? (
-          <div style={{ textAlign:'center', color:'#666', padding:60, border:'1px dashed #1a1a2e', borderRadius:12 }}>
-            <div style={{ fontSize:40, marginBottom:12 }}>🤝</div>
-            <div style={{ fontWeight:600, marginBottom:8 }}>Aucun partenaire dans cette niche</div>
-            <Link to="/forge/submit" style={{ background:'#7c6af7', color:'#fff', padding:'10px 20px', borderRadius:8, textDecoration:'none', fontWeight:600, display:'inline-block', marginTop:12 }}>Soumettre mon site</Link>
+          <div className="nx-card" style={{ textAlign: 'center', padding: 60 }}>
+            <div style={{ fontSize: 40, marginBottom: 12 }}>🤝</div>
+            <div style={{ fontWeight: 800, marginBottom: 8, fontSize: 15 }}>Aucun partenaire dans cette niche</div>
+            <Link to="/forge/submit" className="nx-pill" style={{ display: 'inline-block', marginTop: 16 }}>Soumettre mon site</Link>
           </div>
         ) : (
-          <div style={{ display:'grid', gap:12 }}>
-            {partenaires.map((p:any) => (
-              <div key={p.id} style={{ background:'#111', border:'1px solid #1a1a2e', borderRadius:12, padding:'20px 24px', display:'flex', alignItems:'flex-start', justifyContent:'space-between', gap:16, flexWrap:'wrap' }}>
-                <div style={{ flex:1, minWidth:200 }}>
-                  <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:8, flexWrap:'wrap' }}>
-                    {p.niche && <span style={{ background:'#1a1a2e', color:'#7c6af7', fontSize:'0.75rem', padding:'3px 10px', borderRadius:20, fontWeight:600 }}>{p.niche}</span>}
-                    {p.forge_trust_scores?.tier_forge && <span style={{ background:`${TIER_COLORS[p.forge_trust_scores.tier_forge]}22`, color:TIER_COLORS[p.forge_trust_scores.tier_forge], fontSize:'0.75rem', padding:'3px 10px', borderRadius:20, fontWeight:700 }}>{TIER_ICONS[p.forge_trust_scores.tier_forge]} {p.forge_trust_scores.tier_forge?.toUpperCase()} · {p.forge_trust_scores.score}/100</span>}
+          <div style={{ display: 'grid', gap: 10 }}>
+            {partenaires.map((p: any) => (
+              <div key={p.id} className="nx-card" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
+                <div style={{ flex: 1, minWidth: 200 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8, flexWrap: 'wrap' }}>
+                    {p.niche && <span style={{ background: 'var(--g-dim)', color: 'var(--g)', fontSize: 11, padding: '2px 10px', borderRadius: 20, fontWeight: 700 }}>{p.niche}</span>}
+                    {p.forge_trust_scores?.tier_forge && (
+                      <span style={{ background: `${TIER_COLORS[p.forge_trust_scores.tier_forge]}22`, color: TIER_COLORS[p.forge_trust_scores.tier_forge], fontSize: 11, padding: '2px 10px', borderRadius: 20, fontWeight: 800 }}>
+                        {TIER_ICONS[p.forge_trust_scores.tier_forge]} {p.forge_trust_scores.tier_forge?.toUpperCase()} · {p.forge_trust_scores.score}/100
+                      </span>
+                    )}
                   </div>
-                  <h3 style={{ margin:'0 0 6px', fontSize:'1rem', fontWeight:700 }}>{p.titre}</h3>
-                  <p style={{ margin:'0 0 10px', color:'#888', fontSize:'0.85rem', lineHeight:1.5 }}>{p.description}</p>
-                  <a href={p.url_soumise} target="_blank" rel="noopener noreferrer" style={{ color:'#7c6af7', fontSize:'0.82rem', textDecoration:'none' }}>{p.url_soumise} ↗</a>
+                  <h3 style={{ margin: '0 0 4px', fontSize: 14, fontWeight: 800 }}>{p.titre}</h3>
+                  <p style={{ margin: '0 0 8px', color: 'var(--muted)', fontSize: 13, lineHeight: 1.5 }}>{p.description}</p>
+                  <a href={p.url_soumise} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--g)', fontSize: 12 }}>{p.url_soumise} ↗</a>
                 </div>
-                <div style={{ fontSize:'0.75rem', color:'#555' }}>{new Date(p.created_at).toLocaleDateString('fr-CA')}</div>
+                <div style={{ fontSize: 11, color: 'var(--soft)', whiteSpace: 'nowrap' }}>{new Date(p.created_at).toLocaleDateString('fr-CA')}</div>
               </div>
             ))}
           </div>
         )}
 
         {partenaires.length > 0 && (
-          <div style={{ display:'flex', justifyContent:'center', gap:12, marginTop:32 }}>
-            <button onClick={() => setPage(p => Math.max(1,p-1))} disabled={page===1} style={{ background:'#1a1a2e', color:'#fff', border:'none', borderRadius:8, padding:'8px 18px', cursor:page===1?'not-allowed':'pointer', opacity:page===1?0.4:1 }}>← Précédent</button>
-            <span style={{ padding:'8px 16px', color:'#666', fontSize:'0.85rem' }}>Page {page}</span>
-            <button onClick={() => setPage(p => p+1)} disabled={partenaires.length<20} style={{ background:'#1a1a2e', color:'#fff', border:'none', borderRadius:8, padding:'8px 18px', cursor:partenaires.length<20?'not-allowed':'pointer', opacity:partenaires.length<20?0.4:1 }}>Suivant →</button>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginTop: 28 }}>
+            <button onClick={() => setPage(p => Math.max(1,p-1))} disabled={page===1} style={{ padding: '7px 16px', borderRadius: 8, border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', cursor: page===1?'not-allowed':'pointer', opacity: page===1?0.4:1, fontSize: 13 }}>← Précédent</button>
+            <span style={{ padding: '7px 14px', color: 'var(--muted)', fontSize: 13 }}>Page {page}</span>
+            <button onClick={() => setPage(p => p+1)} disabled={partenaires.length<20} style={{ padding: '7px 16px', borderRadius: 8, border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', cursor: partenaires.length<20?'not-allowed':'pointer', opacity: partenaires.length<20?0.4:1, fontSize: 13 }}>Suivant →</button>
           </div>
         )}
       </div>
