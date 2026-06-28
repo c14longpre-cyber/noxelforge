@@ -109,7 +109,7 @@ export default function LanguageSelector({ locale, onChange }: Props) {
     svg.setAttribute("width", "100%");
     svg.setAttribute("height", "100%");
     svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
-    svg.setAttribute("viewBox", "0 0 900 500");
+    svg.setAttribute("viewBox", "0 0 2000 1001");
     svg.style.width = "100%";
     svg.style.height = "100%";
     svg.style.display = "block";
@@ -121,9 +121,9 @@ export default function LanguageSelector({ locale, onChange }: Props) {
       const id = (p.id || parent?.id || "").trim().toLowerCase();
       if (id) p.setAttribute("data-id", id);
       if (!p.getAttribute("fill") || p.getAttribute("fill") === "none") {
-        p.style.fill = "#1a2a1a";
+        p.style.fill = "#2d4a3e";
       }
-      p.style.stroke = "#3cde6a44";
+      p.style.stroke = "#3cde6a55";
       p.style.strokeWidth = "0.5";
       p.style.transition = "fill 0.12s ease, filter 0.12s ease, stroke 0.12s ease";
       p.style.pointerEvents = "all";
@@ -297,7 +297,7 @@ export default function LanguageSelector({ locale, onChange }: Props) {
               <div ref={mapWrapRef} className="nxl-map-wrap"
                 dangerouslySetInnerHTML={{ __html: worldSvg }}
                 onPointerMove={onPointerMove} onPointerLeave={onPointerLeave} onClick={onClick}
-                style={{ borderRadius: 12, overflow: "hidden", border: "1px solid rgba(255,255,255,0.08)", background: "#07090f", lineHeight: 0, height: 500, display: "flex", alignItems: "center", justifyContent: "center" }}
+                style={{ borderRadius: 12, overflow: "hidden", border: "1px solid rgba(255,255,255,0.08)", background: "#0d1f18", lineHeight: 0, height: 480, display: "flex", alignItems: "center", justifyContent: "center" }}
               />
               <div style={{ marginTop: 8, padding: "9px 12px", background: "rgba(255,255,255,0.03)", borderRadius: 8, border: "1px solid rgba(255,255,255,0.07)", minHeight: 42, display: "flex", alignItems: "center", gap: 10 }}>
                 {hoveredId && hovLangs.length > 0 ? (
