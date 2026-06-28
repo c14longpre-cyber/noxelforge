@@ -109,7 +109,7 @@ export default function LanguageSelector({ locale, onChange }: Props) {
     svg.setAttribute("width", "100%");
     svg.setAttribute("height", "100%");
     svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
-    svg.setAttribute("viewBox", "0 40 900 700");
+    svg.setAttribute("viewBox", "0 0 900 500");
     svg.style.width = "100%";
     svg.style.height = "100%";
     svg.style.display = "block";
@@ -121,9 +121,9 @@ export default function LanguageSelector({ locale, onChange }: Props) {
       const id = (p.id || parent?.id || "").trim().toLowerCase();
       if (id) p.setAttribute("data-id", id);
       if (!p.getAttribute("fill") || p.getAttribute("fill") === "none") {
-        p.style.fill = "#9BD5C1";
+        p.style.fill = "#1a2a1a";
       }
-      p.style.stroke = "#0477BE";
+      p.style.stroke = "#3cde6a44";
       p.style.strokeWidth = "0.5";
       p.style.transition = "fill 0.12s ease, filter 0.12s ease, stroke 0.12s ease";
       p.style.pointerEvents = "all";
@@ -290,13 +290,14 @@ export default function LanguageSelector({ locale, onChange }: Props) {
               <style>{`
                 .nxl-map-wrap svg { width: 100% !important; height: 100% !important; display: block !important; transform: translateY(0); }
                 .nxl-map-wrap svg g, .nxl-map-wrap svg path { pointer-events: all; }
-                .nxl-map-wrap svg .is-hovered { fill: rgba(112,42,165,0.75) !important; stroke: rgba(180,120,255,1) !important; stroke-width: 1.8 !important; filter: drop-shadow(0 0 3px rgba(131,90,255,0.19)) drop-shadow(0 0 8px rgba(131,90,255,0.33)) drop-shadow(0 0 12px rgba(131,90,255,0.25)) !important; }
+                .nxl-map-wrap svg .is-hovered { fill: rgba(112,42,165,0.75) !important; stroke: rgba(180,120,255,1) !important; stroke-width: 1.8 !important; filter: drop-shadow(0 0 8px rgba(131,90,255,0.6)) !important; }
+                .nxl-map-wrap svg .is-selected { fill: rgba(60,222,106,0.4) !important; stroke: rgba(60,222,106,0.8) !important; stroke-width: 1.2 !important; filter: drop-shadow(0 0 6px rgba(60,222,106,0.5)) !important; }
                 .nxl-map-wrap { cursor: crosshair; }
               `}</style>
               <div ref={mapWrapRef} className="nxl-map-wrap"
                 dangerouslySetInnerHTML={{ __html: worldSvg }}
                 onPointerMove={onPointerMove} onPointerLeave={onPointerLeave} onClick={onClick}
-                style={{ borderRadius: 12, overflow: "hidden", border: "1px solid rgba(255,255,255,0.08)", background: "#07090f", lineHeight: 0, height: 700, display: "flex", alignItems: "center", justifyContent: "center" }}
+                style={{ borderRadius: 12, overflow: "hidden", border: "1px solid rgba(255,255,255,0.08)", background: "#07090f", lineHeight: 0, height: 500, display: "flex", alignItems: "center", justifyContent: "center" }}
               />
               <div style={{ marginTop: 8, padding: "9px 12px", background: "rgba(255,255,255,0.03)", borderRadius: 8, border: "1px solid rgba(255,255,255,0.07)", minHeight: 42, display: "flex", alignItems: "center", gap: 10 }}>
                 {hoveredId && hovLangs.length > 0 ? (
@@ -380,6 +381,8 @@ export default function LanguageSelector({ locale, onChange }: Props) {
     </div>
   );
 }
+
+
 
 
 
