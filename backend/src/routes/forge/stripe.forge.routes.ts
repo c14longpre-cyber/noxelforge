@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import Stripe from 'stripe';
-import { creerCheckoutForge, gererWebhookForge } from '../services/forge/stripe.forge.service';
+import { creerCheckoutForge, gererWebhookForge } from '../../services/forge/stripe.forge.service';
 
 const router = Router();
 
@@ -18,7 +18,7 @@ router.post('/checkout', async (req: Request, res: Response) => {
 });
 
 router.post('/webhook', async (req: Request, res: Response) => {
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2024-06-20' });
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2026-06-24.dahlia' });
   const sig = req.headers['stripe-signature'] as string;
   try {
     const event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET!);
@@ -30,3 +30,5 @@ router.post('/webhook', async (req: Request, res: Response) => {
 });
 
 export default router;
+
+
