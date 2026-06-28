@@ -19,3 +19,6 @@ export default function App() {
     </BrowserRouter>
   );
 }
+import ForgePricing from './pages/forge/ForgePricing';
+// dans les routes :
+<Route path="/forge/pricing" element={<ForgePricing />} />

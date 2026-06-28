@@ -46,6 +46,7 @@ export default function ForgeLanding() {
           <Link to="/forge/submit" className="nx-pill" style={{ padding: '7px 16px', fontSize: 13 }}><img src="/forge-tools.webp" alt="Forge" style={{width:18,height:18,objectFit:"contain",marginRight:6,verticalAlign:"middle"}}/> Submit</Link>
         </div>
       </nav>
+      <Link to="/forge/pricing" className="nx-pill" style={{ padding: '7px 16px', fontSize: 13 }}>View pricing</Link>
 
       {/* HERO */}
       <section style={{ padding: '72px 32px 56px', textAlign: 'center', borderBottom: '1px solid var(--border)', background: 'linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%)' }}>
