@@ -2,8 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { LANGUAGES_115 } from "../i18n/languages";
-const FULLY_TRANSLATED = new Set(["en","fr","es","de","it","pt","ar","hi","ja","ko","ru","zh"]);
+import { LANGUAGES_115, FULLY_TRANSLATED } from "../i18n/languages";
 import worldSvg from "../../public/world-map.svg?raw";
 
 type Props = { locale: string; onChange: (code: string) => void };
@@ -290,8 +289,7 @@ export default function LanguageSelector({ locale, onChange }: Props) {
               <style>{`
                 .nxl-map-wrap svg { width: 100% !important; height: 100% !important; display: block !important; transform: translateY(0); }
                 .nxl-map-wrap svg g, .nxl-map-wrap svg path { pointer-events: all; }
-                .nxl-map-wrap svg .is-hovered { fill: rgba(112,42,165,0.75) !important; stroke: rgba(180,120,255,1) !important; stroke-width: 1.8 !important; filter: drop-shadow(0 0 8px rgba(131,90,255,0.6)) !important; }
-                .nxl-map-wrap svg .is-selected { fill: rgba(60,222,106,0.4) !important; stroke: rgba(60,222,106,0.8) !important; stroke-width: 1.2 !important; filter: drop-shadow(0 0 6px rgba(60,222,106,0.5)) !important; }
+                .nxl-map-wrap svg .is-hovered { fill: rgba(112,42,165,0.75) !important; stroke: rgba(180,120,255,1) !important; stroke-width: 1.8 !important; filter: drop-shadow(0 0 3px rgba(131,90,255,0.19)) drop-shadow(0 0 8px rgba(131,90,255,0.33)) drop-shadow(0 0 12px rgba(131,90,255,0.25)) !important; }
                 .nxl-map-wrap { cursor: crosshair; }
               `}</style>
               <div ref={mapWrapRef} className="nxl-map-wrap"
@@ -381,9 +379,6 @@ export default function LanguageSelector({ locale, onChange }: Props) {
     </div>
   );
 }
-
-
-
 
 
 
