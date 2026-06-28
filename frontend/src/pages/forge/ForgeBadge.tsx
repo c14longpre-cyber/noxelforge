@@ -120,10 +120,11 @@ export default function ForgeBadge() {
         <div className="nx-card" style={{ marginTop: 32, borderColor: 'var(--g-border)', background: 'var(--g-dim)' }}>
           <div style={{ fontWeight: 800, fontSize: 14, marginBottom: 8 }}>How badge discounts work</div>
           <div style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.6 }}>
-            Display any badge with a visible link to <strong style={{ color: 'var(--g)' }}>noxelforge.com</strong> or <strong style={{ color: 'var(--g)' }}>noxelseo.com</strong> on your site. Alfred verifies it automatically on every submission. As long as your badge is active, your discount applies permanently — Silver 10%, Gold 15%, Platinum 20%, Diamond 25%.
+            Place any badge in the footer of your site — not just one page, but site-wide. Alfred scans your footer specifically on every submission to confirm the backlink is active on all pages. As long as your footer badge links to noxelforge.com or noxelseo.com, your discount applies permanently — Silver 10%, Gold 15%, Platinum 20%, Diamond 25%.
           </div>
         </div>
       </div>
     </div>
   );
 }
+
