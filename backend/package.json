@@ -13,13 +13,15 @@
     "cors": "latest",
     "dotenv": "latest",
     "express": "latest",
-    "node-cron": "latest"
+    "node-cron": "latest",
+    "stripe": "^22.3.0"
   },
   "devDependencies": {
     "@types/cors": "latest",
     "@types/express": "latest",
     "@types/node": "latest",
     "@types/node-cron": "latest",
+    "@types/stripe": "^8.0.416",
     "ts-node-dev": "latest",
     "typescript": "latest"
   }

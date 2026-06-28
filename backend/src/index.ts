@@ -22,3 +22,7 @@ initForgeBadgeCron();
 
 app.listen(PORT, () => console.log(`NOXEL Forge Backend — Port ${PORT}`));
 export default app;
+import stripeForgeRoutes from './routes/forge/stripe.forge.routes';
+// webhook DOIT être avant express.json()
+app.use('/api/forge/stripe/webhook', express.raw({ type: 'application/json' }), stripeForgeRoutes);
+app.use('/api/forge/stripe', stripeForgeRoutes);

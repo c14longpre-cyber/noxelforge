@@ -55,27 +55,22 @@ export default function ForgeSubmit() {
           </div>
         ) : (
           <>
-          <div className="nx-card" style={{ 
-  marginBottom: 28, 
-  display: 'flex', 
-  gap: 14, 
-  alignItems: 'flex-start', 
-  borderColor: 'var(--g-border)',
-  background: 'var(--g-dim)'
-}}>
-  <img
-    src="/Alfred.webp"
-    alt="Alfred"
-    style={{ width: 44, height: 44, objectFit: 'cover', objectPosition: 'top', borderRadius: '50%',  border: '2px solid var(--g)', flexShrink: 0 }}
-  />
-  <div>
-    <div style={{ fontWeight: 800, fontSize: 13, marginBottom: 4 }}>Alfred reviews every submission</div>
-    <div style={{ color: 'var(--muted)', fontSize: 12, lineHeight: 1.6 }}>
-      Account under 15 days or no scan = auto-published. Otherwise Alfred checks quality before publication.
-    </div>
-  </div>
-</div>
+            {/* Alfred card */}
+            <div className="nx-card" style={{ marginBottom: 28, display: 'flex', gap: 14, alignItems: 'flex-start', borderColor: 'var(--g-border)', background: 'var(--g-dim)' }}>
+              <img
+                src="/Alfred.webp"
+                alt="Alfred"
+                style={{ width: 44, height: 44, objectFit: 'cover', objectPosition: '50% 15%', borderRadius: '50%', border: '2px solid var(--g)', flexShrink: 0 }}
+              />
+              <div>
+                <div style={{ fontWeight: 800, fontSize: 13, marginBottom: 4 }}>Alfred reviews every submission</div>
+                <div style={{ color: 'var(--muted)', fontSize: 12, lineHeight: 1.6 }}>
+                  Every submission is scanned and reviewed by Alfred before publication. Quality guaranteed, spam impossible.
+                </div>
+              </div>
+            </div>
 
+            {/* Form */}
             <div style={{ display: 'grid', gap: 18 }}>
               <div>
                 <label style={{ display: 'block', fontSize: 12, fontWeight: 800, marginBottom: 8, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
@@ -120,17 +115,13 @@ export default function ForgeSubmit() {
                 </div>
               </div>
 
-             <div className="nx-card" style={{ display: 'flex', gap: 10, alignItems: 'center', padding: '12px 16px' }}>
-  <img
-    src="/chain-link.webp"
-    alt="Give one get one"
-    style={{ width: 28, height: 28, objectFit: 'contain', flexShrink: 0 }}
-  />
-  <div style={{ fontSize: 12, color: 'var(--muted)', lineHeight: 1.6 }}>
-    <strong style={{ color: 'var(--g)' }}>Give one, get one:</strong> your site must display a link to{' '}
-    <strong style={{ color: 'var(--g)' }}>noxelseo.com</strong> or <strong style={{ color: 'var(--g)' }}>noxelforge.com</strong> to keep the backlink active.
-  </div>
-</div>
+              <div className="nx-card" style={{ display: 'flex', gap: 10, alignItems: 'center', padding: '12px 16px' }}>
+                <img src="/chain-link.webp" alt="Give one get one" style={{ width: 28, height: 28, objectFit: 'contain', flexShrink: 0 }} />
+                <div style={{ fontSize: 12, color: 'var(--muted)', lineHeight: 1.6 }}>
+                  <strong style={{ color: 'var(--g)' }}>Give one, get one:</strong> your site must display a link to{' '}
+                  <strong style={{ color: 'var(--g)' }}>noxelseo.com</strong> or <strong style={{ color: 'var(--g)' }}>noxelforge.com</strong> to keep the backlink active.
+                </div>
+              </div>
 
               {error && (
                 <div style={{ background: 'rgba(255,92,122,0.1)', border: '1px solid rgba(255,92,122,0.3)', borderRadius: 'var(--r)', padding: '12px 16px', color: 'var(--danger)', fontSize: 13 }}>
@@ -139,13 +130,13 @@ export default function ForgeSubmit() {
               )}
 
               <button onClick={handleSubmit} disabled={loading} className="nx-pill" style={{ padding: '14px', fontSize: 15 }}>
-  {loading ? 'Analyzing...' : (
-    <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
-      <img src="/forge-tools.webp" alt="Forge" style={{ width: 18, height: 18, objectFit: 'contain' }} />
-      Submit to NOXEL Forge
-    </span>
-  )}
-</button>
+                {loading ? 'Analyzing...' : (
+                  <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+                    <img src="/forge-tools.webp" alt="Forge" style={{ width: 18, height: 18, objectFit: 'contain' }} />
+                    Submit to NOXEL Forge
+                  </span>
+                )}
+              </button>
             </div>
           </>
         )}
@@ -153,4 +144,3 @@ export default function ForgeSubmit() {
     </div>
   );
 }
-
