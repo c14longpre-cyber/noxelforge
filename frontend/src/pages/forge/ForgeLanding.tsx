@@ -42,6 +42,7 @@ export default function ForgeLanding() {
           <span style={{ fontWeight: 900, fontSize: 15, letterSpacing: '-0.3px' }}>NOXEL Forge™</span>
         </div>
         <div style={{ display: 'flex', gap: 8 }}>
+          <Link to="/forge/badge" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>Badges</Link>
           <Link to="/forge/pricing" className="nx-pill" style={{ padding: '7px 16px', fontSize: 13 }}>View pricing</Link>
           <Link to="/forge/dashboard" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>Dashboard</Link>
           <Link to="/forge/submit" className="nx-pill" style={{ padding: '7px 16px', fontSize: 13 }}><img src="/forge-tools.webp" alt="Forge" style={{width:18,height:18,objectFit:"contain",marginRight:6,verticalAlign:"middle"}}/> Submit</Link>
@@ -191,3 +192,4 @@ export default function ForgeLanding() {
     </div>
   );
 }
+
