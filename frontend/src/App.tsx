@@ -4,6 +4,7 @@ import ForgeDashboard from './pages/forge/ForgeDashboard';
 import ForgeSubmit from './pages/forge/ForgeSubmit';
 import ForgePartners from './pages/forge/ForgePartners';
 import ForgePoints from './pages/forge/ForgePoints';
+import ForgeBadge from './pages/forge/ForgeBadge';
 import ForgePricing from './pages/forge/ForgePricing';
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/forge/submit" element={<ForgeSubmit />} />
         <Route path="/forge/partners" element={<ForgePartners />} />
         <Route path="/forge/points" element={<ForgePoints />} />
+        <Route path="/forge/badge" element={<ForgeBadge />} />
         <Route path="/forge/pricing" element={<ForgePricing />} />
       </Routes>
     </BrowserRouter>
