@@ -21,7 +21,7 @@ export async function creerSoumission(req: Request, res: Response): Promise<void
   const { data: soumission, error: insertError } = await supabase.from('forge_submissions').insert({ user_id: userId, url_soumise, titre, description, niche, flux, statut: 'pending' }).select().single();
   if (insertError || !soumission) { res.status(500).json({ error: 'Erreur création soumission.' }); return; }
   traiterSoumission(soumission.id, { userId, urlSoumise: url_soumise, titre, description, contenu, niche, trustScore: trustScoreData?.score ?? 0, tierForge: trustScoreData?.tier ?? 'bronze', ageCompteDays, scanComplete: membre.scan_complete, badgeInstalle: membre.badge_installe }).catch(console.error);
-  res.status(201).json({ success: true, soumission_id: soumission.id, flux, message: flux === 'auto_share' ? 'Publié automatiquement. Bienvenue dans NOXEL Forge! 🔥' : 'Soumission reçue — Alfred analyse ton contenu.' });
+  res.status(201).json({ success: true, soumission_id: soumission.id, flux, message: 'Soumission reçue — Alfred analyse ton contenu.' });
 }
 export async function getMesSoumissions(req: Request, res: Response): Promise<void> {
   const supabase = getSupabase();
@@ -41,3 +41,4 @@ export async function getAnnuaire(req: Request, res: Response): Promise<void> {
   if (error) { res.status(500).json({ error: 'Erreur serveur.' }); return; }
   res.json({ annuaire: data ?? [], page: parseInt(page as string), limit });
 }
+
