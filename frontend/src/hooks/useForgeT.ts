@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { getForgeT, ForgeTranslations, LANGUAGES_115 } from '../i18n/forge.translations';
 
 const STORAGE_KEY = 'forge_lang';
@@ -20,3 +20,5 @@ export function useForgeT() {
 
   return { t, lang, changeLang, languages: LANGUAGES_115 };
 }
+
+

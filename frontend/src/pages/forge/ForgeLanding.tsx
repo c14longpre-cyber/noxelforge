@@ -35,7 +35,7 @@ export default function ForgeLanding() {
     finally { setLoading(false); }
   }
 
-  const currentLang = languages.find(l => l.code === lang);
+  const currentLang = languages.find((l: any) => l.code === lang);
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', overflowY: 'auto' }}>
@@ -55,7 +55,7 @@ export default function ForgeLanding() {
             {showLangMenu && (
               <div onClick={() => setShowLangMenu(false)} style={{ position: 'fixed', inset: 0, zIndex: 200 }}>
                 <div onClick={e => e.stopPropagation()} style={{ position: 'absolute', top: 36, right: 0, background: 'var(--bg2)', border: '1px solid var(--border)', borderRadius: 'var(--r)', padding: 8, width: 200, maxHeight: 320, overflowY: 'auto', zIndex: 201 }}>
-                  {languages.map(l => (
+                  {languages.map((l: any) => (
                     <button key={l.code} onClick={() => { changeLang(l.code); setShowLangMenu(false); }} style={{ display: 'flex', alignItems: 'center', gap: 8, width: '100%', padding: '6px 8px', borderRadius: 6, border: 'none', background: lang === l.code ? 'var(--g-dim)' : 'transparent', color: lang === l.code ? 'var(--g)' : 'var(--text)', fontSize: 12, cursor: 'pointer', textAlign: 'left' }}>
                       <span>{l.flag}</span>
                       <span>{l.native}</span>
@@ -211,3 +211,4 @@ export default function ForgeLanding() {
     </div>
   );
 }
+
