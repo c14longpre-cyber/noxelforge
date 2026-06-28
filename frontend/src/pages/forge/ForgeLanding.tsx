@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForgeT } from '../../hooks/useForgeT';
+import LanguageSelector from '../../components/LanguageSelector';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const NICHES = ['SEO','Marketing','AI','E-commerce','Web Dev','Business','Design'];
@@ -14,12 +15,12 @@ const TIER_CONFIG: Record<string, { color: string; icon: string; label: string }
 };
 
 export default function ForgeLanding() {
-  const { t, lang, changeLang, languages } = useForgeT();
+  const { t, lang, changeLang } = useForgeT();
   const [annuaire, setAnnuaire] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [nicheFilter, setNicheFilter] = useState('');
   const [page, setPage] = useState(1);
-  const [showLangMenu, setShowLangMenu] = useState(false);
+
 
   useEffect(() => { fetchAnnuaire(); }, [nicheFilter, page]);
 
@@ -35,7 +36,7 @@ export default function ForgeLanding() {
     finally { setLoading(false); }
   }
 
-  const currentLang = languages.find((l: any) => l.code === lang);
+
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', overflowY: 'auto' }}>
@@ -47,24 +48,7 @@ export default function ForgeLanding() {
           <span style={{ fontWeight: 900, fontSize: 15, letterSpacing: '-0.3px' }}>NOXEL Forge™</span>
         </div>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          {/* Language selector */}
-          <div style={{ position: 'relative' }}>
-            <button onClick={() => setShowLangMenu(m => !m)} style={{ padding: '6px 10px', borderRadius: 'var(--r)', border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', fontSize: 13, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}>
-              {currentLang?.flag} {currentLang?.code.toUpperCase()}
-            </button>
-            {showLangMenu && (
-              <div onClick={() => setShowLangMenu(false)} style={{ position: 'fixed', inset: 0, zIndex: 200 }}>
-                <div onClick={e => e.stopPropagation()} style={{ position: 'absolute', top: 36, right: 0, background: 'var(--bg2)', border: '1px solid var(--border)', borderRadius: 'var(--r)', padding: 8, width: 200, maxHeight: 320, overflowY: 'auto', zIndex: 201 }}>
-                  {languages.map((l: any) => (
-                    <button key={l.code} onClick={() => { changeLang(l.code); setShowLangMenu(false); }} style={{ display: 'flex', alignItems: 'center', gap: 8, width: '100%', padding: '6px 8px', borderRadius: 6, border: 'none', background: lang === l.code ? 'var(--g-dim)' : 'transparent', color: lang === l.code ? 'var(--g)' : 'var(--text)', fontSize: 12, cursor: 'pointer', textAlign: 'left' }}>
-                      <span>{l.flag}</span>
-                      <span>{l.native}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
+          <LanguageSelector locale={lang} onChange={changeLang} />
           <Link to="/forge/badge" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>{t.nav.badges}</Link>
           <Link to="/forge/pricing" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>{t.nav.pricing}</Link>
           <Link to="/forge/dashboard" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>{t.nav.dashboard}</Link>
@@ -211,4 +195,8 @@ export default function ForgeLanding() {
     </div>
   );
 }
+
+
+
+
 
