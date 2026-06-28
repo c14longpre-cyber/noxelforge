@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useForgeT } from '../../hooks/useForgeT';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const NICHES = ['SEO','Marketing','AI','E-commerce','Web Dev','Business','Design'];
@@ -13,10 +14,12 @@ const TIER_CONFIG: Record<string, { color: string; icon: string; label: string }
 };
 
 export default function ForgeLanding() {
+  const { t, lang, changeLang, languages } = useForgeT();
   const [annuaire, setAnnuaire] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [nicheFilter, setNicheFilter] = useState('');
   const [page, setPage] = useState(1);
+  const [showLangMenu, setShowLangMenu] = useState(false);
 
   useEffect(() => { fetchAnnuaire(); }, [nicheFilter, page]);
 
@@ -32,6 +35,8 @@ export default function ForgeLanding() {
     finally { setLoading(false); }
   }
 
+  const currentLang = languages.find(l => l.code === lang);
+
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', overflowY: 'auto' }}>
 
@@ -41,78 +46,86 @@ export default function ForgeLanding() {
           <img src="/forge-tools.webp" alt="Forge" style={{ width: 28, height: 28, objectFit: 'contain' }} />
           <span style={{ fontWeight: 900, fontSize: 15, letterSpacing: '-0.3px' }}>NOXEL Forge™</span>
         </div>
-        <div style={{ display: 'flex', gap: 8 }}>
-          <Link to="/forge/badge" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>Badges</Link>
-          <Link to="/forge/pricing" className="nx-pill" style={{ padding: '7px 16px', fontSize: 13 }}>View pricing</Link>
-          <Link to="/forge/dashboard" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>Dashboard</Link>
-          <Link to="/forge/submit" className="nx-pill" style={{ padding: '7px 16px', fontSize: 13 }}><img src="/forge-tools.webp" alt="Forge" style={{width:18,height:18,objectFit:"contain",marginRight:6,verticalAlign:"middle"}}/> Submit</Link>
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          {/* Language selector */}
+          <div style={{ position: 'relative' }}>
+            <button onClick={() => setShowLangMenu(m => !m)} style={{ padding: '6px 10px', borderRadius: 'var(--r)', border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', fontSize: 13, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}>
+              {currentLang?.flag} {currentLang?.code.toUpperCase()}
+            </button>
+            {showLangMenu && (
+              <div onClick={() => setShowLangMenu(false)} style={{ position: 'fixed', inset: 0, zIndex: 200 }}>
+                <div onClick={e => e.stopPropagation()} style={{ position: 'absolute', top: 36, right: 0, background: 'var(--bg2)', border: '1px solid var(--border)', borderRadius: 'var(--r)', padding: 8, width: 200, maxHeight: 320, overflowY: 'auto', zIndex: 201 }}>
+                  {languages.map(l => (
+                    <button key={l.code} onClick={() => { changeLang(l.code); setShowLangMenu(false); }} style={{ display: 'flex', alignItems: 'center', gap: 8, width: '100%', padding: '6px 8px', borderRadius: 6, border: 'none', background: lang === l.code ? 'var(--g-dim)' : 'transparent', color: lang === l.code ? 'var(--g)' : 'var(--text)', fontSize: 12, cursor: 'pointer', textAlign: 'left' }}>
+                      <span>{l.flag}</span>
+                      <span>{l.native}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+          <Link to="/forge/badge" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>{t.nav.badges}</Link>
+          <Link to="/forge/pricing" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>{t.nav.pricing}</Link>
+          <Link to="/forge/dashboard" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>{t.nav.dashboard}</Link>
+          <Link to="/forge/submit" className="nx-pill" style={{ padding: '7px 16px', fontSize: 13 }}>
+            <img src="/forge-tools.webp" alt="Forge" style={{width:18,height:18,objectFit:'contain',marginRight:6,verticalAlign:'middle'}}/>
+            {t.nav.submit}
+          </Link>
         </div>
       </nav>
-      
 
       {/* HERO */}
       <section style={{ padding: '72px 32px 56px', textAlign: 'center', borderBottom: '1px solid var(--border)', background: 'linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%)' }}>
-        <div className="nx-kicker" style={{ marginBottom: 16 }}><img src="/forge-tools.webp" alt="Forge" style={{width:18,height:18,objectFit:"contain",marginRight:6,verticalAlign:"middle"}}/> NOXEL Forge™ — Backlink Exchange Ecosystem</div>
+        <div className="nx-kicker" style={{ marginBottom: 16 }}>
+          <img src="/forge-tools.webp" alt="Forge" style={{width:18,height:18,objectFit:'contain',marginRight:6,verticalAlign:'middle'}}/>
+          {t.hero.kicker}
+        </div>
         <h1 className="nx-title" style={{ fontSize: 'clamp(2rem,5vw,3.5rem)', textAlign: 'center', marginBottom: 20 }}>
-          Forge your{' '}
-          <span style={{ color: 'var(--g)' }}>authority</span>
+          {t.hero.title}{' '}
+          <span style={{ color: 'var(--g)' }}>{t.hero.titleAccent}</span>
         </h1>
         <p className="nx-subtitle" style={{ textAlign: 'center', margin: '0 auto 40px' }}>
-          Exchange backlinks with verified sites filtered by Alfred. Quality guaranteed, spam impossible. Give one, get one.
+          {t.hero.subtitle}
         </p>
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link to="/forge/submit" className="nx-pill"><img src="/forge-tools.webp" alt="Forge" style={{width:18,height:18,objectFit:"contain",marginRight:6,verticalAlign:"middle"}}/> Submit my site</Link>
-          <Link to="/forge/dashboard" style={{ padding: '12px 22px', borderRadius: 'var(--r)', border: '1px solid var(--g-border)', color: 'var(--g)', fontSize: 14, fontWeight: 700, background: 'var(--g-dim)' }}>My Dashboard →</Link>
+          <Link to="/forge/submit" className="nx-pill">
+            <img src="/forge-tools.webp" alt="Forge" style={{width:18,height:18,objectFit:'contain',marginRight:6,verticalAlign:'middle'}}/>
+            {t.hero.ctaSubmit}
+          </Link>
+          <Link to="/forge/dashboard" style={{ padding: '12px 22px', borderRadius: 'var(--r)', border: '1px solid var(--g-border)', color: 'var(--g)', fontSize: 14, fontWeight: 700, background: 'var(--g-dim)' }}>{t.hero.ctaDashboard}</Link>
         </div>
 
         {/* STATS */}
         <div style={{ display: 'flex', gap: 48, justifyContent: 'center', marginTop: 56, flexWrap: 'wrap', alignItems: 'flex-start' }}>
-
-          {/* Forge Points */}
           <div style={{ textAlign: 'center' }}>
             <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}>
-              <img
-                src="/forge-tools.webp"
-                alt="Forge Points"
-                style={{ width: 72, height: 72, objectFit: 'contain' }}
-              />
+              <img src="/forge-tools.webp" alt="Forge Points" style={{ width: 72, height: 72, objectFit: 'contain' }} />
             </div>
-            <div style={{ fontWeight: 800, fontSize: 14, color: 'var(--text)', marginBottom: 4 }}>Forge Points</div>
-            <div style={{ fontSize: 12, color: 'var(--muted)', maxWidth: 160 }}>Earn points on every exchange</div>
+            <div style={{ fontWeight: 800, fontSize: 14, color: 'var(--text)', marginBottom: 4 }}>{t.stats.forgePoints}</div>
+            <div style={{ fontSize: 12, color: 'var(--muted)', maxWidth: 160 }}>{t.stats.forgePointsDesc}</div>
           </div>
-
-   {/* Give one get one */}
-<div style={{ textAlign: 'center' }}>
-  <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}>
-    <img
-      src="/chain-link.webp"
-      alt="Give one get one"
-      style={{ width: 72, height: 72, objectFit: 'contain' }}
-    />
-  </div>
-  <div style={{ fontWeight: 800, fontSize: 14, color: 'var(--text)', marginBottom: 4 }}>Give one, get one</div>
-  <div style={{ fontSize: 12, color: 'var(--muted)', maxWidth: 160 }}>You give a backlink, you get one back</div>
-</div>
-          {/* Alfred */}
           <div style={{ textAlign: 'center' }}>
             <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}>
-              <img
-                src="/Alfred.webp"
-                alt="Alfred"
-                style={{ width: 72, height: 72, objectFit: 'cover', objectPosition: '50% 15%', borderRadius: '50%', border: '2px solid var(--g)' }}
-              />
+              <img src="/chain-link.webp" alt="Give one get one" style={{ width: 72, height: 72, objectFit: 'contain' }} />
             </div>
-            <div style={{ fontWeight: 800, fontSize: 14, color: 'var(--text)', marginBottom: 4 }}>Alfred filters</div>
-            <div style={{ fontSize: 12, color: 'var(--muted)', maxWidth: 160 }}>Zero spam, zero generic content</div>
+            <div style={{ fontWeight: 800, fontSize: 14, color: 'var(--text)', marginBottom: 4 }}>{t.stats.giveOne}</div>
+            <div style={{ fontSize: 12, color: 'var(--muted)', maxWidth: 160 }}>{t.stats.giveOneDesc}</div>
           </div>
-
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}>
+              <img src="/Alfred.webp" alt="Alfred" style={{ width: 72, height: 72, objectFit: 'cover', objectPosition: '50% 15%', borderRadius: '50%', border: '2px solid var(--g)' }} />
+            </div>
+            <div style={{ fontWeight: 800, fontSize: 14, color: 'var(--text)', marginBottom: 4 }}>{t.stats.alfredFilters}</div>
+            <div style={{ fontSize: 12, color: 'var(--muted)', maxWidth: 160 }}>{t.stats.alfredFiltersDesc}</div>
+          </div>
         </div>
       </section>
 
       {/* TRUST SCORE TIERS */}
       <section style={{ padding: '56px 32px', maxWidth: 960, margin: '0 auto' }}>
-        <div className="nx-kicker" style={{ marginBottom: 8, textAlign: 'center' }}>Trust Score Forge™</div>
-        <p style={{ textAlign: 'center', color: 'var(--muted)', marginBottom: 32, fontSize: 14 }}>Every site receives a score out of 100 based on 6 quality signals</p>
+        <div className="nx-kicker" style={{ marginBottom: 8, textAlign: 'center' }}>{t.trust.kicker}</div>
+        <p style={{ textAlign: 'center', color: 'var(--muted)', marginBottom: 32, fontSize: 14 }}>{t.trust.subtitle}</p>
         <div className="nx-grid nx-grid--5">
           {[
             { tier: 'bronze',   range: '0–40',   desc: 'Read-only access' },
@@ -121,10 +134,10 @@ export default function ForgeLanding() {
             { tier: 'platinum', range: '86–94',  desc: 'Confirmed authority' },
             { tier: 'diamond',  range: '95–100', desc: 'Forge Elite' },
           ].map(({ tier, range, desc }) => {
-            const t = TIER_CONFIG[tier];
+            const t2 = TIER_CONFIG[tier];
             return (
-              <div key={tier} className="nx-card" style={{ textAlign: 'center', borderColor: `${t.color}33` }}>
-                <div style={{ color: t.color, fontWeight: 900, fontSize: 13, marginBottom: 6 }}>{t.icon} {t.label}</div>
+              <div key={tier} className="nx-card" style={{ textAlign: 'center', borderColor: `${t2.color}33` }}>
+                <div style={{ color: t2.color, fontWeight: 900, fontSize: 13, marginBottom: 6 }}>{t2.icon} {t2.label}</div>
                 <div style={{ fontSize: 22, fontWeight: 900, color: 'var(--text)', marginBottom: 4 }}>{range}</div>
                 <div style={{ fontSize: 11, color: 'var(--muted)' }}>{desc}</div>
               </div>
@@ -137,8 +150,8 @@ export default function ForgeLanding() {
       <section style={{ padding: '0 32px 80px', maxWidth: 960, margin: '0 auto' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20, flexWrap: 'wrap', gap: 12 }}>
           <div>
-            <div className="nx-kicker" style={{ marginBottom: 4 }}>Directory</div>
-            <h2 style={{ fontSize: 20, fontWeight: 900, margin: 0 }}>Verified Forge Sites</h2>
+            <div className="nx-kicker" style={{ marginBottom: 4 }}>{t.directory.kicker}</div>
+            <h2 style={{ fontSize: 20, fontWeight: 900, margin: 0 }}>{t.directory.title}</h2>
           </div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             <button onClick={() => { setNicheFilter(''); setPage(1); }} style={{ padding: '5px 12px', borderRadius: 8, border: '1px solid var(--border)', background: !nicheFilter ? 'var(--g)' : 'transparent', color: !nicheFilter ? '#07090f' : 'var(--muted)', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>All</button>
@@ -149,13 +162,16 @@ export default function ForgeLanding() {
         </div>
 
         {loading ? (
-          <div style={{ textAlign: 'center', color: 'var(--muted)', padding: 60, fontSize: 14 }}><img src="/forge-tools.webp" alt="Forge" style={{width:18,height:18,objectFit:"contain",marginRight:6,verticalAlign:"middle"}}/> Loading directory...</div>
+          <div style={{ textAlign: 'center', color: 'var(--muted)', padding: 60, fontSize: 14 }}>
+            <img src="/forge-tools.webp" alt="Forge" style={{width:18,height:18,objectFit:'contain',marginRight:6,verticalAlign:'middle'}}/>
+            {t.directory.loading}
+          </div>
         ) : annuaire.length === 0 ? (
           <div className="nx-card" style={{ textAlign: 'center', padding: 60 }}>
             <img src="/forge-tools.webp" alt="Forge" style={{ width: 56, height: 56, objectFit: 'contain', marginBottom: 12 }} />
-            <div style={{ fontWeight: 800, marginBottom: 8, fontSize: 15 }}>The directory is empty for now</div>
-            <div style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 24 }}>Be the first to submit your site.</div>
-            <Link to="/forge/submit" className="nx-pill" style={{ display: 'inline-block' }}>Submit my site</Link>
+            <div style={{ fontWeight: 800, marginBottom: 8, fontSize: 15 }}>{t.directory.empty}</div>
+            <div style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 24 }}>{t.directory.emptyDesc}</div>
+            <Link to="/forge/submit" className="nx-pill" style={{ display: 'inline-block' }}>{t.hero.ctaSubmit}</Link>
           </div>
         ) : (
           <div style={{ display: 'grid', gap: 10 }}>
@@ -167,7 +183,7 @@ export default function ForgeLanding() {
                   <p style={{ margin: '0 0 8px', color: 'var(--muted)', fontSize: 13, lineHeight: 1.5 }}>{item.description}</p>
                   <a href={item.url_soumise} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--g)', fontSize: 12 }}>{item.url_soumise} ↗</a>
                 </div>
-                <div style={{ fontSize: 11, color: 'var(--soft)' }}>{new Date(item.created_at).toLocaleDateString('en-CA')}</div>
+                <div style={{ fontSize: 11, color: 'var(--soft)' }}>{new Date(item.created_at).toLocaleDateString(lang)}</div>
               </div>
             ))}
           </div>
@@ -175,21 +191,23 @@ export default function ForgeLanding() {
 
         {annuaire.length > 0 && (
           <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginTop: 28 }}>
-            <button onClick={() => setPage(p => Math.max(1,p-1))} disabled={page===1} style={{ padding: '7px 16px', borderRadius: 8, border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', cursor: page===1?'not-allowed':'pointer', opacity: page===1?0.4:1, fontSize: 13 }}>← Previous</button>
+            <button onClick={() => setPage(p => Math.max(1,p-1))} disabled={page===1} style={{ padding: '7px 16px', borderRadius: 8, border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', cursor: page===1?'not-allowed':'pointer', opacity: page===1?0.4:1, fontSize: 13 }}>{t.directory.previous}</button>
             <span style={{ padding: '7px 14px', color: 'var(--muted)', fontSize: 13 }}>Page {page}</span>
-            <button onClick={() => setPage(p => p+1)} disabled={annuaire.length<20} style={{ padding: '7px 16px', borderRadius: 8, border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', cursor: annuaire.length<20?'not-allowed':'pointer', opacity: annuaire.length<20?0.4:1, fontSize: 13 }}>Next →</button>
+            <button onClick={() => setPage(p => p+1)} disabled={annuaire.length<20} style={{ padding: '7px 16px', borderRadius: 8, border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', cursor: annuaire.length<20?'not-allowed':'pointer', opacity: annuaire.length<20?0.4:1, fontSize: 13 }}>{t.directory.next}</button>
           </div>
         )}
       </section>
 
       {/* CTA BOTTOM */}
       <section style={{ padding: '56px 32px', background: 'var(--bg2)', borderTop: '1px solid var(--border)', textAlign: 'center' }}>
-        <div className="nx-kicker" style={{ marginBottom: 12 }}>Ready to forge?</div>
-        <h2 style={{ fontSize: 28, fontWeight: 900, marginBottom: 12, letterSpacing: '-0.5px' }}>Join NOXEL Forge™</h2>
-        <p style={{ color: 'var(--muted)', marginBottom: 28, fontSize: 14 }}>Start building your verified backlink network today.</p>
-        <Link to="/forge/submit" className="nx-pill"><img src="/forge-tools.webp" alt="Forge" style={{width:18,height:18,objectFit:"contain",marginRight:6,verticalAlign:"middle"}}/> Join NOXEL Forge</Link>
+        <div className="nx-kicker" style={{ marginBottom: 12 }}>{t.cta.kicker}</div>
+        <h2 style={{ fontSize: 28, fontWeight: 900, marginBottom: 12, letterSpacing: '-0.5px' }}>{t.cta.title}</h2>
+        <p style={{ color: 'var(--muted)', marginBottom: 28, fontSize: 14 }}>{t.cta.subtitle}</p>
+        <Link to="/forge/submit" className="nx-pill">
+          <img src="/forge-tools.webp" alt="Forge" style={{width:18,height:18,objectFit:'contain',marginRight:6,verticalAlign:'middle'}}/>
+          {t.cta.title}
+        </Link>
       </section>
     </div>
   );
 }
-
