@@ -302,12 +302,12 @@ export default function LanguageSelector({ locale, onChange }: Props) {
             <div style={{ padding: "4px 6px 8px" }}>
               <style>{`
                 .nxl-map-wrap svg { width: 100% !important; height: 100% !important; display: block !important; transform: translateY(0); }
-                .nxl-map-wrap svg g, .nxl-map-wrap svg path { pointer-events: all; }
+                .nxl-map-wrap svg g, .nxl-map-wrap svg path { pointer-events: all; fill: #9BD5C1; stroke: #0477BE; stroke-width: 0.5; transition: fill 0.12s ease, filter 0.12s ease, stroke 0.12s ease; }
                 .nxl-map-wrap svg .is-hovered { fill: rgba(112,42,165,0.75) !important; stroke: rgba(180,120,255,1) !important; stroke-width: 1.8 !important; filter: drop-shadow(0 0 3px rgba(131,90,255,0.19)) drop-shadow(0 0 8px rgba(131,90,255,0.33)) drop-shadow(0 0 12px rgba(131,90,255,0.25)) !important; }
                 .nxl-map-wrap { cursor: crosshair; }
               `}</style>
               <div ref={mapWrapRef} className="nxl-map-wrap"
-                dangerouslySetInnerHTML={{ __html: worldSvg }}
+                dangerouslySetInnerHTML={{ __html: worldSvg.replace('viewBox="0 0 784.077 458.627"', 'viewBox="0 40 900 700"').replace('width="784.077px"', 'width="100%"').replace('height="458.627px"', 'height="100%"') }}
                 onPointerMove={onPointerMove} onPointerLeave={onPointerLeave} onClick={onClick}
                 style={{ borderRadius: 12, overflow: "hidden", border: "1px solid rgba(255,255,255,0.08)", background: "#07090f", lineHeight: 0, height: 700, display: "flex", alignItems: "center", justifyContent: "center" }}
               />
