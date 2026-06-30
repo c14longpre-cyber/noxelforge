@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForgeT } from '../../hooks/useForgeT';
-import LanguageSelector from '../../components/LanguageSelector';
+import { lazy, Suspense } from 'react';
+const LanguageSelector = lazy(() => import('../../components/LanguageSelector'));
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const NICHES = ['SEO','Marketing','AI','E-commerce','Web Dev','Business','Design'];
@@ -48,7 +49,7 @@ export default function ForgeLanding() {
           <span style={{ fontWeight: 900, fontSize: 15, letterSpacing: '-0.3px' }}>NOXEL Forge™</span>
         </div>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          <LanguageSelector locale={lang} onChange={changeLang} />
+          <Suspense fallback={<span style={{width:40,height:28,display:'inline-block'}} />}><LanguageSelector locale={lang} onChange={changeLang} /></Suspense>
           <Link to="/forge/badge" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>{t.nav.badges}</Link>
           <Link to="/forge/pricing" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>{t.nav.pricing}</Link>
           <Link to="/forge/dashboard" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>{t.nav.dashboard}</Link>
