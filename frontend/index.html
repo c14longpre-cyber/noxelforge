@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>NOXEL Forge - Backlink Exchange Ecosystem | Quality Link Building</title>
+    <title>NOXEL Forge - Backlink Exchange Ecosystem</title>
     <meta name="description" content="Exchange verified backlinks with Alfred-filtered sites. Zero spam, zero generic content. Give one, get one. Build your domain authority with NOXEL Forge." />
-    <link rel="canonical" href="https://noxelforge.com/" />
+    <link rel="canonical" href="https://noxelforge.com/forge" />
 
     <meta property="og:title" content="NOXEL Forge - Backlink Exchange Ecosystem" />
-    <meta property="og:description" content="Exchange verified backlinks with Alfred-filtered sites. Zero spam, zero generic content. Give one, get one." />
+    <meta property="og:description" content="Exchange verified backlinks with Alfred-filtered sites. Zero spam, zero generic content." />
     <meta property="og:image" content="https://noxelforge.com/logo-forge.png" />
     <meta property="og:url" content="https://noxelforge.com/" />
     <meta property="og:type" content="website" />
@@ -37,14 +37,39 @@
       "url": "https://noxelforge.com"
     }
     </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://noxelforge.com"},
+        {"@type": "ListItem", "position": 2, "name": "Forge", "item": "https://noxelforge.com/forge"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "What is NOXEL Forge?", "acceptedAnswer": {"@type": "Answer", "text": "NOXEL Forge is a backlink exchange ecosystem where verified sites exchange quality backlinks, filtered by Alfred AI to guarantee zero spam."}},
+        {"@type": "Question", "name": "How does the Trust Score work?", "acceptedAnswer": {"@type": "Answer", "text": "Every site receives a Trust Score out of 100 based on 6 quality signals, determining their tier from Bronze to Diamond."}},
+        {"@type": "Question", "name": "Is NOXEL Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, the Bronze tier offers free directory access. Paid tiers unlock submission, Alfred review, and Forge Points."}}
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root">
+      <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;">NOXEL Forge - Backlink Exchange Ecosystem</h1>
       <noscript>
-        <h1>NOXEL Forge - Backlink Exchange Ecosystem</h1>
-        <p>Exchange backlinks with verified sites filtered by Alfred. Quality guaranteed, spam impossible. Give one, get one. Every site receives a Trust Score out of 100 based on 6 quality signals. Join NOXEL Forge today to build your domain authority through a verified backlink exchange network.</p>
+        <p>Exchange backlinks with verified sites filtered by Alfred. Quality guaranteed, spam impossible. Give one, get one. Every site receives a Trust Score out of 100 based on 6 quality signals. Join NOXEL Forge today to build your domain authority through a verified backlink exchange network. Visit our pricing page, submit your site, or explore our badge center to display your NOXEL Forge partnership.</p>
+        <a href="/forge/submit">Submit your site</a>
+        <a href="/forge/pricing">View pricing</a>
+        <a href="/forge/badge">Get badges</a>
+        <a href="/forge/dashboard">Dashboard</a>
       </noscript>
     </div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="/src/main.tsx" defer></script>
   </body>
 </html>
