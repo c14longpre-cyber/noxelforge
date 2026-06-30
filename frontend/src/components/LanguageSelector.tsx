@@ -176,6 +176,17 @@ export default function LanguageSelector({ locale, onChange }: Props) {
     const id = resolveDataId(e.target);
     const validId = id && COUNTRY_LANGS[id] ? id : null;
     setHoveredId((prev) => (prev === validId ? prev : validId));
+    if (svgRef.current) {
+      const paths = svgRef.current.querySelectorAll<SVGPathElement>("path");
+      paths.forEach((p) => {
+        if (!p.style.fill || p.style.fill === "") {
+          if (!p.classList.contains("is-hovered") && !p.classList.contains("is-selected")) {
+            p.style.fill = "#9BD5C1";
+            p.style.stroke = "#0477BE";
+          }
+        }
+      });
+    }
   };
 
   const onPointerLeave = () => setHoveredId(null);
