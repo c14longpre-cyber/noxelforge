@@ -101,6 +101,7 @@ export default function LanguageSelector({ locale, onChange }: Props) {
     LANGUAGES_115.find((l) => l.code === "en")!;
 
   useEffect(() => {
+    const timer = setTimeout(() => {
     svgRef.current = mapWrapRef.current?.querySelector("svg") ?? null;
     const svg = svgRef.current;
     if (!svg) return;
@@ -127,6 +128,8 @@ export default function LanguageSelector({ locale, onChange }: Props) {
       p.style.transition = "fill 0.12s ease, filter 0.12s ease, stroke 0.12s ease";
       p.style.pointerEvents = "all";
     });
+    }, 50);
+    return () => clearTimeout(timer);
   }, [viewMode, menuOpen]);
 
   const resolveDataId = (target: EventTarget | null): string | null => {
