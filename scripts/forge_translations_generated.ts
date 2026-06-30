@@ -8183,3 +8183,735 @@ const la: ForgeTranslations = {
 
 // Add to FORGE_TRANSLATIONS object:
 // cs, vi, af, sl, fo, lb, is, th, mt, da, it, de, ln, sm, xh, pl, ja, ga, zh, gl, sn, ar, ps, ka, na, gn, tk, zu, pt, nb, so, ay, tl, lt, kg, gv, qu, sq, az, nd, lu, tn, he, kk, sr, rn, el, lv, be, hi, ro, to, kl, ss, hr, nl, bg, ru, et, tr, mg, nn, ht, bi, st, eu, rw, mh, no, ts, sv, hu, bn, sg, ko, fa, uk, mi, sw, bs, nr, ca, ff, mk, ur, ku, ny, hy, fi, ch, sk, uz, oc, id, mn, fj, ky, tg, ms, ve, la
+
+// RETRY translations
+
+const am: ForgeTranslations = {
+  nav: {
+    submit: "አስገባ",
+    dashboard: "ዳሽቦርድ",
+    pricing: "ዋጋ",
+    badges: "ባጆች"
+  },
+  hero: {
+    kicker: "NOXEL Forge - የጀርባ አገናኝ ልውውጥ ስነ-ምህዳር",
+    title: "ስልጣንህን",
+    titleAccent: "አቅም",
+    subtitle: "በ Alfred በተጣሩ የተረጋገጡ ጣቢያዎች ጋር የጀርባ አገናኞችን ተለዋወጥ። ጥራት የተረጋገጠ፣ ስፓም የማይቻል። አንድ ስጥ፣ አንድ ተቀበል።",
+    ctaSubmit: "ጣቢያዬን አስገባ",
+    ctaDashboard: "የእኔ ዳሽቦርድ"
+  },
+  stats: {
+    forgePoints: "የፎርጅ ነጥቦች",
+    forgePointsDesc: "በእያንዳንዱ ልውውጥ ነጥቦችን አግኝ",
+    giveOne: "አንድ ስጥ፣ አንድ ተቀበል",
+    giveOneDesc: "አንድ የጀርባ አገናኝ ስጥ፣ አንዱን ተቀበል",
+    alfredFilters: "Alfred ማጣሪያዎች",
+    alfredFiltersDesc: "ምንም ስፓም የለም፣ ምንም አጠቃላይ ይዘት የለም"
+  },
+  trust: {
+    kicker: "የመተማመን ነጥብ ፎርጅ",
+    subtitle: "እያንዳንዱ ጣቢያ ከ 100 ውስጥ ነጥብ ይቀበላል በ 6 የጥራት ምልክቶች ላይ ተመስርቶ"
+  },
+  directory: {
+    kicker: "ማውጫ",
+    title: "የተረጋገጡ የፎርጅ ጣቢያዎች",
+    empty: "ማውጫው አሁን ባዶ ነው",
+    emptyDesc: "ጣቢያህን ለማስገባት የመጀመሪያው ሁን።",
+    loading: "ማውጫ በመጫን ላይ...",
+    previous: "ቀዳሚ",
+    next: "ቀጣይ"
+  },
+  submit: {
+    alfredTitle: "Alfred እያንዳንዱን ማስገቢያ ይከልሳል",
+    alfredDesc: "እያንዳንዱ ማስገቢያ ከህትመት በፊት በ Alfred ይቃኛል እና ይከለሳል። ጥራት የተረጋገጠ፣ ስፓም የማይቻል።",
+    urlLabel: "የጣቢያ URL",
+    urlHint: "HTTPS ያስፈልጋል። noxelseo.com ወይም noxelforge.com ወደሚያገናኝ አገናኝ መያዝ አለበት",
+    titleLabel: "ርዕስ",
+    nicheLabel: "ልዩ ዘርፍ",
+    descLabel: "አጭር መግለጫ",
+    contentLabel: "ዋና ይዘት",
+    contentHint: "አማራጭ ነው፣ Alfred በተሻለ እንዲተነትን ይረዳል",
+    submitBtn: "ወደ NOXEL Forge አስገባ",
+    analyzing: "በመተንተን ላይ..."
+  },
+  pricing: {
+    kicker: "NOXEL Forge ዋጋ",
+    title: "የስልጣን",
+    titleAccent: "አውታረ መረብህን ገንባ",
+    subtitle: "የ NOXEL ባጅ በጣቢያህ ላይ አሳይ እና በእያንዳንዱ እርከን ልዩ ቅናሾችን ክፈት።",
+    monthly: "ወርሃዊ",
+    annual: "ዓመታዊ",
+    badgeToggle: "የ NOXEL ባጅ አሳያለሁ፣ ቅናሽ ክፈት",
+    badgeApplied: "የባጅ ቅናሽ ተተግብሯል",
+    mostPopular: "በጣም ታዋቂ",
+    perMonth: "/ወር",
+    getStarted: "ነፃ ጀምር",
+    badgeInfoTitle: "የባጅ ቅናሾችን እንዴት መክፈት እንደሚቻል",
+    badgeInfoDesc: "ማንኛውንም ባጅ በጣቢያህ ግርጌ ላይ አሳይ። Alfred በእያንዳንዱ ማስገቢያ ላይ ግርጌህን ይቃኛል።"
+  },
+  badge: {
+    kicker: "በጣቢያህ ላይ አሳይ",
+    title: "NOXEL Forge",
+    titleAccent: "ባጆች",
+    subtitle: "ማንኛውንም ባጅ ወደ ጣቢያህ ግርጌ ቅዳ እና ለጥፍ።",
+    copy: "ቅንጥብ ቅዳ",
+    copied: "ተቀድቷል!",
+    infoTitle: "የባጅ ቅናሾች እንዴት እንደሚሠሩ",
+    infoDesc: "ማንኛውንም ባጅ በጣቢያህ ግርጌ ላይ፣ በጠቅላላ ጣቢያው ላይ አስቀምጥ። Alfred በእያንዳንዱ ማስገቢያ ላይ ግርጌህን ይቃኛል። ሲልቨር 10%፣ ጎልድ 15%፣ ፕላቲኒየም 20%፣ ዳያሞንድ 25%።"
+  },
+  cta: {
+    kicker: "ለመቅረጽ ዝግጁ ነህ?",
+    title: "NOXEL Forge ይቀላቀሉ",
+    subtitle: "ዛሬ የተረጋገጠ የጀርባ አገናኝ አውታረ መረብህን መገንባት ጀምር።"
+  }
+};
+
+const ti: ForgeTranslations = {
+  nav: {
+    submit: "ኣቕርብ",
+    dashboard: "ዳሽቦርድ",
+    pricing: "ዋጋ",
+    badges: "ባጅታት"
+  },
+  hero: {
+    kicker: "NOXEL Forge - ናይ ባክሊንክ ምልውዋጥ ኢኮሲስተም",
+    title: "ስልጣንካ",
+    titleAccent: "ፍጠር",
+    subtitle: "ምስ ብ Alfred ዝተረጋገጹ ሳይታት ባክሊንክ ተለዋወጥ። ጥራይነት ዋስትና ዘለዎ፣ ስፓም ዘይከኣል። ሓደ ሃብ፣ ሓደ ውሰድ።",
+    ctaSubmit: "ሳይተይ ኣቕርብ",
+    ctaDashboard: "ዳሽቦርደይ"
+  },
+  stats: {
+    forgePoints: "ፎርጅ ነጥብታት",
+    forgePointsDesc: "ኣብ ነፍሲ ወከፍ ምልውዋጥ ነጥብታት ኣኻብብ",
+    giveOne: "ሓደ ሃብ፣ ሓደ ውሰድ",
+    giveOneDesc: "ሓደ ባክሊንክ ትህብ፣ ሓደ ትምለሰልካ",
+    alfredFilters: "Alfred ፊልተራት",
+    alfredFiltersDesc: "ዜሮ ስፓም፣ ዜሮ ሓፈሻዊ ትሕዝቶ"
+  },
+  trust: {
+    kicker: "ትረስት ስኮር ፎርጅ",
+    subtitle: "ነፍሲ ወከፍ ሳይት ካብ 100 ዝኾነ ነጥቢ ብመሰረት 6 ናይ ጥራይነት ምልክታት ይቕበል"
+  },
+  directory: {
+    kicker: "ዳይረክቶሪ",
+    title: "ዝተረጋገጹ ፎርጅ ሳይታት",
+    empty: "ዳይረክቶሪ ሕጂ ባዶ እዩ",
+    emptyDesc: "ሳይትካ ንምቕራብ መጀመርታ ኩን።",
+    loading: "ዳይረክቶሪ ይጽዓን ኣሎ...",
+    previous: "ዝሓለፈ",
+    next: "ዝቕጽል"
+  },
+  submit: {
+    alfredTitle: "Alfred ነፍሲ ወከፍ ምቕራብ ይምርምር",
+    alfredDesc: "ነፍሲ ወከፍ ምቕራብ ቅድሚ ምሕታሙ ብ Alfred ይስካን ይምርመርን። ጥራይነት ዋስትና ዘለዎ፣ ስፓም ዘይከኣል።",
+    urlLabel: "ናይ ሳይት URL",
+    urlHint: "HTTPS የድሊ። noxelseo.com ወይ noxelforge.com ናብ ዝወስድ ሊንክ ክህልዎ ኣለዎ",
+    titleLabel: "ኣርእስቲ",
+    nicheLabel: "ኒሽ",
+    descLabel: "ሓጺር መግለጺ",
+    contentLabel: "ዋና ትሕዝቶ",
+    contentHint: "ወሃቢ፣ Alfred ንምሕጋዝ ዝበለጸ ክምርምር ይሕግዝ",
+    submitBtn: "ናብ NOXEL Forge ኣቕርብ",
+    analyzing: "ይምርምር ኣሎ..."
+  },
+  pricing: {
+    kicker: "NOXEL Forge ዋጋ",
+    title: "ናይ",
+    titleAccent: "ስልጣን ኔትወርክካ ስራሕ",
+    subtitle: "ኣብ ሳይትካ ናይ NOXEL ባጅ ኣርኢ ናይ ነፍሲ ወከፍ ደረጃ ልሉይ ቅናሽ ኣልቅስ።",
+    monthly: "ወርሓዊ",
+    annual: "ዓመታዊ",
+    badgeToggle: "ናይ NOXEL ባጅ ኣርኢ ኣሎኹ፣ ቅናሽ ኣልቅስ",
+    badgeApplied: "ናይ ባጅ ቅናሽ ተተግቢሩ",
+    mostPopular: "ዝበዝሐ ዝጥቀሙሉ",
+    perMonth: "/ወርሒ",
+    getStarted: "ናጻ ጀምር",
+    badgeInfoTitle: "ናይ ባጅ ቅናሽ ብኸመይ ኣልቅስ",
+    badgeInfoDesc: "ኣብ ፉተር ሳይትካ ዝኾነ ባጅ ኣርኢ። Alfred ኣብ ነፍሲ ወከፍ ምቕራብ ፉተርካ ይስካን።"
+  },
+  badge: {
+    kicker: "ኣብ ሳይትካ ኣርኢ",
+    title: "NOXEL Forge",
+    titleAccent: "ባጅታት",
+    subtitle: "ዝኾነ ባጅ ኣብ ፉተር ሳይትካ ቅዳሕ ለጥፍ።",
+    copy: "ስኒፐት ቅዳሕ",
+    copied: "ተቐዲሑ!",
+    infoTitle: "ናይ ባጅ ቅናሽ ብኸመይ ይሰርሕ",
+    infoDesc: "ዝኾነ ባጅ ኣብ ፉተር ሳይትካ ኣብ ምሉእ ሳይት ግበር። Alfred ኣብ ነፍሲ ወከፍ ምቕራብ ፉተርካ ይስካን። ሲልቨር 10%፣ ጎልድ 15%፣ ፕላቲነም 20%፣ ዳያሞንድ 25%።"
+  },
+  cta: {
+    kicker: "ንምፍጣር ድሉው ዲኻ?",
+    title: "NOXEL Forge ተጸምበር",
+    subtitle: "ሎሚ ዝተረጋገጸ ናይ ባክሊንክ ኔትወርክካ ምህናጽ ጀምር።"
+  }
+};
+
+const my: ForgeTranslations = {
+  nav: {
+    submit: "တင်သွင်းရန်",
+    dashboard: "ဒက်ရှ်ဘုတ်",
+    pricing: "စျေးနှုန်း",
+    badges: "ဘတ်ဂျ်များ"
+  },
+  hero: {
+    kicker: "NOXEL Forge - ဘက်လင့်ခ်လဲလှယ်ရေး စနစ်",
+    title: "သင်၏",
+    titleAccent: "အာဏာသိကျ္ခာ",
+    subtitle: "Alfred စစ်ထုတ်ပြီးသော အတည်ပြုထားသောဆိုဒ်များနှင့် ဘက်လင့်ခ်များ လဲလှယ်ပါ။ အရည်အသွေး အာမခံ၊ spam မဖြစ်နိုင်ပါ။ တစ်ခုပေး၊ တစ်ခုရ။",
+    ctaSubmit: "ကျွန်ုပ်၏ဆိုဒ်ကို တင်သွင်းရန်",
+    ctaDashboard: "ကျွန်ုပ်၏ ဒက်ရှ်ဘုတ်"
+  },
+  stats: {
+    forgePoints: "Forge အမှတ်များ",
+    forgePointsDesc: "လဲလှယ်မှုတိုင်းတွင် အမှတ်များ ရရှိပါ",
+    giveOne: "တစ်ခုပေး၊ တစ်ခုရ",
+    giveOneDesc: "ဘက်လင့်ခ်တစ်ခု ပေးလိုက်သည်နှင့် တစ်ခု ပြန်ရမည်",
+    alfredFilters: "Alfred စစ်ထုတ်မှု",
+    alfredFiltersDesc: "spam သုညနှင့် အများသုံးအကြောင်းအရာ သုည"
+  },
+  trust: {
+    kicker: "ယုံကြည်မှု ရမှတ် Forge",
+    subtitle: "ဆိုဒ်တိုင်းသည် အရည်အသွေး အချက် ၆ ချက်အပေါ်အခြေခံ၍ ၁၀၀ အနက် ရမှတ်တစ်ခု ရရှိသည်"
+  },
+  directory: {
+    kicker: "လမ်းညွှန်",
+    title: "အတည်ပြုထားသော Forge ဆိုဒ်များ",
+    empty: "လမ်းညွှန်သည် ယခုအခါ ဗလာဖြစ်နေသည်",
+    emptyDesc: "သင်၏ဆိုဒ်ကို ပထမဆုံး တင်သွင်းသူ ဖြစ်လိုက်ပါ။",
+    loading: "လမ်းညွှန် ဖွင့်နေသည်...",
+    previous: "ယခင်",
+    next: "နောက်"
+  },
+  submit: {
+    alfredTitle: "Alfred က တင်သွင်းမှုတိုင်းကို သုံးသပ်သည်",
+    alfredDesc: "တင်သွင်းမှုတိုင်းကို Alfred က ထုတ်ဝေမတိုင်ခင် စကင်ဖတ်ပြီး သုံးသပ်သည်။ အရည်အသွေး အာမခံ၊ spam မဖြစ်နိုင်ပါ။",
+    urlLabel: "ဆိုဒ် URL",
+    urlHint: "HTTPS လိုအပ်သည်။ noxelseo.com သို့မဟုတ် noxelforge.com သို့ လင့်ခ်ပါဝင်ရမည်",
+    titleLabel: "ခေါင်းစဉ်",
+    nicheLabel: "အထူးပြု နယ်ပယ်",
+    descLabel: "အကျဉ်းချုပ် ဖော်ပြချက်",
+    contentLabel: "အဓိက အကြောင်းအရာ",
+    contentHint: "ရွေးချယ်နိုင်သည်၊ Alfred ပိုမိုကောင်းမွန်စွာ ခွဲခြမ်းစိတ်ဖြာနိုင်ရန် ကူညီသည်",
+    submitBtn: "NOXEL Forge သို့ တင်သွင်းရန်",
+    analyzing: "ခွဲခြမ်းစိတ်ဖြာနေသည်..."
+  },
+  pricing: {
+    kicker: "NOXEL Forge စျေးနှုန်း",
+    title: "သင်၏",
+    titleAccent: "အာဏာသိကျ္ခာ ကွန်ရက်",
+    subtitle: "သင်၏ဆိုဒ်တွင် NOXEL ဘတ်ဂျ် ပြသပြီး အဆင့်တိုင်းတွင် အထူးလျှော့စျေးများ ရယူပါ။",
+    monthly: "လစဉ်",
+    annual: "နှစ်စဉ်",
+    badgeToggle: "ကျွန်ုပ် NOXEL ဘတ်ဂျ် ပြသထားသည်၊ လျှော့စျေး ဖွင့်ပါ",
+    badgeApplied: "ဘတ်ဂျ် လျှော့စျေး သက်ရောက်ပြီ",
+    mostPopular: "အရေပြားဆုံး",
+    perMonth: "/လ",
+    getStarted: "အခမဲ့ စတင်ပါ",
+    badgeInfoTitle: "ဘတ်ဂျ် လျှော့စျေးများ ဖွင့်နည်း",
+    badgeInfoDesc: "သင်၏ဆိုဒ်၏ footer တွင် ဘတ်ဂျ်တစ်ခုခု ပြသပါ။ Alfred က တင်သွင်းမှုတိုင်းတွင် သင်၏ footer ကို စကင်ဖတ်သည်။"
+  },
+  badge: {
+    kicker: "သင်၏ဆိုဒ်တွင် ပြသရန်",
+    title: "NOXEL Forge",
+    titleAccent: "ဘတ်ဂျ်များ",
+    subtitle: "ဘတ်ဂျ်တစ်ခုခုကို သင်၏ဆိုဒ် footer တွင် ကူးယူ၍ ကပ်ထည့်ပါ။",
+    copy: "ကုဒ် ကူးယူရန်",
+    copied: "ကူးယူပြီး!",
+    infoTitle: "ဘတ်ဂျ် လျှော့စျေးများ အလုပ်လုပ်ပုံ",
+    infoDesc: "ဆိုဒ်တစ်ခုလုံးတွင် ဘတ်ဂျ်တစ်ခုခုကို သင်၏ဆိုဒ်၏ footer တွင် ထည့်ပါ။ Alfred က တင်သွင်းမှုတိုင်းတွင် သင်၏ footer ကို စကင်ဖတ်သည်။ Silver ၁၀%၊ Gold ၁၅%၊ Platinum ၂၀%၊ Diamond ၂၅%။"
+  },
+  cta: {
+    kicker: "forge လုပ်ရန် အသင့်ဖြစ်ပြီလား?",
+    title: "NOXEL Forge တွင် ပါဝင်ပါ",
+    subtitle: "ယနေ့ပင် သင်၏ အတည်ပြုထားသော ဘက်လင့်ခ်ကွန်ရက်ကို တည်ဆောက်စတင်ပါ။"
+  }
+};
+
+const lo: ForgeTranslations = {
+  nav: {
+    submit: "ສົ່ງ",
+    dashboard: "ແດຊບອດ",
+    pricing: "ລາຄາ",
+    badges: "ແບດຈ໌"
+  },
+  hero: {
+    kicker: "NOXEL Forge - ລະບົບນິເວດການແລກປ່ຽນແບັກລິງ",
+    title: "ສ້າງ",
+    titleAccent: "ອຳນາດ",
+    subtitle: "ແລກປ່ຽນແບັກລິງກັບເວັບໄຊທ໌ທີ່ຜ່ານການກວດສອບໂດຍ Alfred. ຮັບປະກັນຄຸນນະພາບ, ສະແປມເປັນໄປບໍ່ໄດ້. ໃຫ້ໜຶ່ງ, ໄດ້ຮັບໜຶ່ງ.",
+    ctaSubmit: "ສົ່ງເວັບໄຊທ໌ຂອງຂ້ອຍ",
+    ctaDashboard: "ແດຊບອດຂອງຂ້ອຍ"
+  },
+  stats: {
+    forgePoints: "ຄະແນນ Forge",
+    forgePointsDesc: "ສະສົມຄະແນນໃນທຸກການແລກປ່ຽນ",
+    giveOne: "ໃຫ້ໜຶ່ງ, ໄດ້ຮັບໜຶ່ງ",
+    giveOneDesc: "ທ່ານໃຫ້ແບັກລິງ, ທ່ານໄດ້ຮັບຄືນ",
+    alfredFilters: "Alfred ກັ່ນຕອງ",
+    alfredFiltersDesc: "ສູນສະແປມ, ສູນເນື້ອຫາທົ່ວໄປ"
+  },
+  trust: {
+    kicker: "ຄະແນນຄວາມໜ້າເຊື່ອຖື Forge",
+    subtitle: "ທຸກເວັບໄຊທ໌ໄດ້ຮັບຄະແນນຈາກ 100 ໂດຍອີງໃສ່ 6 ສັນຍານຄຸນນະພາບ"
+  },
+  directory: {
+    kicker: "ໄດເຣັກທໍຣີ",
+    title: "ເວັບໄຊທ໌ Forge ທີ່ຜ່ານການກວດສອບ",
+    empty: "ໄດເຣັກທໍຣີຍັງຫວ່າງຢູ່ໃນຕອນນີ້",
+    emptyDesc: "ເປັນຄົນທຳອິດທີ່ສົ່ງເວັບໄຊທ໌ຂອງທ່ານ.",
+    loading: "ກຳລັງໂຫຼດໄດເຣັກທໍຣີ...",
+    previous: "ກ່ອນໜ້າ",
+    next: "ຕໍ່ໄປ"
+  },
+  submit: {
+    alfredTitle: "Alfred ກວດສອບທຸກການສົ່ງ",
+    alfredDesc: "ທຸກການສົ່ງຈະຖືກສະແກນແລະກວດສອບໂດຍ Alfred ກ່ອນການເຜີຍແຜ່. ຮັບປະກັນຄຸນນະພາບ, ສະແປມເປັນໄປບໍ່ໄດ້.",
+    urlLabel: "URL ເວັບໄຊທ໌",
+    urlHint: "ຕ້ອງການ HTTPS. ຕ້ອງມີລິງຫາ noxelseo.com ຫຼື noxelforge.com",
+    titleLabel: "ຫົວຂໍ້",
+    nicheLabel: "ກຸ່ມ",
+    descLabel: "ຄຳອະທິບາຍສັ້ນ",
+    contentLabel: "ເນື້ອຫາຫຼັກ",
+    contentHint: "ທາງເລືອກ, ຊ່ວຍໃຫ້ Alfred ວິເຄາະໄດ້ດີຂຶ້ນ",
+    submitBtn: "ສົ່ງໃຫ້ NOXEL Forge",
+    analyzing: "ກຳລັງວິເຄາະ..."
+  },
+  pricing: {
+    kicker: "ລາຄາ NOXEL Forge",
+    title: "ສ້າງ",
+    titleAccent: "ເຄືອຂ່າຍອຳນາດ",
+    subtitle: "ສະແດງແບດຈ໌ NOXEL ໃນເວັບໄຊທ໌ຂອງທ່ານແລະປົດລັອກສ່ວນຫຼຸດສະເພາະໃນທຸກລະດັບ.",
+    monthly: "ລາຍເດືອນ",
+    annual: "ລາຍປີ",
+    badgeToggle: "ຂ້ອຍສະແດງແບດຈ໌ NOXEL, ປົດລັອກສ່ວນຫຼຸດ",
+    badgeApplied: "ສ່ວນຫຼຸດແບດຈ໌ຖືກນຳໃຊ້ແລ້ວ",
+    mostPopular: "ນິຍົມທີ່ສຸດ",
+    perMonth: "/ເດືອນ",
+    getStarted: "ເລີ່ມຕົ້ນຟຣີ",
+    badgeInfoTitle: "ວິທີປົດລັອກສ່ວນຫຼຸດແບດຈ໌",
+    badgeInfoDesc: "ສະແດງແບດຈ໌ໃດໆໃນສ່ວນທ້າຍຂອງເວັບໄຊທ໌ຂອງທ່ານ. Alfred ສະແກນສ່ວນທ້າຍຂອງທ່ານໃນທຸກການສົ່ງ."
+  },
+  badge: {
+    kicker: "ສະແດງໃນເວັບໄຊທ໌ຂອງທ່ານ",
+    title: "NOXEL Forge",
+    titleAccent: "ແບດຈ໌",
+    subtitle: "ຄັດລອກແລະວາງແບດຈ໌ໃດໆໃນສ່ວນທ້າຍຂອງເວັບໄຊທ໌ຂອງທ່ານ.",
+    copy: "ຄັດລອກໂຄດ",
+    copied: "ຄັດລອກແລ້ວ!",
+    infoTitle: "ວິທີທີ່ສ່ວນຫຼຸດແບດຈ໌ເຮັດວຽກ",
+    infoDesc: "ວາງແບດຈ໌ໃດໆໃນສ່ວນທ້າຍຂອງເວັບໄຊທ໌ຂອງທ່ານທົ່ວທັງໄຊທ໌. Alfred ສະແກນສ່ວນທ້າຍຂອງທ່ານໃນທຸກການສົ່ງ. ເງິນ 10%, ທອງ 15%, ແພລທີນຳ 20%, ເພັດ 25%."
+  },
+  cta: {
+    kicker: "ພ້ອມທີ່ຈະສ້າງແລ້ວບໍ?",
+    title: "ເຂົ້າຮ່ວມ NOXEL Forge",
+    subtitle: "ເລີ່ມສ້າງເຄືອຂ່າຍແບັກລິງທີ່ຜ່ານການກວດສອບຂອງທ່ານໃນມື້ນີ້."
+  }
+};
+
+const dv: ForgeTranslations = {
+  nav: {
+    submit: "ހުށަހަޅާ",
+    dashboard: "ޑޭޝްބޯޑް",
+    pricing: "އަގުތައް",
+    badges: "ބެޖްތައް"
+  },
+  hero: {
+    kicker: "NOXEL Forge - ބެކްލިންކް އެކްސްޗޭންޖް އިކޯސިސްޓަމް",
+    title: "ތިބާގެ",
+    titleAccent: "އޮތޯރިޓީ",
+    subtitle: "Alfred ފިލްޓަރ ކޮށްފައިވާ ވެރިފައިޑް ސައިޓްތަކާ އެކު ބެކްލިންކް ބަދަލުކޮށްލާ. ކޮލިޓީ ގެރެންޓީ، ސްޕޭމް ނުވާނެ. އެއް ދީ، އެއް ލިބޭ.",
+    ctaSubmit: "އަހަރެންގެ ސައިޓް ހުށަހަޅާ",
+    ctaDashboard: "އަހަރެންގެ ޑޭޝްބޯޑް"
+  },
+  stats: {
+    forgePoints: "ފޯޖް ޕޮއިންޓްސް",
+    forgePointsDesc: "ކޮންމެ އެކްސްޗޭންޖަކުން ޕޮއިންޓް ހޯދާ",
+    giveOne: "އެއް ދީ، އެއް ލިބޭ",
+    giveOneDesc: "ތިބާ ބެކްލިންކެއް ދީ، ބެކްލިންކެއް ލިބޭ",
+    alfredFilters: "Alfred ފިލްޓަރތައް",
+    alfredFiltersDesc: "ސްޕޭމެއް ނެތް، ޖެނެރިކް ކޮންޓެންޓެއް ނެތް"
+  },
+  trust: {
+    kicker: "ޓްރަސްޓް ސްކޯ ފޯޖް",
+    subtitle: "ކޮންމެ ސައިޓަކަށް 6 ކޮލިޓީ ސިގްނަލްގެ މައްޗަށް 100 އިން ސްކޯ ދެވޭ"
+  },
+  directory: {
+    kicker: "ޑިރެކްޓަރީ",
+    title: "ވެރިފައިޑް ފޯޖް ސައިޓްތައް",
+    empty: "ޑިރެކްޓަރީ މިވަގުތު ހުހަށް އެބައޮތް",
+    emptyDesc: "ތިބާގެ ސައިޓް ފުރަތަމަ ހުށަހަޅާ.",
+    loading: "ޑިރެކްޓަރީ ލޯޑް ކުރަނީ...",
+    previous: "ކުރީ",
+    next: "ދެން"
+  },
+  submit: {
+    alfredTitle: "Alfred ކޮންމެ ހުށަހެޅުމެއް ރިވިއު ކުރޭ",
+    alfredDesc: "ކޮންމެ ހުށަހެޅުމެއް ޝާއިއު ކުރުމުގެ ކުރިން Alfred ސްކޭން ކޮށް ރިވިއު ކުރޭ. ކޮލިޓީ ގެރެންޓީ، ސްޕޭމް ނުވާނެ.",
+    urlLabel: "ސައިޓް URL",
+    urlHint: "HTTPS ބޭނުންވޭ. noxelseo.com ނުވަތަ noxelforge.com އަށް ލިންކެއް ހިމެނެން ވާނެ",
+    titleLabel: "ސުރުހީ",
+    nicheLabel: "ނިޝް",
+    descLabel: "ކުރު ތަފްސީލު",
+    contentLabel: "މައި ކޮންޓެންޓް",
+    contentHint: "އިހްތިޔާރީ، Alfred ބަލާ ރަނގަޅުވޭ",
+    submitBtn: "NOXEL Forge އަށް ހުށަހަޅާ",
+    analyzing: "ވިލަންޓެ ވަނީ..."
+  },
+  pricing: {
+    kicker: "NOXEL Forge އަގުތައް",
+    title: "ތިބާގެ",
+    titleAccent: "އޮތޯރިޓީ ނެޓްވޯކް",
+    subtitle: "ތިބާގެ ސައިޓްގައި NOXEL ބެޖް ދައްކާ، ކޮންމެ ޓިއަރއަކުން އެކްސްކްލޫސިވް ޑިސްކައުންޓް ހޯދާ.",
+    monthly: "މަހުން",
+    annual: "އަހަރުން",
+    badgeToggle: "އަހަރެން NOXEL ބެޖް ދައްކަން، ޑިސްކައުންޓް ހޯދާ",
+    badgeApplied: "ބެޖް ޑިސްކައުންޓް ހިމަނިއްޖެ",
+    mostPopular: "އެންމެ މަގުބޫލު",
+    perMonth: "/މަސް",
+    getStarted: "ހިލޭ ފަށާ",
+    badgeInfoTitle: "ބެޖް ޑިސްކައުންޓް ހޯދާނެ ގޮތް",
+    badgeInfoDesc: "ތިބާގެ ސައިޓްގެ ފޫޓަރގައި ބެޖެއް ދައްކާ. Alfred ކޮންމެ ހުށަހެޅުމަކުން ތިބާގެ ފޫޓަރ ސްކޭން ކުރޭ."
+  },
+  badge: {
+    kicker: "ތިބާގެ ސައިޓްގައި ދައްކާ",
+    title: "NOXEL Forge",
+    titleAccent: "ބެޖްތައް",
+    subtitle: "ތިބާގެ ސައިޓް ފޫޓަރގައި ބެޖެއް ކޮޕީ ކޮށް ޕޭސްޓް ކޮށްލާ.",
+    copy: "ސްނިޕެޓް ކޮޕީ ކޮށްލާ",
+    copied: "ކޮޕީ ވެއްޖެ!",
+    infoTitle: "ބެޖް ޑިސްކައުންޓް މަސައްކަތް ކުރާ ގޮތް",
+    infoDesc: "ތިބާގެ ސައިޓްގެ ފޫޓަރގައި، ސައިޓް ފުރިހަމައަށް، ބެޖެއް ބަހައްޓާ. Alfred ކޮންމެ ހުށަހެޅުމަކުން ތިބާގެ ފޫޓަރ ސްކޭން ކުރޭ. ސިލްވަރ %10، ގޯލްޑް %15، ޕްލެޓިނަމް %20، ޑައިމަންޑް %25."
+  },
+  cta: {
+    kicker: "ފޯޖް ކުރަން ތައްޔާރުތަ؟",
+    title: "NOXEL Forge އާ ގުޅޭ",
+    subtitle: "މިއަދު ތިބާގެ ވެރިފައިޑް ބެކްލިންކް ނެޓްވޯކް ބިނާ ކުުރަން ފަށާ."
+  }
+};
+
+const ne: ForgeTranslations = {
+  nav: {
+    submit: "पेश गर्नुहोस्",
+    dashboard: "ड्यासबोर्ड",
+    pricing: "मूल्य निर्धारण",
+    badges: "ब्याजहरू"
+  },
+  hero: {
+    kicker: "NOXEL Forge - ब्याकलिङ्क एक्सचेन्ज इकोसिस्टम",
+    title: "आफ्नो",
+    titleAccent: "अधिकार",
+    subtitle: "Alfred द्वारा फिल्टर गरिएका प्रमाणित साइटहरूसँग ब्याकलिङ्क आदानप्रदान गर्नुहोस्। गुणस्तर ग्यारेन्टी, स्प्याम असम्भव। एउटा दिनुहोस्, एउटा पाउनुहोस्।",
+    ctaSubmit: "मेरो साइट पेश गर्नुहोस्",
+    ctaDashboard: "मेरो ड्यासबोर्ड"
+  },
+  stats: {
+    forgePoints: "फोर्ज पोइन्टहरू",
+    forgePointsDesc: "हरेक आदानप्रदानमा पोइन्ट कमाउनुहोस्",
+    giveOne: "एउटा दिनुहोस्, एउटा पाउनुहोस्",
+    giveOneDesc: "तपाईंले एउटा ब्याकलिङ्क दिनुहोस्, एउटा फिर्ता पाउनुहोस्",
+    alfredFilters: "Alfred फिल्टरहरू",
+    alfredFiltersDesc: "शून्य स्प्याम, शून्य सामान्य सामग्री"
+  },
+  trust: {
+    kicker: "ट्रस्ट स्कोर फोर्ज",
+    subtitle: "प्रत्येक साइटले ६ गुणस्तर संकेतहरूको आधारमा १०० मध्ये स्कोर प्राप्त गर्छ"
+  },
+  directory: {
+    kicker: "डाइरेक्टरी",
+    title: "प्रमाणित फोर्ज साइटहरू",
+    empty: "डाइरेक्टरी अहिलेको लागि खाली छ",
+    emptyDesc: "आफ्नो साइट पेश गर्ने पहिलो व्यक्ति बन्नुहोस्।",
+    loading: "डाइरेक्टरी लोड हुँदैछ...",
+    previous: "अघिल्लो",
+    next: "अर्को"
+  },
+  submit: {
+    alfredTitle: "Alfred ले प्रत्येक सबमिसन समीक्षा गर्छ",
+    alfredDesc: "प्रकाशन अघि प्रत्येक सबमिसन Alfred द्वारा स्क्यान र समीक्षा गरिन्छ। गुणस्तर ग्यारेन्टी, स्प्याम असम्भव।",
+    urlLabel: "साइट URL",
+    urlHint: "HTTPS आवश्यक छ। noxelseo.com वा noxelforge.com को लिङ्क समावेश हुनुपर्छ",
+    titleLabel: "शीर्षक",
+    nicheLabel: "निच",
+    descLabel: "छोटो विवरण",
+    contentLabel: "मुख्य सामग्री",
+    contentHint: "वैकल्पिक, Alfred लाई राम्रोसँग विश्लेषण गर्न मद्दत गर्छ",
+    submitBtn: "NOXEL Forge मा पेश गर्नुहोस्",
+    analyzing: "विश्लेषण हुँदैछ..."
+  },
+  pricing: {
+    kicker: "NOXEL Forge मूल्य निर्धारण",
+    title: "आफ्नो",
+    titleAccent: "अधिकार नेटवर्क",
+    subtitle: "आफ्नो साइटमा NOXEL ब्याज प्रदर्शन गर्नुहोस् र हरेक तहमा विशेष छुट अनलक गर्नुहोस्।",
+    monthly: "मासिक",
+    annual: "वार्षिक",
+    badgeToggle: "म NOXEL ब्याज प्रदर्शन गर्छु, छुट अनलक गर्नुहोस्",
+    badgeApplied: "ब्याज छुट लागू गरियो",
+    mostPopular: "सबैभन्दा लोकप्रिय",
+    perMonth: "/महिना",
+    getStarted: "निःशुल्क सुरु गर्नुहोस्",
+    badgeInfoTitle: "ब्याज छुट कसरी अनलक गर्ने",
+    badgeInfoDesc: "आफ्नो साइटको फुटरमा कुनै पनि ब्याज प्रदर्शन गर्नुहोस्। Alfred ले प्रत्येक सबमिसनमा तपाईंको फुटर स्क्यान गर्छ।"
+  },
+  badge: {
+    kicker: "आफ्नो साइटमा प्रदर्शन गर्नुहोस्",
+    title: "NOXEL Forge",
+    titleAccent: "ब्याजहरू",
+    subtitle: "आफ्नो साइट फुटरमा कुनै पनि ब्याज कपी र पेस्ट गर्नुहोस्।",
+    copy: "स्निपेट कपी गर्नुहोस्",
+    copied: "कपी गरियो!",
+    infoTitle: "ब्याज छुटहरू कसरी काम गर्छन्",
+    infoDesc: "आफ्नो साइटको फुटरमा साइटव्यापी रूपमा कुनै पनि ब्याज राख्नुहोस्। Alfred ले प्रत्येक सबमिसनमा तपाईंको फुटर स्क्यान गर्छ। सिल्भर १०%, गोल्ड १५%, प्लाटिनम २०%, डाइमन्ड २५%।"
+  },
+  cta: {
+    kicker: "फोर्ज गर्न तयार हुनुहुन्छ?",
+    title: "NOXEL Forge मा सामेल हुनुहोस्",
+    subtitle: "आज आफ्नो प्रमाणित ब्याकलिङ्क नेटवर्क निर्माण सुरु गर्नुहोस्।"
+  }
+};
+
+const km: ForgeTranslations = {
+  nav: {
+    submit: "ដាក់ស្នើ",
+    dashboard: "ផ្ទាំងគ្រប់គ្រង",
+    pricing: "តម្លៃ",
+    badges: "បាដហ្ស"
+  },
+  hero: {
+    kicker: "NOXEL Forge - ប្រព័ន្ធផ្លាស់ប្តូរ Backlink",
+    title: "បង្កើត",
+    titleAccent: "សិទ្ធិអំណាច",
+    subtitle: "ផ្លាស់ប្តូរ backlink ជាមួយគេហទំព័រដែលបានផ្ទៀងផ្ទាត់ដោយ Alfred ។ ធានាគុណភាព មិនអាចមានសារឥតបានការ។ ផ្តល់មួយ ទទួលមួយ។",
+    ctaSubmit: "ដាក់ស្នើគេហទំព័ររបស់ខ្ញុំ",
+    ctaDashboard: "ផ្ទាំងគ្រប់គ្រងរបស់ខ្ញុំ"
+  },
+  stats: {
+    forgePoints: "Forge Points",
+    forgePointsDesc: "រកពិន្ទុលើការផ្លាស់ប្តូររាល់លើក",
+    giveOne: "ផ្តល់មួយ ទទួលមួយ",
+    giveOneDesc: "អ្នកផ្តល់ backlink មួយ អ្នកទទួលបានមួយវិញ",
+    alfredFilters: "តម្រង Alfred",
+    alfredFiltersDesc: "គ្មានសារឥតបានការ គ្មានខ្លឹមសារទូទៅ"
+  },
+  trust: {
+    kicker: "Trust Score Forge",
+    subtitle: "គេហទំព័រគ្រប់ទីទទួលបានពិន្ទុចេញពី 100 ដោយផ្អែកលើសញ្ញាណគុណភាព 6"
+  },
+  directory: {
+    kicker: "ឯកសារបញ្ជី",
+    title: "គេហទំព័រ Forge ដែលបានផ្ទៀងផ្ទាត់",
+    empty: "ឯកសារបញ្ជីនៅទទេនៅឡើយ",
+    emptyDesc: "សូមក្លាយជាអ្នកដំបូងដាក់ស្នើគេហទំព័ររបស់អ្នក។",
+    loading: "កំពុងផ្ទុកឯកសារបញ្ជី...",
+    previous: "មុន",
+    next: "បន្ទាប់"
+  },
+  submit: {
+    alfredTitle: "Alfred ពិនិត្យការដាក់ស្នើរាល់លើក",
+    alfredDesc: "ការដាក់ស្នើរាល់លើកត្រូវបានស្កេន និងពិនិត្យដោយ Alfred មុនការផ្សព្វផ្សាយ។ ធានាគុណភាព មិនអាចមានសារឥតបានការ។",
+    urlLabel: "URL គេហទំព័រ",
+    urlHint: "ត្រូវការ HTTPS ។ ត្រូវតែមានតំណភ្ជាប់ទៅ noxelseo.com ឬ noxelforge.com",
+    titleLabel: "ចំណងជើង",
+    nicheLabel: "ជំនាញ",
+    descLabel: "ការពិពណ៌នាខ្លី",
+    contentLabel: "ខ្លឹមសារចម្បង",
+    contentHint: "ស្រេចចិត្ត ជួយ Alfred វិភាគបានល្អជាងមុន",
+    submitBtn: "ដាក់ស្នើទៅ NOXEL Forge",
+    analyzing: "កំពុងវិភាគ..."
+  },
+  pricing: {
+    kicker: "តម្លៃ NOXEL Forge",
+    title: "បង្កើត",
+    titleAccent: "បណ្តាញសិទ្ធិអំណាច",
+    subtitle: "បង្ហាញបាដហ្ស NOXEL នៅលើគេហទំព័ររបស់អ្នក និងដោះសោការបញ្ចុះតម្លៃផ្តាច់មុខលើគ្រប់កម្រិត។",
+    monthly: "ប្រចាំខែ",
+    annual: "ប្រចាំឆ្នាំ",
+    badgeToggle: "ខ្ញុំបង្ហាញបាដហ្ស NOXEL ដោះសោការបញ្ចុះតម្លៃ",
+    badgeApplied: "ការបញ្ចុះតម្លៃបាដហ្សត្រូវបានអនុវត្ត",
+    mostPopular: "ពេញនិយមបំផុត",
+    perMonth: "/ខែ",
+    getStarted: "ចាប់ផ្តើមដោយឥតគិតថ្លៃ",
+    badgeInfoTitle: "របៀបដោះសោការបញ្ចុះតម្លៃបាដហ្ស",
+    badgeInfoDesc: "បង្ហាញបាដហ្សណាមួយនៅក្នុង footer គេហទំព័ររបស់អ្នក។ Alfred ស្កេន footer របស់អ្នកនៅការដាក់ស្នើរាល់លើក។"
+  },
+  badge: {
+    kicker: "បង្ហាញនៅលើគេហទំព័ររបស់អ្នក",
+    title: "NOXEL Forge",
+    titleAccent: "បាដហ្ស",
+    subtitle: "ចម្លង និងបិទភ្ជាប់បាដហ្សណាមួយនៅក្នុង footer គេហទំព័ររបស់អ្នក។",
+    copy: "ចម្លង snippet",
+    copied: "បានចម្លង!",
+    infoTitle: "របៀបដែលការបញ្ចុះតម្លៃបាដហ្សដំណើរការ",
+    infoDesc: "ដាក់បាដហ្សណាមួយនៅក្នុង footer គេហទំព័ររបស់អ្នក ទូទាំងគេហទំព័រ។ Alfred ស្កេន footer របស់អ្នកនៅការដាក់ស្នើរាល់លើក។ Silver 10%, Gold 15%, Platinum 20%, Diamond 25%."
+  },
+  cta: {
+    kicker: "រួចរាល់ក្នុងការបង្កើតហើយឬ?",
+    title: "ចូលរួម NOXEL Forge",
+    subtitle: "ចាប់ផ្តើមបង្កើតបណ្តាញ backlink ដែលបានផ្ទៀងផ្ទាត់របស់អ្នកថ្ងៃនេះ។"
+  }
+};
+
+const si: ForgeTranslations = {
+  nav: {
+    submit: "ඉදිරිපත් කරන්න",
+    dashboard: "උපකරණ පුවරුව",
+    pricing: "මිල නির්ණය",
+    badges: "බැජ්"
+  },
+  hero: {
+    kicker: "NOXEL Forge - බැක්ලිංක් හුවමාරු පරිසර පද්ධතිය",
+    title: "ඔබේ",
+    titleAccent: "අධිකාරිය",
+    subtitle: "Alfred විසින් පෙරන ලද සත්යාපිත අඩවි සමඟ බැක්ලිංක් හුවමාරු කරන්න. ගුණත්වය සහතිකයි, ස්පෑම් කළ නොහැක. එකක් දෙන්න, එකක් ගන්න.",
+    ctaSubmit: "මගේ අඩවිය ඉදිරිපත් කරන්න",
+    ctaDashboard: "මගේ උපකරණ පුවරුව"
+  },
+  stats: {
+    forgePoints: "Forge Points",
+    forgePointsDesc: "සෑම හුවමාරුවකින්ම ලකුණු උපයන්න",
+    giveOne: "එකක් දෙන්න, එකක් ගන්න",
+    giveOneDesc: "ඔබ බැක්ලිංකයක් දෙන්න, ඔබට එකක් ලැබේ",
+    alfredFilters: "Alfred පෙරහන්",
+    alfredFiltersDesc: "ස්පෑම් නැත, සාමාන්ය අන්තර්ගතය නැත"
+  },
+  trust: {
+    kicker: "විශ්වාස ලකුණු Forge",
+    subtitle: "සෑම අඩවියක්ම ගුණාත්මක සංඥා 6ක් මත පදනම්ව 100න් ලකුණු ලබා ගනී"
+  },
+  directory: {
+    kicker: "නාමාවලිය",
+    title: "සත්යාපිත Forge අඩවි",
+    empty: "නාමාවලිය දැනට හිස්ය",
+    emptyDesc: "ඔබේ අඩවිය ඉදිරිපත් කළ පළමු අය වන්න.",
+    loading: "නාමාවලිය පූරණය වෙමින් පවතී...",
+    previous: "පෙර",
+    next: "ඊළඟ"
+  },
+  submit: {
+    alfredTitle: "Alfred සෑම ඉදිරිපත් කිරීමක්ම සමාලෝචනය කරයි",
+    alfredDesc: "සෑම ඉදිරිපත් කිරීමක්ම ප්රකාශනයට පෙර Alfred විසින් පරිලෝකනය කර සමාලෝචනය කෙරේ. ගුණත්වය සහතිකයි, ස්පෑම් කළ නොහැක.",
+    urlLabel: "අඩවි URL",
+    urlHint: "HTTPS අවශ්යය. noxelseo.com හෝ noxelforge.com වෙත සබැඳියක් අඩංගු විය යුතුය",
+    titleLabel: "මාතෘකාව",
+    nicheLabel: "කොටස",
+    descLabel: "කෙටි විස්තරය",
+    contentLabel: "ප්රධාන අන්තර්ගතය",
+    contentHint: "විකල්පය, Alfred ට වඩා හොඳින් විශ්ලේෂණය කිරීමට උපකාරී වේ",
+    submitBtn: "NOXEL Forge වෙත ඉදිරිපත් කරන්න",
+    analyzing: "විශ්ලේෂණය වෙමින්..."
+  },
+  pricing: {
+    kicker: "NOXEL Forge මිල නිර්ණය",
+    title: "ඔබේ",
+    titleAccent: "අධිකාරි ජාලය",
+    subtitle: "ඔබේ අඩවියේ NOXEL බැජ් දර්ශනය කර සෑම මට්ටමකම සුවිශේෂ වට්ටම් අගුළු අරින්න.",
+    monthly: "මාසික",
+    annual: "වාර්ෂික",
+    badgeToggle: "මම NOXEL බැජ් දර්ශනය කරමි, වට්ටම් අගුළු අරින්න",
+    badgeApplied: "බැජ් වට්ටම් යෙදී ඇත",
+    mostPopular: "වඩාත් ජනප්රිය",
+    perMonth: "/මා",
+    getStarted: "නොමිලේ ආරම්භ කරන්න",
+    badgeInfoTitle: "බැජ් වට්ටම් අගුළු අරිනේ කෙසේද",
+    badgeInfoDesc: "ඔබේ අඩවියේ පාදකයේ ඕනෑම බැජ් එකක් දර්ශනය කරන්න. Alfred සෑම ඉදිරිපත් කිරීමකදීම ඔබේ පාදකය පරිලෝකනය කරයි."
+  },
+  badge: {
+    kicker: "ඔබේ අඩවියේ දර්ශනය කරන්න",
+    title: "NOXEL Forge",
+    titleAccent: "බැජ්",
+    subtitle: "ඔබේ අඩවි පාදකයේ ඕනෑම බැජ් එකක් පිටපත් කර අලවන්න.",
+    copy: "කේතය පිටපත් කරන්න",
+    copied: "පිටපත් කෙරිණි!",
+    infoTitle: "බැජ් වට්ටම් ක්රියා කරන ආකාරය",
+    infoDesc: "ඔබේ අඩවියේ පාදකයේ, අඩවිය පුරා, ඕනෑම බැජ් එකක් තබන්න. Alfred සෑම ඉදිරිපත් කිරීමකදීම ඔබේ පාදකය පරිලෝකනය කරයි. රිදී 10%, රන් 15%, ප්ලැටිනම් 20%, දියමන්ති 25%."
+  },
+  cta: {
+    kicker: "Forge කිරීමට සූදානම්ද?",
+    title: "NOXEL Forge හා එක් වන්න",
+    subtitle: "අද ඔබේ සත්යාපිත බැක්ලිංක් ජාලය ගොඩනැගීම ආරම්භ කරන්න."
+  }
+};
+
+const ta: ForgeTranslations = {
+  nav: {
+    submit: "சமர்ப்பி",
+    dashboard: "டாஷ்போர்டு",
+    pricing: "விலை நிர்ணயம்",
+    badges: "பதக்கங்கள்"
+  },
+  hero: {
+    kicker: "NOXEL Forge - பின்னிணைப்பு பரிமாற்ற சுற்றுச்சூழல்",
+    title: "உங்கள்",
+    titleAccent: "அதிகாரத்தை உருவாக்குங்கள்",
+    subtitle: "Alfred வடிகட்டிய சரிபார்க்கப்பட்ட தளங்களுடன் பின்னிணைப்புகளை பரிமாறிக்கொள்ளுங்கள். தரம் உறுதி, ஸ்பேம் இல்லை. ஒன்று கொடு, ஒன்று பெறு.",
+    ctaSubmit: "என் தளத்தை சமர்ப்பி",
+    ctaDashboard: "என் டாஷ்போர்டு"
+  },
+  stats: {
+    forgePoints: "Forge Points",
+    forgePointsDesc: "ஒவ்வொரு பரிமாற்றத்திலும் புள்ளிகள் சம்பாதியுங்கள்",
+    giveOne: "ஒன்று கொடு, ஒன்று பெறு",
+    giveOneDesc: "நீங்கள் ஒரு பின்னிணைப்பு கொடுக்கிறீர்கள், ஒன்று திரும்பப் பெறுகிறீர்கள்",
+    alfredFilters: "Alfred வடிகட்டிகள்",
+    alfredFiltersDesc: "பூஜ்ஜிய ஸ்பேம், பூஜ்ஜிய பொதுவான உள்ளடக்கம்"
+  },
+  trust: {
+    kicker: "Trust Score Forge",
+    subtitle: "ஒவ்வொரு தளமும் 6 தர சமிக்ஞைகளின் அடிப்படையில் 100 இல் மதிப்பெண் பெறுகிறது"
+  },
+  directory: {
+    kicker: "அடைவு",
+    title: "சரிபார்க்கப்பட்ட Forge தளங்கள்",
+    empty: "அடைவு இப்போது காலியாக உள்ளது",
+    emptyDesc: "உங்கள் தளத்தை முதலில் சமர்ப்பிக்கவும்.",
+    loading: "அடைவு ஏற்றுகிறது...",
+    previous: "முந்தையது",
+    next: "அடுத்தது"
+  },
+  submit: {
+    alfredTitle: "Alfred ஒவ்வொரு சமர்ப்பிப்பையும் மதிப்பாய்வு செய்கிறார்",
+    alfredDesc: "ஒவ்வொரு சமர்ப்பிப்பும் வெளியீட்டிற்கு முன் Alfred ஆல் ஸ்கேன் செய்யப்பட்டு மதிப்பாய்வு செய்யப்படுகிறது. தரம் உறுதி, ஸ்பேம் இல்லை.",
+    urlLabel: "தள URL",
+    urlHint: "HTTPS தேவை. noxelseo.com அல்லது noxelforge.com க்கு இணைப்பு இருக்க வேண்டும்",
+    titleLabel: "தலைப்பு",
+    nicheLabel: "துறை",
+    descLabel: "சுருக்கமான விளக்கம்",
+    contentLabel: "முக்கிய உள்ளடக்கம்",
+    contentHint: "விருப்பமானது, Alfred சிறப்பாக பகுப்பாய்வு செய்ய உதவுகிறது",
+    submitBtn: "NOXEL Forge க்கு சமர்ப்பி",
+    analyzing: "பகுப்பாய்வு செய்கிறது..."
+  },
+  pricing: {
+    kicker: "NOXEL Forge விலை நிர்ணயம்",
+    title: "உங்கள்",
+    titleAccent: "அதிகார நெட்வொர்க்கை உருவாக்குங்கள்",
+    subtitle: "உங்கள் தளத்தில் NOXEL பதக்கத்தை காட்டி ஒவ்வொரு நிலையிலும் பிரத்யேக தள்ளுபடிகளை அணைக்கலாம்.",
+    monthly: "மாதாந்திரம்",
+    annual: "வருடாந்திரம்",
+    badgeToggle: "நான் NOXEL பதக்கத்தை காட்டுகிறேன், தள்ளுபடியை அணைக்கவும்",
+    badgeApplied: "பதக்க தள்ளுபடி பயன்படுத்தப்பட்டது",
+    mostPopular: "மிகவும் பிரபலமானது",
+    perMonth: "/மாதம்",
+    getStarted: "இலவசமாக தொடங்குங்கள்",
+    badgeInfoTitle: "பதக்க தள்ளுபடிகளை எப்படி அணைப்பது",
+    badgeInfoDesc: "உங்கள் தளத்தின் அடிக்குறிப்பில் எந்த பதக்கத்தையும் காட்டுங்கள். Alfred ஒவ்வொரு சமர்ப்பிப்பிலும் உங்கள் அடிக்குறிப்பை ஸ்கேன் செய்கிறார்."
+  },
+  badge: {
+    kicker: "உங்கள் தளத்தில் காட்டுங்கள்",
+    title: "NOXEL Forge",
+    titleAccent: "பதக்கங்கள்",
+    subtitle: "உங்கள் தள அடிக்குறிப்பில் எந்த பதக்கத்தையும் நகலெடுத்து ஒட்டுங்கள்.",
+    copy: "குறியீட்டை நகலெடு",
+    copied: "நகலெடுக்கப்பட்டது!",
+    infoTitle: "பதக்க தள்ளுபடிகள் எப்படி செயல்படுகின்றன",
+    infoDesc: "உங்கள் தளத்தின் அடிக்குறிப்பில் எந்த பதக்கத்தையும் தள அளவில் வையுங்கள். Alfred ஒவ்வொரு சமர்ப்பிப்பிலும் உங்கள் அடிக்குறிப்பை ஸ்கேன் செய்கிறார். வெள்ளி 10%, தங்கம் 15%, பிளாட்டினம் 20%, வைரம் 25%."
+  },
+  cta: {
+    kicker: "உருவாக்க தயாரா?",
+    title: "NOXEL Forge இல் சேருங்கள்",
+    subtitle: "இன்றே உங்கள் சரிபார்க்கப்பட்ட பின்னிணைப்பு நெட்வொர்க்கை உருவாக்கத் தொடங்குங்கள்."
+  }
+};
+
