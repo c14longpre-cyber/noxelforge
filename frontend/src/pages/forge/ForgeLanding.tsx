@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { useForgeT } from '../../hooks/useForgeT';
-import { lazy, Suspense } from 'react';
-const LanguageSelector = lazy(() => import('../../components/LanguageSelector'));
+const NoxelInterface = lazy(() => import('../../components/NoxelInterface'));
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const NICHES = ['SEO','Marketing','AI','E-commerce','Web Dev','Business','Design'];
@@ -17,6 +16,7 @@ const TIER_CONFIG: Record<string, { color: string; icon: string; label: string }
 
 export default function ForgeLanding() {
   const { t, lang, changeLang } = useForgeT();
+  const [showMap, setShowMap] = useState(false);
   const [annuaire, setAnnuaire] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [nicheFilter, setNicheFilter] = useState('');
@@ -49,7 +49,12 @@ export default function ForgeLanding() {
           <span style={{ fontWeight: 900, fontSize: 15, letterSpacing: '-0.3px' }}>NOXEL Forge™</span>
         </div>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          <Suspense fallback={<span style={{width:40,height:28,display:'inline-block'}} />}><LanguageSelector locale={lang} onChange={changeLang} /></Suspense>
+          <button onClick={() => setShowMap(true)} style={{ padding: '6px 10px', borderRadius: 'var(--r)', border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', fontSize: 13, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}>🌐 {lang.toUpperCase()}</button>
+          {showMap && (
+            <Suspense fallback={null}>
+              <NoxelInterface locale={lang} onChange={(l) => { changeLang(l); setShowMap(false); }} onClose={() => setShowMap(false)} />
+            </Suspense>
+          )}
           <Link to="/forge/badge" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>{t.nav.badges}</Link>
           <Link to="/forge/pricing" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>{t.nav.pricing}</Link>
           <Link to="/forge/dashboard" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>{t.nav.dashboard}</Link>
