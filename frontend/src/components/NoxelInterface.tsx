@@ -1,5 +1,5 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import worldSvgRaw from "../../public/world-map.svg?raw";
+import { useEffect, useMemo, useRef, useState } from "react";
+import worldSvgRaw from "../world-map.svg?raw";
 import { COUNTRY_DATA, type CountryInfo } from "../i18n/nexus/countryData";
 import { getIndigenousLanguagesLabel } from "../i18n/nexus/indigenous";
 
@@ -23,7 +23,7 @@ const LANGUAGE_BY_ISO2: Record<string, string> = {
   FI: "fi", ET: "am", KE: "en",
 };
 
-const MAP_STYLE = ".noxel-map-wrap svg path { fill: #9BD5C1; stroke: #0477BE; stroke-width: 0.5; transition: fill 0.12s ease, stroke 0.12s ease, filter 0.12s ease; } .noxel-map-wrap svg path.iso-selected { fill: #3CDE6A !important; stroke: #702AA5 !important; stroke-width: 1.2 !important; filter: drop-shadow(0 0 6px rgba(60,222,106,0.6)) !important; } .noxel-map-wrap svg path.iso-hovered { fill: #8ae7a8 !important; stroke: #702AA5 !important; stroke-width: 0.9 !important; filter: drop-shadow(0 0 4px rgba(138,231,168,0.5)) !important; }";
+const MAP_STYLE = ".noxel-map-wrap svg { width: 100%; height: auto; display: block; } .noxel-map-wrap svg path { fill: #9BD5C1; stroke: #0477BE; stroke-width: 0.5; transition: fill 0.12s ease, stroke 0.12s ease, filter 0.12s ease; } .noxel-map-wrap svg path.iso-selected { fill: #3CDE6A !important; stroke: #702AA5 !important; stroke-width: 1.2 !important; filter: drop-shadow(0 0 6px rgba(60,222,106,0.6)) !important; } .noxel-map-wrap svg path.iso-hovered { fill: #8ae7a8 !important; stroke: #702AA5 !important; stroke-width: 0.9 !important; filter: drop-shadow(0 0 4px rgba(138,231,168,0.5)) !important; }";
 
 function normalizeIso(raw?: string | null): string | null {
   if (!raw) return null;
@@ -52,6 +52,7 @@ export default function NoxelInterface({ locale, onChange, onClose }: Props) {
   const [tooltip, setTooltip] = useState<TooltipState>({ visible: false, x: 0, y: 0, iso: null });
   const mapHostRef = useRef<HTMLDivElement | null>(null);
   const svgRef = useRef<SVGSVGElement | null>(null);
+  const initDone = useRef(false);
 
   const countryByIso2 = useMemo<Map<string, CountryInfo>>(() => {
     const map = new Map<string, CountryInfo>();
@@ -70,19 +71,19 @@ export default function NoxelInterface({ locale, onChange, onClose }: Props) {
     return () => { document.body.style.overflow = ""; };
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    if (initDone.current) return;
     svgRef.current = mapHostRef.current?.querySelector("svg") ?? null;
     const svg = svgRef.current;
     if (!svg) return;
 
-    svg.setAttribute("width", "100%");
-    svg.setAttribute("height", "100%");
+    // Garder le viewBox natif du SVG — ne pas le modifier
+    svg.removeAttribute("width");
+    svg.removeAttribute("height");
+    svg.removeAttribute("x");
+    svg.removeAttribute("y");
     svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
-    
-    svg.style.width = "100%";
-    svg.style.height = "100%";
-    svg.style.display = "block";
-    svg.setAttribute("viewBox", "0 40 900 700");
+    svg.setAttribute("viewBox", "0 0 784.077 380");
 
     const paths = Array.from(svg.querySelectorAll<SVGPathElement>("path"));
     paths.forEach((p) => {
@@ -96,8 +97,10 @@ export default function NoxelInterface({ locale, onChange, onClose }: Props) {
     const initial = Array.from(svg.querySelectorAll<SVGPathElement>("path[data-id]"));
     initial.forEach((p) => {
       const id = p.getAttribute("data-id");
-      p.classList.toggle("iso-selected", id === selectedIso.toLowerCase());
+      p.classList.toggle("iso-selected", id === "ca");
     });
+
+    initDone.current = true;
   }, []);
 
   useEffect(() => {
@@ -112,7 +115,10 @@ export default function NoxelInterface({ locale, onChange, onClose }: Props) {
   }, [selectedIso, hoveredIso]);
 
   function onPointerMove(e: React.PointerEvent) {
-    const id = findIsoFromElement(e.target as Element);
+    const target = e.target as Element;
+    const isSvgPath = target.tagName === "path" || target.tagName === "PATH" || target.closest("svg") !== null;
+    if (!isSvgPath) return;
+    const id = findIsoFromElement(target);
     setHoveredIso(id);
     if (!id || !mapHostRef.current) {
       setTooltip((p) => ({ ...p, visible: false, iso: null }));
@@ -139,7 +145,7 @@ export default function NoxelInterface({ locale, onChange, onClose }: Props) {
   }
 
   return (
-    <div style={{ position: "fixed", inset: 0, zIndex: 2147483647, background: "rgba(7,9,15,0.97)", overflowY: "auto" }}>
+    <div style={{ position: "fixed", inset: 0, zIndex: 2147483647, background: "rgba(7,9,15,0.97)", overflowY: "auto", pointerEvents: "all" }}>
       <div style={{ maxWidth: 1400, margin: "0 auto", padding: "24px 32px 60px" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
           <div style={{ color: "var(--muted)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 700 }}>NOXEL Interface</div>
@@ -152,17 +158,16 @@ export default function NoxelInterface({ locale, onChange, onClose }: Props) {
 
         <h1 style={{ fontSize: 28, fontWeight: 900, marginBottom: 20, color: "var(--text)" }}>Choisissez votre langue</h1>
 
-        <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1.5fr) minmax(320px, 0.6fr)", gap: 16 }}>
-          <div style={{ position: "relative", borderRadius: 20, border: "1px solid var(--border)", background: "rgba(255,255,255,0.03)", overflow: "hidden", height: 600, minHeight: 600, maxHeight: 600, padding: 8 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1.5fr) minmax(320px, 0.6fr)", gap: 16, alignItems: "start" }}>
+          <div style={{ position: "relative", borderRadius: 20, border: "1px solid var(--border)", background: "rgba(255,255,255,0.03)", overflow: "hidden", padding: 1, minHeight: 650, height: 650 }}>
             <style>{MAP_STYLE}</style>
             <div
               ref={mapHostRef}
-              className="noxel-map-wrap"
+              className="noxel-map-wrap" style={{ marginTop: "-14%", display: "block" }}
               onClick={onClick}
               onPointerMove={onPointerMove}
               onPointerLeave={onPointerLeave}
-              dangerouslySetInnerHTML={{ __html: worldSvgRaw }}
-              style={{ width: "100%", height: "100%" }}
+              dangerouslySetInnerHTML={{ __html: worldSvgRaw.replace('viewBox="0 0 784.077 458.627"', 'viewBox="0 40 900 700"').replace('width="784.077px"', 'width="100%"').replace('height="458.627px"', 'height="100%"') }}
             />
             {tooltip.visible && tooltip.iso && (
               <div style={{ position: "absolute", left: tooltip.x, top: tooltip.y, zIndex: 20, pointerEvents: "none", background: "rgba(10,12,18,0.94)", color: "white", border: "1px solid var(--border)", borderRadius: 12, padding: "8px 10px", fontSize: 12, boxShadow: "0 10px 30px rgba(0,0,0,0.3)", maxWidth: 220 }}>
