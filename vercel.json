@@ -1,3 +1,9 @@
 {
-  "redirects": []
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/forge",
+      "permanent": true
+    }
+  ]
 }
