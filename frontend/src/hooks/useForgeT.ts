@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getForgeT, LANGUAGES_115 } from '../i18n/forge.translations';
 import type { ForgeTranslations } from '../i18n/forge.translations';
+import en from '../i18n/forge/en';
 
 const STORAGE_KEY = 'forge_lang';
 
@@ -12,7 +13,15 @@ export function useForgeT() {
     return browser || 'en';
   });
 
-  const t: ForgeTranslations = getForgeT(lang);
+  const [t, setT] = useState<ForgeTranslations>(en);
+
+  useEffect(() => {
+    let cancelled = false;
+    getForgeT(lang).then((translations) => {
+      if (!cancelled) setT(translations);
+    });
+    return () => { cancelled = true; };
+  }, [lang]);
 
   function changeLang(code: string) {
     setLang(code);
@@ -21,6 +30,3 @@ export function useForgeT() {
 
   return { t, lang, changeLang, languages: LANGUAGES_115 };
 }
-
-
-
