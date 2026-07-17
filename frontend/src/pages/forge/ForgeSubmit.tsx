@@ -19,8 +19,7 @@ export default function ForgeSubmit() {
     if (!form.url_soumise || !form.titre) { setError('URL and title are required.'); return; }
     setLoading(true); setError(''); setResult(null);
     try {
-      const token = localStorage.getItem('supabase_token') || '';
-      const res = await fetch(`${API_BASE}/api/forge/submissions`, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify(form) });
+     const res = await fetch(`${API_BASE}/api/forge/submissions`, { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) });
       const data = await res.json();
       if (!res.ok) { setError(data.raison || data.error || 'Submission error.'); return; }
       setResult(data);
