@@ -16,6 +16,7 @@ import {
   getMesSoumissions,
   getAnnuaire,
 } from '../../controllers/forge/submissions.controller';
+import { getSuggestions } from '../../controllers/forge/matchmaking.controller';
 
 const router = Router();
 
@@ -42,6 +43,13 @@ router.post('/badges/verify', requireAuth, verifierMonBadge);
 
 // Recalcul Trust Score après scan NOXEL SEO
 router.post('/trust-score/recalculate', requireAuth, recalculerMonScore);
+
+// ============================================================
+// MATCHMAKING
+// ============================================================
+
+// Suggestions de partenaires (scoring pondéré niche + trust score + activité)
+router.get('/matchmaking/suggestions', requireAuth, getSuggestions);
 
 // ============================================================
 // SOUMISSIONS

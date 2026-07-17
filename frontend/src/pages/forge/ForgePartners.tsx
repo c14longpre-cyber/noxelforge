@@ -11,8 +11,26 @@ export default function ForgePartners() {
   const [loading, setLoading] = useState(true);
   const [nicheFilter, setNicheFilter] = useState('');
   const [page, setPage] = useState(1);
+  const [recommandations, setRecommandations] = useState<any[]>([]);
+  const [loadingReco, setLoadingReco] = useState(true);
 
   useEffect(() => { fetchPartenaires(); }, [nicheFilter, page]);
+  useEffect(() => { fetchRecommandations(); }, []);
+
+  async function fetchRecommandations() {
+    setLoadingReco(true);
+    try {
+      const token = localStorage.getItem('supabase_token') || '';
+      const res = await fetch(`${API_BASE}/api/forge/matchmaking/suggestions?limit=6`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setRecommandations(data.suggestions ?? []);
+      }
+    } catch { setRecommandations([]); }
+    finally { setLoadingReco(false); }
+  }
 
   async function fetchPartenaires() {
     setLoading(true);
@@ -49,6 +67,36 @@ export default function ForgePartners() {
             </div>
           ))}
         </div>
+
+        {(loadingReco || recommandations.length > 0) && (
+          <div style={{ marginBottom: 28 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+              <span style={{ fontSize: 16 }}>🎯</span>
+              <h2 style={{ margin: 0, fontSize: 14, fontWeight: 900 }}>Recommended for you</h2>
+            </div>
+            {loadingReco ? (
+              <div style={{ color: 'var(--muted)', fontSize: 13, padding: '20px 0' }}>Calculating best matches...</div>
+            ) : (
+              <div style={{ display: 'grid', gap: 8, gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' }}>
+                {recommandations.map((r: any) => (
+                  <div key={r.user_id} className="nx-card" style={{ padding: 14 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+                        {r.niche && <span style={{ background: 'var(--g-dim)', color: 'var(--g)', fontSize: 10, padding: '2px 8px', borderRadius: 20, fontWeight: 700 }}>{r.niche}</span>}
+                        <span style={{ background: `${TIER_COLORS[r.trust_tier]}22`, color: TIER_COLORS[r.trust_tier], fontSize: 10, padding: '2px 8px', borderRadius: 20, fontWeight: 800 }}>
+                          {TIER_ICONS[r.trust_tier]} {r.trust_score}/100
+                        </span>
+                      </div>
+                      <span style={{ fontSize: 11, fontWeight: 900, color: 'var(--g)' }}>{r.score_matchmaking}% match</span>
+                    </div>
+                    <a href={r.url_site} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text)', fontSize: 13, fontWeight: 700, display: 'block', marginBottom: 4 }}>{r.url_site} ↗</a>
+                    <p style={{ margin: 0, color: 'var(--muted)', fontSize: 11, lineHeight: 1.5 }}>{r.raison}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
 
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 20 }}>
           <button onClick={() => { setNicheFilter(''); setPage(1); }} style={{ padding: '5px 12px', borderRadius: 8, border: '1px solid var(--border)', background: !nicheFilter ? 'var(--g)' : 'transparent', color: !nicheFilter ? '#07090f' : 'var(--muted)', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>All</button>
