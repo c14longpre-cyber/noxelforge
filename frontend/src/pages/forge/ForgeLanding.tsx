@@ -1,6 +1,8 @@
 import { useEffect, useState, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { useForgeT } from '../../hooks/useForgeT';
+import { useAuthStore } from '../../auth/AuthStore';
+import ForgeAccessModal from '../../components/ForgeAccessModal';
 const NoxelInterface = lazy(() => import('../../components/NoxelInterface'));
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
@@ -17,6 +19,8 @@ const TIER_CONFIG: Record<string, { color: string; icon: string; label: string }
 export default function ForgeLanding() {
   const { t, lang, changeLang } = useForgeT();
   const [showMap, setShowMap] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const { isAuthenticated, user, logout } = useAuthStore();
   const [annuaire, setAnnuaire] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [nicheFilter, setNicheFilter] = useState('');
@@ -45,8 +49,8 @@ export default function ForgeLanding() {
       {/* NAV */}
       <nav style={{ borderBottom: '1px solid var(--border)', padding: '0 32px', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--bg2)', position: 'sticky', top: 0, zIndex: 100 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <img src="/forge-tools.webp" alt="Forge" style={{ width: 28, height: 28, objectFit: 'contain' }} />
-          <span style={{ fontWeight: 900, fontSize: 15, letterSpacing: '-0.3px' }}>NOXEL Forge™</span>
+          <img src="/noxel-seo.webp" alt="Forge" style={{ width: 50, height: 50, objectFit: 'contain' }} />
+          <span style={{ fontWeight: 900, fontSize: 15, letterSpacing: '-0.3px' }}>NOXEL FORGE™</span>
         </div>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
           <button onClick={() => setShowMap(true)} style={{ padding: '6px 10px', borderRadius: 'var(--r)', border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', fontSize: 13, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}>🌐 {lang.toUpperCase()}</button>
@@ -58,6 +62,11 @@ export default function ForgeLanding() {
           <Link to="/forge/badge" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>{t.nav.badges}</Link>
           <Link to="/forge/pricing" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>{t.nav.pricing}</Link>
           <Link to="/forge/dashboard" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>{t.nav.dashboard}</Link>
+          {isAuthenticated ? (
+            <button onClick={() => logout()} style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>{user?.name || 'Account'} (logout)</button>
+          ) : (
+            <button onClick={() => setShowAuthModal(true)} style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--g-border)', background: 'var(--g-dim)', color: 'var(--g)', fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>Sign in</button>
+          )}
           <Link to="/forge/submit" className="nx-pill" style={{ padding: '7px 16px', fontSize: 13 }}>
             <img src="/forge-tools.webp" alt="Forge" style={{width:18,height:18,objectFit:'contain',marginRight:6,verticalAlign:'middle'}}/>
             {t.nav.submit}
@@ -198,11 +207,8 @@ export default function ForgeLanding() {
           {t.cta.title}
         </Link>
       </section>
+      <ForgeAccessModal open={showAuthModal} onClose={() => setShowAuthModal(false)} />
     </div>
   );
 }
-
-
-
-
 

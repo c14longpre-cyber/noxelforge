@@ -1,0 +1,70 @@
+NOXEL FORGE — Matchmaking Engine V1
+=====================================
+
+CE QUE CONTIENT CE ZIP (4 fichiers, structure identique à ton repo) :
+
+  NOUVEAUX FICHIERS :
+  - backend/src/services/forge/matchmaking.service.ts
+  - backend/src/controllers/forge/matchmaking.controller.ts
+
+  FICHIERS MODIFIÉS (remplacent les tiens tels quels) :
+  - backend/src/routes/forge/forge.routes.ts
+  - frontend/src/pages/forge/ForgePartners.tsx
+
+
+COMMENT INSTALLER (PowerShell) :
+---------------------------------
+1. Dézippe ce fichier n'importe où (ex: Downloads\forge-patch)
+2. Depuis la racine de ton repo NOXEL FORGE, colle :
+
+   Copy-Item "C:\chemin\vers\forge-patch\*" -Destination "." -Recurse -Force
+
+3. Vérifie avec git status que seulement ces 4 fichiers ont changé.
+4. npm run build (dans backend/) pour confirmer que ça compile.
+
+
+ÉTAPE MANUELLE RESTANTE — Nettoyage des 13 fichiers vides :
+--------------------------------------------------------------
+Un zip ne peut pas "supprimer" des fichiers de ton repo. Lance ceci
+depuis la racine du repo (déjà validé, aucun de ces fichiers n'est
+importé nulle part) :
+
+git rm backend/src/controllers/forge/trustScore.controller.ts `
+       backend/src/controllers/forge/badges.controller.ts `
+       backend/src/controllers/forge/points.controller.ts `
+       backend/src/controllers/forge/blacklist.controller.ts `
+       backend/src/middleware/forge/bronzeGate.middleware.ts `
+       backend/src/middleware/forge/forgeAuth.middleware.ts `
+       backend/src/services/forge/forgePoints.service.ts `
+       backend/src/routes/forge/submissions.routes.ts `
+       backend/src/routes/forge/trustScore.routes.ts `
+       backend/src/routes/forge/points.routes.ts `
+       backend/src/routes/forge/badges.routes.ts `
+       backend/src/routes/forge/blacklist.routes.ts `
+       backend/src/routes/forge/members.routes.ts
+
+
+NOUVEL ENDPOINT :
+------------------
+GET /api/forge/matchmaking/suggestions?limit=20  (auth requise)
+
+Retourne les meilleurs partenaires potentiels, triés par score de
+matching (niche + proximité Trust Score + activité + fraîcheur).
+
+Le frontend (ForgePartners.tsx) affiche maintenant une section
+"Recommended for you" en haut de la page /forge/partners, avant
+l'annuaire filtré existant.
+
+
+POUR TESTER :
+-------------
+Il te faut au moins 2-3 membres Forge actifs (badge_installe = true,
+statut = 'actif') dans Supabase pour voir des résultats — sinon la
+section reste vide silencieusement (comportement normal, pas un bug).
+
+
+PROCHAINE ÉTAPE SUGGÉRÉE :
+----------------------------
+V1.5 — historique d'échanges (table forge_exchanges) pour éviter de
+recommander deux fois le même partenaire une fois l'échange fait.
+On peut la bâtir quand tu es prêt.

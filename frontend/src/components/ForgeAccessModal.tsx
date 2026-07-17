@@ -1,0 +1,302 @@
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { useAuthStore } from "../auth/AuthStore";
+import PasskeyButton from "./PasskeyButton";
+
+declare global {
+  interface Window {
+    google?: {
+      accounts: {
+        id: {
+          initialize: (config: object) => void;
+          renderButton: (el: HTMLElement, config: object) => void;
+          prompt: () => void;
+        };
+      };
+    };
+  }
+}
+
+type Props = {
+  open: boolean;
+  onClose: () => void;
+  defaultTab?: "signin" | "email" | "magic";
+};
+
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || "";
+const API_BASE = import.meta.env.VITE_API_URL ?? "";
+
+type Screen = "grid" | "email" | "magic";
+
+const inputStyle: React.CSSProperties = {
+  width: "100%", padding: "11px 14px", borderRadius: 8,
+  border: "1px solid rgba(255,255,255,0.12)",
+  background: "rgba(255,255,255,0.04)",
+  color: "#fff", fontSize: 14, fontFamily: "inherit",
+  outline: "none", boxSizing: "border-box",
+};
+
+function writeStored(user: any) {
+  try { localStorage.setItem("nxl_forge_user", JSON.stringify(user)); } catch {}
+}
+
+export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
+  const { loginWithGoogle, refreshAuth } = useAuthStore();
+  const googleInitialized = useRef(false);
+
+  const [screen, setScreen] = useState<Screen>(
+    defaultTab === "email" ? "email" : defaultTab === "magic" ? "magic" : "grid"
+  );
+
+  const [emailAddr, setEmailAddr] = useState("");
+  const [emailPass, setEmailPass] = useState("");
+  const [emailName, setEmailName] = useState("");
+  const [emailMode, setEmailMode] = useState<"login" | "register">("login");
+  const [emailLoading, setEmailLoading] = useState(false);
+  const [emailError, setEmailError] = useState("");
+
+  const [magicEmail, setMagicEmail] = useState("");
+  const [magicStatus, setMagicStatus] = useState<"idle" | "loading" | "sent" | "error">("idle");
+  const [magicMessage, setMagicMessage] = useState("");
+
+  useEffect(() => {
+    if (!open || !GOOGLE_CLIENT_ID || screen !== "grid") return;
+    function initGoogle() {
+      if (!window.google?.accounts?.id || googleInitialized.current) return;
+      googleInitialized.current = true;
+      window.google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: async (response: { credential: string }) => {
+          try { await loginWithGoogle(response.credential); onClose(); }
+          catch (err) { console.error("Google login failed:", err); }
+        },
+      });
+    }
+    if (!window.google?.accounts) {
+      const script = document.createElement("script");
+      script.src = "https://accounts.google.com/gsi/client";
+      script.async = true; script.defer = true;
+      script.onload = initGoogle;
+      document.head.appendChild(script);
+    } else { initGoogle(); }
+  }, [open, loginWithGoogle, onClose, screen]);
+
+  const handleGoogleClick = () => {
+    if (window.google?.accounts?.id) {
+      window.google.accounts.id.prompt();
+    } else {
+      const script = document.createElement("script");
+      script.src = "https://accounts.google.com/gsi/client";
+      script.onload = () => {
+        if (window.google?.accounts?.id) {
+          window.google.accounts.id.initialize({
+            client_id: GOOGLE_CLIENT_ID,
+            callback: async (response: { credential: string }) => {
+              try { await loginWithGoogle(response.credential); onClose(); }
+              catch (err) { console.error("Google login failed:", err); }
+            },
+          });
+          window.google.accounts.id.prompt();
+        }
+      };
+      document.head.appendChild(script);
+    }
+  };
+
+  const handleMagicLink = async () => {
+    if (!magicEmail.trim()) return;
+    setMagicStatus("loading");
+    try {
+      const res = await fetch(API_BASE + "/api/auth/magic/request", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: magicEmail.trim() }),
+      });
+      const data = await res.json();
+      if (data.ok) { setMagicStatus("sent"); }
+      else { setMagicStatus("error"); setMagicMessage(data.error || "Failed to send link"); }
+    } catch { setMagicStatus("error"); setMagicMessage("Server error. Please try again."); }
+  };
+
+  const handleEmailAuth = async () => {
+    if (!emailAddr.trim() || !emailPass.trim()) { setEmailError("Email and password required"); return; }
+    setEmailLoading(true); setEmailError("");
+    try {
+      const endpoint = emailMode === "register" ? "/api/auth/register" : "/api/auth/login";
+      const body: any = { email: emailAddr.trim(), password: emailPass };
+      if (emailMode === "register" && emailName.trim()) body.name = emailName.trim();
+      const res = await fetch(API_BASE + endpoint, {
+        method: "POST", credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+      if (!data.ok) throw new Error(data.error);
+      window.location.reload();
+    } catch (e: any) { setEmailError(e.message || "Authentication failed"); }
+    finally { setEmailLoading(false); }
+  };
+
+  if (!open) return null;
+  const overlayRoot = document.getElementById("overlay-root") || document.body;
+
+  const providers = [
+    {
+      id: "google", label: "Google", onClick: handleGoogleClick,
+      icon: <svg width="32" height="32" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.042.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>,
+    },
+    {
+      id: "microsoft", label: "Microsoft",
+      onClick: () => { window.location.href = API_BASE + "/api/auth/microsoft/start"; },
+      icon: <svg width="32" height="32" viewBox="0 0 24 24"><rect x="1" y="1" width="10.5" height="10.5" fill="#F25022"/><rect x="12.5" y="1" width="10.5" height="10.5" fill="#7FBA00"/><rect x="1" y="12.5" width="10.5" height="10.5" fill="#00A4EF"/><rect x="12.5" y="12.5" width="10.5" height="10.5" fill="#FFB900"/></svg>,
+    },
+  ];
+
+  const BackBtn = () => (
+    <button type="button" onClick={() => setScreen("grid")} style={{
+      background: "none", border: "none", color: "rgba(255,255,255,0.4)",
+      cursor: "pointer", fontFamily: "inherit", fontSize: 13, fontWeight: 600,
+      display: "flex", alignItems: "center", gap: 6, marginBottom: 20, padding: 0,
+    }}>Back</button>
+  );
+
+  return createPortal(
+    <div onClick={onClose} style={{
+      position: "fixed", inset: 0, zIndex: 2147483647,
+      background: "radial-gradient(circle at 30% 20%, rgba(60,222,106,0.08), transparent 30%), radial-gradient(circle at 75% 30%, rgba(112,42,165,0.08), transparent 30%), rgba(2,6,15,0.85)",
+      backdropFilter: "blur(12px)", display: "grid", placeItems: "center", padding: 24,
+    }}>
+      <div onClick={(e) => e.stopPropagation()} style={{
+        width: "100%", maxWidth: 500, borderRadius: 24, padding: "32px 28px 28px",
+        background: "linear-gradient(180deg, rgba(10,16,26,0.98), rgba(6,10,18,0.99))",
+        boxShadow: "0 0 0 1px rgba(60,222,106,0.18), 0 0 60px rgba(60,222,106,0.08)",
+        position: "relative",
+      }}>
+        <div style={{
+          position: "absolute", top: 0, left: "10%", right: "10%", height: 1,
+          background: "linear-gradient(90deg, transparent, rgba(60,222,106,0.7), transparent)",
+          boxShadow: "0 0 16px rgba(60,222,106,0.4)", borderRadius: "0 0 8px 8px",
+        }} />
+
+        <button type="button" onClick={onClose} style={{
+          position: "absolute", top: 16, right: 16, width: 36, height: 36, borderRadius: 10,
+          background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)",
+          color: "rgba(255,255,255,0.5)", cursor: "pointer",
+          display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16,
+        }}>X</button>
+
+        {screen === "grid" && (
+          <>
+            <div style={{ marginBottom: 22 }}>
+              <h2 style={{ margin: 0, fontSize: 24, fontWeight: 900, color: "#fff", lineHeight: 1.1 }}>Access NOXEL Forge</h2>
+              <p style={{ margin: "8px 0 0", fontSize: 13, color: "rgba(255,255,255,0.45)" }}>Secure authentication for your account.</p>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 12 }}>
+              {providers.map((p) => (
+                <button key={p.id} type="button" onClick={p.onClick}
+                  style={{
+                    display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+                    gap: 10, padding: "18px 10px", borderRadius: 14,
+                    background: "rgba(255,255,255,0.04)",
+                    border: "1px solid rgba(60,222,106,0.15)",
+                    cursor: "pointer", transition: "all 0.15s",
+                  }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "rgba(60,222,106,0.08)"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.04)"; }}
+                >
+                  <div>{p.icon}</div>
+                  <div style={{ fontSize: 13, fontWeight: 800, color: "#fff" }}>{p.label}</div>
+                </button>
+              ))}
+            </div>
+
+            <PasskeyButton
+              onSuccess={(u) => { writeStored(u); void refreshAuth(); onClose(); }}
+              onError={(msg) => console.error("Passkey error:", msg)}
+            />
+
+            <button type="button" onClick={() => setScreen("magic")} style={{
+              width: "100%", padding: "11px", borderRadius: 12, marginTop: 8,
+              background: "rgba(60,222,106,0.07)", border: "1px solid rgba(60,222,106,0.2)",
+              color: "#3cde6a", fontWeight: 700, fontSize: 13, cursor: "pointer", fontFamily: "inherit",
+              display: "flex", alignItems: "center", justifyContent: "center", gap: 8, transition: "all 0.15s",
+            }}>
+              Sign in with Magic Link (no password)
+            </button>
+
+            <button type="button" onClick={() => setScreen("email")} style={{
+              width: "100%", padding: "11px", borderRadius: 12, marginTop: 8,
+              background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)",
+              color: "rgba(255,255,255,0.65)", fontWeight: 700, fontSize: 13, cursor: "pointer", fontFamily: "inherit",
+              display: "flex", alignItems: "center", justifyContent: "center", gap: 8, transition: "all 0.15s",
+            }}>
+              Sign in with email / password
+            </button>
+          </>
+        )}
+
+        {screen === "magic" && (
+          <>
+            <BackBtn />
+            <h2 style={{ margin: "0 0 6px", fontSize: 22, fontWeight: 900, color: "#fff" }}>Magic Link</h2>
+            <p style={{ margin: "0 0 20px", fontSize: 13, color: "rgba(255,255,255,0.45)", lineHeight: 1.5 }}>
+              Enter your email and we will send you a secure login link.
+            </p>
+            {magicStatus === "sent" ? (
+              <div style={{ padding: "24px", borderRadius: 12, textAlign: "center", background: "rgba(60,222,106,0.07)", border: "1px solid rgba(60,222,106,0.25)" }}>
+                <div style={{ color: "#3cde6a", fontWeight: 800, fontSize: 16, marginBottom: 8 }}>Check your inbox!</div>
+                <div style={{ color: "rgba(255,255,255,0.55)", fontSize: 13 }}>
+                  We sent a login link to <strong style={{ color: "#fff" }}>{magicEmail}</strong>. It expires in 15 minutes.
+                </div>
+              </div>
+            ) : (
+              <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                <input type="email" value={magicEmail} onChange={(e) => setMagicEmail(e.target.value)}
+                  placeholder="your@email.com" onKeyDown={(e) => e.key === "Enter" && handleMagicLink()} style={inputStyle} />
+                {magicMessage && <div style={{ fontSize: 12, color: "#ff5c7a", padding: "8px 12px", background: "rgba(255,92,122,0.08)", borderRadius: 8, border: "1px solid rgba(255,92,122,0.2)" }}>{magicMessage}</div>}
+                <button type="button" onClick={handleMagicLink} disabled={magicStatus === "loading" || !magicEmail.trim()} style={{
+                  width: "100%", padding: "13px", borderRadius: 10, border: "none",
+                  background: "rgba(60,222,106,0.15)", color: "#3cde6a", fontWeight: 800, fontSize: 14,
+                  cursor: "pointer", fontFamily: "inherit", outline: "1px solid rgba(60,222,106,0.3)",
+                }}>{magicStatus === "loading" ? "Sending..." : "Send Magic Link"}</button>
+              </div>
+            )}
+          </>
+        )}
+
+        {screen === "email" && (
+          <>
+            <BackBtn />
+            <h2 style={{ margin: "0 0 18px", fontSize: 22, fontWeight: 900, color: "#fff" }}>Sign in with email</h2>
+            <div style={{ display: "flex", gap: 4, background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: 4, marginBottom: 14 }}>
+              {(["login", "register"] as const).map((m) => (
+                <button key={m} type="button" onClick={() => { setEmailMode(m); setEmailError(""); }} style={{
+                  flex: 1, padding: "8px", borderRadius: 7, border: "none", cursor: "pointer",
+                  fontFamily: "inherit", fontWeight: 700, fontSize: 13, transition: "all 0.15s",
+                  background: emailMode === m ? "rgba(60,222,106,0.15)" : "transparent",
+                  color: emailMode === m ? "#3cde6a" : "rgba(255,255,255,0.4)",
+                }}>{m === "login" ? "Sign In" : "Create Account"}</button>
+              ))}
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              {emailMode === "register" && <input type="text" value={emailName} onChange={(e) => setEmailName(e.target.value)} placeholder="Your name" style={inputStyle} />}
+              <input type="email" value={emailAddr} onChange={(e) => setEmailAddr(e.target.value)} placeholder="your@email.com" onKeyDown={(e) => e.key === "Enter" && handleEmailAuth()} style={inputStyle} />
+              <input type="password" value={emailPass} onChange={(e) => setEmailPass(e.target.value)} placeholder="Password (min 6 characters)" onKeyDown={(e) => e.key === "Enter" && handleEmailAuth()} style={inputStyle} />
+              {emailError && <div style={{ fontSize: 12, color: "#ff5c7a", padding: "8px 12px", background: "rgba(255,92,122,0.08)", borderRadius: 8, border: "1px solid rgba(255,92,122,0.2)" }}>{emailError}</div>}
+              <button type="button" onClick={handleEmailAuth} disabled={emailLoading} style={{
+                width: "100%", padding: "13px", borderRadius: 10, border: "none",
+                background: "rgba(60,222,106,0.15)", color: "#3cde6a", fontWeight: 800, fontSize: 14,
+                cursor: emailLoading ? "not-allowed" : "pointer", fontFamily: "inherit", outline: "1px solid rgba(60,222,106,0.3)",
+              }}>{emailLoading ? "Please wait..." : emailMode === "login" ? "Sign In" : "Create Account"}</button>
+            </div>
+          </>
+        )}
+
+        <p style={{ margin: "20px 0 0", fontSize: 11, color: "rgba(255,255,255,0.2)", textAlign: "center" }}>
+          By signing in you agree to our Terms of Service. We never sell your data.
+        </p>
+      </div>
+    </div>,
+    overlayRoot
+  );
+}
