@@ -20,7 +20,8 @@
     "jsonwebtoken": "^9.0.3",
     "node-cron": "latest",
     "resend": "^6.17.1",
-    "stripe": "^22.3.0"
+    "stripe": "^22.3.0",
+    "ws": "^8.21.1"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
@@ -31,6 +32,7 @@
     "@types/node": "latest",
     "@types/node-cron": "latest",
     "@types/stripe": "^8.0.416",
+    "@types/ws": "^8.18.1",
     "ts-node-dev": "latest",
     "typescript": "latest"
   },

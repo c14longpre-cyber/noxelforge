@@ -1,9 +1,8 @@
 import { Request, Response } from 'express';
-import { createClient } from '@supabase/supabase-js';
 import { runSpamGate } from '../../services/forge/spamGate.service';
 import { traiterSoumission, determinerFlux } from '../../services/forge/alfred.forge.service';
 import { getTrustScore } from '../../services/forge/trustScore.service';
-function getSupabase() { return createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!); }
+import { getSupabase } from '../../lib/supabaseClient';
 export async function creerSoumission(req: Request, res: Response): Promise<void> {
   const supabase = getSupabase();
   const userId = (req as any).userId;

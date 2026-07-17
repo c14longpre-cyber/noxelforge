@@ -1,7 +1,6 @@
 import cron from 'node-cron';
-import { createClient } from '@supabase/supabase-js';
 import { traiterVerificationBadge } from '../services/forge/badgeChecker.service';
-function getSupabase() { return createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!); }
+import { getSupabase } from '../lib/supabaseClient';
 export async function runForgeBadgeCron(): Promise<void> {
   console.log(`[ForgeBadgeCron] Démarrage — ${new Date().toISOString()}`);
   const supabase = getSupabase();

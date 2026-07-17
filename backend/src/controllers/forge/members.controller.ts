@@ -1,9 +1,8 @@
 import { Request, Response } from 'express';
-import { createClient } from '@supabase/supabase-js';
 import { recalculerTrustScore, getTrustScore } from '../../services/forge/trustScore.service';
 import { reactiverMembre, verifierBadgeSurSite } from '../../services/forge/badgeChecker.service';
 import { determinerFlux } from '../../services/forge/alfred.forge.service';
-function getSupabase() { return createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!); }
+import { getSupabase } from '../../lib/supabaseClient';
 export async function registerMembre(req: Request, res: Response): Promise<void> {
   const supabase = getSupabase();
   const userId = (req as any).userId;

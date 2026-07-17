@@ -1,5 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
-function getSupabase() { return createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!); }
+import { getSupabase } from '../../lib/supabaseClient';
 export interface SpamGateResult { passe: boolean; raison?: string; type?: 'spam' | 'bot' | 'pub_automatique' | 'contenu_interdit' | 'blacklist'; }
 export interface SpamGateInput { url: string; titre: string; description?: string; contenu?: string; userId: string; }
 const PATTERNS_PUB = [/buy\s+now/i,/limited\s+time\s+offer/i,/act\s+now/i,/free\s+money/i,/earn\s+\$\d+/i,/make\s+money\s+fast/i,/casino|poker|slots|gambling/i,/viagra|cialis|pharmacy|pills/i,/crypto\s+profit|bitcoin\s+earn/i,/mlm|multi.?level\s+marketing/i];

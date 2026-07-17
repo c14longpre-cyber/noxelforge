@@ -1,9 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
-
-function getSupabase() {
-  return createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!);
-}
-
+import { getSupabase } from '../../lib/supabaseClient';
 export type BadgeStatut = 'verifie' | 'non_verifie' | 'grace' | 'suspendu';
 
 export interface BadgeCheckResult {

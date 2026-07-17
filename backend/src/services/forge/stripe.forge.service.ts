@@ -1,4 +1,5 @@
 import Stripe from 'stripe';
+import { getSupabase } from '../../lib/supabaseClient';
 
 function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2026-06-24.dahlia' });
@@ -54,8 +55,7 @@ export async function creerCheckoutForge(params: {
 }
 
 export async function gererWebhookForge(event: Stripe.Event): Promise<void> {
-  const { createClient } = await import('@supabase/supabase-js');
-  const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!);
+  const supabase = getSupabase();
 
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session;

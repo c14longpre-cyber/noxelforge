@@ -1,9 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
-
-function getSupabase() {
-  return createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!);
-}
-
+import { getSupabase } from '../../lib/supabaseClient';
 export type TierForge = 'bronze' | 'silver' | 'gold' | 'platinum' | 'diamond';
 
 export interface TrustScoreInput {

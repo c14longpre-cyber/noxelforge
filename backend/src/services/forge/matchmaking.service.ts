@@ -1,14 +1,8 @@
+import { getSupabase } from '../../lib/supabaseClient';
 // ============================================================
 // NOXEL Forge™ — Matchmaking Engine V1 (rule-based)
 // backend/src/services/forge/matchmaking.service.ts
 // ============================================================
-
-import { createClient } from '@supabase/supabase-js';
-
-function getSupabase() {
-  return createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!);
-}
-
 // Niches complémentaires — un échange entre ces paires a du sens même sans niche identique
 const NICHES_COMPLEMENTAIRES: Record<string, string[]> = {
   SEO: ['Marketing', 'Web Dev', 'AI'],

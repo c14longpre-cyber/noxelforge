@@ -1,8 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk';
-import { createClient } from '@supabase/supabase-js';
 import { ajouterBlacklist } from './spamGate.service';
+import { getSupabase } from '../../lib/supabaseClient';
 
-function getSupabase() { return createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!); }
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! });
 
 export type AlfredVerdict = 'approuve' | 'rejete' | 'blacklist';
