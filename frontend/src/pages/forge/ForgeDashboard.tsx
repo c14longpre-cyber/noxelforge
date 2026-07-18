@@ -11,17 +11,18 @@ export default function ForgeDashboard() {
   const [loading, setLoading] = useState(true);
   const [verifyingBadge, setVerifyingBadge] = useState(false);
   const [badgeMsg, setBadgeMsg] = useState('');
+  const [joining, setJoining] = useState(false);
+  const [joinForm, setJoinForm] = useState({ url_site: '', niche: '' });
+  const [joinError, setJoinError] = useState('');
 
   useEffect(() => { fetchDashboard(); }, []);
 
   async function fetchDashboard() {
     setLoading(true);
     try {
-      const token = localStorage.getItem('supabase_token') || '';
-      const headers = { Authorization: `Bearer ${token}` };
       const [s, r] = await Promise.all([
-        fetch(`${API_BASE}/api/forge/members/status`, { headers }),
-        fetch(`${API_BASE}/api/forge/submissions`, { headers }),
+        fetch(`${API_BASE}/api/forge/members/status`, { credentials: 'include' }),
+        fetch(`${API_BASE}/api/forge/submissions`, { credentials: 'include' }),
       ]);
       if (s.ok) setStatut(await s.json());
       if (r.ok) setSoumissions((await r.json()).soumissions ?? []);
@@ -32,13 +33,29 @@ export default function ForgeDashboard() {
   async function verifierBadge() {
     setVerifyingBadge(true); setBadgeMsg('');
     try {
-      const token = localStorage.getItem('supabase_token') || '';
-      const res = await fetch(`${API_BASE}/api/forge/badges/verify`, { method: 'POST', headers: { Authorization: `Bearer ${token}` } });
+      const res = await fetch(`${API_BASE}/api/forge/badges/verify`, { method: 'POST', credentials: 'include' });
       const data = await res.json();
       setBadgeMsg(data.message);
       fetchDashboard();
     } catch { setBadgeMsg('Verification error.'); }
     finally { setVerifyingBadge(false); }
+  }
+
+  async function handleJoin() {
+    if (!joinForm.url_site) { setJoinError('Site URL is required.'); return; }
+    setJoining(true); setJoinError('');
+    try {
+      const res = await fetch(`${API_BASE}/api/forge/members/register`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(joinForm),
+      });
+      const data = await res.json();
+      if (!res.ok) { setJoinError(data.error || 'Registration failed.'); return; }
+      fetchDashboard();
+    } catch { setJoinError('Server error. Please try again.'); }
+    finally { setJoining(false); }
   }
 
   if (loading) return (
@@ -48,10 +65,35 @@ export default function ForgeDashboard() {
   );
 
   if (!statut?.membre) return (
-    <div style={{ minHeight: '100vh', background: 'var(--bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
+    <div style={{ minHeight: '100vh', background: 'var(--bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16, padding: 24 }}>
       <div style={{ fontSize: 48 }}>⚒️</div>
-      <h2 style={{ fontWeight: 900, fontSize: 20 }}>You are not yet a member of NOXEL Forge</h2>
-      <Link to="/forge" className="nx-pill">Join Forge</Link>
+      <h2 style={{ fontWeight: 900, fontSize: 20, textAlign: 'center' }}>You are not yet a member of NOXEL Forge</h2>
+      <div className="nx-card" style={{ width: '100%', maxWidth: 420, display: 'grid', gap: 12 }}>
+        <div>
+          <label style={{ display: 'block', fontSize: 12, fontWeight: 800, marginBottom: 6, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Your site URL</label>
+          <input type="url" placeholder="https://yoursite.com" value={joinForm.url_site}
+            onChange={(e) => setJoinForm({ ...joinForm, url_site: e.target.value })}
+            style={{ width: '100%', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--r)', padding: '11px 14px', color: 'var(--text)', fontSize: 14, outline: 'none', boxSizing: 'border-box' }} />
+        </div>
+        <div>
+          <label style={{ display: 'block', fontSize: 12, fontWeight: 800, marginBottom: 6, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Niche</label>
+          <select value={joinForm.niche} onChange={(e) => setJoinForm({ ...joinForm, niche: e.target.value })} className="forge-niche-select"
+            style={{ width: '100%', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--r)', padding: '11px 14px', color: joinForm.niche ? 'var(--text)' : 'var(--soft)', fontSize: 14, outline: 'none', boxSizing: 'border-box' }}>
+            <option value="">Select a niche</option>
+            {['SEO','Marketing','AI','E-commerce','Web Dev','Business','Design','Finance','Health','Education','Other'].map(n => <option key={n} value={n}>{n}</option>)}
+          </select>
+          <style>{`
+            .forge-niche-select option { background-color: #07090f; color: #3cde6a; }
+            .forge-niche-select option:hover, .forge-niche-select option:focus, .forge-niche-select option:checked {
+              background-color: #07090f; background: linear-gradient(#b06ef5, #b06ef5); color: #b06ef5;
+            }
+          `}</style>
+        </div>
+        {joinError && <div style={{ color: 'var(--danger)', fontSize: 13 }}>{joinError}</div>}
+        <button onClick={handleJoin} disabled={joining} className="nx-pill" style={{ width: '100%', padding: '12px', fontSize: 14, cursor: joining ? 'wait' : 'pointer' }}>
+          {joining ? 'Joining...' : 'Join Forge'}
+        </button>
+      </div>
     </div>
   );
 

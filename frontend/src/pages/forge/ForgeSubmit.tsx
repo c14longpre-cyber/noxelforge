@@ -89,13 +89,26 @@ export default function ForgeSubmit() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: 12, fontWeight: 800, marginBottom: 8, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Niche</label>
-                <select name="niche" value={form.niche} onChange={handleChange}
-                  style={{ width: '100%', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--r)', padding: '11px 14px', color: form.niche ? 'var(--text)' : 'var(--soft)', fontSize: 14, outline: 'none', boxSizing: 'border-box' }}>
-                  <option value="">Select a niche</option>
-                  {NICHES.map(n => <option key={n} value={n}>{n}</option>)}
-                </select>
-              </div>
+  <label style={{ display: 'block', fontSize: 12, fontWeight: 800, marginBottom: 8, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Niche</label>
+  <select name="niche" value={form.niche} onChange={handleChange} className="forge-niche-select"
+    style={{ width: '100%', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--r)', padding: '11px 14px', color: form.niche ? 'var(--text)' : 'var(--soft)', fontSize: 14, outline: 'none', boxSizing: 'border-box' }}>
+    <option value="">Select a niche</option>
+    {NICHES.map(n => <option key={n} value={n}>{n}</option>)}
+  </select>
+  <style>{`
+    .forge-niche-select option {
+      background-color: #07090f;
+      color: #3cde6a;
+    }
+    .forge-niche-select option:hover,
+    .forge-niche-select option:focus,
+    .forge-niche-select option:checked {
+      background-color: #07090f;
+      background: linear-gradient(#b06ef5, #b06ef5);
+      color: #b06ef5;
+    }
+  `}</style>
+</div>
 
               <div>
                 <label style={{ display: 'block', fontSize: 12, fontWeight: 800, marginBottom: 8, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Short description</label>
