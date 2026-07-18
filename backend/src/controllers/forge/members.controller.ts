@@ -10,7 +10,7 @@ export async function registerMembre(req: Request, res: Response): Promise<void>
   const { data: existant } = await supabase.from('forge_members').select('id').eq('user_id', userId).single();
   if (existant) { res.status(409).json({ error: 'Tu es déjà membre de NOXEL Forge.' }); return; }
   const { data: membre, error } = await supabase.from('forge_members').insert({ user_id: userId, tier_abonnement, url_site, niche, badge_installe: false, scan_complete: false, statut: 'actif' }).select().single();
-  if (error || !membre) { res.status(500).json({ error: 'Erreur inscription.' }); return; }
+  if (error || !membre) { console.error('[registerMembre] Supabase insert error:', error); res.status(500).json({ error: 'Erreur inscription.' }); return; }
   await supabase.from('forge_points').insert({ user_id: userId, solde: 0, total_gagne: 0, total_depense: 0 });
   res.status(201).json({ success: true, membre, message: 'Bienvenue dans NOXEL Forge! 🔥' });
 }
