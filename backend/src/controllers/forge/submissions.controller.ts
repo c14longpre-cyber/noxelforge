@@ -19,7 +19,8 @@ export async function creerSoumission(req: Request, res: Response): Promise<void
   const trustScoreData = await getTrustScore(userId);
   const { data: soumission, error: insertError } = await supabase.from('forge_submissions').insert({ user_id: userId, url_soumise, titre, description, niche, flux, statut: 'pending' }).select().single();
   if (insertError || !soumission) { console.error('[creerSoumission] Supabase insert error:', insertError); res.status(500).json({ error: 'Erreur création soumission.' }); return; }
-  traiterSoumission(soumission.id, { userId, urlSoumise: url_soumise, titre, description, contenu, niche, trustScore: trustScoreData?.score ?? 0, tierForge: trustScoreData?.tier ?? 'bronze', ageCompteDays, scanComplete: membre.scan_complete, badgeInstalle: membre.badge_installe }).catch(console.error);
+  console.log(`[creerSoumission] Lancement traiterSoumission pour ${soumission.id}`);
+traiterSoumission(soumission.id, { userId, urlSoumise: url_soumise, titre, description, contenu, niche, trustScore: trustScoreData?.score ?? 0, tierForge: trustScoreData?.tier ?? 'bronze', ageCompteDays, scanComplete: membre.scan_complete, badgeInstalle: membre.badge_installe }).catch((e) => console.error('[creerSoumission] traiterSoumission a rejete:', e));
   res.status(201).json({ success: true, soumission_id: soumission.id, flux, message: 'Soumission reçue — Alfred analyse ton contenu.' });
 }
 export async function getMesSoumissions(req: Request, res: Response): Promise<void> {

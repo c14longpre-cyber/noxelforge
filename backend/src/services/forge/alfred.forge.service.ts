@@ -69,25 +69,40 @@ async function crediterPoints(userId: string, points: number, description: strin
 }
 
 export async function traiterSoumission(submissionId: string, input: AlfredInput): Promise<void> {
+  console.log(`[traiterSoumission] DEMARRAGE pour submission ${submissionId}, tierForge=${input.tierForge}`);
   const supabase = getSupabase();
 
-  if (input.tierForge === 'bronze') {
-    await supabase.from('forge_submissions').update({ statut: 'rejete', flux: 'bloque', alfred_raison: 'Tier Bronze — accès lecture seulement. Upgrade vers Silver pour soumettre.', updated_at: new Date().toISOString() }).eq('id', submissionId);
-    return;
-  }
+  try {
+    if (input.tierForge === 'bronze') {
+      console.log(`[traiterSoumission] Rejet Bronze pour ${submissionId}`);
+      await supabase.from('forge_submissions').update({ statut: 'rejete', flux: 'bloque', alfred_raison: 'Tier Bronze — accès lecture seulement. Upgrade vers Silver pour soumettre.', updated_at: new Date().toISOString() }).eq('id', submissionId);
+      return;
+    }
 
-  const urlScan = await scanUrl(input.urlSoumise);
-  if (!urlScan.accessible) {
-    await supabase.from('forge_submissions').update({ statut: 'rejete', flux: 'scan', alfred_raison: urlScan.raison || 'URL inaccessible.', updated_at: new Date().toISOString() }).eq('id', submissionId);
-    return;
-  }
+    console.log(`[traiterSoumission] Scan URL pour ${submissionId}: ${input.urlSoumise}`);
+    const urlScan = await scanUrl(input.urlSoumise);
+    console.log(`[traiterSoumission] Resultat scan:`, urlScan);
 
-  if (!urlScan.hasBacklink) {
-    await supabase.from('forge_submissions').update({ statut: 'rejete', flux: 'scan', alfred_raison: 'Backlink vers noxelseo.com ou noxelforge.com introuvable sur la page.', updated_at: new Date().toISOString() }).eq('id', submissionId);
-    return;
-  }
+    if (!urlScan.accessible) {
+      await supabase.from('forge_submissions').update({ statut: 'rejete', flux: 'scan', alfred_raison: urlScan.raison || 'URL inaccessible.', updated_at: new Date().toISOString() }).eq('id', submissionId);
+      return;
+    }
 
-  const result = await runAlfred(input);
-  await supabase.from('forge_submissions').update({ statut: result.verdict === 'approuve' ? 'approuve' : 'rejete', flux: 'alfred', alfred_score: result.score, alfred_raison: result.raison, backlink_noxel_actif: result.verdict === 'approuve', updated_at: new Date().toISOString() }).eq('id', submissionId);
-  if (result.verdict === 'approuve') await crediterPoints(input.userId, 50, 'Soumission approuvée par Alfred');
+    if (!urlScan.hasBacklink) {
+      await supabase.from('forge_submissions').update({ statut: 'rejete', flux: 'scan', alfred_raison: 'Backlink vers noxelseo.com ou noxelforge.com introuvable sur la page.', updated_at: new Date().toISOString() }).eq('id', submissionId);
+      return;
+    }
+
+    console.log(`[traiterSoumission] Appel Alfred/Claude pour ${submissionId}`);
+    const result = await runAlfred(input);
+    console.log(`[traiterSoumission] Verdict Alfred pour ${submissionId}:`, result.verdict, result.raison);
+
+    const { error: updateError } = await supabase.from('forge_submissions').update({ statut: result.verdict === 'approuve' ? 'approuve' : 'rejete', flux: 'alfred', alfred_score: result.score, alfred_raison: result.raison, backlink_noxel_actif: result.verdict === 'approuve', updated_at: new Date().toISOString() }).eq('id', submissionId);
+    if (updateError) console.error(`[traiterSoumission] Erreur update final pour ${submissionId}:`, updateError);
+
+    if (result.verdict === 'approuve') await crediterPoints(input.userId, 50, 'Soumission approuvée par Alfred');
+    console.log(`[traiterSoumission] TERMINE pour ${submissionId}`);
+  } catch (err) {
+    console.error(`[traiterSoumission] EXCEPTION NON GEREE pour ${submissionId}:`, err);
+  }
 }
