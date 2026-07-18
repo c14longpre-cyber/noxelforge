@@ -18,7 +18,7 @@ export async function creerSoumission(req: Request, res: Response): Promise<void
   if (flux === 'bloque') { res.status(403).json({ error: 'Compte non éligible.', raison: !membre.scan_complete ? 'Lance un scan NOXEL SEO d\'abord.' : 'Installe le badge NOXEL sur ton site.' }); return; }
   const trustScoreData = await getTrustScore(userId);
   const { data: soumission, error: insertError } = await supabase.from('forge_submissions').insert({ user_id: userId, url_soumise, titre, description, niche, flux, statut: 'pending' }).select().single();
-  if (insertError || !soumission) { res.status(500).json({ error: 'Erreur création soumission.' }); return; }
+  if (insertError || !soumission) { console.error('[creerSoumission] Supabase insert error:', insertError); res.status(500).json({ error: 'Erreur création soumission.' }); return; }
   traiterSoumission(soumission.id, { userId, urlSoumise: url_soumise, titre, description, contenu, niche, trustScore: trustScoreData?.score ?? 0, tierForge: trustScoreData?.tier ?? 'bronze', ageCompteDays, scanComplete: membre.scan_complete, badgeInstalle: membre.badge_installe }).catch(console.error);
   res.status(201).json({ success: true, soumission_id: soumission.id, flux, message: 'Soumission reçue — Alfred analyse ton contenu.' });
 }
