@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "latest",
-    "typescript": "latest",
     "@simplewebauthn/server": "^13.3.2",
     "@supabase/supabase-js": "latest",
     "bcryptjs": "^3.0.3",
@@ -34,7 +33,9 @@
     "@types/node-cron": "latest",
     "@types/stripe": "^8.0.416",
     "@types/ws": "^8.18.1",
-    "ts-node-dev": "latest"},
+    "ts-node-dev": "latest",
+    "typescript": "latest"
+  },
   "engines": {
     "node": ">=22.0.0"
   }
