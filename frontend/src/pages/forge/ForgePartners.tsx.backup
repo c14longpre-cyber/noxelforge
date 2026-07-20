@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Footer from '../../components/Footer';
 import { Link } from 'react-router-dom';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
@@ -145,17 +144,6 @@ export default function ForgePartners() {
           </div>
         )}
       </div>
-      <Footer
-        brand="NOXEL Forge"
-        siteUrl="https://noxelforge.com"
-        contactEmail="founder@noxel360.com"
-        links={[
-          { label: "Home", href: "/forge" },
-          { label: "Pricing", href: "/forge/pricing" },
-          { label: "Partners", href: "/forge/partners" },
-          { label: "NOXEL SEO", href: "https://noxelseo.com" },
-        ]}
-      />
     </div>
   );
 }
