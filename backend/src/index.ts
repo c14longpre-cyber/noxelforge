@@ -8,6 +8,7 @@ import authRoutes from "./routes/auth.routes";
 import authMagicRoutes from "./routes/auth.magic";
 import authMicrosoftRoutes from "./routes/auth.microsoft";
 import authPasskeyRoutes from "./routes/auth.passkey";
+import authLinkedInRoutes from "./routes/auth.linkedin";
 import { initForgeBadgeCron } from "./cron/forgeBadgeCron";
 
 const app = express();
@@ -33,6 +34,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/auth/magic", authMagicRoutes);
 app.use("/api/auth", authMicrosoftRoutes);
 app.use("/api/auth/passkey", authPasskeyRoutes);
+app.use("/api/auth", authLinkedInRoutes);
 
 initForgeBadgeCron();
 
