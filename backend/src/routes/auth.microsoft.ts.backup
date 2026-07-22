@@ -7,11 +7,15 @@ const router = Router();
 const COOKIE_NAME = process.env.FORGE_SESSION_COOKIE_NAME || "forge_session";
 const IS_PROD = process.env.NODE_ENV === "production";
 const FRONTEND_URL = IS_PROD ? (process.env.FRONTEND_URL || "https://noxelforge.com") : "http://localhost:5173";
+const BACKEND_URL = IS_PROD
+  ? (process.env.BACKEND_PUBLIC_URL || "https://noxelforge-production.up.railway.app")
+  : ("http://localhost:" + (process.env.PORT || 3001));
+
 const COOKIE_OPTS = IS_PROD
   ? { httpOnly: true, sameSite: "none" as const, secure: true, maxAge: 7 * 24 * 60 * 60 * 1000 }
   : { httpOnly: true, sameSite: "lax" as const, secure: false, maxAge: 7 * 24 * 60 * 60 * 1000 };
 
-const REDIRECT_URI = process.env.MICROSOFT_REDIRECT_URI || "https://api.noxelforge.com/api/auth/microsoft/callback";
+const REDIRECT_URI = BACKEND_URL + "/api/auth/microsoft/callback";
 
 async function readJsonSafe(res: globalThis.Response) {
   const raw = await res.text();
