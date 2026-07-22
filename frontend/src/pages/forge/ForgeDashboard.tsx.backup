@@ -109,21 +109,7 @@ export default function ForgeDashboard() {
           <span style={{ color: 'var(--soft)' }}>·</span>
           <span style={{ fontWeight: 900, fontSize: 15 }}>Dashboard</span>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <Link to="/forge/pricing" style={{
-            display: 'flex', alignItems: 'center', gap: 6,
-            padding: '6px 14px', borderRadius: 20, fontSize: 12, fontWeight: 800,
-            textDecoration: 'none', textTransform: 'capitalize',
-            background: (TIER_COLORS[statut.membre.tier_abonnement] || '#888') + '20',
-            color: TIER_COLORS[statut.membre.tier_abonnement] || '#888',
-            border: `1px solid ${(TIER_COLORS[statut.membre.tier_abonnement] || '#888')}40`,
-          }}>
-            <span>{TIER_ICONS[statut.membre.tier_abonnement] || '🥉'}</span>
-            <span>{statut.membre.tier_abonnement}</span>
-            {statut.membre.tier_abonnement !== 'diamond' && <span style={{ opacity: 0.7 }}> · Upgrade ↗</span>}
-          </Link>
-          <Link to="/forge/submit" className="nx-pill" style={{ padding: '7px 16px', fontSize: 13 }}>+ Submit</Link>
-        </div>
+        <Link to="/forge/submit" className="nx-pill" style={{ padding: '7px 16px', fontSize: 13 }}>+ Submit</Link>
       </nav>
 
       <div style={{ maxWidth: 960, margin: '0 auto', padding: '32px 32px 80px' }}>
