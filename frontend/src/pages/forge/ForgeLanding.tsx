@@ -22,6 +22,7 @@ export default function ForgeLanding() {
   const [showMap, setShowMap] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const { isAuthenticated, user, logout } = useAuthStore();
+  const [membre, setMembre] = useState<any>(null);
   const [annuaire, setAnnuaire] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [nicheFilter, setNicheFilter] = useState('');
@@ -29,6 +30,13 @@ export default function ForgeLanding() {
 
 
   useEffect(() => { fetchAnnuaire(); }, [nicheFilter, page]);
+  useEffect(() => {
+    if (!isAuthenticated) { setMembre(null); return; }
+    fetch(`${API_BASE}/api/forge/members/status`, { credentials: 'include' })
+      .then(res => res.ok ? res.json() : null)
+      .then(data => setMembre(data?.membre ?? null))
+      .catch(() => setMembre(null));
+  }, [isAuthenticated]);
 
   async function fetchAnnuaire() {
     setLoading(true);
@@ -64,7 +72,10 @@ export default function ForgeLanding() {
           <Link to="/forge/pricing" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>{t.nav.pricing}</Link>
           <Link to="/forge/dashboard" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>{t.nav.dashboard}</Link>
           {isAuthenticated ? (
+                  <>
+                  {membre?.tier_abonnement && (<Link to="/forge/pricing" style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 14px', borderRadius: 20, fontSize: 12, fontWeight: 800, textDecoration: 'none', textTransform: 'capitalize', background: (TIER_CONFIG[membre.tier_abonnement]?.color || '#888') + '20', color: TIER_CONFIG[membre.tier_abonnement]?.color || '#888', border: `1px solid ${(TIER_CONFIG[membre.tier_abonnement]?.color || '#888')}40` }}><span>{TIER_CONFIG[membre.tier_abonnement]?.icon || '🥉'}</span><span style={{marginLeft:6}}>{membre.tier_abonnement}</span>{membre.tier_abonnement !== 'diamond' && <span style={{ opacity: 0.7, marginLeft: 4 }}>· Upgrade ↗</span>}</Link>)}
             <button onClick={() => logout()} style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>{user?.name || 'Account'} (logout)</button>
+                  </>
           ) : (
             <button onClick={() => setShowAuthModal(true)} style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--g-border)', background: 'var(--g-dim)', color: 'var(--g)', fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>Sign in</button>
           )}

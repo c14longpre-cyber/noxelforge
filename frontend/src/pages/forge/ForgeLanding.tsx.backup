@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useForgeT } from '../../hooks/useForgeT';
 import { useAuthStore } from '../../auth/AuthStore';
 import ForgeAccessModal from '../../components/ForgeAccessModal';
+import Footer from '../../components/Footer';
 const NoxelInterface = lazy(() => import('../../components/NoxelInterface'));
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
@@ -207,6 +208,17 @@ export default function ForgeLanding() {
           {t.cta.title}
         </Link>
       </section>
+      <Footer
+        brand="NOXEL Forge"
+        siteUrl="https://noxelforge.com"
+        contactEmail="founder@noxel360.com"
+        links={[
+          { label: "Home", href: "/forge" },
+          { label: "Pricing", href: "/forge/pricing" },
+          { label: "Partners", href: "/forge/partners" },
+          { label: "NOXEL SEO", href: "https://noxelseo.com" },
+        ]}
+      />
       <ForgeAccessModal open={showAuthModal} onClose={() => setShowAuthModal(false)} />
     </div>
   );
