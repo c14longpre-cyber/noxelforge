@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { lazy, Suspense, useEffect } from "react";
 import { AuthProvider } from "./auth/AuthStore";
 import ForgeLanding from "./pages/forge/ForgeLanding";
 
@@ -18,10 +18,32 @@ function PageLoader() {
   );
 }
 
+// Keeps <link rel="canonical"> in sync with the actual route. Without this,
+// index.html's static canonical (hardcoded to "/") applied to every page,
+// including /forge — telling Google that /forge wasn't the preferred URL
+// and diluting its ranking credit.
+function CanonicalUpdater() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const canonicalUrl = `https://noxelforge.com${location.pathname === "/" ? "" : location.pathname}`;
+    let link = document.querySelector('link[rel="canonical"]');
+    if (!link) {
+      link = document.createElement("link");
+      link.setAttribute("rel", "canonical");
+      document.head.appendChild(link);
+    }
+    link.setAttribute("href", canonicalUrl);
+  }, [location.pathname]);
+
+  return null;
+}
+
 export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <CanonicalUpdater />
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Navigate to="/forge" replace />} />
