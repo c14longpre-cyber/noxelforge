@@ -58,7 +58,7 @@ export default function ForgeLanding() {
       {/* NAV */}
       <nav style={{ borderBottom: '1px solid var(--border)', padding: '0 32px', height: 150, display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--bg2)', position: 'sticky', top: 0, zIndex: 100 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <img src="logo-forge.webp" alt="Forge" style={{ width: 150, height: 150, objectFit: 'contain' }} />
+          <img src="/logo-forge.avif" alt="Forge" style={{ width: 150, height: 150, objectFit: 'contain' }} />
           <span style={{ fontWeight: 900, fontSize: 15, letterSpacing: '-0.3px' }}>NOXEL FORGE™</span>
         </div>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
@@ -80,7 +80,7 @@ export default function ForgeLanding() {
             <button onClick={() => setShowAuthModal(true)} style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--g-border)', background: 'var(--g-dim)', color: 'var(--g)', fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>Sign in</button>
           )}
           <Link to="/forge/submit" className="nx-pill" style={{ padding: '7px 16px', fontSize: 13 }}>
-            <img src="/forge-tools.webp" alt="Forge" style={{width:18,height:18,objectFit:'contain',marginRight:6,verticalAlign:'middle'}}/>
+            <img src="/forge-tools.avif" alt="Forge" style={{width:18,height:18,objectFit:'contain',marginRight:6,verticalAlign:'middle'}}/>
             {t.nav.submit}
           </Link>
         </div>
@@ -89,7 +89,7 @@ export default function ForgeLanding() {
       {/* HERO */}
       <section style={{ padding: '72px 32px 56px', textAlign: 'center', borderBottom: '1px solid var(--border)', background: 'linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%)' }}>
         <div className="nx-kicker" style={{ marginBottom: 16 }}>
-          <img src="/forge-tools.webp" alt="Forge" style={{width:18,height:18,objectFit:'contain',marginRight:6,verticalAlign:'middle'}}/>
+          <img src="/forge-tools.avif" alt="Forge" style={{width:18,height:18,objectFit:'contain',marginRight:6,verticalAlign:'middle'}}/>
           {t.hero.kicker}
         </div>
         <h1 className="nx-title" style={{ fontSize: 'clamp(2rem,5vw,3.5rem)', textAlign: 'center', marginBottom: 20 }}>
@@ -101,7 +101,7 @@ export default function ForgeLanding() {
         </p>
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link to="/forge/submit" className="nx-pill">
-            <img src="/forge-tools.webp" alt="Forge" style={{width:18,height:18,objectFit:'contain',marginRight:6,verticalAlign:'middle'}}/>
+            <img src="/forge-tools.avif" alt="Forge" style={{width:18,height:18,objectFit:'contain',marginRight:6,verticalAlign:'middle'}}/>
             {t.hero.ctaSubmit}
           </Link>
           <Link to="/forge/dashboard" style={{ padding: '12px 22px', borderRadius: 'var(--r)', border: '1px solid var(--g-border)', color: 'var(--g)', fontSize: 14, fontWeight: 700, background: 'var(--g-dim)' }}>{t.hero.ctaDashboard}</Link>
@@ -111,21 +111,21 @@ export default function ForgeLanding() {
         <div style={{ display: 'flex', gap: 48, justifyContent: 'center', marginTop: 56, flexWrap: 'wrap', alignItems: 'flex-start' }}>
           <div style={{ textAlign: 'center' }}>
             <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}>
-              <img src="/forge-tools.webp" alt="Forge Points" style={{ width: 72, height: 72, objectFit: 'contain' }} />
+              <img src="/forge-tools.avif" alt="Forge Points" style={{ width: 72, height: 72, objectFit: 'contain' }} />
             </div>
             <div style={{ fontWeight: 800, fontSize: 14, color: 'var(--text)', marginBottom: 4 }}>{t.stats.forgePoints}</div>
             <div style={{ fontSize: 12, color: 'var(--muted)', maxWidth: 160 }}>{t.stats.forgePointsDesc}</div>
           </div>
           <div style={{ textAlign: 'center' }}>
             <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}>
-              <img src="/chain-link.webp" alt="Give one get one" style={{ width: 72, height: 72, objectFit: 'contain' }} />
+              <img src="/chain-link.avif" alt="Give one get one" style={{ width: 72, height: 72, objectFit: 'contain' }} />
             </div>
             <div style={{ fontWeight: 800, fontSize: 14, color: 'var(--text)', marginBottom: 4 }}>{t.stats.giveOne}</div>
             <div style={{ fontSize: 12, color: 'var(--muted)', maxWidth: 160 }}>{t.stats.giveOneDesc}</div>
           </div>
           <div style={{ textAlign: 'center' }}>
             <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}>
-              <img src="/Alfred.webp" alt="Alfred" style={{ width: 72, height: 72, objectFit: 'cover', objectPosition: '50% 15%', borderRadius: '50%', border: '2px solid var(--g)' }} />
+              <img src="/Alfred.avif" alt="Alfred" style={{ width: 72, height: 72, objectFit: 'cover', objectPosition: '50% 15%', borderRadius: '50%', border: '2px solid var(--g)' }} />
             </div>
             <div style={{ fontWeight: 800, fontSize: 14, color: 'var(--text)', marginBottom: 4 }}>{t.stats.alfredFilters}</div>
             <div style={{ fontSize: 12, color: 'var(--muted)', maxWidth: 160 }}>{t.stats.alfredFiltersDesc}</div>
@@ -174,12 +174,12 @@ export default function ForgeLanding() {
 
         {loading ? (
           <div style={{ textAlign: 'center', color: 'var(--muted)', padding: 60, fontSize: 14 }}>
-            <img src="/forge-tools.webp" alt="Forge" style={{width:18,height:18,objectFit:'contain',marginRight:6,verticalAlign:'middle'}}/>
+            <img src="/forge-tools.avif" alt="Forge" style={{width:18,height:18,objectFit:'contain',marginRight:6,verticalAlign:'middle'}}/>
             {t.directory.loading}
           </div>
         ) : annuaire.length === 0 ? (
           <div className="nx-card" style={{ textAlign: 'center', padding: 60 }}>
-            <img src="/forge-tools.webp" alt="Forge" style={{ width: 56, height: 56, objectFit: 'contain', marginBottom: 12 }} />
+            <img src="/forge-tools.avif" alt="Forge" style={{ width: 56, height: 56, objectFit: 'contain', marginBottom: 12 }} />
             <div style={{ fontWeight: 800, marginBottom: 8, fontSize: 15 }}>{t.directory.empty}</div>
             <div style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 24 }}>{t.directory.emptyDesc}</div>
             <Link to="/forge/submit" className="nx-pill" style={{ display: 'inline-block' }}>{t.hero.ctaSubmit}</Link>
@@ -215,7 +215,7 @@ export default function ForgeLanding() {
         <h2 style={{ fontSize: 28, fontWeight: 900, marginBottom: 12, letterSpacing: '-0.5px' }}>{t.cta.title}</h2>
         <p style={{ color: 'var(--muted)', marginBottom: 28, fontSize: 14 }}>{t.cta.subtitle}</p>
         <Link to="/forge/submit" className="nx-pill">
-          <img src="/forge-tools.webp" alt="Forge" style={{width:18,height:18,objectFit:'contain',marginRight:6,verticalAlign:'middle'}}/>
+          <img src="/forge-tools.avif" alt="Forge" style={{width:18,height:18,objectFit:'contain',marginRight:6,verticalAlign:'middle'}}/>
           {t.cta.title}
         </Link>
       </section>

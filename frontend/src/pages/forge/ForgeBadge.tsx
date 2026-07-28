@@ -5,7 +5,7 @@ const BADGES = [
   {
     id: 'partner',
     label: 'NOXEL Forge Partner',
-    image: '/forge-tools.webp',
+    image: '/forge-tools.avif',
     title: 'NOXEL FORGE',
     subtitle: 'Verified Partner',
     borderColor: '#3cde6a44',
@@ -15,7 +15,7 @@ const BADGES = [
   {
     id: 'verified',
     label: 'Forge Verified',
-    image: '/forge_verified.webp',
+    image: '/forge_verified.avif',
     title: 'FORGE VERIFIED',
     subtitle: 'Trust Score certified',
     borderColor: '#702aa566',
@@ -25,7 +25,7 @@ const BADGES = [
   {
     id: 'exchange',
     label: 'Forge Exchange',
-    image: '/chain-link.webp',
+    image: '/chain-link.avif',
     title: 'FORGE EXCHANGE',
     subtitle: 'Give one · Get one',
     borderColor: '#3cde6a44',
@@ -35,7 +35,7 @@ const BADGES = [
   {
     id: 'seo',
     label: 'Optimized with NOXEL SEO',
-    image: '/noxel-seo.webp',
+    image: '/noxel-seo.avif',
     title: 'OPTIMIZED WITH',
     subtitle: 'NOXEL SEO',
     borderColor: '#3cde6a33',

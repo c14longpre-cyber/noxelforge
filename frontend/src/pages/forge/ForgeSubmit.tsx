@@ -57,7 +57,7 @@ export default function ForgeSubmit() {
             {/* Alfred card */}
             <div className="nx-card" style={{ marginBottom: 28, display: 'flex', gap: 14, alignItems: 'flex-start', borderColor: 'var(--g-border)', background: 'var(--g-dim)' }}>
               <img
-                src="/Alfred.webp"
+                src="/Alfred.avif"
                 alt="Alfred"
                 style={{ width: 44, height: 44, objectFit: 'cover', objectPosition: '50% 15%', borderRadius: '50%', border: '2px solid var(--g)', flexShrink: 0 }}
               />
@@ -128,7 +128,7 @@ export default function ForgeSubmit() {
               </div>
 
               <div className="nx-card" style={{ display: 'flex', gap: 10, alignItems: 'center', padding: '12px 16px' }}>
-                <img src="/chain-link.webp" alt="Give one get one" style={{ width: 28, height: 28, objectFit: 'contain', flexShrink: 0 }} />
+                <img src="/chain-link.avif" alt="Give one get one" style={{ width: 28, height: 28, objectFit: 'contain', flexShrink: 0 }} />
                 <div style={{ fontSize: 12, color: 'var(--muted)', lineHeight: 1.6 }}>
                   <strong style={{ color: 'var(--g)' }}>Give one, get one:</strong> your site must display a link to{' '}
                   <strong style={{ color: 'var(--g)' }}>noxelseo.com</strong> or <strong style={{ color: 'var(--g)' }}>noxelforge.com</strong> to keep the backlink active.
@@ -144,7 +144,7 @@ export default function ForgeSubmit() {
               <button onClick={handleSubmit} disabled={loading} className="nx-pill" style={{ padding: '14px', fontSize: 15 }}>
                 {loading ? 'Analyzing...' : (
                   <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
-                    <img src="/forge-tools.webp" alt="Forge" style={{ width: 18, height: 18, objectFit: 'contain' }} />
+                    <img src="/forge-tools.avif" alt="Forge" style={{ width: 18, height: 18, objectFit: 'contain' }} />
                     Submit to NOXEL Forge
                   </span>
                 )}

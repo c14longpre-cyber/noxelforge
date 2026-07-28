@@ -135,7 +135,7 @@ export default function ForgePricing() {
 
           {/* BADGE TOGGLE */}
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '10px 20px', borderRadius: 'var(--r)', border: `1px solid ${badgeInstalle ? 'var(--g-border)' : 'var(--border)'}`, background: badgeInstalle ? 'var(--g-dim)' : 'transparent', cursor: 'pointer' }} onClick={() => setBadgeInstalle(b => !b)}>
-            <img src="/chain-link.webp" alt="Badge" style={{ width: 20, height: 20, objectFit: 'contain' }} />
+            <img src="/chain-link.avif" alt="Badge" style={{ width: 20, height: 20, objectFit: 'contain' }} />
             <span style={{ fontSize: 13, fontWeight: 700, color: badgeInstalle ? 'var(--g)' : 'var(--muted)' }}>
               {badgeInstalle ? '✓ Badge discount applied' : 'I display the NOXEL badge — unlock discount'}
             </span>
@@ -182,7 +182,7 @@ export default function ForgePricing() {
 
         {/* BADGE INFO */}
         <div className="nx-card" style={{ marginTop: 40, display: 'flex', gap: 14, alignItems: 'center', borderColor: 'var(--g-border)', background: 'var(--g-dim)' }}>
-          <img src="/chain-link.webp" alt="Badge" style={{ width: 36, height: 36, objectFit: 'contain', flexShrink: 0 }} />
+          <img src="/chain-link.avif" alt="Badge" style={{ width: 36, height: 36, objectFit: 'contain', flexShrink: 0 }} />
           <div>
             <div style={{ fontWeight: 800, fontSize: 14, marginBottom: 4 }}>How to unlock badge discounts</div>
             <div style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.6 }}>
