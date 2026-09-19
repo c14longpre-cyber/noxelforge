@@ -23,7 +23,7 @@ const LANGUAGE_BY_ISO2: Record<string, string> = {
   FI: "fi", ET: "am", KE: "en",
 };
 
-const MAP_STYLE = ".noxel-map-wrap svg { width: 100%; height: auto; display: block; } .noxel-map-wrap svg path { fill: #9BD5C1; stroke: #0477BE; stroke-width: 0.5; transition: fill 0.12s ease, stroke 0.12s ease, filter 0.12s ease; } .noxel-map-wrap svg path.iso-selected { fill: #3CDE6A !important; stroke: #702AA5 !important; stroke-width: 1.2 !important; filter: drop-shadow(0 0 6px rgba(60,222,106,0.6)) !important; } .noxel-map-wrap svg path.iso-hovered { fill: #8ae7a8 !important; stroke: #702AA5 !important; stroke-width: 0.9 !important; filter: drop-shadow(0 0 4px rgba(138,231,168,0.5)) !important; }";
+const MAP_STYLE = ".noxel-map-wrap svg { width: 100%; height: auto; display: block; } .noxel-map-wrap svg path { fill: #9BD5C1; stroke: #0477BE; stroke-width: 0.5; transition: fill 0.12s ease, stroke 0.12s ease, filter 0.12s ease; } .noxel-map-wrap svg path.iso-selected { fill: #3ddc84 !important; stroke: #a855f7 !important; stroke-width: 1.2 !important; filter: drop-shadow(0 0 6px rgba(60,222,106,0.6)) !important; } .noxel-map-wrap svg path.iso-hovered { fill: #3ddc84 !important; stroke: #a855f7 !important; stroke-width: 0.9 !important; filter: drop-shadow(0 0 4px rgba(138,231,168,0.5)) !important; }";
 
 function normalizeIso(raw?: string | null): string | null {
   if (!raw) return null;

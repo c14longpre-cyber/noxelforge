@@ -16,7 +16,7 @@
 .logo { display: flex; align-items: center; gap: 10px; padding: 8px 10px 18px; }
 .logo-icon {
   width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0;
-  background: linear-gradient(135deg, #3ddc84, #1ba84e);
+  background: linear-gradient(135deg, #3cde6a, #1ba84e);
   display: flex; align-items: center; justify-content: center;
   font-weight: 900; font-size: 14px; color: #07090f;
 }
@@ -824,7 +824,7 @@
   transition: background 0.15s;
   flex-shrink: 0;
 }
-.ai-upgrade-nudge-btn:hover { background: #3ddc84; }
+.ai-upgrade-nudge-btn:hover { background: #2ab856; }
 
 /* ── Pricing card active tier ── */
 .pricing-card.active-tier {
@@ -1103,7 +1103,7 @@
 }
 
   .mobile-nav-item.active {
-    color: #3ddc84;
+    color: #3cde6a;
   }
 
   .mobile-nav-item.active::before {
@@ -1113,7 +1113,7 @@
     left: 25%;
     right: 25%;
     height: 2px;
-    background: #3ddc84;
+    background: #3cde6a;
     border-radius: 0 0 3px 3px;
   }
 
@@ -1127,7 +1127,7 @@
     position: absolute;
     top: 4px;
     right: calc(50% - 14px);
-    background: #3ddc84;
+    background: #3cde6a;
     color: #07090f;
     font-size: 7px;
     font-weight: 900;

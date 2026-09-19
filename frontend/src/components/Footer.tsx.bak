@@ -93,7 +93,7 @@ export default function Footer({
   contactEmail,
   links,
   copyrightText,
-  accentColor = "#3ddc84",
+  accentColor = "#3cde6a",
 }: FooterProps) {
   const year = new Date().getFullYear();
   const sameAs = SOCIAL_LINKS.map((s) => s.url);

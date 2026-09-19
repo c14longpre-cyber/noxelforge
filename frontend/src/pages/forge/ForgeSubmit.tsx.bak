@@ -98,14 +98,14 @@ export default function ForgeSubmit() {
   <style>{`
     .forge-niche-select option {
       background-color: #07090f;
-      color: #3ddc84;
+      color: #3cde6a;
     }
     .forge-niche-select option:hover,
     .forge-niche-select option:focus,
     .forge-niche-select option:checked {
       background-color: #07090f;
-      background: linear-gradient(#a855f7, #a855f7);
-      color: #a855f7;
+      background: linear-gradient(#b06ef5, #b06ef5);
+      color: #b06ef5;
     }
   `}</style>
 </div>

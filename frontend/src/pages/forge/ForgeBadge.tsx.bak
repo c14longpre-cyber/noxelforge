@@ -8,8 +8,8 @@ const BADGES = [
     image: '/forge-tools.avif',
     title: 'NOXEL FORGE',
     subtitle: 'Verified Partner',
-    borderColor: '#3ddc8444',
-    titleColor: '#3ddc84',
+    borderColor: '#3cde6a44',
+    titleColor: '#3cde6a',
     link: 'https://noxelforge.com',
   },
   {
@@ -18,8 +18,8 @@ const BADGES = [
     image: '/forge_verified.avif',
     title: 'FORGE VERIFIED',
     subtitle: 'Trust Score certified',
-    borderColor: '#a855f766',
-    titleColor: '#a855f7',
+    borderColor: '#702aa566',
+    titleColor: '#b06ef5',
     link: 'https://noxelforge.com',
   },
   {
@@ -28,8 +28,8 @@ const BADGES = [
     image: '/chain-link.avif',
     title: 'FORGE EXCHANGE',
     subtitle: 'Give one · Get one',
-    borderColor: '#3ddc8444',
-    titleColor: '#3ddc84',
+    borderColor: '#3cde6a44',
+    titleColor: '#3cde6a',
     link: 'https://noxelforge.com',
   },
   {
@@ -38,8 +38,8 @@ const BADGES = [
     image: '/noxel-seo.avif',
     title: 'OPTIMIZED WITH',
     subtitle: 'NOXEL SEO',
-    borderColor: '#3ddc8433',
-    titleColor: '#3ddc84',
+    borderColor: '#3cde6a33',
+    titleColor: '#3cde6a',
     link: 'https://noxelseo.com',
   },
 ];

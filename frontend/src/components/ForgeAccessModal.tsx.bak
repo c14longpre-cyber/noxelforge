@@ -234,7 +234,7 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
             <button type="button" onClick={() => setScreen("magic")} style={{
               width: "100%", padding: "11px", borderRadius: 12, marginTop: 8,
               background: "rgba(60,222,106,0.07)", border: "1px solid rgba(60,222,106,0.2)",
-              color: "#3ddc84", fontWeight: 700, fontSize: 13, cursor: "pointer", fontFamily: "inherit",
+              color: "#3cde6a", fontWeight: 700, fontSize: 13, cursor: "pointer", fontFamily: "inherit",
               display: "flex", alignItems: "center", justifyContent: "center", gap: 8, transition: "all 0.15s",
             }}>
               Sign in with Magic Link (no password)
@@ -260,7 +260,7 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
             </p>
             {magicStatus === "sent" ? (
               <div style={{ padding: "24px", borderRadius: 12, textAlign: "center", background: "rgba(60,222,106,0.07)", border: "1px solid rgba(60,222,106,0.25)" }}>
-                <div style={{ color: "#3ddc84", fontWeight: 800, fontSize: 16, marginBottom: 8 }}>Check your inbox!</div>
+                <div style={{ color: "#3cde6a", fontWeight: 800, fontSize: 16, marginBottom: 8 }}>Check your inbox!</div>
                 <div style={{ color: "rgba(255,255,255,0.55)", fontSize: 13 }}>
                   We sent a login link to <strong style={{ color: "#fff" }}>{magicEmail}</strong>. It expires in 15 minutes.
                 </div>
@@ -272,7 +272,7 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
                 {magicMessage && <div style={{ fontSize: 12, color: "#ff5c7a", padding: "8px 12px", background: "rgba(255,92,122,0.08)", borderRadius: 8, border: "1px solid rgba(255,92,122,0.2)" }}>{magicMessage}</div>}
                 <button type="button" onClick={handleMagicLink} disabled={magicStatus === "loading" || !magicEmail.trim()} style={{
                   width: "100%", padding: "13px", borderRadius: 10, border: "none",
-                  background: "rgba(60,222,106,0.15)", color: "#3ddc84", fontWeight: 800, fontSize: 14,
+                  background: "rgba(60,222,106,0.15)", color: "#3cde6a", fontWeight: 800, fontSize: 14,
                   cursor: "pointer", fontFamily: "inherit", outline: "1px solid rgba(60,222,106,0.3)",
                 }}>{magicStatus === "loading" ? "Sending..." : "Send Magic Link"}</button>
               </div>
@@ -290,7 +290,7 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
                   flex: 1, padding: "8px", borderRadius: 7, border: "none", cursor: "pointer",
                   fontFamily: "inherit", fontWeight: 700, fontSize: 13, transition: "all 0.15s",
                   background: emailMode === m ? "rgba(60,222,106,0.15)" : "transparent",
-                  color: emailMode === m ? "#3ddc84" : "rgba(255,255,255,0.4)",
+                  color: emailMode === m ? "#3cde6a" : "rgba(255,255,255,0.4)",
                 }}>{m === "login" ? "Sign In" : "Create Account"}</button>
               ))}
             </div>
@@ -301,7 +301,7 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
               {emailError && <div style={{ fontSize: 12, color: "#ff5c7a", padding: "8px 12px", background: "rgba(255,92,122,0.08)", borderRadius: 8, border: "1px solid rgba(255,92,122,0.2)" }}>{emailError}</div>}
               <button type="button" onClick={handleEmailAuth} disabled={emailLoading} style={{
                 width: "100%", padding: "13px", borderRadius: 10, border: "none",
-                background: "rgba(60,222,106,0.15)", color: "#3ddc84", fontWeight: 800, fontSize: 14,
+                background: "rgba(60,222,106,0.15)", color: "#3cde6a", fontWeight: 800, fontSize: 14,
                 cursor: emailLoading ? "not-allowed" : "pointer", fontFamily: "inherit", outline: "1px solid rgba(60,222,106,0.3)",
               }}>{emailLoading ? "Please wait..." : emailMode === "login" ? "Sign In" : "Create Account"}</button>
             </div>

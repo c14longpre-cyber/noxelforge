@@ -1,13 +1,13 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --g: #3ddc84;
+  --g: #3cde6a;
   --g-dim: rgba(60, 222, 106, 0.08);
   --g-border: rgba(60, 222, 106, 0.28);
-  --p: #a855f7;
+  --p: #702aa5;
   --p-dim: rgba(112, 42, 165, 0.12);
   --p-border: rgba(112, 42, 165, 0.35);
-  --ok: #3ddc84;
+  --ok: #3cde6a;
   --warn: #ffb74d;
   --danger: #ff5c7a;
   --info: #4a9eff;

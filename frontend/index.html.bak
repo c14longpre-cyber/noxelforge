@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="preconnect" href="https://noxelforge-production.up.railway.app" />
     <link rel="dns-prefetch" href="https://noxelforge-production.up.railway.app" />
-    <link rel="icon" type="image/svg+xml" href="/NOXEL_FORGE_LOGO.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.avif" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>NOXEL Forge - Backlink Exchange Ecosystem</title>
     <meta name="description" content="Exchange verified backlinks with Alfred-filtered sites. Zero spam, zero generic content. Give one, get one. Build your domain authority with NOXEL Forge." />
@@ -12,14 +12,14 @@
 
     <meta property="og:title" content="NOXEL Forge - Backlink Exchange Ecosystem" />
     <meta property="og:description" content="Exchange verified backlinks with Alfred-filtered sites. Zero spam, zero generic content." />
-    <meta property="og:image" content="https://noxelforge.com/NOXEL_FORGE_LOGO.svg" />
+    <meta property="og:image" content="https://noxelforge.com/logo-forge.avif" />
     <meta property="og:url" content="https://noxelforge.com/" />
     <meta property="og:type" content="website" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="NOXEL Forge - Backlink Exchange Ecosystem" />
     <meta name="twitter:description" content="Exchange verified backlinks with Alfred-filtered sites. Zero spam, zero generic content." />
-    <meta name="twitter:image" content="https://noxelforge.com/NOXEL_FORGE_LOGO.svg" />
+    <meta name="twitter:image" content="https://noxelforge.com/logo-forge.avif" />
 
     <script type="application/ld+json">
     {
@@ -27,7 +27,7 @@
       "@type": "Organization",
       "name": "NOXEL Forge",
       "url": "https://noxelforge.com",
-      "logo": "https://noxelforge.com/NOXEL_FORGE_LOGO.svg",
+      "logo": "https://noxelforge.com/logo-forge.avif",
       "sameAs": ["https://noxelseo.com"]
     }
     </script>
