@@ -58,8 +58,8 @@ export default function ForgeLanding() {
       {/* NAV */}
       <nav style={{ borderBottom: '1px solid var(--border)', padding: '0 32px', height: 150, display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--bg2)', position: 'sticky', top: 0, zIndex: 100 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <img src="/NOXEL_FORGE_LOGO.svg" alt="Forge" style={{ width: 150, height: 150, objectFit: 'contain' }} />
-          <span style={{ fontWeight: 900, fontSize: 15, letterSpacing: '-0.3px' }}>NOXEL FORGE™</span>
+          <img src="/NOXEL_FORGE_LOGO.svg" alt="Forge" style={{ width: 175, height: 175, objectFit: 'contain' }} />
+          
         </div>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
           <button onClick={() => setShowMap(true)} style={{ padding: '6px 10px', borderRadius: 'var(--r)', border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', fontSize: 13, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}>🌐 {lang.toUpperCase()}</button>
