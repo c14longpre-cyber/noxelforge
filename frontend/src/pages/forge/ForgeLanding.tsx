@@ -125,7 +125,7 @@ export default function ForgeLanding() {
           </div>
           <div style={{ textAlign: 'center' }}>
             <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}>
-              <img src="/Alfred.avif" alt="Alfred" style={{ width: 72, height: 72, objectFit: 'cover', objectPosition: '50% 15%', borderRadius: '50%', border: '2px solid var(--g)' }} />
+              <img src="/Alfred-transparent.avif" alt="Alfred" style={{ width: 65, height: 65, objectFit: 'cover', objectPosition: '50% 3%', borderRadius: '50%', border: '2px solid var(--g)' }} />
             </div>
             <div style={{ fontWeight: 800, fontSize: 14, color: 'var(--text)', marginBottom: 4 }}>{t.stats.alfredFilters}</div>
             <div style={{ fontSize: 12, color: 'var(--muted)', maxWidth: 160 }}>{t.stats.alfredFiltersDesc}</div>

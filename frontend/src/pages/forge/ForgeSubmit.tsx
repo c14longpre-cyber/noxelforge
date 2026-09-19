@@ -57,7 +57,7 @@ export default function ForgeSubmit() {
             {/* Alfred card */}
             <div className="nx-card" style={{ marginBottom: 28, display: 'flex', gap: 14, alignItems: 'flex-start', borderColor: 'var(--g-border)', background: 'var(--g-dim)' }}>
               <img
-                src="/Alfred.avif"
+                src="/Alfred-transparent.avif"
                 alt="Alfred"
                 style={{ width: 44, height: 44, objectFit: 'cover', objectPosition: '50% 15%', borderRadius: '50%', border: '2px solid var(--g)', flexShrink: 0 }}
               />
