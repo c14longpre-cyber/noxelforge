@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { lazy, Suspense, useEffect } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import { AuthProvider } from "./auth/AuthStore";
 import ForgeLanding from "./pages/forge/ForgeLanding";
 
@@ -57,6 +58,7 @@ export default function App() {
           </Routes>
         </Suspense>
       </BrowserRouter>
+      <Analytics />
     </AuthProvider>
   );
 }
