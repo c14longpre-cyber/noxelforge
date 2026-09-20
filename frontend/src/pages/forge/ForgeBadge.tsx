@@ -35,7 +35,7 @@ const BADGES = [
   {
     id: 'seo',
     label: 'Optimized with NOXEL SEO',
-    image: '/noxel-seo.avif',
+    image: '/noxel-seo.svg',
     title: 'OPTIMIZED WITH',
     subtitle: 'NOXEL SEO',
     borderColor: '#3ddc8433',
