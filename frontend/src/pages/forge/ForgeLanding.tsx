@@ -148,7 +148,7 @@ export default function ForgeLanding() {
             const t2 = TIER_CONFIG[tier];
             return (
               <div key={tier} className="nx-card" style={{ textAlign: 'center', borderColor: `${t2.color}33` }}>
-                <div style={{ color: t2.color, fontWeight: 900, fontSize: 13, marginBottom: 6 }}><img src={t2.image} alt={t2.label} style={{ width: 16, height: 16, verticalAlign: 'middle', marginRight: 4 }} /> {t2.label}</div>
+                <div style={{ color: t2.color, fontWeight: 900, fontSize: 13, marginBottom: 6 }}><img src={t2.image} alt={t2.label} style={{ width: 24, height: 24, verticalAlign: 'middle', marginRight: 4 }} /> {t2.label}</div>
                 <div style={{ fontSize: 22, fontWeight: 900, color: 'var(--text)', marginBottom: 4 }}>{range}</div>
                 <div style={{ fontSize: 11, color: 'var(--muted)' }}>{desc}</div>
               </div>

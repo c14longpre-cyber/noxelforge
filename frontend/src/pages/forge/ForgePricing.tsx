@@ -9,6 +9,7 @@ const TIERS = [
     key: 'bronze',
     label: 'Bronze',
     icon: '🥉',
+    image: '/Bronze_tier.svg',
     color: '#CD7F32',
     monthly: 0,
     annual: 0,
@@ -21,6 +22,7 @@ const TIERS = [
     key: 'silver',
     label: 'Silver',
     icon: '🥈',
+    image: '/Silver_tier.svg',
     color: '#A8A9AD',
     monthly: 20,
     annual: 199,
@@ -32,6 +34,7 @@ const TIERS = [
     key: 'gold',
     label: 'Gold',
     icon: '🥇',
+    image: '/Gold_tier.svg',
     color: '#FFD700',
     monthly: 40,
     annual: 399,
@@ -44,6 +47,7 @@ const TIERS = [
     key: 'platinum',
     label: 'Platinum',
     icon: '⬡',
+    image: '/Platinum_tier.svg',
     color: '#E5E4E2',
     monthly: 60,
     annual: 599,
@@ -55,6 +59,7 @@ const TIERS = [
     key: 'diamond',
     label: 'Diamond',
     icon: '💎',
+    image: '/Diamond_tier.svg',
     color: '#B9F2FF',
     monthly: 80,
     annual: 799,
@@ -150,7 +155,7 @@ export default function ForgePricing() {
                 <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', background: 'var(--g)', color: '#07090f', fontSize: 11, fontWeight: 800, padding: '3px 14px', borderRadius: 20, whiteSpace: 'nowrap' }}>Most popular</div>
               )}
               <div style={{ textAlign: 'center', marginBottom: 16 }}>
-                <div style={{ color: tier.color, fontWeight: 900, fontSize: 15, marginBottom: 4 }}>{tier.icon} {tier.label}</div>
+                <div style={{ color: tier.color, fontWeight: 900, fontSize: 15, marginBottom: 4 }}><img src={tier.image} alt={tier.label} style={{ width: 24, height: 24, verticalAlign: 'middle', marginRight: 6 }} /> {tier.label}</div>
                 <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: 6 }}>
                   {getOriginalPrice(tier) && <span style={{ fontSize: 13, color: 'var(--muted)', textDecoration: 'line-through' }}>{getOriginalPrice(tier)}</span>}
                   <span style={{ fontSize: 28, fontWeight: 900, color: 'var(--text)' }}>{getPrice(tier)}</span>
