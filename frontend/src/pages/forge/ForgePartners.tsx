@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const NICHES = ['SEO','Marketing','AI','E-commerce','Web Dev','Business','Design','Finance','Health','Education'];
 const TIER_COLORS: Record<string,string> = { bronze:'#CD7F32', silver:'#A8A9AD', gold:'#FFD700', platinum:'#E5E4E2', diamond:'#B9F2FF' };
-const TIER_ICONS: Record<string,string> = { bronze:'🥉', silver:'🥈', gold:'🥇', platinum:'⬡', diamond:'💎' };
+const TIER_IMAGES: Record<string,string> = { bronze:'/Bronze_tier.svg', silver:'/Silver_tier.svg', gold:'/Gold_tier.svg', platinum:'/Platinum_tier.svg', diamond:'/Diamond_tier.svg' };
 
 export default function ForgePartners() {
   const [partenaires, setPartenaires] = useState<any[]>([]);
@@ -85,7 +85,7 @@ export default function ForgePartners() {
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
                         {r.niche && <span style={{ background: 'var(--g-dim)', color: 'var(--g)', fontSize: 10, padding: '2px 8px', borderRadius: 20, fontWeight: 700 }}>{r.niche}</span>}
                         <span style={{ background: `${TIER_COLORS[r.trust_tier]}22`, color: TIER_COLORS[r.trust_tier], fontSize: 10, padding: '2px 8px', borderRadius: 20, fontWeight: 800 }}>
-                          {TIER_ICONS[r.trust_tier]} {r.trust_score}/100
+                          <img src={TIER_IMAGES[r.trust_tier] || TIER_IMAGES.bronze} alt={r.trust_tier} style={{ width: 14, height: 14, verticalAlign: 'middle' }} /> {r.trust_score}/100
                         </span>
                       </div>
                       <span style={{ fontSize: 11, fontWeight: 900, color: 'var(--g)' }}>{r.score_matchmaking}% match</span>
@@ -123,7 +123,7 @@ export default function ForgePartners() {
                     {p.niche && <span style={{ background: 'var(--g-dim)', color: 'var(--g)', fontSize: 11, padding: '2px 10px', borderRadius: 20, fontWeight: 700 }}>{p.niche}</span>}
                     {p.forge_trust_scores?.tier_forge && (
                       <span style={{ background: `${TIER_COLORS[p.forge_trust_scores.tier_forge]}22`, color: TIER_COLORS[p.forge_trust_scores.tier_forge], fontSize: 11, padding: '2px 10px', borderRadius: 20, fontWeight: 800 }}>
-                        {TIER_ICONS[p.forge_trust_scores.tier_forge]} {p.forge_trust_scores.tier_forge?.toUpperCase()} · {p.forge_trust_scores.score}/100
+                        <img src={TIER_IMAGES[p.forge_trust_scores.tier_forge] || TIER_IMAGES.bronze} alt={p.forge_trust_scores.tier_forge} style={{ width: 14, height: 14, verticalAlign: 'middle' }} /> {p.forge_trust_scores.tier_forge?.toUpperCase()} · {p.forge_trust_scores.score}/100
                       </span>
                     )}
                   </div>

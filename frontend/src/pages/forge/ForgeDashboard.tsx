@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const TIER_COLORS: Record<string, string> = { bronze: '#CD7F32', silver: '#A8A9AD', gold: '#FFD700', platinum: '#E5E4E2', diamond: '#B9F2FF' };
-const TIER_ICONS: Record<string, string> = { bronze: '🥉', silver: '🥈', gold: '🥇', platinum: '⬡', diamond: '💎' };
+const TIER_IMAGES: Record<string, string> = { bronze: '/Bronze_tier.svg', silver: '/Silver_tier.svg', gold: '/Gold_tier.svg', platinum: '/Platinum_tier.svg', diamond: '/Diamond_tier.svg' };
 
 export default function ForgeDashboard() {
   const [statut, setStatut] = useState<any>(null);
@@ -118,7 +118,7 @@ export default function ForgeDashboard() {
             color: TIER_COLORS[statut.membre.tier_abonnement] || '#888',
             border: `1px solid ${(TIER_COLORS[statut.membre.tier_abonnement] || '#888')}40`,
           }}>
-            <span>{TIER_ICONS[statut.membre.tier_abonnement] || '🥉'}</span>
+            <img src={TIER_IMAGES[statut.membre.tier_abonnement] || TIER_IMAGES.bronze} alt={statut.membre.tier_abonnement} style={{ width: 16, height: 16, verticalAlign: 'middle' }} />
             <span>{statut.membre.tier_abonnement}</span>
             {statut.membre.tier_abonnement !== 'diamond' && <span style={{ opacity: 0.7 }}> · Upgrade ↗</span>}
           </Link>
@@ -141,7 +141,7 @@ export default function ForgeDashboard() {
             <div style={{ fontSize: 40, fontWeight: 900, color: tierColor, lineHeight: 1 }}>{trust_score?.score ?? 0}</div>
             <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 2 }}>/100</div>
             <div style={{ marginTop: 10, display: 'inline-flex', alignItems: 'center', gap: 6, background: `${tierColor}22`, borderRadius: 20, padding: '3px 10px' }}>
-              <span style={{ fontSize: 12 }}>{TIER_ICONS[tier]}</span>
+              <img src={TIER_IMAGES[tier] || TIER_IMAGES.bronze} alt={tier} style={{ width: 14, height: 14, verticalAlign: 'middle' }} />
               <span style={{ color: tierColor, fontWeight: 800, fontSize: 11, textTransform: 'uppercase' }}>{tier}</span>
             </div>
           </div>

@@ -9,12 +9,12 @@ const NoxelInterface = lazy(() => import('../../components/NoxelInterface'));
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const NICHES = ['SEO','Marketing','AI','E-commerce','Web Dev','Business','Design'];
 
-const TIER_CONFIG: Record<string, { color: string; icon: string; label: string }> = {
-  bronze:   { color: '#CD7F32', icon: '🥉', label: 'Bronze' },
-  silver:   { color: '#A8A9AD', icon: '🥈', label: 'Silver' },
-  gold:     { color: '#FFD700', icon: '🥇', label: 'Gold' },
-  platinum: { color: '#E5E4E2', icon: '⬡',  label: 'Platinum' },
-  diamond:  { color: '#B9F2FF', icon: '💎', label: 'Diamond' },
+const TIER_CONFIG: Record<string, { color: string; icon: string; image: string; label: string }> = {
+  bronze:   { color: '#CD7F32', icon: '🥉', image: '/Bronze_tier.svg', label: 'Bronze' },
+  silver:   { color: '#A8A9AD', icon: '🥈', image: '/Silver_tier.svg', label: 'Silver' },
+  gold:     { color: '#FFD700', icon: '🥇', image: '/Gold_tier.svg', label: 'Gold' },
+  platinum: { color: '#E5E4E2', icon: '⬡',  image: '/Platinum_tier.svg', label: 'Platinum' },
+  diamond:  { color: '#B9F2FF', icon: '💎', image: '/Diamond_tier.svg', label: 'Diamond' },
 };
 
 export default function ForgeLanding() {
@@ -73,7 +73,7 @@ export default function ForgeLanding() {
           <Link to="/forge/dashboard" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>{t.nav.dashboard}</Link>
           {isAuthenticated ? (
                   <>
-                  {membre?.tier_abonnement && (<Link to="/forge/pricing" style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 14px', borderRadius: 20, fontSize: 12, fontWeight: 800, textDecoration: 'none', textTransform: 'capitalize', background: (TIER_CONFIG[membre.tier_abonnement]?.color || '#888') + '20', color: TIER_CONFIG[membre.tier_abonnement]?.color || '#888', border: `1px solid ${(TIER_CONFIG[membre.tier_abonnement]?.color || '#888')}40` }}><span>{TIER_CONFIG[membre.tier_abonnement]?.icon || '🥉'}</span><span style={{marginLeft:6}}>{membre.tier_abonnement}</span>{membre.tier_abonnement !== 'diamond' && <span style={{ opacity: 0.7, marginLeft: 4 }}>· Upgrade ↗</span>}</Link>)}
+                  {membre?.tier_abonnement && (<Link to="/forge/pricing" style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 14px', borderRadius: 20, fontSize: 12, fontWeight: 800, textDecoration: 'none', textTransform: 'capitalize', background: (TIER_CONFIG[membre.tier_abonnement]?.color || '#888') + '20', color: TIER_CONFIG[membre.tier_abonnement]?.color || '#888', border: `1px solid ${(TIER_CONFIG[membre.tier_abonnement]?.color || '#888')}40` }}><img src={TIER_CONFIG[membre.tier_abonnement]?.image || '/Bronze_tier.svg'} alt={membre.tier_abonnement} style={{ width: 14, height: 14, verticalAlign: 'middle' }} /><span style={{marginLeft:6}}>{membre.tier_abonnement}</span>{membre.tier_abonnement !== 'diamond' && <span style={{ opacity: 0.7, marginLeft: 4 }}>· Upgrade ↗</span>}</Link>)}
             <button onClick={() => logout()} style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>{user?.name || 'Account'} (logout)</button>
                   </>
           ) : (
@@ -148,7 +148,7 @@ export default function ForgeLanding() {
             const t2 = TIER_CONFIG[tier];
             return (
               <div key={tier} className="nx-card" style={{ textAlign: 'center', borderColor: `${t2.color}33` }}>
-                <div style={{ color: t2.color, fontWeight: 900, fontSize: 13, marginBottom: 6 }}>{t2.icon} {t2.label}</div>
+                <div style={{ color: t2.color, fontWeight: 900, fontSize: 13, marginBottom: 6 }}><img src={t2.image} alt={t2.label} style={{ width: 16, height: 16, verticalAlign: 'middle', marginRight: 4 }} /> {t2.label}</div>
                 <div style={{ fontSize: 22, fontWeight: 900, color: 'var(--text)', marginBottom: 4 }}>{range}</div>
                 <div style={{ fontSize: 11, color: 'var(--muted)' }}>{desc}</div>
               </div>
