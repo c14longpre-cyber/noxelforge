@@ -38,12 +38,17 @@ BLACKLISTER si: bot évident, manipulation du réseau, contenu interdit.`;
 
 async function analyserAvecClaude(input: AlfredInput): Promise<AlfredResult> {
   const response = await anthropic.messages.create({
-    model: 'claude-sonnet-4-6', max_tokens: 1000, system: ALFRED_SYSTEM,
+    model: 'claude-3-5-sonnet-20241022', max_tokens: 1000, system: ALFRED_SYSTEM,
     messages: [{ role: 'user', content: `URL: ${input.urlSoumise}\nTitre: ${input.titre}\nDescription: ${input.description||'N/A'}\nNiche: ${input.niche||'N/A'}\nTrust Score: ${input.trustScore}/100\nAge compte: ${input.ageCompteDays} jours\nContenu: ${input.contenu||'Non fourni'}` }],
   });
   const text = response.content.filter((b: any) => b.type === 'text').map((b: any) => b.text).join('');
-  const parsed = JSON.parse(text.replace(/```json|```/g, '').trim());
-  return { verdict: parsed.verdict, score: parsed.score ?? 50, raison: parsed.raison ?? 'Analyse complétée', blacklister: parsed.blacklister ?? false, details: { points_forts: parsed.points_forts ?? [], points_faibles: parsed.points_faibles ?? [], analyse_at: new Date().toISOString() } };
+  try {
+    const parsed = JSON.parse(text.replace(/```json|```/g, '').trim());
+    return { verdict: parsed.verdict, score: parsed.score ?? 50, raison: parsed.raison ?? 'Analyse complétée', blacklister: parsed.blacklister ?? false, details: { points_forts: parsed.points_forts ?? [], points_faibles: parsed.points_faibles ?? [], analyse_at: new Date().toISOString() } };
+  } catch (parseError) {
+    console.error('[Alfred] JSON parse error. Raw response:', text);
+    throw new Error('Failed to parse Alfred response: ' + (parseError as any).message);
+  }
 }
 
 export async function runAlfred(input: AlfredInput): Promise<AlfredResult> {
@@ -61,11 +66,13 @@ export async function runAlfred(input: AlfredInput): Promise<AlfredResult> {
 
 async function crediterPoints(userId: string, points: number, description: string): Promise<void> {
   const supabase = getSupabase();
-  const { data } = await supabase.from('forge_points').select('solde,total_gagne,historique').eq('user_id', userId).single();
+  const { data, error } = await supabase.from('forge_points').select('solde,total_gagne,historique').eq('user_id', userId).single();
+  if (error) { console.error('[crediterPoints] Select error:', error); return; }
   const solde = (data?.solde ?? 0) + points;
   const totalGagne = (data?.total_gagne ?? 0) + points;
   const historique = [...(data?.historique ?? []), { type: 'earn', points, description, date: new Date().toISOString() }];
-  await supabase.from('forge_points').upsert({ user_id: userId, solde, total_gagne: totalGagne, historique, updated_at: new Date().toISOString() }, { onConflict: 'user_id' });
+  const { error: upsertError } = await supabase.from('forge_points').upsert({ user_id: userId, solde, total_gagne: totalGagne, historique, updated_at: new Date().toISOString() }, { onConflict: 'user_id' });
+  if (upsertError) console.error('[crediterPoints] Upsert error:', upsertError);
 }
 
 export async function traiterSoumission(submissionId: string, input: AlfredInput): Promise<void> {
@@ -111,4 +118,4 @@ export async function traiterSoumission(submissionId: string, input: AlfredInput
   } catch (err) {
     console.error(`[traiterSoumission] EXCEPTION NON GEREE pour ${submissionId}:`, err);
   }
-  }
+}
