@@ -24,14 +24,16 @@ function verifierRatioLiens(contenu: string): SpamGateResult {
 }
 async function verifierBlacklist(domaine: string): Promise<SpamGateResult> {
   const supabase = getSupabase();
-  const { data } = await supabase.from('forge_blacklist').select('raison,type').eq('domaine', domaine).single();
+  const { data, error } = await supabase.from('forge_blacklist').select('raison,type').eq('domaine', domaine).single();
+  if (error && error.code !== 'PGRST116') console.error('[verifierBlacklist] Query error:', error);
   if (data) return { passe: false, raison: `Domaine blacklisté : ${data.raison}`, type: 'blacklist' };
   return { passe: true };
 }
 async function verifierRateLimit(userId: string): Promise<SpamGateResult> {
   const supabase = getSupabase();
   const hier = new Date(Date.now() - 24*60*60*1000).toISOString();
-  const { count } = await supabase.from('forge_submissions').select('*', { count: 'exact', head: true }).eq('user_id', userId).gte('created_at', hier);
+  const { count, error } = await supabase.from('forge_submissions').select('*', { count: 'exact', head: true }).eq('user_id', userId).gte('created_at', hier);
+  if (error) console.error('[verifierRateLimit] Count error:', error);
   if (count && count >= 3) return { passe: false, raison: 'Limite 3 soumissions/24h atteinte.', type: 'bot' };
   return { passe: true };
 }
@@ -43,5 +45,6 @@ export async function runSpamGate(input: SpamGateInput): Promise<SpamGateResult>
 }
 export async function ajouterBlacklist(domaine: string, type: 'spam'|'bot'|'pub_automatique'|'contenu_interdit'|'manuel', raison: string, ajoute_par: 'alfred'|'admin' = 'alfred'): Promise<void> {
   const supabase = getSupabase();
-  await supabase.from('forge_blacklist').upsert({ domaine, type, raison, ajoute_par }, { onConflict: 'domaine' });
+  const { error } = await supabase.from('forge_blacklist').upsert({ domaine, type, raison, ajoute_par }, { onConflict: 'domaine' });
+  if (error) console.error('[ajouterBlacklist] Upsert error:', error);
 }
