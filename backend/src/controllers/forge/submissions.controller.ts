@@ -8,19 +8,20 @@ export async function creerSoumission(req: Request, res: Response): Promise<void
   const userId = (req as any).userId;
   const { url_soumise, titre, description, contenu, niche } = req.body;
   if (!url_soumise || !titre) { res.status(400).json({ error: 'URL et titre obligatoires.' }); return; }
-  const { data: membre } = await supabase.from('forge_members').select('*').eq('user_id', userId).single();
+  const { data: membre, error } = await supabase.from('forge_members').select('*').eq('user_id', userId).single();
+  if (error) { console.error('[creerSoumission] Query error:', error); res.status(500).json({ error: 'Erreur récupération.' }); return; }
   if (!membre) { res.status(403).json({ error: 'Tu n\'es pas membre de NOXEL Forge.' }); return; }
   if (membre.tier_abonnement === 'bronze') { res.status(403).json({ error: 'Bronze = lecture seule. Upgrade vers Silver pour soumettre.' }); return; }
   const spamResult = await runSpamGate({ url: url_soumise, titre, description, contenu, userId });
   if (!spamResult.passe) { res.status(400).json({ error: 'Rejeté par Spam Gate.', raison: spamResult.raison, type: spamResult.type }); return; }
-  const ageCompteDays = Math.floor((Date.now() - new Date(membre.date_inscription).getTime()) / (1000*60*60*24));
+  const ageCompteDays = Math.floor((Date.now() - new Date(membre.created_at).getTime()) / (1000*60*60*24));
   const flux = determinerFlux({ ageCompteDays, scanComplete: membre.scan_complete, badgeInstalle: membre.badge_installe, tierAbonnement: membre.tier_abonnement });
   if (flux === 'bloque') { res.status(403).json({ error: 'Compte non éligible.', raison: !membre.scan_complete ? 'Lance un scan NOXEL SEO d\'abord.' : 'Installe le badge NOXEL sur ton site.' }); return; }
   const trustScoreData = await getTrustScore(userId);
   const { data: soumission, error: insertError } = await supabase.from('forge_submissions').insert({ user_id: userId, url_soumise, titre, description, niche, flux, statut: 'pending' }).select().single();
   if (insertError || !soumission) { console.error('[creerSoumission] Supabase insert error:', insertError); res.status(500).json({ error: 'Erreur création soumission.' }); return; }
   console.log(`[creerSoumission] Lancement traiterSoumission pour ${soumission.id}`);
-traiterSoumission(soumission.id, { userId, urlSoumise: url_soumise, titre, description, contenu, niche, trustScore: trustScoreData?.score ?? 0, tierForge: trustScoreData?.tier ?? 'bronze', ageCompteDays, scanComplete: membre.scan_complete, badgeInstalle: membre.badge_installe }).catch((e) => console.error('[creerSoumission] traiterSoumission a rejete:', e));
+  traiterSoumission(soumission.id, { userId, urlSoumise: url_soumise, titre, description, contenu, niche, trustScore: trustScoreData?.score ?? 0, tierForge: trustScoreData?.tier ?? 'bronze', ageCompteDays, scanComplete: membre.scan_complete, badgeInstalle: membre.badge_installe }).catch((e) => console.error('[creerSoumission] traiterSoumission a rejete:', e));
   res.status(201).json({ success: true, soumission_id: soumission.id, flux, message: 'Soumission reçue — Alfred analyse ton contenu.' });
 }
 export async function getMesSoumissions(req: Request, res: Response): Promise<void> {
