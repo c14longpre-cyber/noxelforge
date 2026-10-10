@@ -7,8 +7,9 @@ const router = Router();
 router.post('/checkout', async (req: Request, res: Response) => {
   try {
     const { tier, billing, badgeInstalle } = req.body;
-    const userId = (req as any).user?.id;
-    const email = (req as any).user?.email;
+    const userId = (req as any).userId;
+    const user = (req as any).user;
+    const email = user?.email;
     if (!userId || !email) return res.status(401).json({ error: 'Non authentifié' });
     const url = await creerCheckoutForge({ userId, email, tier, billing: billing || 'monthly', badgeInstalle: !!badgeInstalle });
     res.json({ url });
@@ -20,11 +21,15 @@ router.post('/checkout', async (req: Request, res: Response) => {
 router.post('/webhook', async (req: Request, res: Response) => {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2026-06-24.dahlia' });
   const sig = req.headers['stripe-signature'] as string;
+  if (!sig) return res.status(400).json({ error: 'Missing stripe-signature header' });
   try {
-    const event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET!);
+    // req.body is already a Buffer due to express.raw() middleware
+    const body = typeof req.body === 'string' ? req.body : req.body.toString();
+    const event = stripe.webhooks.constructEvent(body, sig, process.env.STRIPE_WEBHOOK_SECRET!);
     await gererWebhookForge(event);
     res.json({ received: true });
   } catch (err: any) {
+    console.error('[Stripe Webhook Error]', err.message);
     res.status(400).json({ error: err.message });
   }
 });

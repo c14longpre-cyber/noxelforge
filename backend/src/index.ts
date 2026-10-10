@@ -18,8 +18,6 @@ const PORT = process.env.PORT || 3001;
 app.use(cors({ origin: process.env.FRONTEND_URL || "http://localhost:5173", credentials: true }));
 app.use(cookieParser());
 
-app.use("/api/forge/stripe/webhook", express.raw({ type: "application/json" }), stripeForgeRoutes);
-
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
@@ -27,6 +25,9 @@ app.get("/health", (_req, res) => {
   const now = new Date();
   res.json({ status: "ok", service: "NOXEL Forge Backend", timestamp: now.toISOString() });
 });
+
+// Stripe webhook MUST be before JSON parsing middleware
+app.post("/api/forge/stripe/webhook", express.raw({ type: "application/json" }), stripeForgeRoutes);
 
 app.use("/api/forge", forgeRoutes);
 app.use("/api/forge/stripe", stripeForgeRoutes);
