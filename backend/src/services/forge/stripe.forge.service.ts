@@ -72,9 +72,53 @@ export async function gererWebhookForge(event: Stripe.Event): Promise<void> {
     if (error) console.error('[gererWebhookForge] Checkout upsert error:', error);
   }
 
+  if (event.type === 'customer.subscription.updated') {
+    const sub = event.data.object as Stripe.Subscription;
+    const customerId = sub.customer as string;
+    const previousSub = event.data.previous_attributes as any;
+
+    // Extract tier from price.id if available
+    let newTier = 'bronze';
+    const priceId = (sub.items.data?.[0]?.price?.id || '') as string;
+    for (const [tier, prices] of Object.entries(FORGE_PRICES)) {
+      if (priceId === prices.monthly || priceId === prices.annual) {
+        newTier = tier;
+        break;
+      }
+    }
+
+    // Log subscription update
+    console.log(`[gererWebhookForge] Subscription updated for customer ${customerId}: ${previousSub?.items?.data?.[0]?.price?.id} → ${priceId}`);
+
+    // Update member tier
+    const { error } = await supabase.from('forge_members')
+      .update({ tier_abonnement: newTier, updated_at: new Date().toISOString() })
+      .eq('stripe_customer_id', customerId);
+    if (error) console.error('[gererWebhookForge] Subscription update error:', error);
+
+    // Track refund window if subscription was just upgraded/downgraded
+    if (previousSub?.items?.data?.[0]?.price?.id && sub.cancel_at_period_end !== true) {
+      // Note: forge_refunds table required (id, user_id, subscription_id, refund_date, status)
+      // TODO: Create migration for forge_refunds table with 14-day refund window tracking
+      const refundEligibleUntil = new Date(Date.now() + 14*24*60*60*1000).toISOString();
+      console.log(`[gererWebhookForge] Refund eligible until ${refundEligibleUntil} for subscription ${sub.id}`);
+    }
+  }
+
   if (event.type === 'customer.subscription.deleted') {
     const sub = event.data.object as Stripe.Subscription;
     const customerId = sub.customer as string;
+
+    // Check if subscription was canceled within 14-day refund window
+    const createdAt = new Date(sub.created * 1000).getTime();
+    const canceledAt = Date.now();
+    const daysSinceCreation = Math.floor((canceledAt - createdAt) / (24*60*60*1000));
+
+    if (daysSinceCreation <= 14) {
+      console.log(`[gererWebhookForge] Refund eligible (${daysSinceCreation} days, within 14-day window) for subscription ${sub.id}`);
+      // TODO: Log to forge_refunds table with status: 'eligible'
+    }
+
     const { error } = await supabase.from('forge_members')
       .update({ tier_abonnement: 'bronze', stripe_subscription_id: null, updated_at: new Date().toISOString() })
       .eq('stripe_customer_id', customerId);

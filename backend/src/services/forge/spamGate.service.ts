@@ -1,6 +1,7 @@
 import { getSupabase } from '../../lib/supabaseClient';
-export interface SpamGateResult { passe: boolean; raison?: string; type?: 'spam' | 'bot' | 'pub_automatique' | 'contenu_interdit' | 'blacklist'; }
-export interface SpamGateInput { url: string; titre: string; description?: string; contenu?: string; userId: string; }
+import { TierForge } from './trustScore.service';
+export interface SpamGateResult { passe: boolean; raison?: string; type?: 'spam' | 'bot' | 'pub_automatique' | 'contenu_interdit' | 'blacklist' | 'rate_limit'; }
+export interface SpamGateInput { url: string; titre: string; description?: string; contenu?: string; userId: string; tier?: TierForge; }
 const PATTERNS_PUB = [/buy\s+now/i,/limited\s+time\s+offer/i,/act\s+now/i,/free\s+money/i,/earn\s+\$\d+/i,/make\s+money\s+fast/i,/casino|poker|slots|gambling/i,/viagra|cialis|pharmacy|pills/i,/crypto\s+profit|bitcoin\s+earn/i,/mlm|multi.?level\s+marketing/i];
 const PATTERNS_AI_SPAM = [/as an ai language model/i,/i am an ai/i,/\[insert\s+\w+\]/i,/lorem ipsum/i,/placeholder text/i];
 const PATTERNS_BOT_URL = [/\?(utm_|ref=|aff=|click=)/i,/\/redirect\//i,/bit\.ly|tinyurl|t\.co/i];
@@ -29,18 +30,30 @@ async function verifierBlacklist(domaine: string): Promise<SpamGateResult> {
   if (data) return { passe: false, raison: `Domaine blacklisté : ${data.raison}`, type: 'blacklist' };
   return { passe: true };
 }
-async function verifierRateLimit(userId: string): Promise<SpamGateResult> {
+async function verifierRateLimit(userId: string, tier?: TierForge): Promise<SpamGateResult> {
   const supabase = getSupabase();
   const hier = new Date(Date.now() - 24*60*60*1000).toISOString();
   const { count, error } = await supabase.from('forge_submissions').select('*', { count: 'exact', head: true }).eq('user_id', userId).gte('created_at', hier);
   if (error) console.error('[verifierRateLimit] Count error:', error);
-  if (count && count >= 3) return { passe: false, raison: 'Limite 3 soumissions/24h atteinte.', type: 'bot' };
+
+  const limiteParTier: Record<TierForge, number> = {
+    silver: 5,
+    gold: 20,
+    platinum: 50,
+    diamond: 999, // unlimited
+    bronze: 0, // bronze cannot submit anyway
+  };
+  const limite = limiteParTier[tier ?? 'silver'] ?? 5;
+
+  if (count && count >= limite) {
+    return { passe: false, raison: `Limite ${limite} soumissions/24h atteinte (tier: ${tier ?? 'silver'}).`, type: 'rate_limit' };
+  }
   return { passe: true };
 }
 export async function runSpamGate(input: SpamGateInput): Promise<SpamGateResult> {
   const contenu = `${input.titre} ${input.description||''} ${input.contenu||''}`;
   const domaine = extraireDomaine(input.url);
-  const checks = [await verifierBlacklist(domaine), verifierURL(input.url), verifierPatternsPub(contenu), verifierPatternsAiSpam(contenu), verifierRatioLiens(contenu), await verifierRateLimit(input.userId)];
+  const checks = [await verifierBlacklist(domaine), verifierURL(input.url), verifierPatternsPub(contenu), verifierPatternsAiSpam(contenu), verifierRatioLiens(contenu), await verifierRateLimit(input.userId, input.tier)];
   return checks.find(c => !c.passe) ?? { passe: true };
 }
 export async function ajouterBlacklist(domaine: string, type: 'spam'|'bot'|'pub_automatique'|'contenu_interdit'|'manuel', raison: string, ajoute_par: 'alfred'|'admin' = 'alfred'): Promise<void> {

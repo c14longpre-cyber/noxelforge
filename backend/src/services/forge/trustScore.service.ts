@@ -27,9 +27,10 @@ export interface TrustScoreResult {
 }
 
 function scoreVersTimer(score: number): TierForge {
-  if (score >= 86) return 'diamond';
-  if (score >= 66) return 'gold';
-  if (score >= 41) return 'silver';
+  if (score >= 85) return 'diamond';
+  if (score >= 70) return 'platinum';
+  if (score >= 55) return 'gold';
+  if (score >= 40) return 'silver';
   return 'bronze';
 }
 
