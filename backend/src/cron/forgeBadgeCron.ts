@@ -4,7 +4,8 @@ import { getSupabase } from '../lib/supabaseClient';
 export async function runForgeBadgeCron(): Promise<void> {
   console.log(`[ForgeBadgeCron] Démarrage — ${new Date().toISOString()}`);
   const supabase = getSupabase();
-  const { data: membres } = await supabase.from('forge_members').select('user_id,url_site,statut').in('statut', ['actif','suspendu']).not('url_site','is',null);
+  const { data: membres, error } = await supabase.from('forge_members').select('user_id,url_site,statut').in('statut', ['actif','suspendu']).not('url_site','is',null);
+  if (error) { console.error('[ForgeBadgeCron] Query error:', error); return; }
   if (!membres || membres.length === 0) { console.log('[ForgeBadgeCron] Aucun membre.'); return; }
   console.log(`[ForgeBadgeCron] ${membres.length} membres à vérifier`);
   let ok=0, grace=0, suspendus=0;
