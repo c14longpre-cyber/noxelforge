@@ -69,15 +69,15 @@ export async function getRecommendedPartners(
 ): Promise<PartnerSuggestion[]> {
   const supabase = getSupabase();
 
-  const { data: moi } = await supabase
+  const { data: moi, error: moiError } = await supabase
     .from('forge_members')
     .select('user_id, niche, tier_abonnement, badge_installe, scan_complete')
     .eq('user_id', userId)
     .single();
 
-  if (!moi) return [];
+  if (moiError || !moi) return [];
 
-  const { data: candidats } = await supabase
+  const { data: candidats, error: candidatsError } = await supabase
     .from('forge_members')
     .select('user_id, url_site, niche, tier_abonnement, badge_installe, scan_complete, statut, updated_at')
     .eq('statut', 'actif')
@@ -85,14 +85,15 @@ export async function getRecommendedPartners(
     .eq('badge_installe', true)
     .limit(200);
 
-  if (!candidats || candidats.length === 0) return [];
+  if (candidatsError || !candidats || candidats.length === 0) return [];
 
   const userIds = candidats.map((c) => c.user_id);
-  const { data: trustScores } = await supabase
+  const { data: trustScores, error: trustError } = await supabase
     .from('forge_trust_scores')
     .select('user_id, score, tier_forge')
     .in('user_id', userIds);
 
+  if (trustError) console.error('[getRecommendedPartners] Trust scores query error:', trustError);
   const trustMap = new Map((trustScores ?? []).map((t) => [t.user_id, t]));
 
   const suggestions: PartnerSuggestion[] = candidats.map((c) => {
