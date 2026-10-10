@@ -1,20 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { getForgeT } from '../../i18n/forge.translations';
 
-const BADGES = [
+const getBadges = (t: any) => [
   {
     id: 'partner',
-    label: 'NOXEL Forge Partner',
+    label: t.badge.partner,
     image: '/forge-tools.avif',
     title: 'NOXEL FORGE',
-    subtitle: 'Verified Partner',
+    subtitle: t.badge.partner,
     borderColor: '#3ddc8444',
     titleColor: '#3ddc84',
     link: 'https://noxelforge.com',
   },
   {
     id: 'verified',
-    label: 'Forge Verified',
+    label: t.badge.verified,
     image: '/forge_verified.avif',
     title: 'FORGE VERIFIED',
     subtitle: 'Trust Score certified',
@@ -24,17 +25,17 @@ const BADGES = [
   },
   {
     id: 'exchange',
-    label: 'Forge Exchange',
+    label: t.badge.exchange,
     image: '/chain-link.avif',
     title: 'FORGE EXCHANGE',
-    subtitle: 'Give one · Get one',
+    subtitle: t.stats.giveOne,
     borderColor: '#3ddc8444',
     titleColor: '#3ddc84',
     link: 'https://noxelforge.com',
   },
   {
     id: 'seo',
-    label: 'Optimized with NOXEL SEO',
+    label: t.badge.optimized,
     image: '/noxel-seo.svg',
     title: 'OPTIMIZED WITH',
     subtitle: 'NOXEL SEO',
@@ -55,8 +56,16 @@ function getBadgeHTML(badge: typeof BADGES[0], baseUrl: string): string {
 }
 
 export default function ForgeBadge() {
+  const [t, setT] = useState<any>(null);
   const [copied, setCopied] = useState<string | null>(null);
   const baseUrl = 'https://noxelforge.com';
+
+  useEffect(() => {
+    const lang = navigator.language.split('-')[0] || 'en';
+    getForgeT(lang).then(setT).catch(() => getForgeT('en').then(setT));
+  }, []);
+
+  if (!t) return <div style={{ minHeight: '100vh', background: 'var(--bg)' }} />;
 
   function copySnippet(badgeId: string, html: string) {
     navigator.clipboard.writeText(html);
@@ -67,22 +76,22 @@ export default function ForgeBadge() {
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', overflowY: 'auto' }}>
       <nav style={{ borderBottom: '1px solid var(--border)', padding: '0 32px', height: 56, display: 'flex', alignItems: 'center', gap: 12, background: 'var(--bg2)', position: 'sticky', top: 0, zIndex: 100 }}>
-        <Link to="/forge" style={{ color: 'var(--muted)', fontSize: 13 }}>← Forge</Link>
+        <Link to="/forge" style={{ color: 'var(--muted)', fontSize: 13 }}>{t.nav.back}</Link>
         <span style={{ color: 'var(--soft)' }}>·</span>
-        <span style={{ fontWeight: 900, fontSize: 15 }}>Badge Center</span>
+        <span style={{ fontWeight: 900, fontSize: 15 }}>{t.nav.badges}</span>
       </nav>
 
       <div style={{ maxWidth: 780, margin: '0 auto', padding: '48px 32px 80px' }}>
-        <div className="nx-kicker" style={{ marginBottom: 12 }}>Display on your site</div>
+        <div className="nx-kicker" style={{ marginBottom: 12 }}>{t.badge.kicker}</div>
         <h1 style={{ fontSize: 28, fontWeight: 900, marginBottom: 8, letterSpacing: '-0.5px' }}>
-          NOXEL Forge <span style={{ color: 'var(--g)' }}>Badges</span>
+          {t.badge.title} <span style={{ color: 'var(--g)' }}>{t.badge.titleAccent}</span>
         </h1>
         <p style={{ color: 'var(--muted)', fontSize: 14, marginBottom: 40, lineHeight: 1.6 }}>
-          Copy and paste any badge on your site. Displaying a badge with a link to noxelforge.com or noxelseo.com keeps your backlink active and unlocks badge discounts.
+          {t.badge.subtitle}
         </p>
 
         <div style={{ display: 'grid', gap: 20 }}>
-          {BADGES.map(badge => {
+          {getBadges(t).map(badge => {
             const html = getBadgeHTML(badge, baseUrl);
             return (
               <div key={badge.id} className="nx-card">
@@ -92,7 +101,7 @@ export default function ForgeBadge() {
                     onClick={() => copySnippet(badge.id, html)}
                     style={{ padding: '6px 16px', borderRadius: 'var(--r)', border: '1px solid var(--g-border)', background: copied === badge.id ? 'var(--g)' : 'var(--g-dim)', color: copied === badge.id ? '#07090f' : 'var(--g)', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}
                   >
-                    {copied === badge.id ? '✓ Copied!' : 'Copy snippet'}
+                    {copied === badge.id ? '✓ ' + t.badge.copied : t.badge.copy}
                   </button>
                 </div>
 
@@ -118,9 +127,9 @@ export default function ForgeBadge() {
 
         {/* INFO */}
         <div className="nx-card" style={{ marginTop: 32, borderColor: 'var(--g-border)', background: 'var(--g-dim)' }}>
-          <div style={{ fontWeight: 800, fontSize: 14, marginBottom: 8 }}>How badge discounts work</div>
+          <div style={{ fontWeight: 800, fontSize: 14, marginBottom: 8 }}>{t.badge.infoTitle}</div>
           <div style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.6 }}>
-            Place any badge in the footer of your site — not just one page, but site-wide. Alfred scans your footer specifically on every submission to confirm the backlink is active on all pages. As long as your footer badge links to noxelforge.com or noxelseo.com, your discount applies permanently — Silver 10%, Gold 15%, Platinum 20%, Diamond 25%.
+            {t.badge.infoDesc}
           </div>
         </div>
       </div>

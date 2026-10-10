@@ -1,22 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { getForgeT } from '../../i18n/forge.translations';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-const NICHES = ['SEO','Marketing','AI','E-commerce','Web Dev','Business','Design','Finance','Health','Education','Other'];
 
 export default function ForgeSubmit() {
   const navigate = useNavigate();
+  const [t, setT] = useState<any>(null);
   const [form, setForm] = useState({ url_soumise:'', titre:'', description:'', contenu:'', niche:'' });
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    const lang = navigator.language.split('-')[0] || 'en';
+    getForgeT(lang).then(setT).catch(() => getForgeT('en').then(setT));
+  }, []);
+
+  if (!t) return <div style={{ minHeight: '100vh', background: 'var(--bg)' }} />;
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>) {
     setForm(f => ({ ...f, [e.target.name]: e.target.value }));
   }
 
   async function handleSubmit() {
-    if (!form.url_soumise || !form.titre) { setError('URL and title are required.'); return; }
+    if (!form.url_soumise || !form.titre) { setError(t.submit.requiredFields); return; }
     setLoading(true); setError(''); setResult(null);
     try {
      const res = await fetch(`${API_BASE}/api/forge/submissions`, { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) });
@@ -32,9 +40,9 @@ export default function ForgeSubmit() {
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', overflowY: 'auto' }}>
       <nav style={{ borderBottom: '1px solid var(--border)', padding: '0 32px', height: 56, display: 'flex', alignItems: 'center', gap: 12, background: 'var(--bg2)', position: 'sticky', top: 0, zIndex: 100 }}>
-        <Link to="/forge" style={{ color: 'var(--muted)', fontSize: 13 }}>← Forge</Link>
+        <Link to="/forge" style={{ color: 'var(--muted)', fontSize: 13 }}>{t.nav.back}</Link>
         <span style={{ color: 'var(--soft)' }}>·</span>
-        <span style={{ fontWeight: 900, fontSize: 15 }}>Submit a site</span>
+        <span style={{ fontWeight: 900, fontSize: 15 }}>{t.nav.submit}</span>
       </nav>
 
       <div style={{ maxWidth: 680, margin: '0 auto', padding: '40px 32px 80px' }}>
@@ -42,14 +50,14 @@ export default function ForgeSubmit() {
           <div className="nx-card" style={{ textAlign: 'center', padding: 48, borderColor: 'var(--g-border)', background: 'var(--g-dim)' }}>
             <div style={{ fontSize: 52, marginBottom: 16 }}>🔥</div>
             <h2 style={{ fontWeight: 900, fontSize: 22, marginBottom: 8, color: 'var(--g)' }}>
-              {result.flux === 'auto_share' ? 'Published automatically!' : 'Submission received!'}
+              {result.flux === 'auto_share' ? t.submit.successAuto : t.submit.successTitle}
             </h2>
             <p style={{ color: 'var(--muted)', marginBottom: 28, fontSize: 14 }}>{result.message}</p>
             <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
               <button onClick={() => { setResult(null); setForm({ url_soumise:'', titre:'', description:'', contenu:'', niche:'' }); }} style={{ padding: '10px 20px', borderRadius: 'var(--r)', border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', cursor: 'pointer', fontWeight: 600, fontSize: 13 }}>
-                + Submit another
+                {t.submit.submitAnother}
               </button>
-              <button onClick={() => navigate('/forge/dashboard')} className="nx-pill">View my Dashboard →</button>
+              <button onClick={() => navigate('/forge/dashboard')} className="nx-pill">{t.submit.viewDashboard}</button>
             </div>
           </div>
         ) : (
@@ -62,9 +70,9 @@ export default function ForgeSubmit() {
                 style={{ width: 44, height: 44, objectFit: 'cover', objectPosition: '50% 15%', borderRadius: '50%', border: '2px solid var(--g)', flexShrink: 0 }}
               />
               <div>
-                <div style={{ fontWeight: 800, fontSize: 13, marginBottom: 4 }}>Alfred reviews every submission</div>
+                <div style={{ fontWeight: 800, fontSize: 13, marginBottom: 4 }}>{t.submit.alfredTitle}</div>
                 <div style={{ color: 'var(--muted)', fontSize: 12, lineHeight: 1.6 }}>
-                  Every submission is scanned and reviewed by Alfred before publication. Quality guaranteed, spam impossible.
+                  {t.submit.alfredDesc}
                 </div>
               </div>
             </div>
@@ -73,27 +81,27 @@ export default function ForgeSubmit() {
             <div style={{ display: 'grid', gap: 18 }}>
               <div>
                 <label style={{ display: 'block', fontSize: 12, fontWeight: 800, marginBottom: 8, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  Site URL <span style={{ color: 'var(--danger)' }}>*</span>
+                  {t.submit.urlLabel} <span style={{ color: 'var(--danger)' }}>*</span>
                 </label>
                 <input name="url_soumise" value={form.url_soumise} onChange={handleChange} placeholder="https://mysite.com/my-article"
                   style={{ width: '100%', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--r)', padding: '11px 14px', color: 'var(--text)', fontSize: 14, outline: 'none', boxSizing: 'border-box' }} />
-                <div style={{ fontSize: 11, color: 'var(--soft)', marginTop: 5 }}>HTTPS required · Must contain a link to noxelseo.com or noxelforge.com</div>
+                <div style={{ fontSize: 11, color: 'var(--soft)', marginTop: 5 }}>{t.submit.urlHint}</div>
               </div>
 
               <div>
                 <label style={{ display: 'block', fontSize: 12, fontWeight: 800, marginBottom: 8, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  Title <span style={{ color: 'var(--danger)' }}>*</span>
+                  {t.submit.titleLabel} <span style={{ color: 'var(--danger)' }}>*</span>
                 </label>
                 <input name="titre" value={form.titre} onChange={handleChange} placeholder="Title of your article or page"
                   style={{ width: '100%', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--r)', padding: '11px 14px', color: 'var(--text)', fontSize: 14, outline: 'none', boxSizing: 'border-box' }} />
               </div>
 
               <div>
-  <label style={{ display: 'block', fontSize: 12, fontWeight: 800, marginBottom: 8, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Niche</label>
+  <label style={{ display: 'block', fontSize: 12, fontWeight: 800, marginBottom: 8, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{t.submit.nicheLabel}</label>
   <select name="niche" value={form.niche} onChange={handleChange} className="forge-niche-select"
     style={{ width: '100%', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--r)', padding: '11px 14px', color: form.niche ? 'var(--text)' : 'var(--soft)', fontSize: 14, outline: 'none', boxSizing: 'border-box' }}>
     <option value="">Select a niche</option>
-    {NICHES.map(n => <option key={n} value={n}>{n}</option>)}
+    {Object.entries(t.submit.niches).map(([key, label]) => <option key={key} value={key}>{label}</option>)}
   </select>
   <style>{`
     .forge-niche-select option {
@@ -111,14 +119,14 @@ export default function ForgeSubmit() {
 </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: 12, fontWeight: 800, marginBottom: 8, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Short description</label>
+                <label style={{ display: 'block', fontSize: 12, fontWeight: 800, marginBottom: 8, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{t.submit.descLabel}</label>
                 <textarea name="description" value={form.description} onChange={handleChange} placeholder="Briefly describe the content (1-2 sentences)" rows={3}
                   style={{ width: '100%', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--r)', padding: '11px 14px', color: 'var(--text)', fontSize: 13, outline: 'none', resize: 'vertical', boxSizing: 'border-box', fontFamily: 'inherit' }} />
               </div>
 
               <div>
                 <label style={{ display: 'block', fontSize: 12, fontWeight: 800, marginBottom: 8, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  Main content <span style={{ color: 'var(--soft)', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>(optional — helps Alfred analyze better)</span>
+                  {t.submit.contentLabel} <span style={{ color: 'var(--soft)', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>({t.submit.contentHint})</span>
                 </label>
                 <textarea name="contenu" value={form.contenu} onChange={handleChange} placeholder="Paste your article text here (300+ words recommended)" rows={8}
                   style={{ width: '100%', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--r)', padding: '11px 14px', color: 'var(--text)', fontSize: 13, outline: 'none', resize: 'vertical', boxSizing: 'border-box', fontFamily: 'inherit' }} />
@@ -130,7 +138,7 @@ export default function ForgeSubmit() {
               <div className="nx-card" style={{ display: 'flex', gap: 10, alignItems: 'center', padding: '12px 16px' }}>
                 <img src="/chain-link.avif" alt="Give one get one" style={{ width: 28, height: 28, objectFit: 'contain', flexShrink: 0 }} />
                 <div style={{ fontSize: 12, color: 'var(--muted)', lineHeight: 1.6 }}>
-                  <strong style={{ color: 'var(--g)' }}>Give one, get one:</strong> your site must display a link to{' '}
+                  <strong style={{ color: 'var(--g)' }}>{t.stats.giveOne}:</strong> your site must display a link to{' '}
                   <strong style={{ color: 'var(--g)' }}>noxelseo.com</strong> or <strong style={{ color: 'var(--g)' }}>noxelforge.com</strong> to keep the backlink active.
                 </div>
               </div>
@@ -142,10 +150,10 @@ export default function ForgeSubmit() {
               )}
 
               <button onClick={handleSubmit} disabled={loading} className="nx-pill" style={{ padding: '14px', fontSize: 15 }}>
-                {loading ? 'Analyzing...' : (
+                {loading ? t.submit.analyzing : (
                   <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
                     <img src="/forge-tools.avif" alt="Forge" style={{ width: 18, height: 18, objectFit: 'contain' }} />
-                    Submit to NOXEL Forge
+                    {t.submit.submitBtn}
                   </span>
                 )}
               </button>

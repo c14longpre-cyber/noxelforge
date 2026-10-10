@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Footer from '../../components/Footer';
 import { Link } from 'react-router-dom';
+import { getForgeT } from '../../i18n/forge.translations';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
-const TIERS = [
+const getTiers = (t: any) => [
   {
     key: 'bronze',
     label: 'Bronze',
@@ -15,7 +16,7 @@ const TIERS = [
     annual: 0,
     priceLabel: 'Free',
     features: ['Directory access', 'View all Forge partners', 'NOXEL badge (display only)'],
-    cta: 'Get started free',
+    cta: t.pricing.getStartedFree,
     disabled: false,
   },
   {
@@ -27,7 +28,7 @@ const TIERS = [
     monthly: 20,
     annual: 199,
     features: ['Submit your site', 'Alfred review', 'Earn Forge Points', 'Badge discount 10%'],
-    cta: 'Start with Silver',
+    cta: t.pricing.ctaSilver,
     disabled: false,
   },
   {
@@ -39,7 +40,7 @@ const TIERS = [
     monthly: 40,
     annual: 399,
     features: ['Priority Alfred review', '1.5x Forge Points', 'Badge discount 15%', 'Verified partner badge'],
-    cta: 'Start with Gold',
+    cta: t.pricing.ctaGold,
     disabled: false,
     popular: true,
   },
@@ -52,7 +53,7 @@ const TIERS = [
     monthly: 60,
     annual: 599,
     features: ['VIP Alfred review', '2x Forge Points', 'Badge discount 20%', 'Advanced placement'],
-    cta: 'Start with Platinum',
+    cta: t.pricing.ctaPlatinum,
     disabled: false,
   },
   {
@@ -64,7 +65,7 @@ const TIERS = [
     monthly: 80,
     annual: 799,
     features: ['Elite Alfred VIP', '3x Forge Points', 'Badge discount 25%', 'Featured listing'],
-    cta: 'Start with Diamond',
+    cta: t.pricing.ctaDiamond,
     disabled: false,
   },
 ];
@@ -77,6 +78,14 @@ export default function ForgePricing() {
   const [billing, setBilling] = useState<'monthly' | 'annual'>('monthly');
   const [badgeInstalle, setBadgeInstalle] = useState(false);
   const [loading, setLoading] = useState<string | null>(null);
+  const [t, setT] = useState<any>(null);
+
+  useEffect(() => {
+    const lang = navigator.language.split('-')[0] || 'en';
+    getForgeT(lang).then(setT).catch(() => getForgeT('en').then(setT));
+  }, []);
+
+  if (!t) return <div style={{ minHeight: '100vh', background: 'var(--bg)' }} />;
 
   async function handleCheckout(tier: string) {
     if (tier === 'bronze') return;
@@ -113,28 +122,28 @@ export default function ForgePricing() {
 
       {/* NAV */}
       <nav style={{ borderBottom: '1px solid var(--border)', padding: '0 32px', height: 56, display: 'flex', alignItems: 'center', gap: 12, background: 'var(--bg2)', position: 'sticky', top: 0, zIndex: 100 }}>
-        <Link to="/forge" style={{ color: 'var(--muted)', fontSize: 13 }}>← Forge</Link>
+        <Link to="/forge" style={{ color: 'var(--muted)', fontSize: 13 }}>{t.nav.back}</Link>
         <span style={{ color: 'var(--soft)' }}>·</span>
-        <span style={{ fontWeight: 900, fontSize: 15 }}>Pricing</span>
+        <span style={{ fontWeight: 900, fontSize: 15 }}>{t.nav.pricing}</span>
       </nav>
 
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 32px 80px' }}>
 
         {/* HEADER */}
         <div style={{ textAlign: 'center', marginBottom: 48 }}>
-          <div className="nx-kicker" style={{ marginBottom: 12 }}>NOXEL Forge™ Pricing</div>
+          <div className="nx-kicker" style={{ marginBottom: 12 }}>{t.pricing.kicker}</div>
           <h1 style={{ fontSize: 'clamp(1.8rem,4vw,2.8rem)', fontWeight: 900, marginBottom: 16, letterSpacing: '-0.5px' }}>
-            Build your <span style={{ color: 'var(--g)' }}>authority network</span>
+            {t.pricing.title} <span style={{ color: 'var(--g)' }}>{t.pricing.titleAccent}</span>
           </h1>
           <p style={{ color: 'var(--muted)', fontSize: 15, marginBottom: 32 }}>
-            Display the NOXEL badge on your site and unlock exclusive discounts on every tier.
+            {t.pricing.subtitle}
           </p>
 
           {/* BILLING TOGGLE */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, marginBottom: 20 }}>
-            <button onClick={() => setBilling('monthly')} style={{ padding: '8px 20px', borderRadius: 'var(--r)', border: '1px solid var(--border)', background: billing === 'monthly' ? 'var(--g)' : 'transparent', color: billing === 'monthly' ? '#07090f' : 'var(--muted)', fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>Monthly</button>
+            <button onClick={() => setBilling('monthly')} style={{ padding: '8px 20px', borderRadius: 'var(--r)', border: '1px solid var(--border)', background: billing === 'monthly' ? 'var(--g)' : 'transparent', color: billing === 'monthly' ? '#07090f' : 'var(--muted)', fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>{t.pricing.monthly}</button>
             <button onClick={() => setBilling('annual')} style={{ padding: '8px 20px', borderRadius: 'var(--r)', border: '1px solid var(--border)', background: billing === 'annual' ? 'var(--g)' : 'transparent', color: billing === 'annual' ? '#07090f' : 'var(--muted)', fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>
-              Annual <span style={{ fontSize: 11, marginLeft: 4, color: billing === 'annual' ? '#07090f' : 'var(--g)' }}>−17%</span>
+              {t.pricing.annual} <span style={{ fontSize: 11, marginLeft: 4, color: billing === 'annual' ? '#07090f' : 'var(--g)' }}>{t.pricing.discount}</span>
             </button>
           </div>
 
@@ -142,27 +151,27 @@ export default function ForgePricing() {
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '10px 20px', borderRadius: 'var(--r)', border: `1px solid ${badgeInstalle ? 'var(--g-border)' : 'var(--border)'}`, background: badgeInstalle ? 'var(--g-dim)' : 'transparent', cursor: 'pointer' }} onClick={() => setBadgeInstalle(b => !b)}>
             <img src="/chain-link.avif" alt="Badge" style={{ width: 20, height: 20, objectFit: 'contain' }} />
             <span style={{ fontSize: 13, fontWeight: 700, color: badgeInstalle ? 'var(--g)' : 'var(--muted)' }}>
-              {badgeInstalle ? '✓ Badge discount applied' : 'I display the NOXEL badge — unlock discount'}
+              {badgeInstalle ? '✓ ' + t.pricing.badgeApplied : t.pricing.badgeToggle}
             </span>
           </div>
         </div>
 
         {/* TIERS GRID */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 16 }}>
-          {TIERS.map(tier => (
+          {getTiers(t).map(tier => (
             <div key={tier.key} className="nx-card" style={{ position: 'relative', borderColor: tier.popular ? 'var(--g-border)' : undefined, background: tier.popular ? 'var(--g-dim)' : undefined, display: 'flex', flexDirection: 'column' }}>
               {tier.popular && (
-                <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', background: 'var(--g)', color: '#07090f', fontSize: 11, fontWeight: 800, padding: '3px 14px', borderRadius: 20, whiteSpace: 'nowrap' }}>Most popular</div>
+                <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', background: 'var(--g)', color: '#07090f', fontSize: 11, fontWeight: 800, padding: '3px 14px', borderRadius: 20, whiteSpace: 'nowrap' }}>{t.pricing.mostPopular}</div>
               )}
               <div style={{ textAlign: 'center', marginBottom: 16 }}>
                 <div style={{ color: tier.color, fontWeight: 900, fontSize: 15, marginBottom: 4 }}><img src={tier.image} alt={tier.label} style={{ width: 24, height: 24, verticalAlign: 'middle', marginRight: 6 }} /> {tier.label}</div>
                 <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: 6 }}>
                   {getOriginalPrice(tier) && <span style={{ fontSize: 13, color: 'var(--muted)', textDecoration: 'line-through' }}>{getOriginalPrice(tier)}</span>}
                   <span style={{ fontSize: 28, fontWeight: 900, color: 'var(--text)' }}>{getPrice(tier)}</span>
-                  {tier.monthly > 0 && <span style={{ fontSize: 12, color: 'var(--muted)' }}>/mo</span>}
+                  {tier.monthly > 0 && <span style={{ fontSize: 12, color: 'var(--muted)' }}>{t.pricing.perMonth}</span>}
                 </div>
                 {billing === 'annual' && tier.annual > 0 && (
-                  <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 2 }}>billed ${tier.annual}/year</div>
+                  <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 2 }}>billed ${tier.annual}/{t.pricing.annual.toLowerCase()}</div>
                 )}
               </div>
 
@@ -189,9 +198,9 @@ export default function ForgePricing() {
         <div className="nx-card" style={{ marginTop: 40, display: 'flex', gap: 14, alignItems: 'center', borderColor: 'var(--g-border)', background: 'var(--g-dim)' }}>
           <img src="/chain-link.avif" alt="Badge" style={{ width: 36, height: 36, objectFit: 'contain', flexShrink: 0 }} />
           <div>
-            <div style={{ fontWeight: 800, fontSize: 14, marginBottom: 4 }}>How to unlock badge discounts</div>
+            <div style={{ fontWeight: 800, fontSize: 14, marginBottom: 4 }}>{t.pricing.badgeInfoTitle}</div>
             <div style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.6 }}>
-              Display a link to <strong style={{ color: 'var(--g)' }}>noxelseo.com</strong> or <strong style={{ color: 'var(--g)' }}>noxelforge.com</strong> on your site. Alfred verifies it automatically on every submission. Discount applies permanently as long as the badge is active.
+              {t.pricing.badgeInfoDesc}
             </div>
           </div>
         </div>
