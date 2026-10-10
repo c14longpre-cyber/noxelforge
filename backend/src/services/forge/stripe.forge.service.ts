@@ -62,20 +62,22 @@ export async function gererWebhookForge(event: Stripe.Event): Promise<void> {
     const { userId, tier } = session.metadata || {};
     if (!userId || !tier) return;
 
-    await supabase.from('forge_members').upsert({
+    const { error } = await supabase.from('forge_members').upsert({
       user_id: userId,
       tier_abonnement: tier,
       stripe_customer_id: session.customer as string,
       stripe_subscription_id: session.subscription as string,
       updated_at: new Date().toISOString(),
     }, { onConflict: 'user_id' });
+    if (error) console.error('[gererWebhookForge] Checkout upsert error:', error);
   }
 
   if (event.type === 'customer.subscription.deleted') {
     const sub = event.data.object as Stripe.Subscription;
     const customerId = sub.customer as string;
-    await supabase.from('forge_members')
+    const { error } = await supabase.from('forge_members')
       .update({ tier_abonnement: 'bronze', stripe_subscription_id: null, updated_at: new Date().toISOString() })
       .eq('stripe_customer_id', customerId);
+    if (error) console.error('[gererWebhookForge] Subscription delete error:', error);
   }
 }
