@@ -173,19 +173,19 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
   return createPortal(
     <div onClick={onClose} style={{
       position: "fixed", inset: 0, zIndex: 2147483647,
-      background: "radial-gradient(circle at 30% 20%, rgba(60,222,106,0.08), transparent 30%), radial-gradient(circle at 75% 30%, rgba(112,42,165,0.08), transparent 30%), rgba(2,6,15,0.85)",
+      background: "radial-gradient(circle at 30% 20%, rgba(61,220,132,0.08), transparent 30%), radial-gradient(circle at 75% 30%, rgba(112,42,165,0.08), transparent 30%), rgba(2,6,15,0.85)",
       backdropFilter: "blur(12px)", display: "grid", placeItems: "center", padding: 24,
     }}>
       <div onClick={(e) => e.stopPropagation()} style={{
         width: "100%", maxWidth: 500, borderRadius: 24, padding: "32px 28px 28px",
         background: "linear-gradient(180deg, rgba(10,16,26,0.98), rgba(6,10,18,0.99))",
-        boxShadow: "0 0 0 1px rgba(60,222,106,0.18), 0 0 60px rgba(60,222,106,0.08)",
+        boxShadow: "0 0 0 1px rgba(61,220,132,0.18), 0 0 60px rgba(61,220,132,0.08)",
         position: "relative",
       }}>
         <div style={{
           position: "absolute", top: 0, left: "10%", right: "10%", height: 1,
-          background: "linear-gradient(90deg, transparent, rgba(60,222,106,0.7), transparent)",
-          boxShadow: "0 0 16px rgba(60,222,106,0.4)", borderRadius: "0 0 8px 8px",
+          background: "linear-gradient(90deg, transparent, rgba(61,220,132,0.7), transparent)",
+          boxShadow: "0 0 16px rgba(61,220,132,0.4)", borderRadius: "0 0 8px 8px",
         }} />
 
         <button type="button" onClick={onClose} style={{
@@ -210,12 +210,12 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
                     display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
                     gap: 6, padding: "18px 10px", borderRadius: 14,
                     background: "rgba(255,255,255,0.04)",
-                    border: "1px solid rgba(60,222,106,0.15)",
+                    border: "1px solid rgba(61,220,132,0.15)",
                     cursor: p.comingSoon ? "not-allowed" : "pointer",
                     opacity: p.comingSoon ? 0.45 : 1,
                     transition: "all 0.15s", position: "relative",
                   }}
-                  onMouseEnter={(e) => { if (!p.comingSoon) (e.currentTarget as HTMLButtonElement).style.background = "rgba(60,222,106,0.08)"; }}
+                  onMouseEnter={(e) => { if (!p.comingSoon) (e.currentTarget as HTMLButtonElement).style.background = "rgba(61,220,132,0.08)"; }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.04)"; }}
                 >
                   <div>{p.icon}</div>
@@ -234,7 +234,7 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
 
             <button type="button" onClick={() => setScreen("magic")} style={{
               width: "100%", padding: "11px", borderRadius: 12, marginTop: 8,
-              background: "rgba(60,222,106,0.07)", border: "1px solid rgba(60,222,106,0.2)",
+              background: "rgba(61,220,132,0.07)", border: "1px solid rgba(61,220,132,0.2)",
               color: "#3ddc84", fontWeight: 700, fontSize: 13, cursor: "pointer", fontFamily: "inherit",
               display: "flex", alignItems: "center", justifyContent: "center", gap: 8, transition: "all 0.15s",
             }}>
@@ -260,7 +260,7 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
               Enter your email and we will send you a secure login link.
             </p>
             {magicStatus === "sent" ? (
-              <div style={{ padding: "24px", borderRadius: 12, textAlign: "center", background: "rgba(60,222,106,0.07)", border: "1px solid rgba(60,222,106,0.25)" }}>
+              <div style={{ padding: "24px", borderRadius: 12, textAlign: "center", background: "rgba(61,220,132,0.07)", border: "1px solid rgba(61,220,132,0.25)" }}>
                 <div style={{ color: "#3ddc84", fontWeight: 800, fontSize: 16, marginBottom: 8 }}>Check your inbox!</div>
                 <div style={{ color: "rgba(255,255,255,0.55)", fontSize: 13 }}>
                   We sent a login link to <strong style={{ color: "#fff" }}>{magicEmail}</strong>. It expires in 15 minutes.
@@ -287,7 +287,7 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
                 <button key={m} type="button" onClick={() => { setEmailMode(m); setEmailError(""); }} style={{
                   flex: 1, padding: "8px", borderRadius: 7, border: "none", cursor: "pointer",
                   fontFamily: "inherit", fontWeight: 700, fontSize: 13, transition: "all 0.15s",
-                  background: emailMode === m ? "rgba(60,222,106,0.15)" : "transparent",
+                  background: emailMode === m ? "rgba(61,220,132,0.15)" : "transparent",
                   color: emailMode === m ? "#3ddc84" : "rgba(255,255,255,0.4)",
                 }}>{m === "login" ? "Sign In" : "Create Account"}</button>
               ))}
