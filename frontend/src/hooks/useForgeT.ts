@@ -15,6 +15,9 @@ export function useForgeT() {
 
   const [t, setT] = useState<ForgeTranslations>(en);
 
+  // <html lang> = langue affichée : Chrome ne propose plus de retraduire l'interface (voir translationGuard.ts).
+  useEffect(() => { document.documentElement.lang = lang; }, [lang]);
+
   useEffect(() => {
     let cancelled = false;
     getForgeT(lang).then((translations) => {

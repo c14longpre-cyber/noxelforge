@@ -1,3 +1,4 @@
+import './translationGuard'; // avant React : voir le fichier
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './global.css'
