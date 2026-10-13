@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getForgeT } from '../../i18n/forge.translations';
+import { HudButton } from '../../components/hud/HudButton';
 
 const getBadges = (t: any) => [
   {
@@ -97,12 +98,12 @@ export default function ForgeBadge() {
               <div key={badge.id} className="nx-card">
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16, flexWrap: 'wrap', gap: 12 }}>
                   <div style={{ fontSize: 13, fontWeight: 800 }}>{badge.label}</div>
-                  <button
+                  <HudButton
+                    action="copy-code"
+                    compact
+                    label={copied === badge.id ? '✓ ' + t.badge.copied : t.badge.copy}
                     onClick={() => copySnippet(badge.id, html)}
-                    style={{ padding: '6px 16px', borderRadius: 'var(--r)', border: '1px solid var(--g-border)', background: copied === badge.id ? 'var(--g)' : 'var(--g-dim)', color: copied === badge.id ? '#07090f' : 'var(--g)', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}
-                  >
-                    {copied === badge.id ? '✓ ' + t.badge.copied : t.badge.copy}
-                  </button>
+                  />
                 </div>
 
                 {/* PREVIEW */}

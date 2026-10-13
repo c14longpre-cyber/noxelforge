@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { HudButton } from '../../components/hud/HudButton';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
@@ -94,9 +95,7 @@ export default function ForgePoints() {
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                         <span style={{ color: 'var(--g)', fontWeight: 800, fontSize: 13 }}>{pts} pts</span>
-                        <button disabled={(points?.solde??0)<pts} style={{ background: (points?.solde??0)>=pts ? 'var(--g)' : 'var(--surface2)', color: (points?.solde??0)>=pts ? '#07090f' : 'var(--soft)', border: 'none', borderRadius: 6, padding: '4px 10px', cursor: (points?.solde??0)>=pts ? 'pointer' : 'not-allowed', fontSize: 11, fontWeight: 800, opacity: (points?.solde??0)>=pts ? 1 : 0.5 }}>
-                          Use
-                        </button>
+                        <HudButton action="ok" compact label="Use" disabled={(points?.solde??0)<pts} />
                       </div>
                     </div>
                   ))}

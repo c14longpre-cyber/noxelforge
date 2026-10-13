@@ -4,6 +4,8 @@ import { useForgeT } from '../../hooks/useForgeT';
 import { useAuthStore } from '../../auth/AuthStore';
 import ForgeAccessModal from '../../components/ForgeAccessModal';
 import Footer from '../../components/Footer';
+import { HudButton } from '../../components/hud/HudButton';
+import HudRouterLink from '../../components/HudRouterLink';
 const NoxelInterface = lazy(() => import('../../components/NoxelInterface'));
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
@@ -77,12 +79,9 @@ export default function ForgeLanding() {
             <button onClick={() => logout()} style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>{user?.name || 'Account'} (logout)</button>
                   </>
           ) : (
-            <button onClick={() => setShowAuthModal(true)} style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--g-border)', background: 'var(--g-dim)', color: 'var(--g)', fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>Sign in</button>
+            <HudButton action="continue" compact label="Sign in" onClick={() => setShowAuthModal(true)} />
           )}
-          <Link to="/forge/submit" className="nx-pill" style={{ padding: '7px 16px', fontSize: 13 }}>
-            <img src="/forge-tools.avif" alt="Forge" style={{width:18,height:18,objectFit:'contain',marginRight:6,verticalAlign:'middle'}}/>
-            {t.nav.submit}
-          </Link>
+          <HudRouterLink to="/forge/submit" action="new-project" compact label={t.nav.submit} />
         </div>
       </nav>
 
@@ -100,11 +99,8 @@ export default function ForgeLanding() {
           {t.hero.subtitle}
         </p>
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link to="/forge/submit" className="nx-pill">
-            <img src="/forge-tools.avif" alt="Forge" style={{width:18,height:18,objectFit:'contain',marginRight:6,verticalAlign:'middle'}}/>
-            {t.hero.ctaSubmit}
-          </Link>
-          <Link to="/forge/dashboard" style={{ padding: '12px 22px', borderRadius: 'var(--r)', border: '1px solid var(--g-border)', color: 'var(--g)', fontSize: 14, fontWeight: 700, background: 'var(--g-dim)' }}>{t.hero.ctaDashboard}</Link>
+          <HudRouterLink to="/forge/submit" action="new-project" label={t.hero.ctaSubmit} />
+          <HudRouterLink to="/forge/dashboard" action="open-project" label={t.hero.ctaDashboard} />
         </div>
 
         {/* STATS */}
@@ -182,7 +178,7 @@ export default function ForgeLanding() {
             <img src="/forge-tools.avif" alt="Forge" style={{ width: 56, height: 56, objectFit: 'contain', marginBottom: 12 }} />
             <div style={{ fontWeight: 800, marginBottom: 8, fontSize: 15 }}>{t.directory.empty}</div>
             <div style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 24 }}>{t.directory.emptyDesc}</div>
-            <Link to="/forge/submit" className="nx-pill" style={{ display: 'inline-block' }}>{t.hero.ctaSubmit}</Link>
+            <HudRouterLink to="/forge/submit" action="new-project" compact label={t.hero.ctaSubmit} />
           </div>
         ) : (
           <div style={{ display: 'grid', gap: 10 }}>
@@ -214,10 +210,7 @@ export default function ForgeLanding() {
         <div className="nx-kicker" style={{ marginBottom: 12 }}>{t.cta.kicker}</div>
         <h2 style={{ fontSize: 28, fontWeight: 900, marginBottom: 12, letterSpacing: '-0.5px' }}>{t.cta.title}</h2>
         <p style={{ color: 'var(--muted)', marginBottom: 28, fontSize: 14 }}>{t.cta.subtitle}</p>
-        <Link to="/forge/submit" className="nx-pill">
-          <img src="/forge-tools.avif" alt="Forge" style={{width:18,height:18,objectFit:'contain',marginRight:6,verticalAlign:'middle'}}/>
-          {t.cta.title}
-        </Link>
+        <HudRouterLink to="/forge/submit" action="new-project" compact label={t.cta.title} />
       </section>
       <Footer
         brand="NOXEL Forge"

@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import Footer from '../../components/Footer';
 import { Link } from 'react-router-dom';
 import { getForgeT } from '../../i18n/forge.translations';
+import { HudButton } from '../../components/hud/HudButton';
+import HudRouterLink from '../../components/HudRouterLink';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
@@ -184,11 +186,9 @@ export default function ForgePricing() {
               </ul>
 
               {tier.key === 'bronze' ? (
-                <Link to="/forge" className="nx-pill" style={{ textAlign: 'center', display: 'block', fontSize: 13, padding: '10px' }}>{tier.cta}</Link>
+                <HudRouterLink to="/forge" action="continue" compact label={tier.cta} style={{ alignSelf: 'center' }} />
               ) : (
-                <button onClick={() => handleCheckout(tier.key)} disabled={loading === tier.key} className="nx-pill" style={{ width: '100%', padding: '10px', fontSize: 13, cursor: 'pointer' }}>
-                  {loading === tier.key ? 'Loading...' : tier.cta}
-                </button>
+                <HudButton action="continue" compact label={tier.cta} busy={loading === tier.key} busyLabel="Loading..." onClick={() => handleCheckout(tier.key)} style={{ alignSelf: 'center' }} />
               )}
             </div>
           ))}

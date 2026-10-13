@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { getForgeT } from '../../i18n/forge.translations';
+import { HudButton } from '../../components/hud/HudButton';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
@@ -54,10 +55,8 @@ export default function ForgeSubmit() {
             </h2>
             <p style={{ color: 'var(--muted)', marginBottom: 28, fontSize: 14 }}>{result.message}</p>
             <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
-              <button onClick={() => { setResult(null); setForm({ url_soumise:'', titre:'', description:'', contenu:'', niche:'' }); }} style={{ padding: '10px 20px', borderRadius: 'var(--r)', border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', cursor: 'pointer', fontWeight: 600, fontSize: 13 }}>
-                {t.submit.submitAnother}
-              </button>
-              <button onClick={() => navigate('/forge/dashboard')} className="nx-pill">{t.submit.viewDashboard}</button>
+              <HudButton action="new-project" compact label={t.submit.submitAnother} onClick={() => { setResult(null); setForm({ url_soumise:'', titre:'', description:'', contenu:'', niche:'' }); }} />
+              <HudButton action="open-project" compact label={t.submit.viewDashboard} onClick={() => navigate('/forge/dashboard')} />
             </div>
           </div>
         ) : (
@@ -149,14 +148,9 @@ export default function ForgeSubmit() {
                 </div>
               )}
 
-              <button onClick={handleSubmit} disabled={loading} className="nx-pill" style={{ padding: '14px', fontSize: 15 }}>
-                {loading ? t.submit.analyzing : (
-                  <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
-                    <img src="/forge-tools.avif" alt="Forge" style={{ width: 18, height: 18, objectFit: 'contain' }} />
-                    {t.submit.submitBtn}
-                  </span>
-                )}
-              </button>
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <HudButton action="analyse" compact label={t.submit.submitBtn} busy={loading} busyLabel={t.submit.analyzing} onClick={handleSubmit} />
+              </div>
             </div>
           </>
         )}

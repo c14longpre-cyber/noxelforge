@@ -1,0 +1,21 @@
+/* NOXEL HUD — indépendant du fond et de la police du site. */
+.noxel-hud{--hud-size:112px;--hud-green:#3DDC84;--hud-purple:#A855F7;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;max-width:200px;min-width:44px;min-height:44px;padding:8px;border:1px solid transparent;border-radius:14px;background:transparent;color:inherit;text-decoration:none;font:inherit;cursor:pointer;vertical-align:middle;-webkit-tap-highlight-color:transparent;transition:background .18s,border-color .18s,transform .18s}
+.noxel-hud__graphic{position:relative;display:block;width:var(--hud-size);height:var(--hud-size);flex-shrink:0;transition:filter .18s,transform .18s}
+.noxel-hud__svg{display:block;width:100%;height:100%;overflow:visible}.noxel-hud__label{display:block;max-width:100%;font-weight:600;font-size:13px;line-height:1.45;text-align:center;overflow-wrap:anywhere}
+.noxel-hud:hover:not(:disabled){background:rgb(61 220 132 / .04);border-color:rgb(61 220 132 / .18)}
+.noxel-hud:hover:not(:disabled) .noxel-hud__graphic{filter:drop-shadow(0 0 6px rgb(61 220 132 / .18));transform:scale(1.04)}
+.noxel-hud:active:not(:disabled){transform:translateY(1px)}
+.noxel-hud:focus-visible{outline:2px solid var(--hud-purple);outline-offset:4px}
+.noxel-hud[aria-pressed=true]{background:rgb(168 85 247 / .08);border-color:var(--hud-purple)}
+.noxel-hud:disabled{opacity:.36;cursor:not-allowed}.noxel-hud[aria-busy=true]{opacity:1;cursor:wait}
+.noxel-hud[aria-busy=true] .hud-icon{opacity:0}.noxel-hud[aria-busy=true] .hud-orbit{transform-origin:64px 64px;animation:hud-spin 2.4s linear infinite}
+.noxel-hud[aria-busy=true] .hud-segments{transform-origin:64px 64px;animation:hud-spin-reverse 4s linear infinite}
+.noxel-hud__loading{position:absolute;inset:0;display:none;place-items:center;color:var(--hud-green);font-weight:750;font-size:22px;font-variant-numeric:tabular-nums}
+.noxel-hud[aria-busy=true] .noxel-hud__loading{display:grid}.noxel-hud__loading span{letter-spacing:3px;animation:hud-pulse 1.2s ease-in-out infinite}
+.noxel-hud__progress{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.noxel-hud--compact{--hud-size:44px;flex-direction:row;max-width:none;gap:8px;padding:4px 10px 4px 4px;border-radius:10px}
+.noxel-hud--compact .noxel-hud__label{text-align:left}.noxel-hud--compact .noxel-hud__loading{font-size:11px}.noxel-hud--compact .noxel-hud__loading span{letter-spacing:0}
+.noxel-hud--icon-only{--hud-size:44px;width:48px;height:48px;padding:2px}.noxel-hud--icon-only .noxel-hud__label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.noxel-hud--icon-only .noxel-hud__loading{font-size:11px}
+@keyframes hud-spin{to{transform:rotate(360deg)}}@keyframes hud-spin-reverse{to{transform:rotate(-360deg)}}@keyframes hud-pulse{50%{opacity:.35}}
+@media(prefers-reduced-motion:reduce){.noxel-hud,.noxel-hud__graphic{transition:none}.noxel-hud .hud-orbit,.noxel-hud .hud-segments,.noxel-hud__loading span{animation:none!important}.noxel-hud:hover:not(:disabled) .noxel-hud__graphic{transform:none}}
