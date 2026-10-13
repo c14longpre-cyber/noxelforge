@@ -3,3 +3,8 @@ dist/
 .env
 .env.local
 *.log
+
+# Copies de sauvegarde : git garde déjà l'historique
+*.bak
+*.backup
+*.backup[0-9]*
