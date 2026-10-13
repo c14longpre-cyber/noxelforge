@@ -48,7 +48,7 @@ export default function ForgePartners() {
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', overflowY: 'auto' }}>
-      <nav style={{ borderBottom: '1px solid var(--border)', padding: '0 32px', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--bg2)', position: 'sticky', top: 0, zIndex: 100 }}>
+      <nav className="forge-subbar" style={{ borderBottom: '1px solid var(--border)', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--bg2)', position: 'sticky', top: 0, zIndex: 100 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <Link to="/forge" style={{ color: 'var(--muted)', fontSize: 13 }}>← Forge</Link>
           <span style={{ color: 'var(--soft)' }}>·</span>

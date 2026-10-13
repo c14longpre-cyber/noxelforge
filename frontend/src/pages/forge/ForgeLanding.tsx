@@ -1,4 +1,4 @@
-import { useEffect, useState, lazy, Suspense } from 'react';
+import { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { useForgeT } from '../../hooks/useForgeT';
 import { useAuthStore } from '../../auth/AuthStore';
@@ -29,6 +29,26 @@ export default function ForgeLanding() {
   const [loading, setLoading] = useState(true);
   const [nicheFilter, setNicheFilter] = useState('');
   const [page, setPage] = useState(1);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
+  const menuBtnRef = useRef<HTMLButtonElement>(null);
+
+  // Menu mobile : Échap le ferme (et rend le focus au bouton), un clic hors de la barre aussi.
+  useEffect(() => {
+    if (!menuOpen) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') { setMenuOpen(false); menuBtnRef.current?.focus(); }
+    }
+    function onPointer(e: PointerEvent) {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) setMenuOpen(false);
+    }
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('pointerdown', onPointer);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('pointerdown', onPointer);
+    };
+  }, [menuOpen]);
 
 
   useEffect(() => { fetchAnnuaire(); }, [nicheFilter, page]);
@@ -58,30 +78,43 @@ export default function ForgeLanding() {
     <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', overflowY: 'auto' }}>
 
       {/* NAV */}
-      <nav style={{ borderBottom: '1px solid var(--border)', padding: '0 32px', height: 150, display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--bg2)', position: 'sticky', top: 0, zIndex: 100 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <img src="/NOXEL_FORGE_LOGO.svg" alt="Forge" style={{ width: 175, height: 175, objectFit: 'contain' }} />
-          
+      <nav ref={navRef} className="forge-topbar">
+        <div className="forge-topbar__brand">
+          <img src="/NOXEL_FORGE_LOGO.svg" alt="Forge" className="forge-topbar__logo" />
         </div>
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          <button onClick={() => setShowMap(true)} style={{ padding: '6px 10px', borderRadius: 'var(--r)', border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', fontSize: 13, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}>🌐 {lang.toUpperCase()}</button>
+        <div className="forge-topbar__actions">
+          <button onClick={() => setShowMap(true)} className="forge-topbar__lang"><span><span className="forge-topbar__lang-icon" aria-hidden="true">🌐 </span>{lang.toUpperCase()}</span></button>
           {showMap && (
             <Suspense fallback={null}>
               <NoxelInterface locale={lang} onChange={(l) => { changeLang(l); setShowMap(false); }} onClose={() => setShowMap(false)} />
             </Suspense>
           )}
-          <Link to="/forge/badge" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>{t.nav.badges}</Link>
-          <Link to="/forge/pricing" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>{t.nav.pricing}</Link>
-          <Link to="/forge/dashboard" style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', color: 'var(--muted)', fontSize: 13, fontWeight: 600 }}>{t.nav.dashboard}</Link>
-          {isAuthenticated ? (
-                  <>
-                  {membre?.tier_abonnement && (<Link to="/forge/pricing" style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 14px', borderRadius: 20, fontSize: 12, fontWeight: 800, textDecoration: 'none', textTransform: 'capitalize', background: (TIER_CONFIG[membre.tier_abonnement]?.color || '#888') + '20', color: TIER_CONFIG[membre.tier_abonnement]?.color || '#888', border: `1px solid ${(TIER_CONFIG[membre.tier_abonnement]?.color || '#888')}40` }}><img src={TIER_CONFIG[membre.tier_abonnement]?.image || '/Bronze_tier.svg'} alt={membre.tier_abonnement} style={{ width: 14, height: 14, verticalAlign: 'middle' }} /><span style={{marginLeft:6}}>{membre.tier_abonnement}</span>{membre.tier_abonnement !== 'diamond' && <span style={{ opacity: 0.7, marginLeft: 4 }}>· Upgrade ↗</span>}</Link>)}
-            <button onClick={() => logout()} style={{ padding: '7px 16px', borderRadius: 'var(--r)', border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>{user?.name || 'Account'} (logout)</button>
-                  </>
-          ) : (
-            <HudButton action="continue" compact label="Sign in" onClick={() => setShowAuthModal(true)} />
+          <div id="forge-mobile-menu" className="forge-topbar__links" data-open={menuOpen}>
+            <Link to="/forge/badge" className="forge-topbar__link">{t.nav.badges}</Link>
+            <Link to="/forge/pricing" className="forge-topbar__link">{t.nav.pricing}</Link>
+            <Link to="/forge/dashboard" className="forge-topbar__link">{t.nav.dashboard}</Link>
+            {isAuthenticated && (
+              <>
+                {membre?.tier_abonnement && (<Link to="/forge/pricing" style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 14px', borderRadius: 20, fontSize: 12, fontWeight: 800, textDecoration: 'none', textTransform: 'capitalize', background: (TIER_CONFIG[membre.tier_abonnement]?.color || '#888') + '20', color: TIER_CONFIG[membre.tier_abonnement]?.color || '#888', border: `1px solid ${(TIER_CONFIG[membre.tier_abonnement]?.color || '#888')}40` }}><img src={TIER_CONFIG[membre.tier_abonnement]?.image || '/Bronze_tier.svg'} alt={membre.tier_abonnement} style={{ width: 14, height: 14, verticalAlign: 'middle' }} /><span style={{marginLeft:6}}>{membre.tier_abonnement}</span>{membre.tier_abonnement !== 'diamond' && <span style={{ opacity: 0.7, marginLeft: 4 }}>· Upgrade ↗</span>}</Link>)}
+                <button onClick={() => { setMenuOpen(false); logout(); }} className="forge-topbar__link">{user?.name || 'Account'} (logout)</button>
+              </>
+            )}
+          </div>
+          {!isAuthenticated && (
+            <HudButton action="continue" compact label="Sign in" onClick={() => { setMenuOpen(false); setShowAuthModal(true); }} />
           )}
           <HudRouterLink to="/forge/submit" action="new-project" compact label={t.nav.submit} />
+          <button
+            ref={menuBtnRef}
+            type="button"
+            className="forge-topbar__menu-btn"
+            aria-label="Menu"
+            aria-expanded={menuOpen}
+            aria-controls="forge-mobile-menu"
+            onClick={() => setMenuOpen(o => !o)}
+          >
+            <span aria-hidden="true">{menuOpen ? '✕' : '☰'}</span>
+          </button>
         </div>
       </nav>
 
