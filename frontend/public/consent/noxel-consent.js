@@ -252,15 +252,19 @@
     if (!valid(next)) return;
     receipt = next; try { localStorage.setItem(cfg.storageKey, JSON.stringify(next)); } catch (_) { persistenceAvailable = false; }
   }
-  function relayLink(event) {
-    if (!relayEnabled || !valid(receipt)) return;
-    const link = event.target instanceof Element ? event.target.closest('a[href]') : null; if (!link) return;
-    let url; try { url = new URL(link.href, location.href); } catch (_) { return; }
-    if (!/^https?:$/.test(url.protocol) || !relayDomains.has(bareHost(url.hostname)) || bareHost(url.hostname) === bareHost(location.hostname)) return;
+  // Adresse enrichie du choix courant si elle mène vers un autre site NOXEL ; sinon inchangée.
+  function relayUrl(href) {
+    if (!relayEnabled || !valid(receipt)) return String(href);
+    let url; try { url = new URL(String(href), location.href); } catch (_) { return String(href); }
+    if (!/^https?:$/.test(url.protocol) || !relayDomains.has(bareHost(url.hostname)) || bareHost(url.hostname) === bareHost(location.hostname)) return String(href);
     const token = encodeRelay(receipt); const hash = new URLSearchParams(url.hash.replace(/^#/, ''));
     if (!url.hash || (hash.has(relayParam) && [...hash.keys()].length === 1)) url.hash = relayParam + '=' + token;
     else url.searchParams.set(relayParam, token);
-    link.href = url.href;
+    return url.href;
+  }
+  function relayLink(event) {
+    const link = event.target instanceof Element ? event.target.closest('a[href]') : null; if (!link) return;
+    const next = relayUrl(link.href); if (next !== link.href) link.href = next;
   }
   function boot() {
     receipt = read(); adoptRelay(); detect();
@@ -285,7 +289,7 @@
     mutationObserver.observe(document.documentElement, { childList: true, subtree: true });
     window.dispatchEvent(new CustomEvent('noxel:consentready', { detail: { receipt: get() } }));
   }
-  window.NoxelConsent = Object.freeze({ open, close, acceptAll: accept, rejectAll: reject, has, getReceipt: get, register,
+  window.NoxelConsent = Object.freeze({ open, close, acceptAll: accept, rejectAll: reject, has, getReceipt: get, register, relayUrl,
     refresh: () => { detect(); renderBanner(); return scheduleActivation(); }, version: '1.1.0' });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true }); else boot();
 })();
