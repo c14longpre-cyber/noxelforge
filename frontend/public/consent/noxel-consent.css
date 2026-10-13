@@ -49,3 +49,5 @@
 @media(max-width:480px){.nx-consent-banner{left:12px;bottom:76px;width:calc(100vw - 24px);padding:18px}.nx-consent-actions{flex-direction:column;gap:4px}#noxel-consent-root .nx-consent-actions .nx-hud{flex:initial;width:100%}#noxel-consent-root .nx-consent-launcher{left:12px}#noxel-consent-root .nx-consent-dialog{padding:18px}}
 @media(prefers-reduced-motion:reduce){#noxel-consent-root *{scroll-behavior:auto!important}#noxel-consent-root .nx-hud,#noxel-consent-root .nx-hud-graphic{transition:none}#noxel-consent-root .nx-hud .hud-orbit{animation:none}#noxel-consent-root .nx-hud:hover .nx-hud-graphic{transform:none}}
 @media(forced-colors:active){#noxel-consent-root .nx-consent-btn,#noxel-consent-root .nx-consent-category,#noxel-consent-root .nx-consent-banner,#noxel-consent-root .nx-consent-dialog{border-color:CanvasText}#noxel-consent-root :focus-visible{outline-color:Highlight}}
+/* Fenêtre centrée sur tous les sites, même si leur CSS remet les marges à zéro (ex. * { margin: 0 }). */
+#noxel-consent-root dialog.nx-consent-dialog[open]{position:fixed;inset:0;margin:auto;height:fit-content}
