@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const lt: ForgeTranslations = {
+const lt: ForgePartialTranslations = {
   nav: {
     submit: "Pateikti",
     dashboard: "Valdymo skydelis",
@@ -60,7 +60,7 @@ const lt: ForgeTranslations = {
     badgeApplied: "Ženklelio nuolaida pritaikyta",
     mostPopular: "Populiariausias",
     perMonth: "/mėn",
-    getStarted: "Pradėti nemokamai",
+    getStartedFree: "Pradėti nemokamai",
     badgeInfoTitle: "Kaip atrakinti ženklelio nuolaidas",
     badgeInfoDesc: "Rodykite bet kurį ženklelį savo svetainės poraštėje. Alfred nuskaito jūsų poraštę kiekvieno pateikimo metu."
   },

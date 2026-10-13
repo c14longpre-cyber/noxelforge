@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const qu: ForgeTranslations = {
+const qu: ForgePartialTranslations = {
   nav: {
     submit: "Apaykuy",
     dashboard: "Kamachiy panqa",
@@ -60,7 +60,7 @@ const qu: ForgeTranslations = {
     badgeApplied: "Señal chanin allichay churasqa",
     mostPopular: "Aswan reqsisqa",
     perMonth: "/killa",
-    getStarted: "Qallariy mana chaniyuqta",
+    getStartedFree: "Qallariy mana chaniyuqta",
     badgeInfoTitle: "Imaynatas señal chanin allichayta paschanki",
     badgeInfoDesc: "Mayqen señaltapas sitionkip chawpinpi rikuchiy. Alfred sapa apaykuyllapiñataq chawpikita qhawan."
   },

@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const am: ForgeTranslations = {
+const am: ForgePartialTranslations = {
   nav: {
     submit: "አስገባ",
     dashboard: "ዳሽቦርድ",
@@ -60,7 +60,7 @@ const am: ForgeTranslations = {
     badgeApplied: "የባጅ ቅናሽ ተተግብሯል",
     mostPopular: "በጣም ታዋቂ",
     perMonth: "/ወር",
-    getStarted: "ነፃ ጀምር",
+    getStartedFree: "ነፃ ጀምር",
     badgeInfoTitle: "የባጅ ቅናሾችን እንዴት መክፈት እንደሚቻል",
     badgeInfoDesc: "ማንኛውንም ባጅ በጣቢያህ ግርጌ ላይ አሳይ። Alfred በእያንዳንዱ ማስገቢያ ላይ ግርጌህን ይቃኛል።"
   },

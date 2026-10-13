@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const oc: ForgeTranslations = {
+const oc: ForgePartialTranslations = {
   nav: {
     submit: "Soumetre",
     dashboard: "Taulièr de bòrd",
@@ -60,7 +60,7 @@ const oc: ForgeTranslations = {
     badgeApplied: "Remesa d'insigana aplicada",
     mostPopular: "Mai popular",
     perMonth: "/mes",
-    getStarted: "Començar gratuitament",
+    getStartedFree: "Començar gratuitament",
     badgeInfoTitle: "Cossí desverrolhar las remesas d'insigana",
     badgeInfoDesc: "Affichat quina insigana que siá al pèd de pagina de vòstre site. Alfred scanna vòstre pèd de pagina a cada submission."
   },

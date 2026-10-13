@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const fi: ForgeTranslations = {
+const fi: ForgePartialTranslations = {
   nav: {
     submit: "Lähetä",
     dashboard: "Hallintapaneeli",
@@ -60,7 +60,7 @@ const fi: ForgeTranslations = {
     badgeApplied: "Merkkialennus käytössä",
     mostPopular: "Suosituin",
     perMonth: "/kk",
-    getStarted: "Aloita ilmaiseksi",
+    getStartedFree: "Aloita ilmaiseksi",
     badgeInfoTitle: "Kuinka avata merkkialennukset",
     badgeInfoDesc: "Näytä mitä tahansa merkkiä sivustosi alatunnisteessa. Alfred skannaa alatunnisteesi jokaisen lähetyksen yhteydessä."
   },

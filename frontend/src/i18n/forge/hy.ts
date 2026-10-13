@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const hy: ForgeTranslations = {
+const hy: ForgePartialTranslations = {
   nav: {
     submit: "Ներկայացնել",
     dashboard: "Վահանակ",
@@ -60,7 +60,7 @@ const hy: ForgeTranslations = {
     badgeApplied: "Կրծքանշանի զեղչը կիրառված է",
     mostPopular: "Ամենահայտնի",
     perMonth: "/ամիս",
-    getStarted: "Սկսեք անվճար",
+    getStartedFree: "Սկսեք անվճար",
     badgeInfoTitle: "Ինչպես բացել կրծքանշանի զեղչերը",
     badgeInfoDesc: "Ցուցադրեք ցանկացած կրծքանշան ձեր կայքի ստորոտում։ Alfred-ը սկանավորում է ձեր ստորոտը յուրաքանչյուր ներկայացման ժամանակ։"
   },

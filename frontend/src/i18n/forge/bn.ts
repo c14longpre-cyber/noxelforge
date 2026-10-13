@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const bn: ForgeTranslations = {
+const bn: ForgePartialTranslations = {
   nav: {
     submit: "জমা দিন",
     dashboard: "ড্যাশবোর্ড",
@@ -60,7 +60,7 @@ const bn: ForgeTranslations = {
     badgeApplied: "ব্যাজ ছাড় প্রযোজ্য হয়েছে",
     mostPopular: "সবচেয়ে জনপ্রিয়",
     perMonth: "/মাস",
-    getStarted: "বিনামূল্যে শুরু করুন",
+    getStartedFree: "বিনামূল্যে শুরু করুন",
     badgeInfoTitle: "ব্যাজ ছাড় আনলক করার উপায়",
     badgeInfoDesc: "আপনার সাইটের ফুটারে যেকোনো ব্যাজ প্রদর্শন করুন। Alfred প্রতিটি জমার সময় আপনার ফুটার স্ক্যান করে।"
   },

@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const tn: ForgeTranslations = {
+const tn: ForgePartialTranslations = {
   nav: {
     submit: "Romela",
     dashboard: "Dashboard",
@@ -60,7 +60,7 @@ const tn: ForgeTranslations = {
     badgeApplied: "Phokotso ya letshwao e dirilwe",
     mostPopular: "E ratwa thata",
     perMonth: "/kgwedi",
-    getStarted: "Simolola mahala",
+    getStartedFree: "Simolola mahala",
     badgeInfoTitle: "Tsela ya go bula diphokotso tsa letshwao",
     badgeInfoDesc: "Bontsha letshwao lefe kapa lefe mo footer ya saete ya gago. Alfred o sekaseka footer ya gago mo kopong nngwe le nngwe."
   },

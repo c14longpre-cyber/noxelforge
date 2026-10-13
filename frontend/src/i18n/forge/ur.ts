@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ur: ForgeTranslations = {
+const ur: ForgePartialTranslations = {
   nav: {
     submit: "جمع کروائیں",
     dashboard: "ڈیش بورڈ",
@@ -60,7 +60,7 @@ const ur: ForgeTranslations = {
     badgeApplied: "بیج کی چھوٹ لاگو ہو گئی",
     mostPopular: "سب سے مقبول",
     perMonth: "/ماہ",
-    getStarted: "مفت شروع کریں",
+    getStartedFree: "مفت شروع کریں",
     badgeInfoTitle: "بیج کی چھوٹ کیسے حاصل کریں",
     badgeInfoDesc: "اپنی سائٹ کے فوٹر میں کوئی بھی بیج لگائیں۔ Alfred ہر جمع کروانے پر آپ کا فوٹر اسکین کرتا ہے۔"
   },

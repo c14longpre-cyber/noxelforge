@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const sg: ForgeTranslations = {
+const sg: ForgePartialTranslations = {
   nav: {
     submit: "Tongana",
     dashboard: "Tableau de bord",
@@ -60,7 +60,7 @@ const sg: ForgeTranslations = {
     badgeApplied: "Réduction ti badge appliquée",
     mostPopular: "Populaire kolë",
     perMonth: "/nze",
-    getStarted: "Dëngbi vîra da",
+    getStartedFree: "Dëngbi vîra da",
     badgeInfoTitle: "Tongana réductions ti badge",
     badgeInfoDesc: "Veke badge niënga na footer ti site ti mo. Alfred scane footer ti mo na soumission niënga niënga."
   },

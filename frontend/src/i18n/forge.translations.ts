@@ -13,13 +13,31 @@ export type ForgeTranslations = {
   email: { magicLinkSubject: string; magicLinkTitle: string; magicLinkDesc: string; magicLinkCta: string; magicLinkExpiry: string; };
 }
 
-const modules = import.meta.glob<{ default: ForgeTranslations }>('./forge/*.ts');
+/**
+ * Dictionnaire d'une langue pas encore entièrement traduite : chaque section
+ * et chaque clé peuvent manquer. getForgeT complète avec l'anglais, pour
+ * qu'une clé absente affiche le texte anglais au lieu d'un vide.
+ */
+export type ForgePartialTranslations = {
+  [S in keyof ForgeTranslations]?: Partial<ForgeTranslations[S]>;
+};
+
+const modules = import.meta.glob<{ default: ForgeTranslations | ForgePartialTranslations }>('./forge/*.ts');
+
+function withEnglishFallback(en: ForgeTranslations, partial: ForgePartialTranslations): ForgeTranslations {
+  const merged = { ...en } as Record<keyof ForgeTranslations, unknown>;
+  for (const section of Object.keys(en) as (keyof ForgeTranslations)[]) {
+    merged[section] = { ...en[section], ...partial[section] };
+  }
+  const niches = { ...en.submit.niches, ...partial.submit?.niches };
+  return { ...(merged as ForgeTranslations), submit: { ...(merged.submit as ForgeTranslations['submit']), niches } };
+}
 
 export async function getForgeT(lang: string): Promise<ForgeTranslations> {
-  const key = `./forge/${lang}.ts`;
-  const loader = modules[key] ?? modules['./forge/en.ts'];
-  const mod = await loader();
-  return mod.default;
+  const en = (await modules['./forge/en.ts']()).default as ForgeTranslations;
+  const loader = modules[`./forge/${lang}.ts`];
+  if (!loader || lang === 'en') return en;
+  return withEnglishFallback(en, (await loader()).default);
 }
 
 export { LANGUAGES_115 };

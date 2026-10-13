@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ps: ForgeTranslations = {
+const ps: ForgePartialTranslations = {
   nav: {
     submit: "سپارل",
     dashboard: "ډشبورډ",
@@ -60,7 +60,7 @@ const ps: ForgeTranslations = {
     badgeApplied: "د بیج تخفیف پلی شو",
     mostPopular: "خورا مشهور",
     perMonth: "/میاشت",
-    getStarted: "وړیا پیل کړئ",
+    getStartedFree: "وړیا پیل کړئ",
     badgeInfoTitle: "د بیج تخفیفونه څنګه خلاص کړئ",
     badgeInfoDesc: "خپل سایټ فوټر کې هر بیج ښکاره کړئ. Alfred ستاسو فوټر د هرې سپارنې پر مهال سکن کوي."
   },

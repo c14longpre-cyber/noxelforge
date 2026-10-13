@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ay: ForgeTranslations = {
+const ay: ForgePartialTranslations = {
   nav: {
     submit: "Apanipxaña",
     dashboard: "Taqi ukar uñakipaña",
@@ -60,7 +60,7 @@ const ay: ForgeTranslations = {
     badgeApplied: "Arkata descuento luratayna",
     mostPopular: "Askiw mayt'ata",
     perMonth: "/phaxsi",
-    getStarted: "Janiw chaninikiti qalltaña",
+    getStartedFree: "Janiw chaninikiti qalltaña",
     badgeInfoTitle: "Kunjamasti arkata descuentonaka jarkt'aña",
     badgeInfoDesc: "Mayni arkata sitiomastxa footeraru churata. Alfred sapa apaniptawina footer ukar escaneyasiwa."
   },

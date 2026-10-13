@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const lv: ForgeTranslations = {
+const lv: ForgePartialTranslations = {
   nav: {
     submit: "Iesniegt",
     dashboard: "Vadības panelis",
@@ -60,7 +60,7 @@ const lv: ForgeTranslations = {
     badgeApplied: "Nozīmītes atlaide piemērota",
     mostPopular: "Vispopulārākais",
     perMonth: "/mēn.",
-    getStarted: "Sākt bez maksas",
+    getStartedFree: "Sākt bez maksas",
     badgeInfoTitle: "Kā atbloķēt nozīmīšu atlaides",
     badgeInfoDesc: "Rādiet jebkuru nozīmīti savas vietnes kājenē. Alfred skenē jūsu kājeni katrā iesniegumā."
   },

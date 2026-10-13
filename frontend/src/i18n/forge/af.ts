@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const af: ForgeTranslations = {
+const af: ForgePartialTranslations = {
   nav: {
     submit: "Indien",
     dashboard: "Kontroleskerm",
@@ -60,7 +60,7 @@ const af: ForgeTranslations = {
     badgeApplied: "Kenteken korting toegepas",
     mostPopular: "Mees gewild",
     perMonth: "/md",
-    getStarted: "Begin gratis",
+    getStartedFree: "Begin gratis",
     badgeInfoTitle: "Hoe om kenteken kortings te ontsluit",
     badgeInfoDesc: "Vertoon enige kenteken in die voetskrif van jou werf. Alfred skandeer jou voetskrif by elke indiening."
   },

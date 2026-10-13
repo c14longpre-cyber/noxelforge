@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const mi: ForgeTranslations = {
+const mi: ForgePartialTranslations = {
   nav: {
     submit: "Tuku",
     dashboard: "Papatohu",
@@ -60,7 +60,7 @@ const mi: ForgeTranslations = {
     badgeApplied: "Kua tāruatia te whakaheke tohu",
     mostPopular: "Tino rongonui",
     perMonth: "/marama",
-    getStarted: "Tīmata kore utu",
+    getStartedFree: "Tīmata kore utu",
     badgeInfoTitle: "Me pēhea te whakatuwhera i ngā whakaheke tohu",
     badgeInfoDesc: "Whakaaturia tētahi tohu ki raro o tō pae. Ka tirotiro a Alfred i tō raro i ia tukuanga."
   },

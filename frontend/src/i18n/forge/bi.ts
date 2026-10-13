@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const bi: ForgeTranslations = {
+const bi: ForgePartialTranslations = {
   nav: {
     submit: "Sanem",
     dashboard: "Dashboard",
@@ -60,7 +60,7 @@ const bi: ForgeTranslations = {
     badgeApplied: "Diskaont blong badge i applaed finis",
     mostPopular: "I populamost",
     perMonth: "/mo",
-    getStarted: "Statem fri",
+    getStartedFree: "Statem fri",
     badgeInfoTitle: "Hao blong openem ol diskaont blong badge",
     badgeInfoDesc: "Soem eni badge long futa blong saet blong yu. Alfred i skan futa blong yu long evri sabmisen."
   },

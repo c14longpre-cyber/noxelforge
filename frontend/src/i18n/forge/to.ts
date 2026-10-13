@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const to: ForgeTranslations = {
+const to: ForgePartialTranslations = {
   nav: {
     submit: "Tukuange",
     dashboard: "Papa Fakahinohino",
@@ -60,7 +60,7 @@ const to: ForgeTranslations = {
     badgeApplied: "Kuo fakahoko 'a e fakato'okosi pale",
     mostPopular: "Toe lahi ange 'a e ngaahi fa'a ngaue",
     perMonth: "/māhina",
-    getStarted: "Kamata ta'etotongi",
+    getStartedFree: "Kamata ta'etotongi",
     badgeInfoTitle: "Ko e founga ke hu ai ki he ngaahi fakato'okosi pale",
     badgeInfoDesc: "Fakahaa'i ha pale 'i he fasi 'o ho'o saiti. Ko Alfred 'oku ne sivi ho'o fasi 'i he tukuange kotoa."
   },

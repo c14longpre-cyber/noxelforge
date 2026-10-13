@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const si: ForgeTranslations = {
+const si: ForgePartialTranslations = {
   nav: {
     submit: "ඉදිරිපත් කරන්න",
     dashboard: "උපකරණ පුවරුව",
@@ -60,7 +60,7 @@ const si: ForgeTranslations = {
     badgeApplied: "බැජ් වට්ටම් යෙදී ඇත",
     mostPopular: "වඩාත් ජනප්රිය",
     perMonth: "/මා",
-    getStarted: "නොමිලේ ආරම්භ කරන්න",
+    getStartedFree: "නොමිලේ ආරම්භ කරන්න",
     badgeInfoTitle: "බැජ් වට්ටම් අගුළු අරිනේ කෙසේද",
     badgeInfoDesc: "ඔබේ අඩවියේ පාදකයේ ඕනෑම බැජ් එකක් දර්ශනය කරන්න. Alfred සෑම ඉදිරිපත් කිරීමකදීම ඔබේ පාදකය පරිලෝකනය කරයි."
   },

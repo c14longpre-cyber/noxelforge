@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const pt: ForgeTranslations = {
+const pt: ForgePartialTranslations = {
   nav: {
     submit: "Enviar",
     dashboard: "Painel",
@@ -60,7 +60,7 @@ const pt: ForgeTranslations = {
     badgeApplied: "Desconto do emblema aplicado",
     mostPopular: "Mais popular",
     perMonth: "/mês",
-    getStarted: "Comece gratuitamente",
+    getStartedFree: "Comece gratuitamente",
     badgeInfoTitle: "Como desbloquear descontos do emblema",
     badgeInfoDesc: "Exiba qualquer emblema no rodapé do seu site. Alfred verifica seu rodapé em cada envio."
   },

@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ko: ForgeTranslations = {
+const ko: ForgePartialTranslations = {
   nav: {
     submit: "제출",
     dashboard: "대시보드",
@@ -60,7 +60,7 @@ const ko: ForgeTranslations = {
     badgeApplied: "배지 할인 적용됨",
     mostPopular: "가장 인기 있는",
     perMonth: "/월",
-    getStarted: "무료로 시작하기",
+    getStartedFree: "무료로 시작하기",
     badgeInfoTitle: "배지 할인을 받는 방법",
     badgeInfoDesc: "사이트 푸터에 배지를 표시하세요. Alfred는 모든 제출 시 푸터를 스캔합니다."
   },

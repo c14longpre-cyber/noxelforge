@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const uk: ForgeTranslations = {
+const uk: ForgePartialTranslations = {
   nav: {
     submit: "Надіслати",
     dashboard: "Панель керування",
@@ -60,7 +60,7 @@ const uk: ForgeTranslations = {
     badgeApplied: "Знижку за бейдж застосовано",
     mostPopular: "Найпопулярніший",
     perMonth: "/міс",
-    getStarted: "Почати безкоштовно",
+    getStartedFree: "Почати безкоштовно",
     badgeInfoTitle: "Як розблокувати знижки за бейдж",
     badgeInfoDesc: "Розмістіть будь-який бейдж у футері свого сайту. Alfred сканує ваш футер при кожній заявці."
   },

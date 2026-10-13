@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const kl: ForgeTranslations = {
+const kl: ForgePartialTranslations = {
   nav: {
     submit: "Inatsit",
     dashboard: "Nalunaarsuiffiit",
@@ -60,7 +60,7 @@ const kl: ForgeTranslations = {
     badgeApplied: "Nalunaarsorpassuit kissaatissarsiorfigineqarsinnaasumik",
     mostPopular: "Kissaatigineqartoq amerlanerusoq",
     perMonth: "/qaam.",
-    getStarted: "Sumiiffillu aallartissavarpit",
+    getStartedFree: "Sumiiffillu aallartissavarpit",
     badgeInfoTitle: "Nalunaarsorpassuit kissaatissarsiorfigineqarsinnaanissaat pillugit",
     badgeInfoDesc: "Nalunaarsorpassuit nassatarisassaminni kissaatigineqartariaqarpoq. Alfred nassatarisassaminni inatsineqarsinnaasumik nalilersorpaa."
   },

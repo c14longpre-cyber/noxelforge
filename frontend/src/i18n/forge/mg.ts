@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const mg: ForgeTranslations = {
+const mg: ForgePartialTranslations = {
   nav: {
     submit: "Alefa",
     dashboard: "Tableau de bord",
@@ -60,7 +60,7 @@ const mg: ForgeTranslations = {
     badgeApplied: "Fihenam-bidy famantarana ampiharina",
     mostPopular: "Malaza indrindra",
     perMonth: "/volana",
-    getStarted: "Atombohy maimaimpoana",
+    getStartedFree: "Atombohy maimaimpoana",
     badgeInfoTitle: "Ahoana ny fomba hanokafana fihenam-bidy famantarana",
     badgeInfoDesc: "Asehoy famantarana iray amin'ny footer ny tranokala. Alfred mandinika ny footer amin'ny fandefasana rehetra."
   },

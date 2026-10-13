@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ja: ForgeTranslations = {
+const ja: ForgePartialTranslations = {
   nav: {
     submit: "送信",
     dashboard: "ダッシュボード",
@@ -60,7 +60,7 @@ const ja: ForgeTranslations = {
     badgeApplied: "バッジ割引が適用されました",
     mostPopular: "最も人気",
     perMonth: "/月",
-    getStarted: "無料で始める",
+    getStartedFree: "無料で始める",
     badgeInfoTitle: "バッジ割引の解除方法",
     badgeInfoDesc: "サイトのフッターにバッジを表示してください。Alfredは申請のたびにフッターをスキャンします。"
   },

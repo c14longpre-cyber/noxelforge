@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ta: ForgeTranslations = {
+const ta: ForgePartialTranslations = {
   nav: {
     submit: "சமர்ப்பி",
     dashboard: "டாஷ்போர்டு",
@@ -60,7 +60,7 @@ const ta: ForgeTranslations = {
     badgeApplied: "பதக்க தள்ளுபடி பயன்படுத்தப்பட்டது",
     mostPopular: "மிகவும் பிரபலமானது",
     perMonth: "/மாதம்",
-    getStarted: "இலவசமாக தொடங்குங்கள்",
+    getStartedFree: "இலவசமாக தொடங்குங்கள்",
     badgeInfoTitle: "பதக்க தள்ளுபடிகளை எப்படி அணைப்பது",
     badgeInfoDesc: "உங்கள் தளத்தின் அடிக்குறிப்பில் எந்த பதக்கத்தையும் காட்டுங்கள். Alfred ஒவ்வொரு சமர்ப்பிப்பிலும் உங்கள் அடிக்குறிப்பை ஸ்கேன் செய்கிறார்."
   },

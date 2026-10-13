@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const it: ForgeTranslations = {
+const it: ForgePartialTranslations = {
   nav: {
     submit: "Invia",
     dashboard: "Dashboard",
@@ -60,7 +60,7 @@ const it: ForgeTranslations = {
     badgeApplied: "Sconto badge applicato",
     mostPopular: "Più popolare",
     perMonth: "/mese",
-    getStarted: "Inizia gratis",
+    getStartedFree: "Inizia gratis",
     badgeInfoTitle: "Come sbloccare gli sconti badge",
     badgeInfoDesc: "Mostra qualsiasi badge nel footer del tuo sito. Alfred scansiona il tuo footer ad ogni invio."
   },

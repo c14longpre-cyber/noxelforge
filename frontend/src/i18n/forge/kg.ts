@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const kg: ForgeTranslations = {
+const kg: ForgePartialTranslations = {
   nav: {
     submit: "Tuma",
     dashboard: "Tableau ya bord",
@@ -60,7 +60,7 @@ const kg: ForgeTranslations = {
     badgeApplied: "Punguzo la badge limetumika",
     mostPopular: "Maarufu zaidi",
     perMonth: "/mwezi",
-    getStarted: "Anza bure",
+    getStartedFree: "Anza bure",
     badgeInfoTitle: "Jinsi ya kufungua punguzo za badge",
     badgeInfoDesc: "Onyesha badge yoyote kwenye footer ya saiti yako. Alfred achunguza footer yako kwa kila uwasilishaji."
   },

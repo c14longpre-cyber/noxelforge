@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ve: ForgeTranslations = {
+const ve: ForgePartialTranslations = {
   nav: {
     submit: "Tumiša",
     dashboard: "Dashibodi",
@@ -60,7 +60,7 @@ const ve: ForgeTranslations = {
     badgeApplied: "Tsireledzo ya tshitanda yo shumiswa",
     mostPopular: "Yo takalelwa nga vhazhinji",
     perMonth: "/ṅwedzi",
-    getStarted: "Thoma mahala",
+    getStartedFree: "Thoma mahala",
     badgeInfoTitle: "Nḓila ya u pfuka tsireledzo dza tshitanda",
     badgeInfoDesc: "Shumisa tshitanda tshine na tshine kha tsinde ya saiti yavho. Alfred u sedza tsinde yavho kha tumiša nngwe na nngwe."
   },

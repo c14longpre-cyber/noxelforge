@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ti: ForgeTranslations = {
+const ti: ForgePartialTranslations = {
   nav: {
     submit: "ኣቕርብ",
     dashboard: "ዳሽቦርድ",
@@ -60,7 +60,7 @@ const ti: ForgeTranslations = {
     badgeApplied: "ናይ ባጅ ቅናሽ ተተግቢሩ",
     mostPopular: "ዝበዝሐ ዝጥቀሙሉ",
     perMonth: "/ወርሒ",
-    getStarted: "ናጻ ጀምር",
+    getStartedFree: "ናጻ ጀምር",
     badgeInfoTitle: "ናይ ባጅ ቅናሽ ብኸመይ ኣልቅስ",
     badgeInfoDesc: "ኣብ ፉተር ሳይትካ ዝኾነ ባጅ ኣርኢ። Alfred ኣብ ነፍሲ ወከፍ ምቕራብ ፉተርካ ይስካን።"
   },

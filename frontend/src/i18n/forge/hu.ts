@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const hu: ForgeTranslations = {
+const hu: ForgePartialTranslations = {
   nav: {
     submit: "Beküldés",
     dashboard: "Irányítópult",
@@ -60,7 +60,7 @@ const hu: ForgeTranslations = {
     badgeApplied: "Jelvény kedvezmény alkalmazva",
     mostPopular: "Legnépszerűbb",
     perMonth: "/hó",
-    getStarted: "Kezdd el ingyen",
+    getStartedFree: "Kezdd el ingyen",
     badgeInfoTitle: "Hogyan oldhatod fel a jelvény kedvezményeket",
     badgeInfoDesc: "Jelenítsd meg bármelyik jelvényt az oldalad láblécében. Alfred minden beküldéskor megvizsgálja a láblécedet."
   },

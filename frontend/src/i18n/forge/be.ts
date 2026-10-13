@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const be: ForgeTranslations = {
+const be: ForgePartialTranslations = {
   nav: {
     submit: "Адправіць",
     dashboard: "Панэль кіравання",
@@ -60,7 +60,7 @@ const be: ForgeTranslations = {
     badgeApplied: "Зніжка за значок прыменена",
     mostPopular: "Найбольш папулярны",
     perMonth: "/мес",
-    getStarted: "Пачаць бясплатна",
+    getStartedFree: "Пачаць бясплатна",
     badgeInfoTitle: "Як разблакіраваць зніжкі за значок",
     badgeInfoDesc: "Разместзіце любы значок у ніжнім калонтытуле свайго сайта. Alfred сканіруе ваш ніжні калонтытул пры кожнай адпраўцы."
   },

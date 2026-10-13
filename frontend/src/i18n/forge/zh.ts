@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const zh: ForgeTranslations = {
+const zh: ForgePartialTranslations = {
   nav: {
     submit: "提交",
     dashboard: "控制台",
@@ -60,7 +60,7 @@ const zh: ForgeTranslations = {
     badgeApplied: "徽章折扣已应用",
     mostPopular: "最受欢迎",
     perMonth: "/月",
-    getStarted: "免费开始",
+    getStartedFree: "免费开始",
     badgeInfoTitle: "如何解锁徽章折扣",
     badgeInfoDesc: "在您网站的页脚展示任意徽章。Alfred 在每次提交时扫描您的页脚。"
   },

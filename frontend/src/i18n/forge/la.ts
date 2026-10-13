@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const la: ForgeTranslations = {
+const la: ForgePartialTranslations = {
   nav: {
     submit: "Submitte",
     dashboard: "Tabula gubernatoria",
@@ -60,7 +60,7 @@ const la: ForgeTranslations = {
     badgeApplied: "Concessio insignis applicata",
     mostPopular: "Maxime populare",
     perMonth: "/mens.",
-    getStarted: "Incipe gratis",
+    getStartedFree: "Incipe gratis",
     badgeInfoTitle: "Quomodo concessiones insignis recludi possunt",
     badgeInfoDesc: "Ostende quodlibet insigne in pede paginae situs tui. Alfred pedem paginae tuum in omni submissione explorat."
   },

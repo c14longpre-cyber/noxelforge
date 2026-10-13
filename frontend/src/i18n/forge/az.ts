@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const az: ForgeTranslations = {
+const az: ForgePartialTranslations = {
   nav: {
     submit: "Təqdim et",
     dashboard: "İdarə paneli",
@@ -60,7 +60,7 @@ const az: ForgeTranslations = {
     badgeApplied: "Nişan endirimi tətbiq edildi",
     mostPopular: "Ən populyar",
     perMonth: "/ay",
-    getStarted: "Pulsuz başlayın",
+    getStartedFree: "Pulsuz başlayın",
     badgeInfoTitle: "Nişan endiriminin kilidini necə açmaq olar",
     badgeInfoDesc: "Saytınızın altbilgisindəki istənilən nişanı nümayiş etdirin. Alfred hər təqdimetmədə altbilginizi skan edir."
   },

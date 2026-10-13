@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const eu: ForgeTranslations = {
+const eu: ForgePartialTranslations = {
   nav: {
     submit: "Bidali",
     dashboard: "Panela",
@@ -60,7 +60,7 @@ const eu: ForgeTranslations = {
     badgeApplied: "Txapa deskontua aplikatuta",
     mostPopular: "Ezagunena",
     perMonth: "/hil",
-    getStarted: "Hasi doan",
+    getStartedFree: "Hasi doan",
     badgeInfoTitle: "Nola desblokeatu txapa-deskontuak",
     badgeInfoDesc: "Erakutsi edozein txapa zure gunearen oinean. Alfred-ek zure oina eskaneatzen du bidalpen bakoitzean."
   },

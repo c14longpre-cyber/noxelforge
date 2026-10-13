@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const gn: ForgeTranslations = {
+const gn: ForgePartialTranslations = {
   nav: {
     submit: "Manda",
     dashboard: "Tembiapo renda",
@@ -60,7 +60,7 @@ const gn: ForgeTranslations = {
     badgeApplied: "Insignia descuento oñemboguapy",
     mostPopular: "Iporãvéva",
     perMonth: "/mes",
-    getStarted: "Eñepyrũ mbeguekatúpe",
+    getStartedFree: "Eñepyrũ mbeguekatúpe",
     badgeInfoTitle: "Mba'éicha eike insignia descuento-pe",
     badgeInfoDesc: "Ehecha oimeraẽva insignia ne roga pie-pe. Alfred ohecha ne roga pie oimeraẽva mandápe."
   },

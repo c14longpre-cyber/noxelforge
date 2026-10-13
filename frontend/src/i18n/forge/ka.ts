@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ka: ForgeTranslations = {
+const ka: ForgePartialTranslations = {
   nav: {
     submit: "გაგზავნა",
     dashboard: "პანელი",
@@ -60,7 +60,7 @@ const ka: ForgeTranslations = {
     badgeApplied: "ბეჯის ფასდაკლება გამოყენებულია",
     mostPopular: "ყველაზე პოპულარული",
     perMonth: "/თვე",
-    getStarted: "დაიწყე უფასოდ",
+    getStartedFree: "დაიწყე უფასოდ",
     badgeInfoTitle: "როგორ განბლოკო ბეჯის ფასდაკლებები",
     badgeInfoDesc: "გამოაჩინე ნებისმიერი ბეჯი შენი საიტის footer-ში. Alfred სკანირებს შენს footer-ს ყოველ განაცხადზე."
   },

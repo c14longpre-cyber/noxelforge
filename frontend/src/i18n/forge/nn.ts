@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const nn: ForgeTranslations = {
+const nn: ForgePartialTranslations = {
   nav: {
     submit: "Send inn",
     dashboard: "Dashbord",
@@ -60,7 +60,7 @@ const nn: ForgeTranslations = {
     badgeApplied: "Merkerabatt nytta",
     mostPopular: "Mest populær",
     perMonth: "/md",
-    getStarted: "Kom i gang gratis",
+    getStartedFree: "Kom i gang gratis",
     badgeInfoTitle: "Slik låser du opp merkerabattar",
     badgeInfoDesc: "Vis eit merke i botnteksten på sida di. Alfred skannar botnteksten din ved kvar innsending."
   },

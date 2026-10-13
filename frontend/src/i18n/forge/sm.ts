@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const sm: ForgeTranslations = {
+const sm: ForgePartialTranslations = {
   nav: {
     submit: "Tu'uina atu",
     dashboard: "Fa'atonu",
@@ -60,7 +60,7 @@ const sm: ForgeTranslations = {
     badgeApplied: "Ua fa'aogaina le tau fa'amalolo fa'ailoga",
     mostPopular: "Sili ona ta'uta'ua",
     perMonth: "/masina",
-    getStarted: "Amata fua",
+    getStartedFree: "Amata fua",
     badgeInfoTitle: "Fa'afefea ona tatalaina tau fa'amalolo fa'ailoga",
     badgeInfoDesc: "Fa'aali so'o se fa'ailoga i lalo o lau saite. E su'esu'e e Alfred lau lalo i tu'itu'iga uma."
   },

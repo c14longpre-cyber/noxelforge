@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const lu: ForgeTranslations = {
+const lu: ForgePartialTranslations = {
   nav: {
     submit: "Tuma",
     dashboard: "Tableau de bord",
@@ -60,7 +60,7 @@ const lu: ForgeTranslations = {
     badgeApplied: "Punguzo la beji limetumika",
     mostPopular: "Maarufu zaidi",
     perMonth: "/mwezi",
-    getStarted: "Anza bure",
+    getStartedFree: "Anza bure",
     badgeInfoTitle: "Jinsi ya kufungua punguzo za beji",
     badgeInfoDesc: "Onyesha beji yoyote kwenye kijachini cha tovuti yako. Alfred anaskanisha kijachini chako kwa kila uwasilishaji."
   },

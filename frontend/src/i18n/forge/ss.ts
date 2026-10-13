@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ss: ForgeTranslations = {
+const ss: ForgePartialTranslations = {
   nav: {
     submit: "Tfulatela",
     dashboard: "Ikhasi lekuphatha",
@@ -60,7 +60,7 @@ const ss: ForgeTranslations = {
     badgeApplied: "Isaphulelo sechibi sisebentile",
     mostPopular: "Letidume kakhulu",
     perMonth: "/inyanga",
-    getStarted: "Cala mahhala",
+    getStartedFree: "Cala mahhala",
     badgeInfoTitle: "Indlela yokuvula tisaphulelo tetichibi",
     badgeInfoDesc: "Bonisa noma yiliphi ichibi esineni sesayithi sakho. Alfred uhlola isicini sakho kuyo yonkhe iminikelo."
   },

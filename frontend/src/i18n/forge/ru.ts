@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ru: ForgeTranslations = {
+const ru: ForgePartialTranslations = {
   nav: {
     submit: "Отправить",
     dashboard: "Панель управления",
@@ -60,7 +60,7 @@ const ru: ForgeTranslations = {
     badgeApplied: "Скидка за значок применена",
     mostPopular: "Самый популярный",
     perMonth: "/мес",
-    getStarted: "Начать бесплатно",
+    getStartedFree: "Начать бесплатно",
     badgeInfoTitle: "Как разблокировать скидки за значок",
     badgeInfoDesc: "Разместите любой значок в подвале вашего сайта. Alfred сканирует подвал при каждой отправке заявки."
   },

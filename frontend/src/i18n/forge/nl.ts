@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const nl: ForgeTranslations = {
+const nl: ForgePartialTranslations = {
   nav: {
     submit: "Indienen",
     dashboard: "Dashboard",
@@ -60,7 +60,7 @@ const nl: ForgeTranslations = {
     badgeApplied: "Badgekorting toegepast",
     mostPopular: "Meest populair",
     perMonth: "/mnd",
-    getStarted: "Gratis aan de slag",
+    getStartedFree: "Gratis aan de slag",
     badgeInfoTitle: "Hoe badgekortingen ontgrendelen",
     badgeInfoDesc: "Toon een badge in de voettekst van jouw site. Alfred scant jouw voettekst bij elke inzending."
   },

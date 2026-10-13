@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const sq: ForgeTranslations = {
+const sq: ForgePartialTranslations = {
   nav: {
     submit: "Dërgo",
     dashboard: "Paneli",
@@ -60,7 +60,7 @@ const sq: ForgeTranslations = {
     badgeApplied: "Zbritja e distinktivit u aplikua",
     mostPopular: "Më i popullarizuar",
     perMonth: "/muaj",
-    getStarted: "Fillo falas",
+    getStartedFree: "Fillo falas",
     badgeInfoTitle: "Si të zhbllokosh zbritjet e distinktivit",
     badgeInfoDesc: "Shfaq çdo distinktiv në fund të faqes tënde. Alfred skanon fundin e faqes tënde me çdo dërgim."
   },

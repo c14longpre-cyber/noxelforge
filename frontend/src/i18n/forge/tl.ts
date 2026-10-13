@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const tl: ForgeTranslations = {
+const tl: ForgePartialTranslations = {
   nav: {
     submit: "Isumite",
     dashboard: "Dashboard",
@@ -60,7 +60,7 @@ const tl: ForgeTranslations = {
     badgeApplied: "Inilapat ang diskwento ng badge",
     mostPopular: "Pinaka-popular",
     perMonth: "/buwan",
-    getStarted: "Magsimula nang libre",
+    getStartedFree: "Magsimula nang libre",
     badgeInfoTitle: "Paano i-unlock ang mga diskwento ng badge",
     badgeInfoDesc: "Ipakita ang anumang badge sa footer ng iyong site. Ini-scan ni Alfred ang iyong footer sa bawat submission."
   },

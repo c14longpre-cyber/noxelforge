@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const hi: ForgeTranslations = {
+const hi: ForgePartialTranslations = {
   nav: {
     submit: "सबमिट करें",
     dashboard: "डैशबोर्ड",
@@ -60,7 +60,7 @@ const hi: ForgeTranslations = {
     badgeApplied: "बैज छूट लागू की गई",
     mostPopular: "सबसे लोकप्रिय",
     perMonth: "/माह",
-    getStarted: "मुफ़्त में शुरू करें",
+    getStartedFree: "मुफ़्त में शुरू करें",
     badgeInfoTitle: "बैज छूट कैसे अनलॉक करें",
     badgeInfoDesc: "अपनी साइट के फूटर में कोई भी बैज प्रदर्शित करें। Alfred हर सबमिशन पर आपके फूटर को स्कैन करता है।"
   },

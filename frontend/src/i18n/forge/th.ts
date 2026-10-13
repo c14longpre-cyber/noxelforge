@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const th: ForgeTranslations = {
+const th: ForgePartialTranslations = {
   nav: {
     submit: "ส่งเว็บไซต์",
     dashboard: "แดชบอร์ด",
@@ -60,7 +60,7 @@ const th: ForgeTranslations = {
     badgeApplied: "ส่วนลดแบดจ์ถูกนำไปใช้แล้ว",
     mostPopular: "ยอดนิยมที่สุด",
     perMonth: "/เดือน",
-    getStarted: "เริ่มต้นฟรี",
+    getStartedFree: "เริ่มต้นฟรี",
     badgeInfoTitle: "วิธีรับส่วนลดจากแบดจ์",
     badgeInfoDesc: "แสดงแบดจ์ใดก็ได้ในส่วนท้ายของเว็บไซต์คุณ Alfred จะสแกนส่วนท้ายของคุณในทุกการส่ง"
   },
