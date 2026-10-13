@@ -19,4 +19,9 @@ export default defineConfig([
       globals: globals.browser,
     },
   },
+  {
+    // Kit HUD copié tel quel depuis NOXEL Spectra (resynchronisable) : ne pas le modifier ici.
+    files: ['src/components/hud/**/*.{ts,tsx}'],
+    rules: { '@typescript-eslint/triple-slash-reference': 'off' },
+  },
 ])

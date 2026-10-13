@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { startRegistration, startAuthentication } from "@simplewebauthn/browser";
+import { HudButton } from "./hud/HudButton";
 
 const API_BASE = import.meta.env.VITE_API_URL ?? "";
 
@@ -79,21 +80,8 @@ export default function PasskeyButton({ onSuccess, onError }: Props) {
   if (mode === "idle") {
     return (
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        <button
-          type="button"
-          onClick={handleLogin}
-          disabled={loading}
-          style={{
-            width: "100%", padding: "12px", borderRadius: 10, border: "none",
-            background: "rgba(112,42,165,0.15)", color: "#a855f7",
-            fontWeight: 800, fontSize: 14, cursor: "pointer", fontFamily: "inherit",
-            outline: "1px solid rgba(112,42,165,0.3)",
-            display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
-          }}
-        >
-          <span style={{ fontSize: 18 }}>{"\u{1F511}"}</span>
-          {loading ? "Authenticating..." : "Sign in with Passkey"}
-        </button>
+        <HudButton action="continue" compact label="Sign in with Passkey" busy={loading} busyLabel="Authenticating..."
+          onClick={handleLogin} style={{ color: "#fff" }} />
         <button
           type="button"
           onClick={() => setMode("register")}
@@ -119,21 +107,8 @@ export default function PasskeyButton({ onSuccess, onError }: Props) {
         onKeyDown={(e) => e.key === "Enter" && handleRegister()}
         style={inputStyle}
       />
-      <button
-        type="button"
-        onClick={handleRegister}
-        disabled={loading || !email.trim()}
-        style={{
-          width: "100%", padding: "12px", borderRadius: 10, border: "none",
-          background: "rgba(112,42,165,0.15)", color: "#a855f7",
-          fontWeight: 800, fontSize: 14, cursor: "pointer", fontFamily: "inherit",
-          outline: "1px solid rgba(112,42,165,0.3)",
-          display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
-        }}
-      >
-        <span style={{ fontSize: 18 }}>{"\u{1F511}"}</span>
-        {loading ? "Setting up..." : "Create Passkey"}
-      </button>
+      <HudButton action="new-project" compact label="Create Passkey" busy={loading} busyLabel="Setting up..."
+        disabled={!email.trim()} onClick={handleRegister} style={{ color: "#fff" }} />
       <button
         type="button"
         onClick={() => setMode("idle")}

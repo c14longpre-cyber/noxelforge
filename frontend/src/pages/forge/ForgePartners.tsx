@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Footer from '../../components/Footer';
 import { Link } from 'react-router-dom';
+import HudRouterLink from '../../components/HudRouterLink';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const NICHES = ['SEO','Marketing','AI','E-commerce','Web Dev','Business','Design','Finance','Health','Education'];
@@ -53,7 +54,7 @@ export default function ForgePartners() {
           <span style={{ color: 'var(--soft)' }}>·</span>
           <span style={{ fontWeight: 900, fontSize: 15 }}>Forge Partners</span>
         </div>
-        <Link to="/forge/submit" className="nx-pill" style={{ padding: '7px 16px', fontSize: 13 }}>+ Submit</Link>
+        <HudRouterLink to="/forge/submit" action="new-project" compact label="Submit" />
       </nav>
 
       <div style={{ maxWidth: 960, margin: '0 auto', padding: '32px 32px 80px' }}>
@@ -112,7 +113,7 @@ export default function ForgePartners() {
           <div className="nx-card" style={{ textAlign: 'center', padding: 60 }}>
             <div style={{ fontSize: 40, marginBottom: 12 }}>🤝</div>
             <div style={{ fontWeight: 800, marginBottom: 8, fontSize: 15 }}>No partners in this niche yet</div>
-            <Link to="/forge/submit" className="nx-pill" style={{ display: 'inline-block', marginTop: 16 }}>Submit my site</Link>
+            <HudRouterLink to="/forge/submit" action="new-project" compact label="Submit my site" style={{ marginTop: 16 }} />
           </div>
         ) : (
           <div style={{ display: 'grid', gap: 10 }}>

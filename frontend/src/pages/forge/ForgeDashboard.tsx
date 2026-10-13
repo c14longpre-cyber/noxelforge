@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { HudButton } from '../../components/hud/HudButton';
+import HudRouterLink from '../../components/HudRouterLink';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const TIER_COLORS: Record<string, string> = { bronze: '#CD7F32', silver: '#A8A9AD', gold: '#FFD700', platinum: '#E5E4E2', diamond: '#B9F2FF' };
@@ -90,9 +92,7 @@ export default function ForgeDashboard() {
           `}</style>
         </div>
         {joinError && <div style={{ color: 'var(--danger)', fontSize: 13 }}>{joinError}</div>}
-        <button onClick={handleJoin} disabled={joining} className="nx-pill" style={{ width: '100%', padding: '12px', fontSize: 14, cursor: joining ? 'wait' : 'pointer' }}>
-          {joining ? 'Joining...' : 'Join Forge'}
-        </button>
+        <HudButton action="continue" compact label="Join Forge" busy={joining} busyLabel="Joining..." onClick={handleJoin} />
       </div>
     </div>
   );
@@ -122,7 +122,7 @@ export default function ForgeDashboard() {
             <span>{statut.membre.tier_abonnement}</span>
             {statut.membre.tier_abonnement !== 'diamond' && <span style={{ opacity: 0.7 }}> · Upgrade ↗</span>}
           </Link>
-          <Link to="/forge/submit" className="nx-pill" style={{ padding: '7px 16px', fontSize: 13 }}>+ Submit</Link>
+          <HudRouterLink to="/forge/submit" action="new-project" compact label="Submit" />
         </div>
       </nav>
 
@@ -168,9 +168,7 @@ export default function ForgeDashboard() {
             <div style={{ fontSize: 20, fontWeight: 900, color: badge?.statut === 'verifie' ? 'var(--ok)' : badge?.statut === 'grace' ? 'var(--warn)' : 'var(--danger)', lineHeight: 1 }}>
               {badge?.statut === 'verifie' ? '✅ Verified' : badge?.statut === 'grace' ? '⚠️ Grace' : '❌ Missing'}
             </div>
-            <button onClick={verifierBadge} disabled={verifyingBadge} style={{ marginTop: 10, background: 'var(--g-dim)', color: 'var(--g)', border: '1px solid var(--g-border)', borderRadius: 8, padding: '5px 12px', cursor: 'pointer', fontSize: 11, fontWeight: 700 }}>
-              {verifyingBadge ? 'Checking...' : 'Verify badge'}
-            </button>
+            <HudButton action="ok" compact label="Verify badge" busy={verifyingBadge} busyLabel="Checking..." onClick={verifierBadge} style={{ marginTop: 10 }} />
             {badgeMsg && <div style={{ marginTop: 6, fontSize: 11, color: 'var(--muted)' }}>{badgeMsg}</div>}
           </div>
         </div>

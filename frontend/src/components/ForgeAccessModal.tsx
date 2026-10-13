@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useAuthStore } from "../auth/AuthStore";
 import PasskeyButton from "./PasskeyButton";
+import { HudButton } from "./hud/HudButton";
 
 declare global {
   interface Window {
@@ -270,11 +271,8 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
                 <input type="email" value={magicEmail} onChange={(e) => setMagicEmail(e.target.value)}
                   placeholder="your@email.com" onKeyDown={(e) => e.key === "Enter" && handleMagicLink()} style={inputStyle} />
                 {magicMessage && <div style={{ fontSize: 12, color: "#ff5c7a", padding: "8px 12px", background: "rgba(255,92,122,0.08)", borderRadius: 8, border: "1px solid rgba(255,92,122,0.2)" }}>{magicMessage}</div>}
-                <button type="button" onClick={handleMagicLink} disabled={magicStatus === "loading" || !magicEmail.trim()} style={{
-                  width: "100%", padding: "13px", borderRadius: 10, border: "none",
-                  background: "rgba(60,222,106,0.15)", color: "#3ddc84", fontWeight: 800, fontSize: 14,
-                  cursor: "pointer", fontFamily: "inherit", outline: "1px solid rgba(60,222,106,0.3)",
-                }}>{magicStatus === "loading" ? "Sending..." : "Send Magic Link"}</button>
+                <HudButton action="continue" compact label="Send Magic Link" busy={magicStatus === "loading"} busyLabel="Sending..."
+                  disabled={!magicEmail.trim()} onClick={handleMagicLink} style={{ color: "#fff" }} />
               </div>
             )}
           </>
@@ -299,11 +297,9 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
               <input type="email" value={emailAddr} onChange={(e) => setEmailAddr(e.target.value)} placeholder="your@email.com" onKeyDown={(e) => e.key === "Enter" && handleEmailAuth()} style={inputStyle} />
               <input type="password" value={emailPass} onChange={(e) => setEmailPass(e.target.value)} placeholder="Password (min 6 characters)" onKeyDown={(e) => e.key === "Enter" && handleEmailAuth()} style={inputStyle} />
               {emailError && <div style={{ fontSize: 12, color: "#ff5c7a", padding: "8px 12px", background: "rgba(255,92,122,0.08)", borderRadius: 8, border: "1px solid rgba(255,92,122,0.2)" }}>{emailError}</div>}
-              <button type="button" onClick={handleEmailAuth} disabled={emailLoading} style={{
-                width: "100%", padding: "13px", borderRadius: 10, border: "none",
-                background: "rgba(60,222,106,0.15)", color: "#3ddc84", fontWeight: 800, fontSize: 14,
-                cursor: emailLoading ? "not-allowed" : "pointer", fontFamily: "inherit", outline: "1px solid rgba(60,222,106,0.3)",
-              }}>{emailLoading ? "Please wait..." : emailMode === "login" ? "Sign In" : "Create Account"}</button>
+              <HudButton action={emailMode === "login" ? "continue" : "new-project"} compact
+                label={emailMode === "login" ? "Sign In" : "Create Account"} busy={emailLoading} busyLabel="Please wait..."
+                onClick={handleEmailAuth} style={{ color: "#fff" }} />
             </div>
           </>
         )}
