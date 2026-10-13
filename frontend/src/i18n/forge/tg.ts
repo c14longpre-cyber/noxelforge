@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const tg: ForgeTranslations = {
+const tg: ForgePartialTranslations = {
   nav: {
     submit: "Ирсол кардан",
     dashboard: "Панели идоракунӣ",
@@ -60,7 +60,7 @@ const tg: ForgeTranslations = {
     badgeApplied: "Тахфифи нишон татбиқ карда шуд",
     mostPopular: "Маъмултарин",
     perMonth: "/моҳ",
-    getStarted: "Ройгон оғоз кунед",
+    getStartedFree: "Ройгон оғоз кунед",
     badgeInfoTitle: "Чӣ тавр тахфифҳои нишонро кушоед",
     badgeInfoDesc: "Ҳар нишонеро дар поёни сайти худ ҷойгир кунед. Alfred поёни шуморо дар ҳар пешниҳод скан мекунад."
   },

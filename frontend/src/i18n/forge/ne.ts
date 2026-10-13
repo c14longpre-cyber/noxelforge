@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ne: ForgeTranslations = {
+const ne: ForgePartialTranslations = {
   nav: {
     submit: "पेश गर्नुहोस्",
     dashboard: "ड्यासबोर्ड",
@@ -60,7 +60,7 @@ const ne: ForgeTranslations = {
     badgeApplied: "ब्याज छुट लागू गरियो",
     mostPopular: "सबैभन्दा लोकप्रिय",
     perMonth: "/महिना",
-    getStarted: "निःशुल्क सुरु गर्नुहोस्",
+    getStartedFree: "निःशुल्क सुरु गर्नुहोस्",
     badgeInfoTitle: "ब्याज छुट कसरी अनलक गर्ने",
     badgeInfoDesc: "आफ्नो साइटको फुटरमा कुनै पनि ब्याज प्रदर्शन गर्नुहोस्। Alfred ले प्रत्येक सबमिसनमा तपाईंको फुटर स्क्यान गर्छ।"
   },

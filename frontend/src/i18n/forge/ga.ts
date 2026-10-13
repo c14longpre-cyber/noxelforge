@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ga: ForgeTranslations = {
+const ga: ForgePartialTranslations = {
   nav: {
     submit: "Cuir isteach",
     dashboard: "Deais",
@@ -60,7 +60,7 @@ const ga: ForgeTranslations = {
     badgeApplied: "Lascaine suaitheantas curtha i bhfeidhm",
     mostPopular: "Is mó tóir",
     perMonth: "/mí",
-    getStarted: "Tosaigh saor in aisce",
+    getStartedFree: "Tosaigh saor in aisce",
     badgeInfoTitle: "Conas lascainí suaitheantas a dhíghlasáil",
     badgeInfoDesc: "Taispeáin aon suaitheantas i gcochall do shuíomh. Scanann Alfred do chochall ar gach aighneacht."
   },

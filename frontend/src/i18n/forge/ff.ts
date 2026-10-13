@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ff: ForgeTranslations = {
+const ff: ForgePartialTranslations = {
   nav: {
     submit: "Natta",
     dashboard: "Deftere",
@@ -60,7 +60,7 @@ const ff: ForgeTranslations = {
     badgeApplied: "Tiifan kawrital waɗaama",
     mostPopular: "Moƴƴniiɗo fota",
     perMonth: "/lew",
-    getStarted: "Fuɗɗit ko woodi",
+    getStartedFree: "Fuɗɗit ko woodi",
     badgeInfoTitle: "Hol to tiifannooji kawrital udditee",
     badgeInfoDesc: "Hollu kawrital kala to bowre geɗal maa. Alfred seertoo bowre maa to nattugol kala."
   },

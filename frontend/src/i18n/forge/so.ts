@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const so: ForgeTranslations = {
+const so: ForgePartialTranslations = {
   nav: {
     submit: "Gudbi",
     dashboard: "Xarunta Xogta",
@@ -60,7 +60,7 @@ const so: ForgeTranslations = {
     badgeApplied: "Dhimista calaamadda la dabaqay",
     mostPopular: "Ugu caansan",
     perMonth: "/bil",
-    getStarted: "Bilow bilaash",
+    getStartedFree: "Bilow bilaash",
     badgeInfoTitle: "Sida loo furo dhimisyada calaamadda",
     badgeInfoDesc: "Soo bandhig calaamad kasta footer goobtagaaga. Alfred wuxuu baadha footerkaaga gudbinta kasta."
   },

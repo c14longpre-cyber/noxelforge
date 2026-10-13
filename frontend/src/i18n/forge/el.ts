@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const el: ForgeTranslations = {
+const el: ForgePartialTranslations = {
   nav: {
     submit: "Υποβολή",
     dashboard: "Πίνακας Ελέγχου",
@@ -60,7 +60,7 @@ const el: ForgeTranslations = {
     badgeApplied: "Εφαρμόστηκε έκπτωση σήματος",
     mostPopular: "Πιο δημοφιλές",
     perMonth: "/μήνα",
-    getStarted: "Ξεκινήστε δωρεάν",
+    getStartedFree: "Ξεκινήστε δωρεάν",
     badgeInfoTitle: "Πώς να ξεκλειδώσετε εκπτώσεις σήματος",
     badgeInfoDesc: "Εμφανίστε οποιοδήποτε σήμα στο υποσέλιδο του ιστότοπού σας. Ο Alfred σαρώνει το υποσέλιδό σας σε κάθε υποβολή."
   },

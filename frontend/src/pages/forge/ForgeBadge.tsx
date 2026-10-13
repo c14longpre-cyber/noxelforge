@@ -46,7 +46,7 @@ const getBadges = (t: any) => [
   },
 ];
 
-function getBadgeHTML(badge: typeof BADGES[0], baseUrl: string): string {
+function getBadgeHTML(badge: ReturnType<typeof getBadges>[number], baseUrl: string): string {
   return `<a href="${badge.link}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;background:#07090f;border:1px solid ${badge.borderColor};border-radius:10px;padding:10px 16px;text-decoration:none;">
   <img src="${baseUrl}${badge.image}" width="32" height="32" style="object-fit:contain;" alt="${badge.label}" />
   <div>

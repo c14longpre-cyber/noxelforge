@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const sw: ForgeTranslations = {
+const sw: ForgePartialTranslations = {
   nav: {
     submit: "Wasilisha",
     dashboard: "Dashibodi",
@@ -60,7 +60,7 @@ const sw: ForgeTranslations = {
     badgeApplied: "Punguzo la beji limetumika",
     mostPopular: "Maarufu zaidi",
     perMonth: "/mwezi",
-    getStarted: "Anza bila malipo",
+    getStartedFree: "Anza bila malipo",
     badgeInfoTitle: "Jinsi ya kufungua punguzo za beji",
     badgeInfoDesc: "Onyesha beji yoyote kwenye sehemu ya chini ya tovuti yako. Alfred anascan sehemu ya chini yako kwa kila uwasilishaji."
   },

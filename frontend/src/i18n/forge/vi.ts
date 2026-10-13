@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const vi: ForgeTranslations = {
+const vi: ForgePartialTranslations = {
   nav: {
     submit: "Gửi bài",
     dashboard: "Bảng điều khiển",
@@ -60,7 +60,7 @@ const vi: ForgeTranslations = {
     badgeApplied: "Đã áp dụng giảm giá huy hiệu",
     mostPopular: "Phổ biến nhất",
     perMonth: "/tháng",
-    getStarted: "Bắt đầu miễn phí",
+    getStartedFree: "Bắt đầu miễn phí",
     badgeInfoTitle: "Cách mở khóa giảm giá huy hiệu",
     badgeInfoDesc: "Hiển thị bất kỳ huy hiệu nào ở chân trang web của bạn. Alfred quét chân trang của bạn trong mỗi lần gửi bài."
   },

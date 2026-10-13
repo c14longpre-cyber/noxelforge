@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const mh: ForgeTranslations = {
+const mh: ForgePartialTranslations = {
   nav: {
     submit: "Jibwe",
     dashboard: "Dashboard",
@@ -60,7 +60,7 @@ const mh: ForgeTranslations = {
     badgeApplied: "Badge discount ear jibaddek",
     mostPopular: "Ej popular tata",
     perMonth: "/jiṃon",
-    getStarted: "Jinoin wōt ejjeļọk wōnāān",
+    getStartedFree: "Jinoin wōt ejjeļọk wōnāān",
     badgeInfoTitle: "Ewi iien bwe en bōk badge discounts",
     badgeInfoDesc: "Kwaḷọk badge eo ilo footer am site. Alfred ej scan am footer ilo submission ninja."
   },

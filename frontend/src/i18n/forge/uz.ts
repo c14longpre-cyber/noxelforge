@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const uz: ForgeTranslations = {
+const uz: ForgePartialTranslations = {
   nav: {
     submit: "Yuborish",
     dashboard: "Boshqaruv paneli",
@@ -60,7 +60,7 @@ const uz: ForgeTranslations = {
     badgeApplied: "Nishon chegirmasi qo'llanildi",
     mostPopular: "Eng mashhur",
     perMonth: "/oy",
-    getStarted: "Bepul boshlash",
+    getStartedFree: "Bepul boshlash",
     badgeInfoTitle: "Nishon chegirmalarini qanday ochish mumkin",
     badgeInfoDesc: "Saytingizning pastki qismiga istalgan nishonni joylashtiring. Alfred har bir yuborishda pastki qismingizni skanlab chiqadi."
   },

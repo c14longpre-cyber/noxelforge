@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ku: ForgeTranslations = {
+const ku: ForgePartialTranslations = {
   nav: {
     submit: "ناردن",
     dashboard: "داشبۆرد",
@@ -60,7 +60,7 @@ const ku: ForgeTranslations = {
     badgeApplied: "داشکاندنی نیشانە جێبەجێ کرا",
     mostPopular: "بەناوبانگترین",
     perMonth: "/مانگ",
-    getStarted: "بەخۆڕایی دەست پێبکە",
+    getStartedFree: "بەخۆڕایی دەست پێبکە",
     badgeInfoTitle: "چۆن داشکاندنی نیشانە بکەرەوە",
     badgeInfoDesc: "هەر نیشانەیەک لە فووتەری ماڵپەڕەکەت پیشان بدە. Alfred فووتەرەکەت لە هەر ناردنێک سکان دەکات."
   },

@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ky: ForgeTranslations = {
+const ky: ForgePartialTranslations = {
   nav: {
     submit: "Жөнөтүү",
     dashboard: "Башкаруу панели",
@@ -60,7 +60,7 @@ const ky: ForgeTranslations = {
     badgeApplied: "Белги арзандатуусу колдонулду",
     mostPopular: "Эң популярдуу",
     perMonth: "/ай",
-    getStarted: "Акысыз баштоо",
+    getStartedFree: "Акысыз баштоо",
     badgeInfoTitle: "Белги арзандатууларын кантип ачуу керек",
     badgeInfoDesc: "Сайтыңыздын футерине каалаган белгини орнотуңуз. Alfred ар бир жөнөтүүдө футериңизди сканерлейт."
   },

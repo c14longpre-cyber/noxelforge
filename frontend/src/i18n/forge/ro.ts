@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ro: ForgeTranslations = {
+const ro: ForgePartialTranslations = {
   nav: {
     submit: "Trimite",
     dashboard: "Panou de control",
@@ -60,7 +60,7 @@ const ro: ForgeTranslations = {
     badgeApplied: "Reducerea pentru insignă aplicată",
     mostPopular: "Cel mai popular",
     perMonth: "/lună",
-    getStarted: "Începe gratuit",
+    getStartedFree: "Începe gratuit",
     badgeInfoTitle: "Cum să deblochezi reducerile pentru insigne",
     badgeInfoDesc: "Afișează orice insignă în subsolul site-ului tău. Alfred scanează subsolul la fiecare trimitere."
   },

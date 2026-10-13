@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const cs: ForgeTranslations = {
+const cs: ForgePartialTranslations = {
   nav: {
     submit: "Odeslat",
     dashboard: "Přehled",
@@ -60,7 +60,7 @@ const cs: ForgeTranslations = {
     badgeApplied: "Sleva za odznak uplatněna",
     mostPopular: "Nejoblíbenější",
     perMonth: "/měs",
-    getStarted: "Začít zdarma",
+    getStartedFree: "Začít zdarma",
     badgeInfoTitle: "Jak odemknout slevy za odznak",
     badgeInfoDesc: "Zobrazte libovolný odznak v patičce svého webu. Alfred skenuje vaši patičku při každém odeslání."
   },

@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const mt: ForgeTranslations = {
+const mt: ForgePartialTranslations = {
   nav: {
     submit: "Ibgħat",
     dashboard: "Dashboard",
@@ -60,7 +60,7 @@ const mt: ForgeTranslations = {
     badgeApplied: "Skont tal-badge applikat",
     mostPopular: "L-aktar popolari",
     perMonth: "/xahar",
-    getStarted: "Ibda b'xejn",
+    getStartedFree: "Ibda b'xejn",
     badgeInfoTitle: "Kif tiflaħ l-iskontijiet tal-badge",
     badgeInfoDesc: "Uri kwalunkwe badge fil-footer tas-sit tiegħek. Alfred jiskanerja l-footer tiegħek fuq kull sottomissjoni."
   },

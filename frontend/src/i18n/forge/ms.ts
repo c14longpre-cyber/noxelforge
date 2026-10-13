@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ms: ForgeTranslations = {
+const ms: ForgePartialTranslations = {
   nav: {
     submit: "Hantar",
     dashboard: "Papan Pemuka",
@@ -60,7 +60,7 @@ const ms: ForgeTranslations = {
     badgeApplied: "Diskaun lencana telah digunakan",
     mostPopular: "Paling popular",
     perMonth: "/bln",
-    getStarted: "Mulakan secara percuma",
+    getStartedFree: "Mulakan secara percuma",
     badgeInfoTitle: "Cara membuka kunci diskaun lencana",
     badgeInfoDesc: "Paparkan mana-mana lencana di bahagian footer laman anda. Alfred mengimbas footer anda pada setiap penghantaran."
   },

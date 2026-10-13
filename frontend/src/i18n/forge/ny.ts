@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ny: ForgeTranslations = {
+const ny: ForgePartialTranslations = {
   nav: {
     submit: "Tumiza",
     dashboard: "Dashibodi",
@@ -60,7 +60,7 @@ const ny: ForgeTranslations = {
     badgeApplied: "Diskawunti ya chizindikiro yagwiritsidwa ntchito",
     mostPopular: "Wokondedwa kwambiri",
     perMonth: "/mwezi",
-    getStarted: "Yamba kwaulere",
+    getStartedFree: "Yamba kwaulere",
     badgeInfoTitle: "Momwe mungatsegulire diskawunti ya chizindikiro",
     badgeInfoDesc: "Onetsa chizindikiro chilichonse pa folder ya saiti yako. Alfred amafufuza folder yako pa ndemanga iliyonse."
   },

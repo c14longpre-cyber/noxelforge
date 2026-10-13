@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const sr: ForgeTranslations = {
+const sr: ForgePartialTranslations = {
   nav: {
     submit: "Pošalji",
     dashboard: "Kontrolna tabla",
@@ -60,7 +60,7 @@ const sr: ForgeTranslations = {
     badgeApplied: "Popust za značku primenjen",
     mostPopular: "Najpopularnije",
     perMonth: "/mes",
-    getStarted: "Počnite besplatno",
+    getStartedFree: "Počnite besplatno",
     badgeInfoTitle: "Kako otključati popuste za značku",
     badgeInfoDesc: "Prikažite bilo koju značku u podnožju svog sajta. Alfred skenira vaše podnožje pri svakom slanju."
   },

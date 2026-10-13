@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const km: ForgeTranslations = {
+const km: ForgePartialTranslations = {
   nav: {
     submit: "ដាក់ស្នើ",
     dashboard: "ផ្ទាំងគ្រប់គ្រង",
@@ -60,7 +60,7 @@ const km: ForgeTranslations = {
     badgeApplied: "ការបញ្ចុះតម្លៃបាដហ្សត្រូវបានអនុវត្ត",
     mostPopular: "ពេញនិយមបំផុត",
     perMonth: "/ខែ",
-    getStarted: "ចាប់ផ្តើមដោយឥតគិតថ្លៃ",
+    getStartedFree: "ចាប់ផ្តើមដោយឥតគិតថ្លៃ",
     badgeInfoTitle: "របៀបដោះសោការបញ្ចុះតម្លៃបាដហ្ស",
     badgeInfoDesc: "បង្ហាញបាដហ្សណាមួយនៅក្នុង footer គេហទំព័ររបស់អ្នក។ Alfred ស្កេន footer របស់អ្នកនៅការដាក់ស្នើរាល់លើក។"
   },

@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const mn: ForgeTranslations = {
+const mn: ForgePartialTranslations = {
   nav: {
     submit: "Илгээх",
     dashboard: "Хяналтын самбар",
@@ -60,7 +60,7 @@ const mn: ForgeTranslations = {
     badgeApplied: "Тэмдгийн хөнгөлөлт хэрэглэгдсэн",
     mostPopular: "Хамгийн их сонгодог",
     perMonth: "/сар",
-    getStarted: "Үнэгүй эхлэх",
+    getStartedFree: "Үнэгүй эхлэх",
     badgeInfoTitle: "Тэмдгийн хөнгөлөлтийг хэрхэн нээх вэ",
     badgeInfoDesc: "Сайтынхаа footer-т аль нэг тэмдгийг байрлуул. Alfred илгээлт бүрт таны footer-ийг сканнердана."
   },

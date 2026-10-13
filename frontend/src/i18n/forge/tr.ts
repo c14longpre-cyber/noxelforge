@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const tr: ForgeTranslations = {
+const tr: ForgePartialTranslations = {
   nav: {
     submit: "Gönder",
     dashboard: "Kontrol Paneli",
@@ -60,7 +60,7 @@ const tr: ForgeTranslations = {
     badgeApplied: "Rozet indirimi uygulandı",
     mostPopular: "En popüler",
     perMonth: "/ay",
-    getStarted: "Ücretsiz başlayın",
+    getStartedFree: "Ücretsiz başlayın",
     badgeInfoTitle: "Rozet indirimleri nasıl açılır",
     badgeInfoDesc: "Sitenizin altbilgisine herhangi bir rozet ekleyin. Alfred her başvuruda altbilginizi tarar."
   },

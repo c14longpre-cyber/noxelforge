@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const xh: ForgeTranslations = {
+const xh: ForgePartialTranslations = {
   nav: {
     submit: "Faka",
     dashboard: "Ibhodi yolawulo",
@@ -60,7 +60,7 @@ const xh: ForgeTranslations = {
     badgeApplied: "Iskonto sebheji sisebenzisiwe",
     mostPopular: "Eyaziwayo kakhulu",
     perMonth: "/iny",
-    getStarted: "Qala simahla",
+    getStartedFree: "Qala simahla",
     badgeInfoTitle: "Indlela yokuvula iiskonto zebheji",
     badgeInfoDesc: "Bonisa nayiphi na ibheji kwifutha lesayithi sakho. Alfred uskena ifutha lakho kwifakelo nganye."
   },

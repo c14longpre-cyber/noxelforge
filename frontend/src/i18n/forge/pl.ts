@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const pl: ForgeTranslations = {
+const pl: ForgePartialTranslations = {
   nav: {
     submit: "Prześlij",
     dashboard: "Panel",
@@ -60,7 +60,7 @@ const pl: ForgeTranslations = {
     badgeApplied: "Zniżka za odznakę zastosowana",
     mostPopular: "Najpopularniejszy",
     perMonth: "/mies.",
-    getStarted: "Zacznij za darmo",
+    getStartedFree: "Zacznij za darmo",
     badgeInfoTitle: "Jak odblokować zniżki za odznakę",
     badgeInfoDesc: "Wyświetl dowolną odznakę w stopce swojej strony. Alfred skanuje Twoją stopkę przy każdym zgłoszeniu."
   },

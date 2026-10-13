@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const na: ForgeTranslations = {
+const na: ForgePartialTranslations = {
   nav: {
     submit: "Wiawi",
     dashboard: "Daborod",
@@ -60,7 +60,7 @@ const na: ForgeTranslations = {
     badgeApplied: "Irau baj iwiawi",
     mostPopular: "Inaroaro",
     perMonth: "/mak",
-    getStarted: "Ongɨ nɨkɨ tsuri",
+    getStartedFree: "Ongɨ nɨkɨ tsuri",
     badgeInfoTitle: "Anɨ kabwir irau baj buobuot",
     badgeInfoDesc: "Bikin baj ariri amen futer wab itɨm. Alfred irɨir futer itɨm anen wiawi ariri."
   },

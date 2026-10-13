@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const sn: ForgeTranslations = {
+const sn: ForgePartialTranslations = {
   nav: {
     submit: "Tumira",
     dashboard: "Dhashibhodi",
@@ -60,7 +60,7 @@ const sn: ForgeTranslations = {
     badgeApplied: "Dhisikaundi yebadge yashandiswa",
     mostPopular: "Inodikanwa zvakanyanya",
     perMonth: "/mwedzi",
-    getStarted: "Tanga mahara",
+    getStartedFree: "Tanga mahara",
     badgeInfoTitle: "Maitiro ekuzarura dhisikaundi dzebadge",
     badgeInfoDesc: "Ratidza badge ipi zvayo mufuta wesaiti yako. Alfred anotsvaira futa rako pane chitumiro chega chega."
   },

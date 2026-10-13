@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const tk: ForgeTranslations = {
+const tk: ForgePartialTranslations = {
   nav: {
     submit: "Ibermek",
     dashboard: "Dolandyryş paneli",
@@ -60,7 +60,7 @@ const tk: ForgeTranslations = {
     badgeApplied: "Nyşan arzanlygy ulanyldy",
     mostPopular: "Iň meşhur",
     perMonth: "/aý",
-    getStarted: "Mugt başlaň",
+    getStartedFree: "Mugt başlaň",
     badgeInfoTitle: "Nyşan arzanlygyny nädip açmaly",
     badgeInfoDesc: "Saýtyňyzyň aşagyndaky bölümde islendik nyşany görkeziň. Alfred her iberilişde aşagyndaky bölümiňizi skanlaýar."
   },

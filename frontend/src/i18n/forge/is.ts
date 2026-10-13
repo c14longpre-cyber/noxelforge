@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const is: ForgeTranslations = {
+const is: ForgePartialTranslations = {
   nav: {
     submit: "Senda inn",
     dashboard: "Stjórnborð",
@@ -60,7 +60,7 @@ const is: ForgeTranslations = {
     badgeApplied: "Merkjaafsláttur virkur",
     mostPopular: "Vinsælast",
     perMonth: "/mán",
-    getStarted: "Byrjaðu ókeypis",
+    getStartedFree: "Byrjaðu ókeypis",
     badgeInfoTitle: "Hvernig á að opna merkjaafslætti",
     badgeInfoDesc: "Birtu eitthvert merki í fæti síðunnar þinnar. Alfred skannar fætinn þinn við hverja innsendingu."
   },

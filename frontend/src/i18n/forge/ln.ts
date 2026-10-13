@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ln: ForgeTranslations = {
+const ln: ForgePartialTranslations = {
   nav: {
     submit: "Tinda",
     dashboard: "Tableau de bord",
@@ -60,7 +60,7 @@ const ln: ForgeTranslations = {
     badgeApplied: "Réduction ya badge esalemi",
     mostPopular: "Ya kolongelama mingi",
     perMonth: "/sanza",
-    getStarted: "Banda ofele",
+    getStartedFree: "Banda ofele",
     badgeInfoTitle: "Ndenge ya kokungola réductions ya badge",
     badgeInfoDesc: "Bimisa badge nyonso na footer ya site na yo. Alfred asaleli scan footer na yo na submission nyonso."
   },

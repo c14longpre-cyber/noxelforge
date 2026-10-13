@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ar: ForgeTranslations = {
+const ar: ForgePartialTranslations = {
   nav: {
     submit: "إرسال",
     dashboard: "لوحة التحكم",
@@ -60,7 +60,7 @@ const ar: ForgeTranslations = {
     badgeApplied: "تم تطبيق خصم الشارة",
     mostPopular: "الأكثر شيوعاً",
     perMonth: "/شهر",
-    getStarted: "ابدأ مجاناً",
+    getStartedFree: "ابدأ مجاناً",
     badgeInfoTitle: "كيفية فتح خصومات الشارة",
     badgeInfoDesc: "اعرض أي شارة في تذييل موقعك. Alfred يفحص تذييلك عند كل إرسال."
   },

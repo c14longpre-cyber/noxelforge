@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ht: ForgeTranslations = {
+const ht: ForgePartialTranslations = {
   nav: {
     submit: "Soumèt",
     dashboard: "Tablo de bò",
@@ -60,7 +60,7 @@ const ht: ForgeTranslations = {
     badgeApplied: "Rabè badj aplike",
     mostPopular: "Pi popilè",
     perMonth: "/mwa",
-    getStarted: "Kòmanse gratis",
+    getStartedFree: "Kòmanse gratis",
     badgeInfoTitle: "Kijan pou debloke rabè badj",
     badgeInfoDesc: "Afiche nenpòt badj nan pyepaj sit ou. Alfred eskanye pyepaj ou sou chak soumisyon."
   },

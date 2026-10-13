@@ -105,7 +105,7 @@ export default function ForgePricing() {
     finally { setLoading(null); }
   }
 
-  function getPrice(tier: typeof TIERS[0]): string {
+  function getPrice(tier: ReturnType<typeof getTiers>[number]): string {
     if (tier.monthly === 0) return 'Free';
     const base = billing === 'monthly' ? tier.monthly : Math.round(tier.annual / 12);
     const discount = badgeInstalle ? (BADGE_DISCOUNTS[tier.key] ?? 0) : 0;
@@ -113,7 +113,7 @@ export default function ForgePricing() {
     return `$${final}`;
   }
 
-  function getOriginalPrice(tier: typeof TIERS[0]): string | null {
+  function getOriginalPrice(tier: ReturnType<typeof getTiers>[number]): string | null {
     if (tier.monthly === 0 || !badgeInstalle) return null;
     const base = billing === 'monthly' ? tier.monthly : Math.round(tier.annual / 12);
     return `$${base}`;

@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const gl: ForgeTranslations = {
+const gl: ForgePartialTranslations = {
   nav: {
     submit: "Enviar",
     dashboard: "Panel de control",
@@ -60,7 +60,7 @@ const gl: ForgeTranslations = {
     badgeApplied: "Desconto por distintivo aplicado",
     mostPopular: "Máis popular",
     perMonth: "/mes",
-    getStarted: "Comeza gratis",
+    getStartedFree: "Comeza gratis",
     badgeInfoTitle: "Como desbloquear os descontos por distintivo",
     badgeInfoDesc: "Mostra calquera distintivo no pé de páxina do teu sitio. Alfred escanea o teu pé de páxina en cada envío."
   },

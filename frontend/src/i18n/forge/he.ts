@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const he: ForgeTranslations = {
+const he: ForgePartialTranslations = {
   nav: {
     submit: "שלח",
     dashboard: "לוח בקרה",
@@ -60,7 +60,7 @@ const he: ForgeTranslations = {
     badgeApplied: "הנחת תג הוחלה",
     mostPopular: "הפופולרי ביותר",
     perMonth: "/חודש",
-    getStarted: "התחל בחינם",
+    getStartedFree: "התחל בחינם",
     badgeInfoTitle: "כיצד לפתוח הנחות תג",
     badgeInfoDesc: "הצג תג כלשהו בתחתית האתר שלך. Alfred סורק את התחתית שלך בכל הגשה."
   },

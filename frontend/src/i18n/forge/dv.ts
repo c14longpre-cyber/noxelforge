@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const dv: ForgeTranslations = {
+const dv: ForgePartialTranslations = {
   nav: {
     submit: "ހުށަހަޅާ",
     dashboard: "ޑޭޝްބޯޑް",
@@ -60,7 +60,7 @@ const dv: ForgeTranslations = {
     badgeApplied: "ބެޖް ޑިސްކައުންޓް ހިމަނިއްޖެ",
     mostPopular: "އެންމެ މަގުބޫލު",
     perMonth: "/މަސް",
-    getStarted: "ހިލޭ ފަށާ",
+    getStartedFree: "ހިލޭ ފަށާ",
     badgeInfoTitle: "ބެޖް ޑިސްކައުންޓް ހޯދާނެ ގޮތް",
     badgeInfoDesc: "ތިބާގެ ސައިޓްގެ ފޫޓަރގައި ބެޖެއް ދައްކާ. Alfred ކޮންމެ ހުށަހެޅުމަކުން ތިބާގެ ފޫޓަރ ސްކޭން ކުރޭ."
   },

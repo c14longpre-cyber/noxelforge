@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const my: ForgeTranslations = {
+const my: ForgePartialTranslations = {
   nav: {
     submit: "တင်သွင်းရန်",
     dashboard: "ဒက်ရှ်ဘုတ်",
@@ -60,7 +60,7 @@ const my: ForgeTranslations = {
     badgeApplied: "ဘတ်ဂျ် လျှော့စျေး သက်ရောက်ပြီ",
     mostPopular: "အရေပြားဆုံး",
     perMonth: "/လ",
-    getStarted: "အခမဲ့ စတင်ပါ",
+    getStartedFree: "အခမဲ့ စတင်ပါ",
     badgeInfoTitle: "ဘတ်ဂျ် လျှော့စျေးများ ဖွင့်နည်း",
     badgeInfoDesc: "သင်၏ဆိုဒ်၏ footer တွင် ဘတ်ဂျ်တစ်ခုခု ပြသပါ။ Alfred က တင်သွင်းမှုတိုင်းတွင် သင်၏ footer ကို စကင်ဖတ်သည်။"
   },

@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const de: ForgeTranslations = {
+const de: ForgePartialTranslations = {
   nav: {
     submit: "Einreichen",
     dashboard: "Dashboard",
@@ -60,7 +60,7 @@ const de: ForgeTranslations = {
     badgeApplied: "Abzeichen-Rabatt angewendet",
     mostPopular: "Am beliebtesten",
     perMonth: "/Mo.",
-    getStarted: "Kostenlos starten",
+    getStartedFree: "Kostenlos starten",
     badgeInfoTitle: "So schalten Sie Abzeichen-Rabatte frei",
     badgeInfoDesc: "Zeigen Sie ein beliebiges Abzeichen in der Fußzeile Ihrer Website an. Alfred scannt Ihre Fußzeile bei jeder Einreichung."
   },

@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const gv: ForgeTranslations = {
+const gv: ForgePartialTranslations = {
   nav: {
     submit: "Cur stiagh",
     dashboard: "Daahboard",
@@ -60,7 +60,7 @@ const gv: ForgeTranslations = {
     badgeApplied: "Lhiastey badge currit cour",
     mostPopular: "Smoo soit",
     perMonth: "/mee",
-    getStarted: "Toshiaght seose nastee",
+    getStartedFree: "Toshiaght seose nastee",
     badgeInfoTitle: "Kys dy reayll lhiasteyghyn badge",
     badgeInfoDesc: "Soilshee badge erbee ayns bun-choshee dty ynnyd. Ta Alfred scrutaghey dty vun-choshee er dy chooilley chur-stiagh."
   },

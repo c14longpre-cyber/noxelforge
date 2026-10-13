@@ -100,7 +100,7 @@ export default function ForgeSubmit() {
   <select name="niche" value={form.niche} onChange={handleChange} className="forge-niche-select"
     style={{ width: '100%', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--r)', padding: '11px 14px', color: form.niche ? 'var(--text)' : 'var(--soft)', fontSize: 14, outline: 'none', boxSizing: 'border-box' }}>
     <option value="">Select a niche</option>
-    {Object.entries(t.submit.niches).map(([key, label]) => <option key={key} value={key}>{label}</option>)}
+    {Object.entries(t.submit.niches as Record<string, string>).map(([key, label]) => <option key={key} value={key}>{label}</option>)}
   </select>
   <style>{`
     .forge-niche-select option {

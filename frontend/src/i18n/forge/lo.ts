@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const lo: ForgeTranslations = {
+const lo: ForgePartialTranslations = {
   nav: {
     submit: "ສົ່ງ",
     dashboard: "ແດຊບອດ",
@@ -60,7 +60,7 @@ const lo: ForgeTranslations = {
     badgeApplied: "ສ່ວນຫຼຸດແບດຈ໌ຖືກນຳໃຊ້ແລ້ວ",
     mostPopular: "ນິຍົມທີ່ສຸດ",
     perMonth: "/ເດືອນ",
-    getStarted: "ເລີ່ມຕົ້ນຟຣີ",
+    getStartedFree: "ເລີ່ມຕົ້ນຟຣີ",
     badgeInfoTitle: "ວິທີປົດລັອກສ່ວນຫຼຸດແບດຈ໌",
     badgeInfoDesc: "ສະແດງແບດຈ໌ໃດໆໃນສ່ວນທ້າຍຂອງເວັບໄຊທ໌ຂອງທ່ານ. Alfred ສະແກນສ່ວນທ້າຍຂອງທ່ານໃນທຸກການສົ່ງ."
   },

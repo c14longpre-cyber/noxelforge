@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ca: ForgeTranslations = {
+const ca: ForgePartialTranslations = {
   nav: {
     submit: "Enviar",
     dashboard: "Tauler",
@@ -60,7 +60,7 @@ const ca: ForgeTranslations = {
     badgeApplied: "Descompte per insígnia aplicat",
     mostPopular: "Més popular",
     perMonth: "/mes",
-    getStarted: "Comença gratuïtament",
+    getStartedFree: "Comença gratuïtament",
     badgeInfoTitle: "Com desbloquejar els descomptes per insígnia",
     badgeInfoDesc: "Mostra qualsevol insígnia al peu del teu lloc. Alfred escaneja el teu peu en cada enviament."
   },

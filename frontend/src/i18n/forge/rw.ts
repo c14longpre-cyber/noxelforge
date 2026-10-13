@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const rw: ForgeTranslations = {
+const rw: ForgePartialTranslations = {
   nav: {
     submit: "Ohereza",
     dashboard: "Ikibaho",
@@ -60,7 +60,7 @@ const rw: ForgeTranslations = {
     badgeApplied: "Amanusura y'ikimenyetso yakozwe",
     mostPopular: "Ikunda cyane",
     perMonth: "/kwezi",
-    getStarted: "Tangira ubuntu",
+    getStartedFree: "Tangira ubuntu",
     badgeInfoTitle: "Uburyo bwo fungura amanusura y'impeti",
     badgeInfoDesc: "Erekana ikimenyetso icyo aricyo cyose mu maguru y'urubuga rwawe. Alfred asuzuma amaguru yawe buri gihe wohereza."
   },

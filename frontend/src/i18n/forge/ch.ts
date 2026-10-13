@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ch: ForgeTranslations = {
+const ch: ForgePartialTranslations = {
   nav: {
     submit: "Na'tuge'",
     dashboard: "Tableru",
@@ -60,7 +60,7 @@ const ch: ForgeTranslations = {
     badgeApplied: "Diskuento insignia ma aplika",
     mostPopular: "Mas popula",
     perMonth: "/mes",
-    getStarted: "Tutuhon libre",
+    getStartedFree: "Tutuhon libre",
     badgeInfoTitle: "Håfa na manera un abri diskuentos insignia",
     badgeInfoDesc: "Na'lalå'la' kuatkiera insignia gi footer i sitiyu-mu. Alfred eskan i footer-mu gi kada na'tuge'."
   },

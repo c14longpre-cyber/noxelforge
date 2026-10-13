@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const sk: ForgeTranslations = {
+const sk: ForgePartialTranslations = {
   nav: {
     submit: "Odoslať",
     dashboard: "Prehľad",
@@ -60,7 +60,7 @@ const sk: ForgeTranslations = {
     badgeApplied: "Zľava za odznak uplatnená",
     mostPopular: "Najpopulárnejší",
     perMonth: "/mes",
-    getStarted: "Začať zadarmo",
+    getStartedFree: "Začať zadarmo",
     badgeInfoTitle: "Ako odomknúť zľavy za odznak",
     badgeInfoDesc: "Zobrazte ľubovoľný odznak v päte svojej stránky. Alfred skenuje vašu pätu pri každom odoslaní."
   },

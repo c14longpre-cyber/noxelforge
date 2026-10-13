@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const fj: ForgeTranslations = {
+const fj: ForgePartialTranslations = {
   nav: {
     submit: "Solomani",
     dashboard: "Dasibodi",
@@ -60,7 +60,7 @@ const fj: ForgeTranslations = {
     badgeApplied: "Isau vakavinaka ni mata e vakayagataki",
     mostPopular: "E rauta duadua",
     perMonth: "/masumasu",
-    getStarted: "Vakatikina tiko kamunaga",
+    getStartedFree: "Vakatikina tiko kamunaga",
     badgeInfoTitle: "Kerekere dolava na isau vakavinaka ni mata",
     badgeInfoDesc: "Vakacaqe e dua na mata ena koto ni nomu saiti. Alfred e scan na koto ena veisolomani kece."
   },

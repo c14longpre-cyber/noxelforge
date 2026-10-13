@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const fa: ForgeTranslations = {
+const fa: ForgePartialTranslations = {
   nav: {
     submit: "ارسال",
     dashboard: "داشبورد",
@@ -60,7 +60,7 @@ const fa: ForgeTranslations = {
     badgeApplied: "تخفیف نشان اعمال شد",
     mostPopular: "محبوب‌ترین",
     perMonth: "/ماه",
-    getStarted: "رایگان شروع کنید",
+    getStartedFree: "رایگان شروع کنید",
     badgeInfoTitle: "چگونه تخفیف‌های نشان را باز کنید",
     badgeInfoDesc: "هر نشانی را در فوتر سایت خود نمایش دهید. Alfred در هر ارسال فوتر شما را اسکن می‌کند."
   },

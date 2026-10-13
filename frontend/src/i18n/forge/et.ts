@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const et: ForgeTranslations = {
+const et: ForgePartialTranslations = {
   nav: {
     submit: "Esita",
     dashboard: "Töölaud",
@@ -60,7 +60,7 @@ const et: ForgeTranslations = {
     badgeApplied: "Märgi allahindlus rakendatud",
     mostPopular: "Kõige populaarsem",
     perMonth: "/kuu",
-    getStarted: "Alusta tasuta",
+    getStartedFree: "Alusta tasuta",
     badgeInfoTitle: "Kuidas avada märgi allahindlusi",
     badgeInfoDesc: "Kuva mis tahes märki oma saidi jaluses. Alfred skanib sinu jalust iga esituse korral."
   },

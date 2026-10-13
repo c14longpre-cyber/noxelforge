@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const lb: ForgeTranslations = {
+const lb: ForgePartialTranslations = {
   nav: {
     submit: "Abschécken",
     dashboard: "Dashboard",
@@ -60,7 +60,7 @@ const lb: ForgeTranslations = {
     badgeApplied: "Badge-Remise applizéiert",
     mostPopular: "Am populärsten",
     perMonth: "/Mo",
-    getStarted: "Gratis ufänken",
+    getStartedFree: "Gratis ufänken",
     badgeInfoTitle: "Wéi Dir Badge-Remisen entspärt",
     badgeInfoDesc: "Weist e Badge am Footer vun ärer Säit. Alfred scannt äre Footer bei all Aschreiwung."
   },

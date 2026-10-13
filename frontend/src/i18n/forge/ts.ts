@@ -1,6 +1,6 @@
-import type { ForgeTranslations } from '../forge.translations';
+import type { ForgePartialTranslations } from '../forge.translations';
 
-const ts: ForgeTranslations = {
+const ts: ForgePartialTranslations = {
   nav: {
     submit: "Nyikela",
     dashboard: "Sesheni ya Vuhlanganisi",
@@ -60,7 +60,7 @@ const ts: ForgeTranslations = {
     badgeApplied: "Khombo ya bheji yi engeriwe",
     mostPopular: "Leyi thandekaka kunene",
     perMonth: "/n'hweti",
-    getStarted: "Sungula mahala",
+    getStartedFree: "Sungula mahala",
     badgeInfoTitle: "Ndlela yo pfula tikhombo ta bheji",
     badgeInfoDesc: "Kombisa bheji yin'wana na yin'wana eka nhlayo ya saiti ya wena. Alfred u sefa nhlayo ya wena eka ku nyikelwa kun'wana ni kun'wana."
   },
