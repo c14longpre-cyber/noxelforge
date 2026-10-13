@@ -1,0 +1,28 @@
+#noxel-consent-root{--nx-bg:#101522;--nx-text:#f6f7fb;--nx-muted:#c2cbd8;--nx-green:#3ddc84;--nx-purple:#a855f7;--nx-edge:#657388;font:400 15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--nx-text);color-scheme:dark}
+#noxel-consent-root *,#noxel-consent-root *::before,#noxel-consent-root *::after{box-sizing:border-box}
+#noxel-consent-root [hidden]{display:none!important}
+#noxel-consent-root h2{margin:0 0 12px;font-size:24px;line-height:1.3;font-weight:750;color:var(--nx-text)}
+#noxel-consent-root h3,#noxel-consent-root h4{margin:0 0 8px;color:var(--nx-text);font-size:16px}
+#noxel-consent-root p{margin:0 0 14px;color:var(--nx-muted)}
+#noxel-consent-root .nx-consent-brand{color:var(--nx-green);font-size:13px;font-weight:750;letter-spacing:.06em;margin-bottom:8px}
+.nx-consent-banner{position:fixed;z-index:2147483000;bottom:76px;left:20px;width:min(620px,calc(100vw - 40px));max-height:calc(100dvh - 110px);overflow:auto;background:var(--nx-bg);border:1px solid var(--nx-edge);border-radius:18px;padding:24px;box-shadow:0 12px 60px #0008}
+.nx-consent-actions{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 8px}
+#noxel-consent-root .nx-consent-btn{appearance:none;min-height:44px;min-width:44px;padding:10px 16px;border:1px solid var(--nx-edge);border-radius:9px;background:#202b3d;color:var(--nx-text);font:inherit;font-weight:650;cursor:pointer;white-space:normal;text-align:center}
+#noxel-consent-root .nx-consent-actions .nx-consent-btn{flex:1 1 150px}
+#noxel-consent-root .nx-consent-btn:hover{background:#324359;border-color:#d5dfed}
+#noxel-consent-root :focus-visible{outline:3px solid var(--nx-green);outline-offset:3px}
+#noxel-consent-root .nx-consent-link{color:#bff6d6;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:6px 0;min-height:32px}
+#noxel-consent-root .nx-consent-foot:empty{display:none}
+#noxel-consent-root .nx-consent-launcher{position:fixed;bottom:16px;left:20px;z-index:2147482999;box-shadow:0 4px 18px #0006;font-size:13px}
+#noxel-consent-root .nx-consent-dialog{width:min(640px,calc(100vw - 32px));max-width:none;max-height:calc(100dvh - 40px);overflow:auto;overscroll-behavior:contain;background:var(--nx-bg);color:var(--nx-text);border:1px solid var(--nx-edge);border-radius:18px;padding:26px;font:inherit}
+#noxel-consent-root .nx-consent-dialog::backdrop{background:#030712cc}
+.nx-consent-category{border-top:1px solid var(--nx-edge);padding:16px 0}
+#noxel-consent-root .nx-consent-toggle{display:flex;gap:12px;align-items:center;min-height:44px;font-weight:700;cursor:pointer}
+#noxel-consent-root input[type=checkbox]{appearance:auto;width:22px;height:22px;flex:0 0 22px;accent-color:var(--nx-green);cursor:pointer}
+#noxel-consent-root ul{padding-left:24px;color:var(--nx-muted)}
+#noxel-consent-root .nx-consent-close{width:100%;margin-top:8px;background:transparent}
+.nx-consent-placeholder{min-height:44px;padding:16px;border:1px solid #657388;border-radius:8px;background:#101522;color:#f6f7fb;font:inherit;cursor:pointer}
+#noxel-consent-root .nx-consent-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+@media(max-width:480px){.nx-consent-banner{left:12px;bottom:76px;width:calc(100vw - 24px);padding:18px}.nx-consent-actions{flex-direction:column}#noxel-consent-root .nx-consent-actions .nx-consent-btn{flex:initial;width:100%}#noxel-consent-root .nx-consent-launcher{left:12px;max-width:calc(100vw - 24px)}#noxel-consent-root .nx-consent-dialog{padding:18px}}
+@media(prefers-reduced-motion:reduce){#noxel-consent-root *{scroll-behavior:auto!important}}
+@media(forced-colors:active){#noxel-consent-root .nx-consent-btn,#noxel-consent-root .nx-consent-category,#noxel-consent-root .nx-consent-banner,#noxel-consent-root .nx-consent-dialog{border-color:CanvasText}#noxel-consent-root :focus-visible{outline-color:Highlight}}

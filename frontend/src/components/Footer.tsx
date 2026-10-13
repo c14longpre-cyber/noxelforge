@@ -149,6 +149,14 @@ export default function Footer({
         Contact
       </a>
 
+      <button
+        type="button"
+        data-noxel-consent-settings
+        style={{ ...linkStyle, background: "none", border: 0, padding: 0, font: "inherit", cursor: "pointer" }}
+      >
+        Privacy preferences
+      </button>
+
       <span style={{ fontSize: 13, color: "rgba(255,255,255,0.4)" }}>
         {copyrightText ?? `© ${year} NOXEL360`}
       </span>
