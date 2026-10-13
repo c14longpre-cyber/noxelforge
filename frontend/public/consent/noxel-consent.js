@@ -1,12 +1,14 @@
-/* NOXEL Consent 1.2.0 — no dependencies, no remote requests by default.
+/* NOXEL Consent 1.3.0 — no dependencies, no remote requests by default.
    1.1.0 : relais du choix entre les sites NOXEL (relayDomains), voir README « Mémoire entre les sites NOXEL ».
-   1.2.0 : boutons HUD NOXEL (dessins du kit HUD de NOXEL Spectra) et charte NOXEL. */
+   1.2.0 : boutons HUD NOXEL (dessins du kit HUD de NOXEL Spectra) et charte NOXEL.
+   1.3.0 : bannière ouverte à l'arrivée même sans outil facultatif (showWithoutCategories) et bouton Fermer
+           (fermer = continuer sans accepter ; sur un site sans outil facultatif, simple information non relayée). */
 (() => {
   'use strict';
   if (window.NoxelConsent) return;
   const cfg = Object.assign({ siteName: 'NOXEL', language: document.documentElement.lang || 'fr', policyVersion: '1',
     storageKey: 'noxel.consent.v1', retentionDays: 180, privacyUrl: '', enabledCategories: [],
-    providers: [], reloadOnWithdrawal: true, cookieRules: [], storageRules: [], nonce: '', relayDomains: [], relayParam: 'nxc' }, window.NOXEL_CONSENT_CONFIG || {});
+    providers: [], reloadOnWithdrawal: true, cookieRules: [], storageRules: [], nonce: '', relayDomains: [], relayParam: 'nxc', showWithoutCategories: false }, window.NOXEL_CONSENT_CONFIG || {});
   const keys = ['preferences', 'analytics', 'marketing'];
   // Dessins HUD NOXEL extraits tels quels de hud-data.ts (kit HUD de NOXEL Spectra) :
   // reject=cancel, accept=ok, customize=apply-filters, save=save-recipe, close=remove-image, settings=protect.
@@ -26,7 +28,10 @@
       expired: 'Votre choix doit être renouvelé.', blocked: 'Contenu facultatif désactivé. Ouvrez les préférences pour l’autoriser.',
       none: 'Aucun outil facultatif déclaré sur cette page.',
       relayMore: 'Votre choix s’applique à tous les sites NOXEL : il vous suit lorsque vous passez de l’un à l’autre par un lien. Vous pouvez le modifier à tout moment sur chacun d’eux.',
-      relayShort: 'Ce choix vaut pour tous les sites NOXEL.' },
+      relayShort: 'Ce choix vaut pour tous les sites NOXEL.',
+      noneIntro: 'Ce site n’utilise aucun outil facultatif : pas de mesure d’audience ni de publicité. Les outils nécessaires à son fonctionnement restent actifs.',
+      noneRelay: 'Sur les autres sites NOXEL, votre choix vous sera demandé une fois, puis il vous suivra d’un site à l’autre.',
+      dismiss: 'Fermer et continuer sans accepter', dismissInfo: 'Fermer' },
     en: { title: 'Your privacy', intro: 'You choose which optional tools can run on this site. Tools required for the requested service remain active.',
       accept: 'Accept all', reject: 'Reject all', customize: 'Customize', save: 'Save my choices', close: 'Close without changes',
       settings: 'Privacy preferences', policy: 'Privacy policy', necessary: 'Necessary', always: 'Always active',
@@ -39,7 +44,10 @@
       expired: 'Please renew your choice.', blocked: 'Optional content is disabled. Open preferences to allow it.',
       none: 'No optional tools have been declared on this page.',
       relayMore: 'Your choice applies to all NOXEL sites: it follows you when you go from one to another through a link. You can change it at any time on each of them.',
-      relayShort: 'This choice applies to all NOXEL sites.' }
+      relayShort: 'This choice applies to all NOXEL sites.',
+      noneIntro: 'This site uses no optional tools: no audience measurement and no advertising. Tools required for the requested service remain active.',
+      noneRelay: 'On the other NOXEL sites, you will be asked once, then your choice follows you from one site to another.',
+      dismiss: 'Close and continue without accepting', dismissInfo: 'Close' }
   };
   const t = words[lang];
   const categories = new Set((cfg.enabledCategories || []).filter(x => keys.includes(x)));
@@ -208,13 +216,19 @@
   function reject() { choose(empty(), 'reject-all'); }
   function renderBanner() {
     if (!root) return;
-    banner.replaceChildren(); banner.hidden = valid(receipt) || categories.size === 0;
+    const infoOnly = categories.size === 0;
+    banner.replaceChildren(); banner.hidden = valid(receipt) || (infoOnly && cfg.showWithoutCategories !== true);
     if (banner.hidden) return;
-    banner.append(node('p', cfg.siteName, { class: 'nx-consent-brand' }), node('h2', t.title), node('p', t.intro));
-    const actions = node('div', null, { class: 'nx-consent-actions' });
-    actions.append(button(t.reject, reject, '', 'reject'), button(t.accept, accept, '', 'accept'), button(t.customize, open, '', 'customize'));
-    banner.append(actions); const foot = node('div', null, { class: 'nx-consent-foot' });
-    if (relayEnabled) foot.append(node('p', t.relayShort)); safePrivacyLink(foot); banner.append(foot);
+    // Fermer : continuer sans accepter (refus) ; sur un site sans outil facultatif, simple information (non relayée).
+    banner.append(button(infoOnly ? t.dismissInfo : t.dismiss, () => choose(empty(), infoOnly ? 'dismiss-info' : 'dismiss'), 'nx-consent-dismiss nx-hud--icon', 'close'));
+    banner.append(node('p', cfg.siteName, { class: 'nx-consent-brand' }), node('h2', t.title), node('p', infoOnly ? t.noneIntro : t.intro));
+    if (!infoOnly) {
+      const actions = node('div', null, { class: 'nx-consent-actions' });
+      actions.append(button(t.reject, reject, '', 'reject'), button(t.accept, accept, '', 'accept'), button(t.customize, open, '', 'customize'));
+      banner.append(actions);
+    }
+    const foot = node('div', null, { class: 'nx-consent-foot' });
+    if (relayEnabled) foot.append(node('p', infoOnly ? t.noneRelay : t.relayShort)); safePrivacyLink(foot); banner.append(foot);
   }
   function open() {
     if (!root || dialog.open) return;
@@ -268,7 +282,8 @@
   }
   // Adresse enrichie du choix courant si elle mène vers un autre site NOXEL ; sinon inchangée.
   function relayUrl(href) {
-    if (!relayEnabled || !valid(receipt)) return String(href);
+    // Une simple information fermée sur un site sans outil facultatif n'est pas un choix : rien à relayer.
+    if (!relayEnabled || !valid(receipt) || receipt.action === 'dismiss-info') return String(href);
     let url; try { url = new URL(String(href), location.href); } catch (_) { return String(href); }
     if (!/^https?:$/.test(url.protocol) || !relayDomains.has(bareHost(url.hostname)) || bareHost(url.hostname) === bareHost(location.hostname)) return String(href);
     const token = encodeRelay(receipt); const hash = new URLSearchParams(url.hash.replace(/^#/, ''));
@@ -304,6 +319,6 @@
     window.dispatchEvent(new CustomEvent('noxel:consentready', { detail: { receipt: get() } }));
   }
   window.NoxelConsent = Object.freeze({ open, close, acceptAll: accept, rejectAll: reject, has, getReceipt: get, register, relayUrl,
-    refresh: () => { detect(); renderBanner(); return scheduleActivation(); }, version: '1.2.0' });
+    refresh: () => { detect(); renderBanner(); return scheduleActivation(); }, version: '1.3.0' });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true }); else boot();
 })();

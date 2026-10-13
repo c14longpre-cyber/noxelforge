@@ -1,6 +1,7 @@
 /* Select a configuration and load it BEFORE noxel-consent.js.
+   showWithoutCategories : la bannière s'ouvre à l'arrivée sur tous les sites NOXEL, même sans outil facultatif (1.3.0).
    No optional vendor is enabled here: declare the actual tools first (window.NOXEL_CONSENT_CONFIG in the page).
-   Langue : celle de la page (<html lang>), français si absente ; le moteur affiche fr ou en.
+   Langue : choix du visiteur gardé par le site, sinon navigateur français, sinon <html lang> ; le moteur affiche fr ou en.
    privacyUrl : vide tant que le site n'a pas de politique publiée (noxelforge.com, noxelspectra.com au 13/10/2026). */
 window.NOXEL_CONSENT_SITES = {
   'noxelseo.com': { siteName: 'NOXEL SEO', policyVersion: 'seo-1', privacyUrl: '/privacy' },
@@ -13,7 +14,12 @@ window.NOXEL_CONSENT_SITES = {
 window.NOXEL_CONSENT_RELAY_DOMAINS = ['noxel360.com', 'noxelseo.com', 'noxelforge.com', 'noxelspectra.com', 'app.noxelspectra.com'];
 (function () {
   const hostname = location.hostname.replace(/^www\./, '');
+  // Langue de la bannière : choix du visiteur gardé par le site (NOXEL360 noxel.language, SEO noxel-lang,
+  // Forge forge_lang), sinon langue du navigateur si française, sinon langue de la page. Le moteur affiche fr ou en.
+  let chosen = null;
+  try { chosen = localStorage.getItem('noxel.language') || localStorage.getItem('noxel-lang') || localStorage.getItem('forge_lang'); } catch (_) { chosen = null; }
+  const language = chosen || (/^fr\b/i.test(navigator.language || '') ? 'fr' : (document.documentElement.lang || 'fr'));
   const site = window.NOXEL_CONSENT_SITES[hostname] || { siteName: 'NOXEL', policyVersion: '1', privacyUrl: '' };
   window.NOXEL_CONSENT_CONFIG = Object.assign({ storageKey: 'noxel.consent.v1', retentionDays: 180, enabledCategories: [], providers: [],
-    relayDomains: window.NOXEL_CONSENT_RELAY_DOMAINS, language: document.documentElement.lang || 'fr' }, site, window.NOXEL_CONSENT_CONFIG || {});
+    relayDomains: window.NOXEL_CONSENT_RELAY_DOMAINS, showWithoutCategories: true, language }, site, window.NOXEL_CONSENT_CONFIG || {});
 })();
