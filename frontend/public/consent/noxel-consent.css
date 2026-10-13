@@ -1,4 +1,4 @@
-/* NOXEL Consent 1.3.0 — charte NOXEL : vert #3ddc84, violet #A855F7 ; gris #1a1a1a / #888 / #f5f5f5 ; boutons HUD du kit NOXEL Spectra. */
+/* NOXEL Consent 1.4.0 — charte NOXEL : vert #3ddc84, violet #A855F7 ; gris #1a1a1a / #888 / #f5f5f5 ; boutons HUD du kit NOXEL Spectra. */
 #noxel-consent-root{--nx-bg:#1a1a1a;--nx-panel:#111;--nx-text:#f5f5f5;--nx-muted:#b3b3b3;--nx-soft:#888;--nx-green:#3ddc84;--nx-purple:#a855f7;--nx-edge:rgb(61 220 132 / .28);--nx-edge-p:rgb(168 85 247 / .45);font:400 15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--nx-text);color-scheme:dark}
 #noxel-consent-root *,#noxel-consent-root *::before,#noxel-consent-root *::after{box-sizing:border-box}
 #noxel-consent-root [hidden]{display:none!important}

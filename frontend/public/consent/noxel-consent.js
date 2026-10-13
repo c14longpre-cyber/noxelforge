@@ -1,14 +1,16 @@
-/* NOXEL Consent 1.3.0 — no dependencies, no remote requests by default.
+/* NOXEL Consent 1.4.0 — no dependencies, no remote requests by default.
    1.1.0 : relais du choix entre les sites NOXEL (relayDomains), voir README « Mémoire entre les sites NOXEL ».
    1.2.0 : boutons HUD NOXEL (dessins du kit HUD de NOXEL Spectra) et charte NOXEL.
    1.3.0 : bannière ouverte à l'arrivée même sans outil facultatif (showWithoutCategories) et bouton Fermer
-           (fermer = continuer sans accepter ; sur un site sans outil facultatif, simple information non relayée). */
+           (fermer = continuer sans accepter ; sur un site sans outil facultatif, simple information non relayée).
+   1.4.0 : openOnArrival — la fenêtre de préférences complète s'ouvre à l'arrivée tant qu'aucun choix n'existe ;
+           « Fermer sans modifier » (ou Échap) = continuer sans accepter. Interface exclue de la traduction automatique du navigateur. */
 (() => {
   'use strict';
   if (window.NoxelConsent) return;
   const cfg = Object.assign({ siteName: 'NOXEL', language: document.documentElement.lang || 'fr', policyVersion: '1',
     storageKey: 'noxel.consent.v1', retentionDays: 180, privacyUrl: '', enabledCategories: [],
-    providers: [], reloadOnWithdrawal: true, cookieRules: [], storageRules: [], nonce: '', relayDomains: [], relayParam: 'nxc', showWithoutCategories: false }, window.NOXEL_CONSENT_CONFIG || {});
+    providers: [], reloadOnWithdrawal: true, cookieRules: [], storageRules: [], nonce: '', relayDomains: [], relayParam: 'nxc', showWithoutCategories: false, openOnArrival: false }, window.NOXEL_CONSENT_CONFIG || {});
   const keys = ['preferences', 'analytics', 'marketing'];
   // Dessins HUD NOXEL extraits tels quels de hud-data.ts (kit HUD de NOXEL Spectra) :
   // reject=cancel, accept=ok, customize=apply-filters, save=save-recipe, close=remove-image, settings=protect.
@@ -217,7 +219,7 @@
   function renderBanner() {
     if (!root) return;
     const infoOnly = categories.size === 0;
-    banner.replaceChildren(); banner.hidden = valid(receipt) || (infoOnly && cfg.showWithoutCategories !== true);
+    banner.replaceChildren(); banner.hidden = valid(receipt) || cfg.openOnArrival === true || (infoOnly && cfg.showWithoutCategories !== true);
     if (banner.hidden) return;
     // Fermer : continuer sans accepter (refus) ; sur un site sans outil facultatif, simple information (non relayée).
     banner.append(button(infoOnly ? t.dismissInfo : t.dismiss, () => choose(empty(), infoOnly ? 'dismiss-info' : 'dismiss'), 'nx-consent-dismiss nx-hud--icon', 'close'));
@@ -256,10 +258,12 @@
       const selected = empty(); for (const input of dialog.querySelectorAll('input[type="checkbox"]')) selected[input.name] = input.checked;
       choose(selected, 'custom');
     }, '', 'save'));
-    dialog.append(actions, button(t.close, close, 'nx-consent-close', 'close'));
+    dialog.append(actions, button(t.close, closeWithoutChange, 'nx-consent-close', 'close'));
     dialog.showModal(); dialog.querySelector('input,button')?.focus();
   }
   function close() { if (dialog?.open) { dialog.close(); if (returnFocus?.isConnected) returnFocus.focus(); } }
+  // « Fermer sans modifier » : sans choix existant, c'est continuer sans accepter (refus enregistré) ; sinon simple fermeture.
+  function closeWithoutChange() { if (valid(receipt)) close(); else choose(empty(), 'dismiss'); }
   function register(service) {
     if (!service || typeof service.id !== 'string' || !keys.includes(service.category) || typeof service.start !== 'function') throw new TypeError('Service requires id, category and a synchronous start callback.');
     if (services.has(service.id)) throw new Error('Service already registered: ' + service.id);
@@ -298,14 +302,16 @@
   function boot() {
     receipt = read(); adoptRelay(); detect();
     for (const category of keys) if (!has(category)) cleanCategory(category);
-    root = node('div', null, { id: 'noxel-consent-root', lang });
+    // translate=no : l'interface est déjà en fr/en ; la traduction automatique du navigateur la déformait.
+    root = node('div', null, { id: 'noxel-consent-root', lang, translate: 'no', class: 'notranslate' });
     banner = node('section', null, { class: 'nx-consent-banner', 'aria-label': t.settings });
     dialog = node('dialog', null, { class: 'nx-consent-dialog', 'aria-labelledby': 'nx-consent-heading', 'aria-describedby': 'nx-consent-description' });
-    dialog.addEventListener('cancel', event => { event.preventDefault(); close(); });
+    dialog.addEventListener('cancel', event => { event.preventDefault(); closeWithoutChange(); });
     live = node('p', '', { class: 'nx-consent-sr-only', role: 'status', 'aria-live': 'polite', 'aria-atomic': 'true' });
     const launcher = button(t.settings, open, 'nx-consent-launcher nx-hud--icon', 'settings');
     root.append(banner, dialog, launcher, live); document.body.append(root); started = true;
     renderBanner(); scheduleActivation();
+    if (cfg.openOnArrival === true && !valid(receipt)) open();
     document.addEventListener('click', event => { if (event.target.closest('[data-noxel-consent-settings]')) { event.preventDefault(); open(); } });
     if (relayEnabled) { document.addEventListener('click', relayLink, true); document.addEventListener('auxclick', relayLink, true); }
     window.addEventListener('storage', event => { if (event.key !== cfg.storageKey && event.key !== null) return;
@@ -319,6 +325,6 @@
     window.dispatchEvent(new CustomEvent('noxel:consentready', { detail: { receipt: get() } }));
   }
   window.NoxelConsent = Object.freeze({ open, close, acceptAll: accept, rejectAll: reject, has, getReceipt: get, register, relayUrl,
-    refresh: () => { detect(); renderBanner(); return scheduleActivation(); }, version: '1.3.0' });
+    refresh: () => { detect(); renderBanner(); return scheduleActivation(); }, version: '1.4.0' });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true }); else boot();
 })();
