@@ -1,4 +1,4 @@
-/* NOXEL Consent 1.2.0 — charte NOXEL : vert #3ddc84, violet #A855F7 ; gris #1a1a1a / #888 / #f5f5f5 ; boutons HUD du kit NOXEL Spectra. */
+/* NOXEL Consent 1.3.0 — charte NOXEL : vert #3ddc84, violet #A855F7 ; gris #1a1a1a / #888 / #f5f5f5 ; boutons HUD du kit NOXEL Spectra. */
 #noxel-consent-root{--nx-bg:#1a1a1a;--nx-panel:#111;--nx-text:#f5f5f5;--nx-muted:#b3b3b3;--nx-soft:#888;--nx-green:#3ddc84;--nx-purple:#a855f7;--nx-edge:rgb(61 220 132 / .28);--nx-edge-p:rgb(168 85 247 / .45);font:400 15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--nx-text);color-scheme:dark}
 #noxel-consent-root *,#noxel-consent-root *::before,#noxel-consent-root *::after{box-sizing:border-box}
 #noxel-consent-root [hidden]{display:none!important}
@@ -40,6 +40,8 @@
 #noxel-consent-root .nx-consent-toggle{display:flex;gap:12px;align-items:center;min-height:44px;font-weight:700;cursor:pointer}
 #noxel-consent-root input[type=checkbox]{appearance:auto;width:22px;height:22px;flex:0 0 22px;accent-color:var(--nx-green);cursor:pointer}
 #noxel-consent-root ul{padding-left:24px;color:var(--nx-muted)}
+#noxel-consent-root .nx-consent-dismiss{position:absolute;top:10px;right:10px;--hud-size:36px;width:42px;height:42px}
+#noxel-consent-root .nx-consent-banner .nx-consent-brand{padding-right:44px}
 #noxel-consent-root .nx-consent-close{width:100%;margin-top:6px;justify-content:center}
 .nx-consent-placeholder{min-height:44px;padding:16px;border:1px solid rgb(61 220 132 / .28);border-radius:10px;background:#1a1a1a;color:#f5f5f5;font:inherit;cursor:pointer}
 #noxel-consent-root .nx-consent-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
