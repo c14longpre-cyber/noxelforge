@@ -261,3 +261,12 @@ See `backend/.env.example`:
 
 Last updated: October 10, 2026
 Agents: testeur_forge, relecteur_forge, redacteur_forge
+
+## Consentement cookies — NOXEL Consent 1.2.0 (commun aux sites NOXEL)
+
+- **Fichiers** : `frontend/public/consent/` (`noxel-consent.js`, `noxel-consent.css`, `sites.js`), chargés dans le `<head>` AVANT tout outil facultatif. Le même moteur est copié à l'identique dans noxel360, noxelseo et noxelforge (noxelspectra à venir) : toute modification se fait partout, version incrémentée dans l'en-tête du fichier.
+- **Tout traceur passe par le kit** : script facultatif écrit `<script type="text/plain" data-consent="analytics|marketing|preferences" data-src="…">`, SDK démarré par `NoxelConsent.register()` ou rendu seulement si `NoxelConsent.has(catégorie)` (hook `src/components/consent/useNoxelConsent.ts`). Jamais de GTM, gtag, pixel, `<noscript>` de suivi ou widget tiers actif en direct. Déclarer l'outil dans `providers` et, pour un composant React, sa catégorie dans `enabledCategories`.
+- **Mémoire entre les sites** : le choix voyage dans les liens vers les autres sites NOXEL (`#nxc=…`, sans identifiant, accepté seulement si la page d'origine est un site NOXEL). Donc **pas de `noreferrer`** sur un lien vers noxel360.com, noxelseo.com, noxelforge.com ou noxelspectra.com (`rel="noopener"` suffit) ; pour `window.open`, passer l'adresse par `NoxelConsent.relayUrl(url)`.
+- **Politique** : `privacyUrl` vide pour noxelforge.com et noxelspectra.com tant qu'aucune politique n'est publiée. Changer d'outil ou de finalité = incrémenter `policyVersion` du site dans `sites.js`.
+- **Look** (1.2.0) : charte NOXEL (fond #1a1a1a, textes #f5f5f5/#888, vert #3ddc84, violet #A855F7) et boutons HUD (dessins `cancel`, `ok`, `apply-filters`, `save-recipe`, `remove-image`, `protect` copiés tels quels de hud-data.ts du kit HUD de Spectra, intégrés au moteur).
+- Le kit (README, tests `core`, `relay`, `consent`) et le plan d'exécution sont la référence ; le kit ne gère que fr/en.

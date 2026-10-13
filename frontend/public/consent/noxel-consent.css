@@ -1,0 +1,49 @@
+/* NOXEL Consent 1.2.0 — charte NOXEL : vert #3ddc84, violet #A855F7 ; gris #1a1a1a / #888 / #f5f5f5 ; boutons HUD du kit NOXEL Spectra. */
+#noxel-consent-root{--nx-bg:#1a1a1a;--nx-panel:#111;--nx-text:#f5f5f5;--nx-muted:#b3b3b3;--nx-soft:#888;--nx-green:#3ddc84;--nx-purple:#a855f7;--nx-edge:rgb(61 220 132 / .28);--nx-edge-p:rgb(168 85 247 / .45);font:400 15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--nx-text);color-scheme:dark}
+#noxel-consent-root *,#noxel-consent-root *::before,#noxel-consent-root *::after{box-sizing:border-box}
+#noxel-consent-root [hidden]{display:none!important}
+#noxel-consent-root h2{margin:0 0 10px;font-size:22px;line-height:1.3;font-weight:800;color:var(--nx-text)}
+#noxel-consent-root h3,#noxel-consent-root h4{margin:0 0 8px;color:var(--nx-text);font-size:16px}
+#noxel-consent-root p{margin:0 0 12px;color:var(--nx-muted)}
+#noxel-consent-root .nx-consent-brand{color:var(--nx-green);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.nx-consent-banner{position:fixed;z-index:2147483000;bottom:80px;left:20px;width:min(640px,calc(100vw - 40px));max-height:calc(100dvh - 110px);overflow:auto;background:linear-gradient(180deg,#1d1d1d,var(--nx-bg));border:1px solid var(--nx-edge);border-radius:18px;padding:22px 24px;box-shadow:0 0 0 1px rgb(168 85 247 / .12),0 14px 60px #000c,0 0 40px rgb(61 220 132 / .08)}
+.nx-consent-banner::before{content:"";position:absolute;inset:0 0 auto;height:2px;border-radius:18px 18px 0 0;background:linear-gradient(90deg,var(--nx-green),var(--nx-purple))}
+.nx-consent-actions{display:flex;flex-wrap:wrap;gap:8px 12px;margin:14px 0 6px}
+/* Boutons texte (repli) */
+#noxel-consent-root .nx-consent-btn{appearance:none;min-height:44px;min-width:44px;padding:10px 16px;border:1px solid var(--nx-edge);border-radius:10px;background:var(--nx-panel);color:var(--nx-text);font:inherit;font-weight:700;cursor:pointer;white-space:normal;text-align:center}
+#noxel-consent-root .nx-consent-btn:hover{border-color:var(--nx-green)}
+/* Boutons HUD (repris de hud-buttons.css du kit HUD, version compacte) */
+#noxel-consent-root .nx-consent-btn.nx-hud{--hud-size:44px;display:inline-flex;flex-direction:row;align-items:center;gap:10px;padding:4px 14px 4px 4px;border:1px solid transparent;border-radius:12px;background:transparent;text-align:left;transition:background .18s,border-color .18s,transform .18s}
+#noxel-consent-root .nx-consent-actions .nx-hud{flex:1 1 170px}
+#noxel-consent-root .nx-hud-graphic{position:relative;display:block;width:var(--hud-size);height:var(--hud-size);flex-shrink:0;transition:filter .18s,transform .18s}
+#noxel-consent-root .nx-hud-graphic svg{display:block;width:100%;height:100%;overflow:visible}
+#noxel-consent-root .nx-hud-label{display:block;font-weight:700;font-size:14px;line-height:1.35;color:var(--nx-text);overflow-wrap:anywhere}
+#noxel-consent-root .nx-hud:hover{background:rgb(61 220 132 / .05);border-color:rgb(61 220 132 / .22)}
+#noxel-consent-root .nx-hud:hover .nx-hud-graphic{filter:drop-shadow(0 0 6px rgb(61 220 132 / .25));transform:scale(1.05)}
+#noxel-consent-root .nx-hud:active{transform:translateY(1px)}
+#noxel-consent-root .nx-hud .hud-orbit{transform-origin:64px 64px;animation:nx-hud-spin 18s linear infinite}
+#noxel-consent-root .nx-hud:hover .hud-orbit{animation-duration:4s}
+#noxel-consent-root .nx-hud--icon{--hud-size:44px;width:52px;height:52px;padding:4px;justify-content:center;border-radius:50%}
+#noxel-consent-root .nx-hud--icon .nx-hud-label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+#noxel-consent-root :focus-visible{outline:2px solid var(--nx-purple);outline-offset:3px}
+#noxel-consent-root .nx-consent-link{color:var(--nx-green);text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:6px 0;min-height:32px}
+#noxel-consent-root .nx-consent-link:hover{color:#7debb0}
+#noxel-consent-root .nx-consent-foot{display:flex;flex-wrap:wrap;align-items:center;gap:4px 16px}
+#noxel-consent-root .nx-consent-foot p{margin:0;font-size:13px;color:var(--nx-soft)}
+#noxel-consent-root .nx-consent-foot:empty{display:none}
+#noxel-consent-root .nx-consent-launcher{position:fixed;bottom:14px;left:16px;z-index:2147482999;background:rgb(17 17 17 / .88);border:1px solid var(--nx-edge-p);box-shadow:0 4px 18px #0008;backdrop-filter:blur(6px)}
+#noxel-consent-root .nx-consent-launcher:hover{background:rgb(17 17 17 / .95);border-color:var(--nx-green)}
+#noxel-consent-root .nx-consent-dialog{width:min(660px,calc(100vw - 32px));max-width:none;max-height:calc(100dvh - 40px);overflow:auto;overscroll-behavior:contain;background:var(--nx-bg);color:var(--nx-text);border:1px solid var(--nx-edge-p);border-radius:18px;padding:24px 26px;font:inherit;box-shadow:0 0 50px rgb(168 85 247 / .15)}
+#noxel-consent-root .nx-consent-dialog::backdrop{background:rgb(0 0 0 / .78);backdrop-filter:blur(3px)}
+.nx-consent-category{border-top:1px solid rgb(255 255 255 / .08);padding:14px 0}
+#noxel-consent-root .nx-consent-category h3{color:var(--nx-green)}
+#noxel-consent-root .nx-consent-toggle{display:flex;gap:12px;align-items:center;min-height:44px;font-weight:700;cursor:pointer}
+#noxel-consent-root input[type=checkbox]{appearance:auto;width:22px;height:22px;flex:0 0 22px;accent-color:var(--nx-green);cursor:pointer}
+#noxel-consent-root ul{padding-left:24px;color:var(--nx-muted)}
+#noxel-consent-root .nx-consent-close{width:100%;margin-top:6px;justify-content:center}
+.nx-consent-placeholder{min-height:44px;padding:16px;border:1px solid rgb(61 220 132 / .28);border-radius:10px;background:#1a1a1a;color:#f5f5f5;font:inherit;cursor:pointer}
+#noxel-consent-root .nx-consent-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+@keyframes nx-hud-spin{to{transform:rotate(360deg)}}
+@media(max-width:480px){.nx-consent-banner{left:12px;bottom:76px;width:calc(100vw - 24px);padding:18px}.nx-consent-actions{flex-direction:column;gap:4px}#noxel-consent-root .nx-consent-actions .nx-hud{flex:initial;width:100%}#noxel-consent-root .nx-consent-launcher{left:12px}#noxel-consent-root .nx-consent-dialog{padding:18px}}
+@media(prefers-reduced-motion:reduce){#noxel-consent-root *{scroll-behavior:auto!important}#noxel-consent-root .nx-hud,#noxel-consent-root .nx-hud-graphic{transition:none}#noxel-consent-root .nx-hud .hud-orbit{animation:none}#noxel-consent-root .nx-hud:hover .nx-hud-graphic{transform:none}}
+@media(forced-colors:active){#noxel-consent-root .nx-consent-btn,#noxel-consent-root .nx-consent-category,#noxel-consent-root .nx-consent-banner,#noxel-consent-root .nx-consent-dialog{border-color:CanvasText}#noxel-consent-root :focus-visible{outline-color:Highlight}}
