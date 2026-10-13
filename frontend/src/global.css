@@ -8,8 +8,8 @@
 :root {
   /* Brand */
 --g: #3ddc84;
---g-dim: rgba(60, 222, 106, 0.08);
---g-border: rgba(60, 222, 106, 0.28);
+--g-dim: rgba(61, 220, 132, 0.08);
+--g-border: rgba(61, 220, 132, 0.28);
 --p: #a855f7;
 --p-dim: rgba(112, 42, 165, 0.12);
 --p-border: rgba(112, 42, 165, 0.35);
@@ -45,7 +45,7 @@
   --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
 
   /* Glows */
-  --glow-g: 0 0 20px rgba(60, 222, 106, 0.25);
+  --glow-g: 0 0 20px rgba(61, 220, 132, 0.25);
   --glow-p: 0 0 20px rgba(112, 42, 165, 0.3);
 
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif;

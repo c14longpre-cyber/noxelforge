@@ -73,7 +73,7 @@ const COUNTRY_NAMES: Record<string, string> = {
   ch: "Switzerland", za: "South Africa",
 };
 
-const GREEN = "rgb(60,222,106)";
+const GREEN = "rgb(61,220,132)";
 
 const LANG_TO_COUNTRIES: Record<string, string[]> = {};
 for (const [country, langs] of Object.entries(COUNTRY_LANGS)) {
@@ -278,7 +278,7 @@ export default function LanguageSelector({ locale, onChange }: Props) {
             display: "flex", flexDirection: "column", padding: 6, borderRadius: 16,
             border: "1px solid rgba(255,255,255,0.12)",
             background: "linear-gradient(180deg, rgba(14,17,30,0.99) 0%, rgba(8,10,20,0.99) 100%)",
-            boxShadow: "0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(60,222,106,0.06)",
+            boxShadow: "0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(61,220,132,0.06)",
             backdropFilter: "blur(12px)", zIndex: 2147483647, color: "white",
           }}
         >
@@ -288,9 +288,9 @@ export default function LanguageSelector({ locale, onChange }: Props) {
               <button key={mode} type="button" onClick={() => setViewMode(mode)} style={{
                 flex: 1, padding: "7px 10px", borderRadius: 10, border: "none",
                 cursor: "pointer", fontFamily: "inherit", fontSize: 12, fontWeight: 700,
-                background: viewMode === mode ? "rgba(60,222,106,0.15)" : "rgba(255,255,255,0.05)",
+                background: viewMode === mode ? "rgba(61,220,132,0.15)" : "rgba(255,255,255,0.05)",
                 color: viewMode === mode ? GREEN : "rgba(255,255,255,0.6)",
-                outline: viewMode === mode ? "1px solid rgba(60,222,106,0.3)" : "none",
+                outline: viewMode === mode ? "1px solid rgba(61,220,132,0.3)" : "none",
               }}>
                 {mode === "list" ? "☰ List" : "🗺 Map"}
               </button>
@@ -323,7 +323,7 @@ export default function LanguageSelector({ locale, onChange }: Props) {
                         const isActive = lc === locale;
                         return (
                           <button key={lc} type="button" onClick={(e) => { e.stopPropagation(); handleSelect(lc); }}
-                            style={{ display: "inline-flex", alignItems: "center", gap: 5, padding: "4px 10px", borderRadius: 99, border: "none", cursor: "pointer", fontFamily: "inherit", fontSize: 12, fontWeight: 700, background: isActive ? "rgba(60,222,106,0.2)" : "rgba(255,255,255,0.08)", color: isActive ? GREEN : "white", outline: isActive ? "1px solid rgba(60,222,106,0.4)" : "none" }}>
+                            style={{ display: "inline-flex", alignItems: "center", gap: 5, padding: "4px 10px", borderRadius: 99, border: "none", cursor: "pointer", fontFamily: "inherit", fontSize: 12, fontWeight: 700, background: isActive ? "rgba(61,220,132,0.2)" : "rgba(255,255,255,0.08)", color: isActive ? GREEN : "white", outline: isActive ? "1px solid rgba(61,220,132,0.4)" : "none" }}>
                             <span>{info.flag}</span><span>{info.english}</span>{isActive && <span style={{ fontSize: 10 }}>✓</span>}
                           </button>
                         );
@@ -361,7 +361,7 @@ export default function LanguageSelector({ locale, onChange }: Props) {
                   return (
                     <button key={item.code} type="button" role="option" aria-selected={active}
                       onClick={() => handleSelect(item.code)} dir={item.dir}
-                      style={{ display: "flex", alignItems: "center", gap: 10, width: "100%", textAlign: "left", padding: "9px 10px", borderRadius: 10, border: "none", background: active ? "rgba(60,222,106,0.12)" : "transparent", color: "white", cursor: "pointer", fontSize: 13, fontFamily: "inherit" }}>
+                      style={{ display: "flex", alignItems: "center", gap: 10, width: "100%", textAlign: "left", padding: "9px 10px", borderRadius: 10, border: "none", background: active ? "rgba(61,220,132,0.12)" : "transparent", color: "white", cursor: "pointer", fontSize: 13, fontFamily: "inherit" }}>
                       <span style={{ fontSize: 18, flexShrink: 0 }}>{item.flag}</span>
                       <span style={{ flex: 1, minWidth: 0 }}>
                         <div style={{ fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{item.english}</div>
