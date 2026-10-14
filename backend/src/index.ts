@@ -11,6 +11,7 @@ import authPasskeyRoutes from "./routes/auth.passkey";
 import authLinkedInRoutes from "./routes/auth.linkedin";
 import authGithubRoutes from "./routes/auth.github";
 import { initForgeBadgeCron } from "./cron/forgeBadgeCron";
+import { initAuthCleanupCron } from "./cron/authCleanupCron";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -41,6 +42,7 @@ app.use("/api/auth", authLinkedInRoutes);
 app.use("/api/auth", authGithubRoutes);
 
 initForgeBadgeCron();
+initAuthCleanupCron();
 
 app.listen(PORT, () => console.log("NOXEL Forge Backend - Port " + PORT));
 
