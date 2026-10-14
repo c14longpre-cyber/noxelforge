@@ -6,7 +6,7 @@ import HudRouterLink from '../../components/HudRouterLink';
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const NICHES = ['SEO','Marketing','AI','E-commerce','Web Dev','Business','Design','Finance','Health','Education'];
 const TIER_COLORS: Record<string,string> = { bronze:'#CD7F32', silver:'#A8A9AD', gold:'#FFD700', platinum:'#E5E4E2', diamond:'#B9F2FF' };
-const TIER_IMAGES: Record<string,string> = { bronze:'/Bronze_tier.svg', silver:'/Silver_tier.svg', gold:'/Gold_tier.svg', platinum:'/Platinum_tier.svg', diamond:'/Diamond_tier.svg' };
+const TIER_IMAGES: Record<string,string> = { bronze:'/tiers/Bronze_tier.png', silver:'/tiers/Silver_tier.png', gold:'/tiers/Gold_tier.png', platinum:'/tiers/Platinum_tier.png', diamond:'/tiers/Diamond_tier.png' };
 
 export default function ForgePartners() {
   const [partenaires, setPartenaires] = useState<any[]>([]);

@@ -201,7 +201,7 @@ Frontend: Push to GitHub → Vercel auto-deploys
 
 ### High Priority
 - **Exchange history tracking** (forge_exchanges table): Log who matched with whom, when; use to avoid duplicate recommendations (V1.5)
-- **Tier badge SVG images**: Update Bronze/Silver/Gold/Platinum/Diamond tier badges in frontend/public (currently not wired into code)
+- **Tier badges**: the pages show 96 px PNG exports (`frontend/public/tiers/*_tier.png`, ~15–20 kB) rendered from the vector masters `frontend/public/*_tier.svg` (traced 1254 px, 200–600 kB, kept as sources). Re-export the PNG if a master changes
 - **Alfred safety guardrails**: Add additional checks to prevent Alfred from approving spam submissions
 
 ### Medium Priority
