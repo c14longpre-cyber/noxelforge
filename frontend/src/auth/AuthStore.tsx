@@ -28,11 +28,19 @@ function devWarn(msg: string, detail?: unknown) {
   if (IS_DEV) console.warn("[AuthStore] " + msg, detail ?? "");
 }
 
+// Ne garder que les champs publics, quoi que renvoie l'API.
+function pickUser(u: AuthUser): AuthUser {
+  return { id: u.id, email: u.email, name: u.name, avatarUrl: u.avatarUrl ?? null, provider: u.provider, tier: u.tier };
+}
+
 function readStored(): AuthUser | null {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
-    return JSON.parse(raw) as AuthUser;
+    const user = pickUser(JSON.parse(raw));
+    // Purge les anciennes copies qui contenaient password_hash / providerId.
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+    return user;
   } catch {
     return null;
   }
@@ -40,7 +48,7 @@ function readStored(): AuthUser | null {
 
 function writeStored(user: AuthUser) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(pickUser(user)));
   } catch {}
 }
 
@@ -64,7 +72,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (!res.ok) throw new Error("Not authenticated");
       const json = await res.json();
       if (json.ok && json.user) {
-        setUser(json.user);
+        setUser(pickUser(json.user));
         writeStored(json.user);
       } else {
         throw new Error("No user in response");
@@ -103,7 +111,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
     const json = await res.json();
     if (!res.ok || !json.ok) throw new Error(json.error || "Google auth failed");
-    setUser(json.user);
+    setUser(pickUser(json.user));
     writeStored(json.user);
   }, []);
 

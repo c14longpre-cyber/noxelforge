@@ -38,7 +38,9 @@ const inputStyle: React.CSSProperties = {
 };
 
 function writeStored(user: any) {
-  try { localStorage.setItem("nxl_forge_user", JSON.stringify(user)); } catch {}
+  // Champs publics seulement (jamais password_hash ni providerId).
+  const { id, email, name, avatarUrl, provider, tier } = user ?? {};
+  try { localStorage.setItem("nxl_forge_user", JSON.stringify({ id, email, name, avatarUrl: avatarUrl ?? null, provider, tier })); } catch {}
 }
 
 export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {

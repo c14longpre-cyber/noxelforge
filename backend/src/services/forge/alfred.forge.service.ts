@@ -38,7 +38,7 @@ BLACKLISTER si: bot évident, manipulation du réseau, contenu interdit.`;
 
 async function analyserAvecClaude(input: AlfredInput): Promise<AlfredResult> {
   const response = await anthropic.messages.create({
-    model: 'claude-3-5-sonnet-20241022', max_tokens: 1000, system: ALFRED_SYSTEM,
+    model: 'claude-sonnet-4-6', max_tokens: 1000, system: ALFRED_SYSTEM,
     messages: [{ role: 'user', content: `URL: ${input.urlSoumise}\nTitre: ${input.titre}\nDescription: ${input.description||'N/A'}\nNiche: ${input.niche||'N/A'}\nTrust Score: ${input.trustScore}/100\nAge compte: ${input.ageCompteDays} jours\nContenu: ${input.contenu||'Non fourni'}` }],
   });
   const text = response.content.filter((b: any) => b.type === 'text').map((b: any) => b.text).join('');
