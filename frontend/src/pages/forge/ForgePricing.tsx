@@ -93,14 +93,15 @@ export default function ForgePricing() {
     if (tier === 'bronze') return;
     setLoading(tier);
     try {
-      const token = localStorage.getItem('supabase_token') || '';
       const res = await fetch(`${API_BASE}/api/forge/stripe/checkout`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ tier, billing, badgeInstalle }),
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tier, billing }),
       });
-      const data = await res.json();
-      if (data.url) window.location.href = data.url;
+      const data = await res.json().catch(() => ({}));
+      if (data.url) { window.location.href = data.url; return; }
+      alert(res.status === 401 ? 'Please sign in first.' : (data.error || 'Error. Please try again.'));
     } catch { alert('Error. Please try again.'); }
     finally { setLoading(null); }
   }
