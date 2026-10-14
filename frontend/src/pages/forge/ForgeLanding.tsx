@@ -12,11 +12,11 @@ const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const NICHES = ['SEO','Marketing','AI','E-commerce','Web Dev','Business','Design'];
 
 const TIER_CONFIG: Record<string, { color: string; icon: string; image: string; label: string }> = {
-  bronze:   { color: '#CD7F32', icon: '🥉', image: '/Bronze_tier.svg', label: 'Bronze' },
-  silver:   { color: '#A8A9AD', icon: '🥈', image: '/Silver_tier.svg', label: 'Silver' },
-  gold:     { color: '#FFD700', icon: '🥇', image: '/Gold_tier.svg', label: 'Gold' },
-  platinum: { color: '#E5E4E2', icon: '⬡',  image: '/Platinum_tier.svg', label: 'Platinum' },
-  diamond:  { color: '#B9F2FF', icon: '💎', image: '/Diamond_tier.svg', label: 'Diamond' },
+  bronze:   { color: '#CD7F32', icon: '🥉', image: '/tiers/Bronze_tier.png', label: 'Bronze' },
+  silver:   { color: '#A8A9AD', icon: '🥈', image: '/tiers/Silver_tier.png', label: 'Silver' },
+  gold:     { color: '#FFD700', icon: '🥇', image: '/tiers/Gold_tier.png', label: 'Gold' },
+  platinum: { color: '#E5E4E2', icon: '⬡',  image: '/tiers/Platinum_tier.png', label: 'Platinum' },
+  diamond:  { color: '#B9F2FF', icon: '💎', image: '/tiers/Diamond_tier.png', label: 'Diamond' },
 };
 
 export default function ForgeLanding() {
@@ -95,7 +95,7 @@ export default function ForgeLanding() {
             <Link to="/forge/dashboard" className="forge-topbar__link">{t.nav.dashboard}</Link>
             {isAuthenticated && (
               <>
-                {membre?.tier_abonnement && (<Link to="/forge/pricing" style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 14px', borderRadius: 20, fontSize: 12, fontWeight: 800, textDecoration: 'none', textTransform: 'capitalize', background: (TIER_CONFIG[membre.tier_abonnement]?.color || '#888') + '20', color: TIER_CONFIG[membre.tier_abonnement]?.color || '#888', border: `1px solid ${(TIER_CONFIG[membre.tier_abonnement]?.color || '#888')}40` }}><img src={TIER_CONFIG[membre.tier_abonnement]?.image || '/Bronze_tier.svg'} alt={membre.tier_abonnement} style={{ width: 14, height: 14, verticalAlign: 'middle' }} /><span style={{marginLeft:6}}>{membre.tier_abonnement}</span>{membre.tier_abonnement !== 'diamond' && <span style={{ opacity: 0.7, marginLeft: 4 }}>· Upgrade ↗</span>}</Link>)}
+                {membre?.tier_abonnement && (<Link to="/forge/pricing" style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 14px', borderRadius: 20, fontSize: 12, fontWeight: 800, textDecoration: 'none', textTransform: 'capitalize', background: (TIER_CONFIG[membre.tier_abonnement]?.color || '#888') + '20', color: TIER_CONFIG[membre.tier_abonnement]?.color || '#888', border: `1px solid ${(TIER_CONFIG[membre.tier_abonnement]?.color || '#888')}40` }}><img src={TIER_CONFIG[membre.tier_abonnement]?.image || '/tiers/Bronze_tier.png'} alt={membre.tier_abonnement} style={{ width: 14, height: 14, verticalAlign: 'middle' }} /><span style={{marginLeft:6}}>{membre.tier_abonnement}</span>{membre.tier_abonnement !== 'diamond' && <span style={{ opacity: 0.7, marginLeft: 4 }}>· Upgrade ↗</span>}</Link>)}
                 <button onClick={() => { setMenuOpen(false); logout(); }} className="forge-topbar__link">{user?.name || 'Account'} (logout)</button>
               </>
             )}
