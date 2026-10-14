@@ -8,7 +8,8 @@ window.NOXEL_CONSENT_SITES = {
   'noxelforge.com': { siteName: 'NOXEL Forge', policyVersion: 'forge-4', privacyUrl: '/policies/privacy.html' },
   'noxel360.com': { siteName: 'NOXEL360', policyVersion: '360-3', privacyUrl: '/privacy' },
   'noxelspectra.com': { siteName: 'NOXEL Spectra', policyVersion: 'spectra-4', privacyUrl: '/#confidentialite' },
-  'app.noxelspectra.com': { siteName: 'NOXEL Spectra', policyVersion: 'spectra-app-4', privacyUrl: 'https://www.noxelspectra.com/#confidentialite' }
+  'app.noxelspectra.com': { siteName: 'NOXEL Spectra', policyVersion: 'spectra-app-4', privacyUrl: 'https://www.noxelspectra.com/#confidentialite' },
+  'video.noxelspectra.com': { siteName: 'NOXEL Spectra Vidéo', policyVersion: 'spectra-video-1', privacyUrl: 'https://www.noxelspectra.com/#confidentialite' }
 };
 /* Outils facultatifs du réseau NOXEL (1.4.0) : la même fenêtre s'affiche sur tous les sites, avec les mêmes
    catégories et la liste de tous les outils, en précisant le site où chacun est utilisé. Le choix vaut pour tous
@@ -23,7 +24,7 @@ window.NOXEL_CONSENT_NETWORK = {
   ]
 };
 /* Sites NOXEL entre lesquels le choix est relayé par les liens (1.1.0). */
-window.NOXEL_CONSENT_RELAY_DOMAINS = ['noxel360.com', 'noxelseo.com', 'noxelforge.com', 'noxelspectra.com', 'app.noxelspectra.com'];
+window.NOXEL_CONSENT_RELAY_DOMAINS = ['noxel360.com', 'noxelseo.com', 'noxelforge.com', 'noxelspectra.com', 'app.noxelspectra.com', 'video.noxelspectra.com'];
 (function () {
   const hostname = location.hostname.replace(/^www\./, '');
   // Langue de la bannière : choix du visiteur gardé par le site (NOXEL360 noxel.language, SEO noxel-lang,
