@@ -27,6 +27,15 @@ function toUser(row: any): User {
   };
 }
 
+export type PublicUser = Omit<User, "password_hash" | "providerId">;
+
+// Ce qui peut partir vers le navigateur : jamais le hash du mot de passe ni provider_id
+// (qui contient ce hash pour les comptes courriel).
+export function toPublicUser(user: User): PublicUser {
+  const { password_hash: _hash, providerId: _providerId, ...rest } = user;
+  return rest;
+}
+
 export async function findUserById(id: string): Promise<User | null> {
   const supabase = getSupabase();
   const { data } = await supabase.from("users").select("*").eq("id", id).single();

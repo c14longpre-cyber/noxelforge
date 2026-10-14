@@ -2,7 +2,7 @@ import { Router, type Request, type Response } from "express";
 import { OAuth2Client } from "google-auth-library";
 import bcrypt from "bcryptjs";
 import { createSession, verifySession } from "../services/session";
-import { upsertUser, findUserById, findUserByEmail } from "../services/userStore";
+import { upsertUser, findUserById, findUserByEmail, toPublicUser } from "../services/userStore";
 
 const router = Router();
 const COOKIE_NAME = process.env.FORGE_SESSION_COOKIE_NAME || "forge_session";
@@ -33,7 +33,7 @@ router.post("/google", async (req: Request, res: Response) => {
     const user = await upsertUser(email, name, googleId, "google", avatarUrl);
     const session = createSession(user.id);
     res.cookie(COOKIE_NAME, session, COOKIE_OPTS);
-    return res.json({ ok: true, user });
+    return res.json({ ok: true, user: toPublicUser(user) });
   } catch (error) {
     console.error("[auth/google]", error);
     return res.status(500).json({ ok: false, error: "Google authentication failed" });
@@ -51,7 +51,7 @@ router.get("/me", async (req: Request, res: Response) => {
     const user = await findUserById(payload.userId);
     if (!user) return res.status(404).json({ ok: false, error: "User not found" });
 
-    return res.json({ ok: true, user });
+    return res.json({ ok: true, user: toPublicUser(user) });
   } catch (error) {
     console.error("[auth/me]", error);
     return res.status(500).json({ ok: false, error: "Session error" });
@@ -78,7 +78,7 @@ router.post("/register", async (req: Request, res: Response) => {
     const user = await upsertUser(email, name || email.split("@")[0], hash, "email", null);
     const session = createSession(user.id);
     res.cookie(COOKIE_NAME, session, COOKIE_OPTS);
-    return res.json({ ok: true, user });
+    return res.json({ ok: true, user: toPublicUser(user) });
   } catch (err: any) {
     return res.status(500).json({ ok: false, error: err.message });
   }
@@ -98,7 +98,7 @@ router.post("/login", async (req: Request, res: Response) => {
 
     const session = createSession(found.id);
     res.cookie(COOKIE_NAME, session, COOKIE_OPTS);
-    return res.json({ ok: true, user: found });
+    return res.json({ ok: true, user: toPublicUser(found) });
   } catch (err: any) {
     return res.status(500).json({ ok: false, error: err.message });
   }

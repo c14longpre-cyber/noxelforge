@@ -6,7 +6,7 @@ import {
   verifyAuthenticationResponse,
 } from "@simplewebauthn/server";
 import { getSupabase } from "../lib/supabaseClient";
-import { upsertUser, findUserById } from "../services/userStore";
+import { upsertUser, findUserById, toPublicUser } from "../services/userStore";
 import { createSession } from "../services/session";
 
 const router = Router();
@@ -97,7 +97,7 @@ router.post("/register/finish", async (req: Request, res: Response) => {
 
     const session = createSession(user.id);
     res.cookie(COOKIE_NAME, session, COOKIE_OPTS);
-    return res.json({ ok: true, user: user });
+    return res.json({ ok: true, user: toPublicUser(user) });
   } catch (err: any) {
     console.error("[passkey/register/finish]", err);
     return res.status(500).json({ ok: false, error: err.message });
@@ -178,7 +178,7 @@ router.post("/login/finish", async (req: Request, res: Response) => {
 
     const session = createSession(user.id);
     res.cookie(COOKIE_NAME, session, COOKIE_OPTS);
-    return res.json({ ok: true, user: user });
+    return res.json({ ok: true, user: toPublicUser(user) });
   } catch (err: any) {
     console.error("[passkey/login/finish]", err);
     return res.status(500).json({ ok: false, error: err.message });
