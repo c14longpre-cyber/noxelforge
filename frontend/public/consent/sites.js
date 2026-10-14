@@ -5,7 +5,7 @@
    privacyUrl : vide tant que le site n'a pas de politique publiée (noxelforge.com, noxelspectra.com au 13/10/2026). */
 window.NOXEL_CONSENT_SITES = {
   'noxelseo.com': { siteName: 'NOXEL SEO', policyVersion: 'seo-3', privacyUrl: '/privacy' },
-  'noxelforge.com': { siteName: 'NOXEL Forge', policyVersion: 'forge-3', privacyUrl: '' },
+  'noxelforge.com': { siteName: 'NOXEL Forge', policyVersion: 'forge-4', privacyUrl: '/policies/privacy.html' },
   'noxel360.com': { siteName: 'NOXEL360', policyVersion: '360-3', privacyUrl: '/privacy' },
   'noxelspectra.com': { siteName: 'NOXEL Spectra', policyVersion: 'spectra-4', privacyUrl: '/#confidentialite' },
   'app.noxelspectra.com': { siteName: 'NOXEL Spectra', policyVersion: 'spectra-app-4', privacyUrl: 'https://www.noxelspectra.com/#confidentialite' }

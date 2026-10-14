@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Politique de confidentialité — NOXEL Forge</title>
+<meta name="description" content="Comment NOXEL Forge recueille, utilise et protège vos renseignements personnels.">
+<link rel="canonical" href="https://noxelforge.com/policies/privacy.html">
+<link rel="icon" type="image/svg+xml" href="/NOXEL_FORGE_LOGO.svg">
+<style>
+  :root { --bg: #07090f; --panel: #1a1a1a; --text: #f5f5f5; --muted: #888; --soft: #cfcfdb; --green: #3ddc84; --purple: #a855f7; --line: rgba(255,255,255,0.1); }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; line-height: 1.65; }
+  header, main, footer { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 20px; padding-bottom: 20px; }
+  .brand { color: var(--text); font-weight: 800; text-decoration: none; letter-spacing: 0.04em; }
+  .brand span { background: linear-gradient(90deg, var(--green), var(--purple)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  a { color: var(--green); }
+  h1 { font-size: 34px; line-height: 1.2; margin: 20px 0 8px; }
+  h2 { font-size: 22px; margin: 44px 0 12px; padding-left: 12px; border-left: 4px solid var(--green); }
+  h3 { font-size: 17px; margin: 24px 0 8px; color: var(--green); }
+  p, li, td { color: var(--soft); font-size: 15px; }
+  strong { color: var(--text); }
+  ul { padding-left: 20px; }
+  .meta { color: var(--muted); font-size: 14px; }
+  .box { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin: 14px 0; }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 600px; }
+  th, td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid var(--line); font-size: 14px; }
+  th { color: var(--text); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+  code { color: #e3ccff; }
+  footer { margin-top: 56px; padding-top: 18px; padding-bottom: 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+  footer a { margin-right: 14px; }
+</style>
+<link rel="stylesheet" href="/consent/noxel-consent.css">
+<script src="/consent/sites.js"></script>
+<script src="/consent/noxel-consent.js"></script>
+</head>
+<body>
+<header>
+  <a class="brand" href="/forge"><span>NOXEL</span> Forge</a>
+  <a href="/forge">← Retour à NOXEL Forge</a>
+</header>
+<main>
+<h1>Politique de confidentialité — NOXEL Forge</h1>
+<p class="meta">Dernière mise à jour : 14 octobre 2026 · Version 1.0</p>
+
+<div class="box">
+  <p><strong>En bref.</strong> Nous recueillons ce qu'il faut pour votre compte, l'échange de liens (site, soumissions, Trust Score, suggestions de partenaires, badge) et votre abonnement. Vos soumissions sont examinées automatiquement, notamment par Alfred, une IA d'Anthropic. Les soumissions approuvées sont publiées dans l'annuaire public. Aucun outil de mesure d'audience ni de publicité n'est actif sur noxelforge.com. Nous ne vendons pas vos renseignements.</p>
+</div>
+
+<h2>1. Responsable</h2>
+<p><strong>NOXEL360 Inc.</strong>, Cookshire-Eaton (Québec), Canada.<br>
+Responsable de la protection des renseignements personnels : <a href="mailto:legal@noxel360.com">legal@noxel360.com</a></p>
+<p>NOXEL Forge fait partie de l'écosystème NOXEL (noxel360.com, noxelseo.com, noxelforge.com, noxelspectra.com). Les comptes de NOXEL Forge sont enregistrés dans une table d'utilisateurs <strong>partagée avec NOXEL SEO</strong>.</p>
+
+<h2>2. Renseignements recueillis</h2>
+
+<h3>2.1 Compte et connexion</h3>
+<p>Vous pouvez vous connecter avec Google, Microsoft, LinkedIn, GitHub, un lien de connexion par courriel, une clé d'accès (passkey) ou un courriel et un mot de passe.</p>
+<div class="table-wrap"><table>
+<tr><th>Renseignements</th><th>Pourquoi</th><th>Base</th><th>Conservation</th></tr>
+<tr><td>Courriel, nom affiché, méthode de connexion, identifiant chez le fournisseur choisi, photo de profil (Google, LinkedIn, GitHub), date de création, palier</td><td>Créer et identifier votre compte</td><td>Contrat</td><td>Durée du compte + 1 an</td></tr>
+<tr><td>Mot de passe (connexion par courriel), uniquement sous forme hachée (bcrypt)</td><td>Authentification</td><td>Contrat</td><td>Durée du compte</td></tr>
+<tr><td>Lien de connexion par courriel : courriel, jeton, dates</td><td>Vous envoyer un lien de connexion</td><td>Contrat</td><td>Valide 15 minutes, supprimé 24 heures après expiration</td></tr>
+<tr><td>Clé d'accès : identifiant et clé publique, compteur, type d'appareil, dernière utilisation (la clé privée reste sur votre appareil)</td><td>Connexion sans mot de passe</td><td>Contrat</td><td>Durée du compte</td></tr>
+<tr><td>Défi de connexion par clé d'accès (lié à votre courriel)</td><td>Sécuriser la connexion</td><td>Contrat</td><td>Valide 5 minutes, supprimé au plus tard 1 heure après</td></tr>
+</table></div>
+<p>Les jetons remis par Google, Microsoft, LinkedIn ou GitHub servent seulement à lire votre profil au moment de la connexion ; nous ne les enregistrons pas. Si Microsoft ou GitHub ne transmet pas de courriel, une adresse technique non fonctionnelle (par exemple <code>gh_…@noxelforge.local</code>) est créée.</p>
+
+<h3>2.2 Adhésion, site et Trust Score</h3>
+<div class="table-wrap"><table>
+<tr><th>Renseignements</th><th>Pourquoi</th><th>Base</th><th>Conservation</th></tr>
+<tr><td>Adresse de votre site, niche, palier, statut, badge installé ou non, dates</td><td>Faire fonctionner votre adhésion</td><td>Contrat</td><td>Durée du compte + 1 an</td></tr>
+<tr><td>Trust Score sur 100 et ses six signaux (technique, autorité, spam, contenu, ancienneté, fréquence)</td><td>Évaluer votre site et vous classer</td><td>Contrat</td><td>Durée du compte + 1 an (remplacé à chaque recalcul)</td></tr>
+<tr><td>Points Forge : solde et historique</td><td>Programme de points</td><td>Contrat</td><td>Durée du compte + 1 an</td></tr>
+</table></div>
+<p><strong>Ce que voient les autres membres :</strong> les suggestions de partenaires montrent l'adresse du site, la niche, le palier et le Trust Score des membres actifs dont le badge est installé.</p>
+
+<h3>2.3 Soumissions et examen par Alfred</h3>
+<div class="table-wrap"><table>
+<tr><th>Renseignements</th><th>Pourquoi</th><th>Base</th><th>Conservation</th></tr>
+<tr><td>Adresse de la page soumise, titre, description, niche, statut, score et motif de l'examen</td><td>Examiner et publier vos soumissions</td><td>Contrat</td><td>Durée du compte + 1 an</td></tr>
+<tr><td>Texte du contenu (champ facultatif)</td><td>Analyse anti-spam et examen par Alfred</td><td>Contrat</td><td>Transmis à Anthropic pour l'analyse, non enregistré chez nous</td></tr>
+<tr><td>Nombre de soumissions sur 24 heures</td><td>Limiter les abus selon votre palier</td><td>Intérêt légitime (lutte contre le spam)</td><td>Fenêtre de 24 heures</td></tr>
+</table></div>
+<p>Déroulement : un filtre anti-spam automatique vérifie l'adresse et le texte ; notre robot (<code>NOXELForge-Bot/1.0</code>) visite la page soumise ; puis Alfred (modèle Claude d'Anthropic) reçoit l'adresse, le titre, la description, la niche, votre Trust Score, l'ancienneté de votre compte et, le cas échéant, le texte du contenu — <strong>jamais votre nom ni votre courriel</strong>. Le résultat (approuvé, rejeté ou liste noire) est rendu dans les minutes qui suivent.</p>
+<p><strong>Décisions automatisées.</strong> Le rejet d'une soumission, l'ajout d'un domaine à la liste noire et l'attribution de points sont décidés automatiquement. Vous pouvez demander les renseignements utilisés et les motifs de la décision, présenter vos observations et demander une révision par une personne à <a href="mailto:legal@noxel360.com">legal@noxel360.com</a>.</p>
+<p><strong>Publication.</strong> Une soumission approuvée est publiée dans l'<strong>annuaire public</strong> (accessible sans compte) avec son adresse, son titre, sa description, sa niche et sa date. Elle en est retirée si votre adhésion est suspendue.</p>
+
+<h3>2.4 Liste noire</h3>
+<p>Nom de domaine, type et motif, auteur de l'ajout (Alfred ou un administrateur), pour protéger le réseau contre le spam (intérêt légitime). Conservé tant que le motif demeure ; vous pouvez contester à <a href="mailto:legal@noxel360.com">legal@noxel360.com</a>.</p>
+
+<h3>2.5 Vérification du badge</h3>
+<p>Notre robot (<code>NOXEL-Forge-BadgeVerifier/1.0</code>) visite la page d'accueil de votre site le 1<sup>er</sup> et le 15 de chaque mois à 9 h (heure de Toronto), et quand vous demandez une vérification. Il cherche le badge dans le code de la page et ne recueille rien sur vos visiteurs. Si le badge est absent, une période de grâce de 7 jours commence ; ensuite l'adhésion est suspendue et vos liens publiés sont désactivés jusqu'à sa réinstallation.</p>
+<p>L'image du badge est hébergée chez nous : quand vos visiteurs l'affichent, leur navigateur contacte notre hébergeur Vercel, qui reçoit les données techniques usuelles (adresse IP, navigateur, page d'origine). NOXEL Forge n'exploite pas ces données.</p>
+
+<h3>2.6 Abonnement et paiement</h3>
+<div class="table-wrap"><table>
+<tr><th>Renseignements</th><th>Pourquoi</th><th>Base</th><th>Conservation</th></tr>
+<tr><td>Courriel, identifiant de compte, palier, mode de facturation, remise badge — transmis à Stripe</td><td>Créer la session de paiement</td><td>Contrat</td><td>Chez Stripe, selon sa politique</td></tr>
+<tr><td>Identifiants client et abonnement Stripe, palier</td><td>Associer l'abonnement à votre compte</td><td>Contrat</td><td>Durée du compte + 1 an</td></tr>
+<tr><td>Pièces comptables</td><td>Obligations fiscales</td><td>Obligation légale</td><td>7 ans</td></tr>
+</table></div>
+<p>Le paiement se fait sur la page de <strong>Stripe</strong> : vos numéros de carte ne passent pas par nos serveurs. Remboursement sans question dans les 14 jours ; vous pouvez annuler à tout moment (la facturation suivante n'est pas appliquée).</p>
+
+<h3>2.7 Courriels</h3>
+<p>Le seul courriel envoyé est le lien de connexion, expédié depuis noreply@noxelforge.com par notre prestataire <strong>Resend</strong>. Nous ne faisons pas de prospection par courriel.</p>
+
+<h3>2.8 Journaux techniques</h3>
+<p>Nos hébergeurs reçoivent les données techniques de connexion (adresse IP, navigateur, heure) et nos journaux serveur contiennent des informations de diagnostic (adresses des pages soumises, identifiants de soumission, messages d'erreur). Base : intérêt légitime (sécurité, débogage). Conservation : 30 jours. NOXEL Forge n'enregistre pas votre adresse IP dans sa base de données.</p>
+
+<h2>3. Destinataires et sous-traitants</h2>
+<div class="table-wrap"><table>
+<tr><th>Prestataire</th><th>Rôle</th><th>Données</th></tr>
+<tr><td>Supabase</td><td>Base de données</td><td>Compte, adhésion, soumissions, badge, points</td></tr>
+<tr><td>Railway</td><td>Hébergement de l'API</td><td>Requêtes, journaux</td></tr>
+<tr><td>Cloudflare</td><td>Réseau devant api.noxelforge.com</td><td>Données techniques de connexion</td></tr>
+<tr><td>Vercel</td><td>Hébergement du site et de l'image du badge</td><td>Données techniques de navigation</td></tr>
+<tr><td>Stripe</td><td>Paiements</td><td>Courriel, identifiant, palier, paiement</td></tr>
+<tr><td>Anthropic</td><td>Examen des soumissions (Alfred)</td><td>Contenu des soumissions (section 2.3)</td></tr>
+<tr><td>Resend</td><td>Envoi du lien de connexion</td><td>Courriel</td></tr>
+<tr><td>Google, Microsoft, LinkedIn, GitHub</td><td>Connexion, si vous les choisissez</td><td>Échange d'identification</td></tr>
+</table></div>
+<p>Les autres membres voient ce qui est décrit en 2.2, le public voit les soumissions approuvées (2.3), et les autorités peuvent recevoir des renseignements lorsque la loi l'exige.</p>
+
+<h2>4. Transferts hors du Québec</h2>
+<p>Plusieurs prestataires traitent des données aux États-Unis (notamment Stripe, Anthropic, Resend, Vercel, Railway, Cloudflare) ou ailleurs au Canada. Nous encadrons ces communications par des ententes avec chaque prestataire, comme l'exigent la Loi 25 et, pour les personnes dans l'Union européenne, le RGPD.</p>
+
+<h2>5. Cookies et stockage local</h2>
+<p><strong>Aucun outil facultatif</strong> (mesure d'audience, publicité, réseaux sociaux) n'est actif sur noxelforge.com.</p>
+<div class="table-wrap"><table>
+<tr><th>Nom</th><th>Type</th><th>Rôle</th><th>Durée</th></tr>
+<tr><td><code>forge_session</code></td><td>Cookie (HttpOnly, sécurisé)</td><td>Vous garder connecté</td><td>7 jours ; supprimé à la déconnexion</td></tr>
+<tr><td><code>gh_oauth_state</code>, <code>ms_oauth_state</code>, <code>linkedin_oauth_state</code></td><td>Cookie</td><td>Protéger la connexion GitHub, Microsoft ou LinkedIn</td><td>10 minutes</td></tr>
+<tr><td><code>nxl_forge_user</code></td><td>Stockage local</td><td>Affichage de votre profil (identifiant, courriel, nom, photo, méthode, palier)</td><td>Jusqu'à la déconnexion</td></tr>
+<tr><td><code>forge_lang</code></td><td>Stockage local</td><td>Langue de l'interface</td><td>Jusqu'à ce que vous l'effaciez</td></tr>
+<tr><td><code>noxel.consent.v1</code></td><td>Stockage local</td><td>Votre choix de confidentialité</td><td>180 jours</td></tr>
+</table></div>
+<p>La fenêtre de préférences est commune aux sites NOXEL : elle liste les outils utilisés sur l'ensemble des sites (par exemple Google Tag Manager sur NOXEL SEO) en précisant où chacun est actif ; aucun ne l'est sur NOXEL Forge. Quand vous suivez un lien vers un autre site NOXEL, votre choix l'accompagne sous la forme d'un court code (<code>#nxc=…</code>) <strong>sans aucun identifiant</strong>. Changez d'avis à tout moment avec « Privacy preferences » en bas de page.</p>
+
+<h2>6. Vos droits</h2>
+<p>Selon la loi qui s'applique à vous (Loi 25 au Québec, LPRPDE au Canada, RGPD dans l'Union européenne), vous pouvez demander l'accès à vos renseignements, leur rectification, leur suppression, leur portabilité, vous opposer à un traitement ou en demander la limitation, et retirer votre consentement.</p>
+<p>Écrivez à <a href="mailto:legal@noxel360.com">legal@noxel360.com</a> en indiquant votre courriel de compte ou votre domaine et le droit visé. Nous pourrons vérifier votre identité et répondons dans les 30 jours. La suppression de compte se fait sur demande ; comme la table des comptes est partagée avec NOXEL SEO, précisez si la demande vise aussi votre compte NOXEL SEO.</p>
+<p>Vous pouvez porter plainte auprès de la <a href="https://www.cai.gouv.qc.ca/" rel="noopener">Commission d'accès à l'information du Québec</a>, du <a href="https://www.priv.gc.ca/" rel="noopener">Commissariat à la protection de la vie privée du Canada</a> ou de l'autorité de votre pays.</p>
+
+<h2>7. Sécurité</h2>
+<p>Connexions chiffrées (HTTPS), cookie de session inaccessible aux scripts, mots de passe hachés avec bcrypt, liens de connexion à usage unique, signature des notifications Stripe vérifiée, accès aux données des membres réservé aux comptes connectés. En cas d'incident de confidentialité présentant un risque de préjudice sérieux, nous aviserons les personnes concernées et les autorités comme la loi l'exige.</p>
+
+<h2>8. Enfants</h2>
+<p>NOXEL Forge s'adresse aux propriétaires de sites et aux professionnels, pas aux enfants. Si un enfant nous a transmis des renseignements, écrivez-nous et nous les supprimerons.</p>
+
+<h2>9. Modifications</h2>
+<p>La date en haut de page indique la dernière mise à jour. En cas de changement important, nous vous en informerons et la fenêtre de préférences vous sera présentée de nouveau.</p>
+</main>
+<footer>
+  <a href="/forge">NOXEL Forge</a>
+  <a href="https://noxel360.com/" rel="noopener">NOXEL360</a>
+  <a href="mailto:legal@noxel360.com">legal@noxel360.com</a>
+  <p>© 2026 NOXEL360 Inc.</p>
+</footer>
+</body>
+</html>
