@@ -152,6 +152,7 @@ export default function ForgePartners() {
           { label: "Pricing", href: "/forge/pricing" },
           { label: "Partners", href: "/forge/partners" },
           { label: "NOXEL SEO", href: "https://noxelseo.com" },
+          { label: "Privacy", href: "/policies/privacy.html" },
         ]}
       />
     </div>
