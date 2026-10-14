@@ -35,7 +35,7 @@ const fr: ForgeTranslations = {
     annual: 'Annuel',
     discount: '−17%',
     badgeToggle: 'J\'affiche le badge NOXEL — déverrouiller la réduction',
-    badgeApplied: '✓ Réduction badge appliquée',
+    badgeApplied: 'Réduction badge appliquée',
     mostPopular: 'Plus populaire',
     perMonth: '/mois',
     getStartedFree: 'Commencer gratuitement',

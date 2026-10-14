@@ -78,6 +78,7 @@ const BADGE_DISCOUNTS: Record<string, number> = {
 
 export default function ForgePricing() {
   const [billing, setBilling] = useState<'monthly' | 'annual'>('monthly');
+  // Remise badge affichée seulement si le serveur a vérifié le badge (même règle que /checkout).
   const [badgeInstalle, setBadgeInstalle] = useState(false);
   const [loading, setLoading] = useState<string | null>(null);
   const [t, setT] = useState<any>(null);
@@ -85,6 +86,10 @@ export default function ForgePricing() {
   useEffect(() => {
     const lang = navigator.language.split('-')[0] || 'en';
     getForgeT(lang).then(setT).catch(() => getForgeT('en').then(setT));
+    fetch(`${API_BASE}/api/forge/members/status`, { credentials: 'include' })
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => setBadgeInstalle(d?.membre?.badge_installe === true))
+      .catch(() => {});
   }, []);
 
   if (!t) return <div style={{ minHeight: '100vh', background: 'var(--bg)' }} />;
@@ -150,13 +155,18 @@ export default function ForgePricing() {
             </button>
           </div>
 
-          {/* BADGE TOGGLE */}
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '10px 20px', borderRadius: 'var(--r)', border: `1px solid ${badgeInstalle ? 'var(--g-border)' : 'var(--border)'}`, background: badgeInstalle ? 'var(--g-dim)' : 'transparent', cursor: 'pointer' }} onClick={() => setBadgeInstalle(b => !b)}>
-            <img src="/chain-link.avif" alt="Badge" style={{ width: 20, height: 20, objectFit: 'contain' }} />
-            <span style={{ fontSize: 13, fontWeight: 700, color: badgeInstalle ? 'var(--g)' : 'var(--muted)' }}>
-              {badgeInstalle ? '✓ ' + t.pricing.badgeApplied : t.pricing.badgeToggle}
-            </span>
-          </div>
+          {/* BADGE : remise appliquée si vérifiée, sinon lien vers la page du badge */}
+          {badgeInstalle ? (
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '10px 20px', borderRadius: 'var(--r)', border: '1px solid var(--g-border)', background: 'var(--g-dim)' }}>
+              <img src="/chain-link.avif" alt="Badge" style={{ width: 20, height: 20, objectFit: 'contain' }} />
+              <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--g)' }}>{'✓ ' + t.pricing.badgeApplied}</span>
+            </div>
+          ) : (
+            <Link to="/forge/badge" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '10px 20px', borderRadius: 'var(--r)', border: '1px solid var(--border)', textDecoration: 'none' }}>
+              <img src="/chain-link.avif" alt="Badge" style={{ width: 20, height: 20, objectFit: 'contain' }} />
+              <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--muted)' }}>{t.pricing.badgeToggle}</span>
+            </Link>
+          )}
         </div>
 
         {/* TIERS GRID */}
