@@ -22,10 +22,7 @@ export default function ForgePartners() {
   async function fetchRecommandations() {
     setLoadingReco(true);
     try {
-      const token = localStorage.getItem('supabase_token') || '';
-      const res = await fetch(`${API_BASE}/api/forge/matchmaking/suggestions?limit=6`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(`${API_BASE}/api/forge/matchmaking/suggestions?limit=6`, { credentials: 'include' });
       if (res.ok) {
         const data = await res.json();
         setRecommandations(data.suggestions ?? []);

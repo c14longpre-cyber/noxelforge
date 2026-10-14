@@ -28,8 +28,7 @@ export default function ForgePoints() {
   async function fetchPoints() {
     setLoading(true);
     try {
-      const token = localStorage.getItem('supabase_token') || '';
-      const res = await fetch(`${API_BASE}/api/forge/members/status`, { headers: { Authorization: `Bearer ${token}` } });
+      const res = await fetch(`${API_BASE}/api/forge/members/status`, { credentials: 'include' });
       if (res.ok) { const data = await res.json(); setPoints(data.points); }
     } catch {}
     finally { setLoading(false); }
