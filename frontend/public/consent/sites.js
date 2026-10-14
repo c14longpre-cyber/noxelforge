@@ -7,8 +7,8 @@ window.NOXEL_CONSENT_SITES = {
   'noxelseo.com': { siteName: 'NOXEL SEO', policyVersion: 'seo-3', privacyUrl: '/privacy' },
   'noxelforge.com': { siteName: 'NOXEL Forge', policyVersion: 'forge-3', privacyUrl: '' },
   'noxel360.com': { siteName: 'NOXEL360', policyVersion: '360-3', privacyUrl: '/privacy' },
-  'noxelspectra.com': { siteName: 'NOXEL Spectra', policyVersion: 'spectra-3', privacyUrl: '' },
-  'app.noxelspectra.com': { siteName: 'NOXEL Spectra', policyVersion: 'spectra-app-3', privacyUrl: '' }
+  'noxelspectra.com': { siteName: 'NOXEL Spectra', policyVersion: 'spectra-4', privacyUrl: '/#confidentialite' },
+  'app.noxelspectra.com': { siteName: 'NOXEL Spectra', policyVersion: 'spectra-app-4', privacyUrl: 'https://www.noxelspectra.com/#confidentialite' }
 };
 /* Outils facultatifs du réseau NOXEL (1.4.0) : la même fenêtre s'affiche sur tous les sites, avec les mêmes
    catégories et la liste de tous les outils, en précisant le site où chacun est utilisé. Le choix vaut pour tous
