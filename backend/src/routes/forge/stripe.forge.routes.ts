@@ -1,16 +1,26 @@
 import { Router, Request, Response } from 'express';
 import Stripe from 'stripe';
 import { creerCheckoutForge, gererWebhookForge } from '../../services/forge/stripe.forge.service';
+import { requireAuth } from '../../middleware/requireAuth';
+import { getSupabase } from '../../lib/supabaseClient';
 
 const router = Router();
 
-router.post('/checkout', async (req: Request, res: Response) => {
+router.post('/checkout', requireAuth, async (req: Request, res: Response) => {
   try {
-    const { tier, billing, badgeInstalle } = req.body;
+    // badgeInstalle sent by the client is ignored: the badge discount depends on the real badge status
+    const { tier, billing } = req.body;
     const userId = (req as any).user?.id;
     const email = (req as any).user?.email;
     if (!userId || !email) return res.status(401).json({ error: 'Non authentifié' });
-    const url = await creerCheckoutForge({ userId, email, tier, billing: billing || 'monthly', badgeInstalle: !!badgeInstalle });
+    const { data: badge, error: badgeError } = await getSupabase()
+      .from('forge_badges').select('statut').eq('user_id', userId).maybeSingle();
+    if (badgeError) {
+      console.error('[checkout] forge_badges:', badgeError.message);
+      return res.status(500).json({ error: 'Erreur serveur.' });
+    }
+    const badgeInstalle = badge?.statut === 'verifie';
+    const url = await creerCheckoutForge({ userId, email, tier, billing: billing || 'monthly', badgeInstalle });
     res.json({ url });
   } catch (err: any) {
     res.status(400).json({ error: err.message });

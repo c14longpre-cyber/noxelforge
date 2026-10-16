@@ -6,7 +6,10 @@ import { getSupabase } from '../../lib/supabaseClient';
 export async function registerMembre(req: Request, res: Response): Promise<void> {
   const supabase = getSupabase();
   const userId = (req as any).userId;
-  const { url_site, niche, tier_abonnement = 'bronze' } = req.body;
+  // tier_abonnement sent by the client is ignored: every new account starts on the free tier,
+  // only the Stripe webhook (gererWebhookForge) changes it after a real payment
+  const { url_site, niche } = req.body;
+  const tier_abonnement = 'bronze';
   const { data: existant } = await supabase.from('forge_members').select('id').eq('user_id', userId).single();
   if (existant) { res.status(409).json({ error: 'Tu es déjà membre de NOXEL Forge.' }); return; }
   const { data: membre, error } = await supabase.from('forge_members').insert({ user_id: userId, tier_abonnement, url_site, niche, badge_installe: false, scan_complete: false, statut: 'actif' }).select().single();
