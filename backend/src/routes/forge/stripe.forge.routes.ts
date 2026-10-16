@@ -30,12 +30,21 @@ router.post('/checkout', requireAuth, async (req: Request, res: Response) => {
 router.post('/webhook', async (req: Request, res: Response) => {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2026-06-24.dahlia' });
   const sig = req.headers['stripe-signature'] as string;
+  let event: Stripe.Event;
   try {
-    const event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET!);
+    event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET!);
+  } catch (err: any) {
+    // Bad signature or payload: retrying would not help
+    res.status(400).json({ error: err.message });
+    return;
+  }
+  try {
     await gererWebhookForge(event);
     res.json({ received: true });
   } catch (err: any) {
-    res.status(400).json({ error: err.message });
+    // Processing failed (e.g. Supabase error): 500 so Stripe retries instead of considering it done
+    console.error(`[stripe webhook] ${event.type} ${event.id} failed:`, err?.message ?? err);
+    res.status(500).json({ error: 'Webhook processing failed.' });
   }
 });
 

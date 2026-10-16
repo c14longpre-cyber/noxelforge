@@ -1,4 +1,5 @@
 import { getSupabase } from '../../lib/supabaseClient';
+import { must } from '../../lib/supabaseCheck';
 export type BadgeStatut = 'verifie' | 'non_verifie' | 'grace' | 'suspendu';
 
 export interface BadgeCheckResult {
@@ -34,18 +35,18 @@ export async function verifierBadgeSurSite(urlSite: string): Promise<boolean> {
 export async function traiterVerificationBadge(userId: string, urlSite: string): Promise<BadgeCheckResult> {
   const supabase = getSupabase();
   const badgePresent = await verifierBadgeSurSite(urlSite);
-  const { data: badgeActuel } = await supabase.from('forge_badges').select('*').eq('user_id', userId).single();
+  const badgeActuel = must(await supabase.from('forge_badges').select('*').eq('user_id', userId).maybeSingle(), 'forge_badges select');
   const maintenant = new Date();
   const prochaineVerif = new Date();
   prochaineVerif.setDate(prochaineVerif.getDate() + 15);
 
   if (badgePresent) {
-    await supabase.from('forge_badges').upsert({
+    must(await supabase.from('forge_badges').upsert({
       user_id: userId, url_site: urlSite, badge_present: true,
       derniere_verification: maintenant.toISOString(), prochaine_verification: prochaineVerif.toISOString(),
       grace_expire_at: null, tentatives_echec: 0, statut: 'verifie', updated_at: maintenant.toISOString(),
-    }, { onConflict: 'user_id' });
-    await supabase.from('forge_members').update({ badge_installe: true, updated_at: maintenant.toISOString() }).eq('user_id', userId);
+    }, { onConflict: 'user_id' }), 'forge_badges upsert');
+    must(await supabase.from('forge_members').update({ badge_installe: true, updated_at: maintenant.toISOString() }).eq('user_id', userId), 'forge_members update');
     return { present: true, statut: 'verifie', message: 'Badge NOXEL détecté et vérifié.' };
   }
 
@@ -55,24 +56,24 @@ export async function traiterVerificationBadge(userId: string, urlSite: string):
   if (statutActuel === 'verifie' || statutActuel === 'non_verifie') {
     const graceExpire = new Date();
     graceExpire.setDate(graceExpire.getDate() + 7);
-    await supabase.from('forge_badges').upsert({
+    must(await supabase.from('forge_badges').upsert({
       user_id: userId, url_site: urlSite, badge_present: false,
       derniere_verification: maintenant.toISOString(), prochaine_verification: prochaineVerif.toISOString(),
       grace_expire_at: graceExpire.toISOString(), tentatives_echec: tentativesEchec, statut: 'grace', updated_at: maintenant.toISOString(),
-    }, { onConflict: 'user_id' });
+    }, { onConflict: 'user_id' }), 'forge_badges upsert');
     return { present: false, statut: 'grace', message: `Badge non détecté. Tu as 7 jours pour le réinstaller.` };
   }
 
   if (statutActuel === 'grace') {
     const graceExpire = badgeActuel?.grace_expire_at ? new Date(badgeActuel.grace_expire_at) : new Date();
     if (maintenant > graceExpire) {
-      await supabase.from('forge_badges').upsert({
+      must(await supabase.from('forge_badges').upsert({
         user_id: userId, url_site: urlSite, badge_present: false,
         derniere_verification: maintenant.toISOString(), prochaine_verification: prochaineVerif.toISOString(),
         tentatives_echec: tentativesEchec, statut: 'suspendu', updated_at: maintenant.toISOString(),
-      }, { onConflict: 'user_id' });
-      await supabase.from('forge_members').update({ badge_installe: false, statut: 'suspendu', updated_at: maintenant.toISOString() }).eq('user_id', userId);
-      await supabase.from('forge_submissions').update({ backlink_noxel_actif: false, updated_at: maintenant.toISOString() }).eq('user_id', userId).eq('backlink_noxel_actif', true);
+      }, { onConflict: 'user_id' }), 'forge_badges upsert');
+      must(await supabase.from('forge_members').update({ badge_installe: false, statut: 'suspendu', updated_at: maintenant.toISOString() }).eq('user_id', userId), 'forge_members update');
+      must(await supabase.from('forge_submissions').update({ backlink_noxel_actif: false, updated_at: maintenant.toISOString() }).eq('user_id', userId).eq('backlink_noxel_actif', true), 'forge_submissions update');
       return { present: false, statut: 'suspendu', message: 'Compte Forge suspendu — badge non réinstallé dans les délais.' };
     }
     return { present: false, statut: 'grace', message: `Badge toujours absent. Période de grâce expire le ${graceExpire.toLocaleDateString('fr-CA')}.` };
@@ -86,8 +87,8 @@ export async function reactiverMembre(userId: string, urlSite: string): Promise<
   const badgePresent = await verifierBadgeSurSite(urlSite);
   if (!badgePresent) return { present: false, statut: 'suspendu', message: 'Badge toujours non détecté. Vérifie l\'installation.' };
   const maintenant = new Date();
-  await supabase.from('forge_badges').update({ badge_present: true, derniere_verification: maintenant.toISOString(), grace_expire_at: null, tentatives_echec: 0, statut: 'verifie', updated_at: maintenant.toISOString() }).eq('user_id', userId);
-  await supabase.from('forge_members').update({ badge_installe: true, statut: 'actif', updated_at: maintenant.toISOString() }).eq('user_id', userId);
-  await supabase.from('forge_submissions').update({ backlink_noxel_actif: true, updated_at: maintenant.toISOString() }).eq('user_id', userId).eq('statut', 'approuve');
+  must(await supabase.from('forge_badges').update({ badge_present: true, derniere_verification: maintenant.toISOString(), grace_expire_at: null, tentatives_echec: 0, statut: 'verifie', updated_at: maintenant.toISOString() }).eq('user_id', userId), 'forge_badges update');
+  must(await supabase.from('forge_members').update({ badge_installe: true, statut: 'actif', updated_at: maintenant.toISOString() }).eq('user_id', userId), 'forge_members update');
+  must(await supabase.from('forge_submissions').update({ backlink_noxel_actif: true, updated_at: maintenant.toISOString() }).eq('user_id', userId).eq('statut', 'approuve'), 'forge_submissions update');
   return { present: true, statut: 'verifie', message: 'Badge réinstallé. Compte Forge réactivé! 🔥' };
 }

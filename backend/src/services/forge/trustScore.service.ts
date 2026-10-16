@@ -1,4 +1,5 @@
 import { getSupabase } from '../../lib/supabaseClient';
+import { must } from '../../lib/supabaseCheck';
 export type TierForge = 'bronze' | 'silver' | 'gold' | 'platinum' | 'diamond';
 
 export interface TrustScoreInput {
@@ -67,26 +68,26 @@ export function calculerTrustScore(input: TrustScoreInput): TrustScoreResult {
 
 export async function sauvegarderTrustScore(userId: string, result: TrustScoreResult): Promise<void> {
   const supabase = getSupabase();
-  await supabase.from('forge_trust_scores').upsert({
+  must(await supabase.from('forge_trust_scores').upsert({
     user_id: userId, score: result.score, tier_forge: result.tier,
     signal_technique: result.signaux.technique, signal_autorite: result.signaux.autorite,
     signal_spam: result.signaux.spam, signal_contenu: result.signaux.contenu,
     signal_anciennete: result.signaux.anciennete, signal_frequence: result.signaux.frequence,
     details: result.details, calcule_at: new Date().toISOString(),
-  }, { onConflict: 'user_id' });
+  }, { onConflict: 'user_id' }), 'forge_trust_scores upsert');
 }
 
 export async function recalculerTrustScore(input: TrustScoreInput): Promise<TrustScoreResult> {
   const supabase = getSupabase();
   const result = calculerTrustScore(input);
   await sauvegarderTrustScore(input.userId, result);
-  await supabase.from('forge_members').update({ updated_at: new Date().toISOString() }).eq('user_id', input.userId);
+  must(await supabase.from('forge_members').update({ updated_at: new Date().toISOString() }).eq('user_id', input.userId), 'forge_members update');
   return result;
 }
 
 export async function getTrustScore(userId: string): Promise<TrustScoreResult | null> {
   const supabase = getSupabase();
-  const { data } = await supabase.from('forge_trust_scores').select('*').eq('user_id', userId).single();
+  const data = must(await supabase.from('forge_trust_scores').select('*').eq('user_id', userId).maybeSingle(), 'forge_trust_scores select');
   if (!data) return null;
   return {
     score: data.score, tier: data.tier_forge as TierForge,

@@ -38,6 +38,13 @@ app.use("/api/auth/passkey", authPasskeyRoutes);
 app.use("/api/auth", authLinkedInRoutes);
 app.use("/api/auth", authGithubRoutes);
 
+// Last: any error thrown by a route (e.g. a Supabase { error } through must()) becomes a JSON 500
+app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+  console.error("[unhandled]", err?.message ?? err);
+  if (res.headersSent) return;
+  res.status(500).json({ error: "Erreur serveur." });
+});
+
 initForgeBadgeCron();
 
 app.listen(PORT, () => console.log("NOXEL Forge Backend - Port " + PORT));

@@ -1,4 +1,5 @@
 import { getSupabase } from '../../lib/supabaseClient';
+import { must } from '../../lib/supabaseCheck';
 export interface SpamGateResult { passe: boolean; raison?: string; type?: 'spam' | 'bot' | 'pub_automatique' | 'contenu_interdit' | 'blacklist'; }
 export interface SpamGateInput { url: string; titre: string; description?: string; contenu?: string; userId: string; }
 const PATTERNS_PUB = [/buy\s+now/i,/limited\s+time\s+offer/i,/act\s+now/i,/free\s+money/i,/earn\s+\$\d+/i,/make\s+money\s+fast/i,/casino|poker|slots|gambling/i,/viagra|cialis|pharmacy|pills/i,/crypto\s+profit|bitcoin\s+earn/i,/mlm|multi.?level\s+marketing/i];
@@ -24,14 +25,15 @@ function verifierRatioLiens(contenu: string): SpamGateResult {
 }
 async function verifierBlacklist(domaine: string): Promise<SpamGateResult> {
   const supabase = getSupabase();
-  const { data } = await supabase.from('forge_blacklist').select('raison,type').eq('domaine', domaine).single();
+  const data = must(await supabase.from('forge_blacklist').select('raison,type').eq('domaine', domaine).maybeSingle(), 'forge_blacklist select');
   if (data) return { passe: false, raison: `Domaine blacklisté : ${data.raison}`, type: 'blacklist' };
   return { passe: true };
 }
 async function verifierRateLimit(userId: string): Promise<SpamGateResult> {
   const supabase = getSupabase();
   const hier = new Date(Date.now() - 24*60*60*1000).toISOString();
-  const { count } = await supabase.from('forge_submissions').select('*', { count: 'exact', head: true }).eq('user_id', userId).gte('created_at', hier);
+  const { count, error } = await supabase.from('forge_submissions').select('*', { count: 'exact', head: true }).eq('user_id', userId).gte('created_at', hier);
+  must({ data: count, error }, 'forge_submissions count');
   if (count && count >= 3) return { passe: false, raison: 'Limite 3 soumissions/24h atteinte.', type: 'bot' };
   return { passe: true };
 }
@@ -43,5 +45,5 @@ export async function runSpamGate(input: SpamGateInput): Promise<SpamGateResult>
 }
 export async function ajouterBlacklist(domaine: string, type: 'spam'|'bot'|'pub_automatique'|'contenu_interdit'|'manuel', raison: string, ajoute_par: 'alfred'|'admin' = 'alfred'): Promise<void> {
   const supabase = getSupabase();
-  await supabase.from('forge_blacklist').upsert({ domaine, type, raison, ajoute_par }, { onConflict: 'domaine' });
+  must(await supabase.from('forge_blacklist').upsert({ domaine, type, raison, ajoute_par }, { onConflict: 'domaine' }), 'forge_blacklist upsert');
 }

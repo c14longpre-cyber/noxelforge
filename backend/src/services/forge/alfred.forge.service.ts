@@ -1,6 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { ajouterBlacklist } from './spamGate.service';
 import { getSupabase } from '../../lib/supabaseClient';
+import { must } from '../../lib/supabaseCheck';
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! });
 
@@ -61,11 +62,11 @@ export async function runAlfred(input: AlfredInput): Promise<AlfredResult> {
 
 async function crediterPoints(userId: string, points: number, description: string): Promise<void> {
   const supabase = getSupabase();
-  const { data } = await supabase.from('forge_points').select('solde,total_gagne,historique').eq('user_id', userId).single();
+  const data = must(await supabase.from('forge_points').select('solde,total_gagne,historique').eq('user_id', userId).maybeSingle(), 'forge_points select');
   const solde = (data?.solde ?? 0) + points;
   const totalGagne = (data?.total_gagne ?? 0) + points;
   const historique = [...(data?.historique ?? []), { type: 'earn', points, description, date: new Date().toISOString() }];
-  await supabase.from('forge_points').upsert({ user_id: userId, solde, total_gagne: totalGagne, historique, updated_at: new Date().toISOString() }, { onConflict: 'user_id' });
+  must(await supabase.from('forge_points').upsert({ user_id: userId, solde, total_gagne: totalGagne, historique, updated_at: new Date().toISOString() }, { onConflict: 'user_id' }), 'forge_points upsert');
 }
 
 export async function traiterSoumission(submissionId: string, input: AlfredInput): Promise<void> {

@@ -1,5 +1,6 @@
 import Stripe from 'stripe';
 import { getSupabase } from '../../lib/supabaseClient';
+import { must } from '../../lib/supabaseCheck';
 
 function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2026-06-24.dahlia' });
@@ -62,20 +63,23 @@ export async function gererWebhookForge(event: Stripe.Event): Promise<void> {
     const { userId, tier } = session.metadata || {};
     if (!userId || !tier) return;
 
-    await supabase.from('forge_members').upsert({
+    // A failure throws: the webhook route answers 500 so Stripe retries the event
+    must(await supabase.from('forge_members').upsert({
       user_id: userId,
       tier_abonnement: tier,
       stripe_customer_id: session.customer as string,
       stripe_subscription_id: session.subscription as string,
       updated_at: new Date().toISOString(),
-    }, { onConflict: 'user_id' });
+    }, { onConflict: 'user_id' }), 'forge_members upsert (checkout.session.completed)');
   }
 
   if (event.type === 'customer.subscription.deleted') {
     const sub = event.data.object as Stripe.Subscription;
-    const customerId = sub.customer as string;
-    await supabase.from('forge_members')
+    // Look the member up by the subscription that ended (a customer can have had several)
+    const rows = must(await supabase.from('forge_members')
       .update({ tier_abonnement: 'bronze', stripe_subscription_id: null, updated_at: new Date().toISOString() })
-      .eq('stripe_customer_id', customerId);
+      .eq('stripe_subscription_id', sub.id)
+      .select('user_id'), 'forge_members update (customer.subscription.deleted)');
+    if (!rows?.length) console.warn(`[stripe webhook] subscription.deleted: no member for subscription ${sub.id}`);
   }
 }
