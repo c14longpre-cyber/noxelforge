@@ -54,16 +54,23 @@ function calculerSignalFrequence(freq?: number): number {
   return Math.round((s/100)*5);
 }
 
+// Negative, NaN or non-numeric inputs count as 0; percentages are capped at 100.
+// Without this, spamScore=-50 gave a spam signal of 30/20 and negative inputs a negative score.
+function borner(v: unknown, max = Infinity): number {
+  const n = Number(v);
+  return Number.isFinite(n) ? Math.min(Math.max(n, 0), max) : 0;
+}
+
 export function calculerTrustScore(input: TrustScoreInput): TrustScoreResult {
   const signaux = {
-    technique: calculerSignalTechnique(input.scoresTechnique),
-    autorite: calculerSignalAutorite(input.domainAuthority),
-    spam: calculerSignalSpam(input.spamScore),
-    contenu: calculerSignalContenu(input.qualiteContenu),
-    anciennete: calculerSignalAnciennete(input.ageDomaineAnnees),
-    frequence: calculerSignalFrequence(input.publicationsParMois),
+    technique: calculerSignalTechnique(borner(input.scoresTechnique, 100)),
+    autorite: calculerSignalAutorite(borner(input.domainAuthority, 100)),
+    spam: calculerSignalSpam(borner(input.spamScore, 100)),
+    contenu: calculerSignalContenu(borner(input.qualiteContenu, 100)),
+    anciennete: calculerSignalAnciennete(borner(input.ageDomaineAnnees)),
+    frequence: calculerSignalFrequence(borner(input.publicationsParMois)),
   };
-  const score = Math.min(Object.values(signaux).reduce((a,b) => a+b, 0), 100);
+  const score = Math.min(Math.max(Object.values(signaux).reduce((a,b) => a+b, 0), 0), 100);
   return { score, tier: scoreVersTimer(score), signaux, details: { inputs: input, calcule_at: new Date().toISOString() } };
 }
 

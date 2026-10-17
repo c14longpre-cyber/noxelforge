@@ -47,6 +47,13 @@ export async function traiterVerificationBadge(userId: string, urlSite: string):
       grace_expire_at: null, tentatives_echec: 0, statut: 'verifie', updated_at: maintenant.toISOString(),
     }, { onConflict: 'user_id' }), 'forge_badges upsert');
     must(await supabase.from('forge_members').update({ badge_installe: true, updated_at: maintenant.toISOString() }).eq('user_id', userId), 'forge_members update');
+    if (badgeActuel?.statut === 'suspendu') {
+      // Badge back on a suspended account: same reactivation as reactiverMembre, otherwise the
+      // cron left forge_members.statut at 'suspendu' while forge_badges said 'verifie'.
+      must(await supabase.from('forge_members').update({ statut: 'actif', updated_at: maintenant.toISOString() }).eq('user_id', userId), 'forge_members reactivate');
+      must(await supabase.from('forge_submissions').update({ backlink_noxel_actif: true, updated_at: maintenant.toISOString() }).eq('user_id', userId).eq('statut', 'approuve'), 'forge_submissions reactivate');
+      return { present: true, statut: 'verifie', message: 'Badge réinstallé. Compte Forge réactivé! 🔥' };
+    }
     return { present: true, statut: 'verifie', message: 'Badge NOXEL détecté et vérifié.' };
   }
 
