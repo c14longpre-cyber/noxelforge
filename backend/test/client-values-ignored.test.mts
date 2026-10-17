@@ -45,6 +45,7 @@ function fakeSupabase() {
       const q: any = {
         select: () => q,
         eq: (c: string, v: unknown) => { filters.push([c, v]); return q; },
+        gte: () => q, // only used by the submissions counter (no rows here)
         insert: (row: Row) => { op = "insert"; payload = row; return q; },
         upsert: (row: Row) => { op = "upsert"; payload = row; return q; },
         update: (row: Row) => { op = "update"; payload = row; return q; },
@@ -65,6 +66,11 @@ stripeService.creerCheckoutForge = async (params: any) => {
   return "https://checkout.stripe.test/session";
 };
 
+// Alfred runs in the background after a submission: stubbed to capture its input
+const alfred = require("../dist/services/forge/alfred.forge.service.js");
+let alfredInputs: any[] = [];
+alfred.traiterSoumission = async (_id: string, input: any) => { alfredInputs.push(input); };
+
 // Routes are required after the stubs so they bind to them
 const forgeRoutes = require("../dist/routes/forge/forge.routes.js").default;
 const stripeRoutes = require("../dist/routes/forge/stripe.forge.routes.js").default;
@@ -78,6 +84,7 @@ function reset() {
   writes = [];
   failTable = null;
   checkoutCalls = [];
+  alfredInputs = [];
 }
 
 async function call(method: string, path: string, body: unknown, userId?: string) {
@@ -164,4 +171,24 @@ test("checkout: a forge_badges error stops the checkout (500), no discount guess
   const r = await call("POST", "/api/forge/stripe/checkout", { tier: "gold", billing: "monthly", badgeInstalle: true }, "u-ok");
   assert.equal(r.status, 500);
   assert.deepEqual(checkoutCalls, []);
+});
+
+// Account age comes from forge_members.date_inscription (forge_members has no created_at column)
+const daysAgo = (n: number) => new Date(Date.now() - n * 24 * 60 * 60 * 1000).toISOString();
+
+test("status: age_compte_days is computed from date_inscription", async () => {
+  reset();
+  tables.forge_members = [{ user_id: "u-ok", tier_abonnement: "silver", scan_complete: true, badge_installe: true, statut: "actif", date_inscription: daysAgo(20) }];
+  const r = await call("GET", "/api/forge/members/status", undefined, "u-ok");
+  assert.equal(r.status, 200);
+  assert.equal(r.body.age_compte_days, 20);
+});
+
+test("submission: Alfred receives the account age computed from date_inscription", async () => {
+  reset();
+  tables.forge_members = [{ user_id: "u-ok", tier_abonnement: "silver", scan_complete: true, badge_installe: true, statut: "actif", date_inscription: daysAgo(3) }];
+  const r = await call("POST", "/api/forge/submissions", { url_soumise: "https://exemple.ca/article", titre: "Guide plein air" }, "u-ok");
+  assert.equal(r.status, 201);
+  assert.equal(alfredInputs.length, 1);
+  assert.equal(alfredInputs[0].ageCompteDays, 3);
 });

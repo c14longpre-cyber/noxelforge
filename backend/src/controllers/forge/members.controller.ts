@@ -33,7 +33,7 @@ export async function getMonStatut(req: Request, res: Response): Promise<void> {
   must(p, 'forge_points select'); must(b, 'forge_badges select');
   const membre = m.data;
   if (!membre) { res.status(404).json({ error: 'Membre non trouvé.' }); return; }
-  const ageCompteDays = Math.floor((Date.now() - new Date(membre.created_at).getTime()) / (1000*60*60*24));
+  const ageCompteDays = Math.floor((Date.now() - new Date(membre.date_inscription).getTime()) / (1000*60*60*24));
   const flux = determinerFlux({ ageCompteDays, scanComplete: membre.scan_complete, badgeInstalle: membre.badge_installe, tierAbonnement: membre.tier_abonnement });
   const etapesManquantes = [];
   if (!membre.scan_complete) etapesManquantes.push('Lance un scan NOXEL SEO sur ton site');
