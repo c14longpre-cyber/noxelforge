@@ -3,7 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   normaliserDomaine, signalLePlusFaible, construireReponseTrouvee, reponseNonTrouvee, SIGNAL_MAX,
-  chercherTrustScorePublic, ErreurSupabase,
+  chercherTrustScorePublic, ErreurSupabase, scoreServeurActif,
 } from "../src/services/forge/trustScorePublic.ts";
 
 test("normaliserDomaine: lowercase, no protocol, no www., no path/port/query", () => {
@@ -108,20 +108,23 @@ const db = fakeDb({
   forge_trust_scores: [score("pub", 71), score("grace", 64), score("susp", 55), score("other", 40)],
 });
 
-test("member with a public (verified) badge: found with the stored score", async () => {
-  const r: any = await chercherTrustScorePublic(db, "public.ca");
+const COMPUTED = { serverComputed: true }; // once the server computes the score
+
+test("member with a public (verified) badge: found with the stored score (server computation on)", async () => {
+  const r: any = await chercherTrustScorePublic(db, "public.ca", COMPUTED);
   assert.equal(r.found, true);
   assert.equal(r.trust_score, 71);
 });
 
 test("member without a public badge, suspended member, unknown domain: found:false, no score", async () => {
   for (const d of ["grace.ca", "suspendu.ca", "notpublic.ca", "inconnu.ca"])
-    assert.deepEqual(await chercherTrustScorePublic(db, d), { ok: true, found: false, domain: d }, d);
+    for (const opts of [{}, COMPUTED])
+      assert.deepEqual(await chercherTrustScorePublic(db, d, opts), { ok: true, found: false, domain: d }, d);
 });
 
 test("ilike narrowing does not match a different domain containing the same text", async () => {
   // "public.ca" is a substring of "notpublic.ca": only the exact normalized domain counts
-  const r: any = await chercherTrustScorePublic(db, "public.ca");
+  const r: any = await chercherTrustScorePublic(db, "public.ca", COMPUTED);
   assert.equal(r.trust_score, 71);
 });
 
@@ -131,5 +134,32 @@ test("a Supabase { error } is raised, never treated as 'not found'", async () =>
       forge_members: [{ user_id: "pub", url_site: "public.ca", statut: "actif" }],
       forge_badges: [{ user_id: "pub", statut: "verifie" }],
       forge_trust_scores: [score("pub", 71)],
-    }, table), "public.ca"), ErreurSupabase, table);
+    }, table), "public.ca", COMPUTED), ErreurSupabase, table);
+});
+
+// No server computation yet: a public member is "pending", never a figure
+test("default (flag off): a public member gets status pending, no score, no signals", async () => {
+  assert.deepEqual(await chercherTrustScorePublic(db, "public.ca"), {
+    ok: true, found: true, domain: "public.ca", status: "pending",
+    trust_score: null, signals: null,
+    max: { technical: 25, authority: 25, spam: 20, content: 15, age: 10, frequency: 5 },
+    weakest: null, computedAt: null,
+    message: "Trust Score en cours de calcul par NOXEL.",
+  });
+});
+
+test("default (flag off): forge_trust_scores is not even read", async () => {
+  // A failure on forge_trust_scores would throw if it were queried
+  const r: any = await chercherTrustScorePublic(fakeDb({
+    forge_members: [{ user_id: "pub", url_site: "public.ca", statut: "actif" }],
+    forge_badges: [{ user_id: "pub", statut: "verifie" }],
+  }, "forge_trust_scores"), "public.ca");
+  assert.equal(r.status, "pending");
+});
+
+test("TRUST_SCORE_SERVER_COMPUTED: off unless exactly 'true'", () => {
+  assert.equal(scoreServeurActif({}), false);
+  assert.equal(scoreServeurActif({ TRUST_SCORE_SERVER_COMPUTED: "false" }), false);
+  assert.equal(scoreServeurActif({ TRUST_SCORE_SERVER_COMPUTED: "1" }), false);
+  assert.equal(scoreServeurActif({ TRUST_SCORE_SERVER_COMPUTED: "true" }), true);
 });

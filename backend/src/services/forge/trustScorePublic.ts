@@ -78,6 +78,27 @@ export function construireReponseTrouvee(domain: string, row: Record<string, unk
 
 export const reponseNonTrouvee = (domain: string) => ({ ok: true as const, found: false as const, domain });
 
+// No server-side computation of the six signals exists yet: stored scores were entered by hand,
+// so no figure is published until TRUST_SCORE_SERVER_COMPUTED=true (set it once the server computes them).
+export function scoreServeurActif(env: Record<string, string | undefined> = process.env): boolean {
+  return env.TRUST_SCORE_SERVER_COMPUTED === 'true';
+}
+
+export const MESSAGE_SCORE_EN_ATTENTE = 'Trust Score en cours de calcul par NOXEL.';
+
+export const reponseEnAttente = (domain: string) => ({
+  ok: true as const,
+  found: true as const,
+  domain,
+  status: 'pending' as const,
+  trust_score: null,
+  signals: null,
+  max: { ...SIGNAL_MAX },
+  weakest: null,
+  computedAt: null,
+  message: MESSAGE_SCORE_EN_ATTENTE,
+});
+
 // Minimal shape of the Supabase client used here (injected, so tests can pass a fake one)
 type QueryResult = PromiseLike<{ data: any[] | null; error: { message: string } | null }>;
 interface Query extends QueryResult {
@@ -99,7 +120,9 @@ export class ErreurSupabase extends Error {
 
 // READ ONLY: last stored score of an active member whose badge is verified ("public").
 // Anyone else (unknown domain, suspended member, badge not verified, no score) gets found:false.
-export async function chercherTrustScorePublic(db: TrustScoreDb, domain: string) {
+export async function chercherTrustScorePublic(
+  db: TrustScoreDb, domain: string, { serverComputed = scoreServeurActif() }: { serverComputed?: boolean } = {},
+) {
   // url_site is stored as entered (protocol, www, path…): narrow with ilike, then compare normalized.
   // domain is normalized to [a-z0-9.-], so it cannot carry ilike wildcards.
   const membres = await db.from('forge_members').select('user_id,url_site')
@@ -117,6 +140,9 @@ export async function chercherTrustScorePublic(db: TrustScoreDb, domain: string)
 
   const publics = (badges.data ?? []).map((b) => b.user_id);
   if (!publics.length) return reponseNonTrouvee(domain);
+
+  // Until the server computes the score, a public member is reported as pending: the stored figure is not read
+  if (!serverComputed) return reponseEnAttente(domain);
 
   // Explicit column list: user_id, tier_forge and details are never read
   const scores = await db.from('forge_trust_scores')

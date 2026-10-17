@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Footer from '../../components/Footer';
 import { Link } from 'react-router-dom';
 import HudRouterLink from '../../components/HudRouterLink';
+import { TRUST_SCORE_SERVER_COMPUTED, TRUST_SCORE_PENDING_LABEL } from '../../config/trustScore';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const NICHES = ['SEO','Marketing','AI','E-commerce','Web Dev','Business','Design','Finance','Health','Education'];
@@ -82,9 +83,15 @@ export default function ForgePartners() {
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
                         {r.niche && <span style={{ background: 'var(--g-dim)', color: 'var(--g)', fontSize: 10, padding: '2px 8px', borderRadius: 20, fontWeight: 700 }}>{r.niche}</span>}
-                        <span style={{ background: `${TIER_COLORS[r.trust_tier]}22`, color: TIER_COLORS[r.trust_tier], fontSize: 10, padding: '2px 8px', borderRadius: 20, fontWeight: 800 }}>
-                          <img src={TIER_IMAGES[r.trust_tier] || TIER_IMAGES.bronze} alt={r.trust_tier} style={{ width: 14, height: 14, verticalAlign: 'middle' }} /> {r.trust_score}/100
-                        </span>
+                        {TRUST_SCORE_SERVER_COMPUTED ? (
+                          <span style={{ background: `${TIER_COLORS[r.trust_tier]}22`, color: TIER_COLORS[r.trust_tier], fontSize: 10, padding: '2px 8px', borderRadius: 20, fontWeight: 800 }}>
+                            <img src={TIER_IMAGES[r.trust_tier] || TIER_IMAGES.bronze} alt={r.trust_tier} style={{ width: 14, height: 14, verticalAlign: 'middle' }} /> {r.trust_score}/100
+                          </span>
+                        ) : (
+                          <span style={{ background: 'var(--surface2)', color: 'var(--muted)', fontSize: 10, padding: '2px 8px', borderRadius: 20, fontWeight: 700 }}>
+                            Trust Score: {TRUST_SCORE_PENDING_LABEL.toLowerCase()}
+                          </span>
+                        )}
                       </div>
                       <span style={{ fontSize: 11, fontWeight: 900, color: 'var(--g)' }}>{r.score_matchmaking}% match</span>
                     </div>
@@ -119,7 +126,7 @@ export default function ForgePartners() {
                 <div style={{ flex: 1, minWidth: 200 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8, flexWrap: 'wrap' }}>
                     {p.niche && <span style={{ background: 'var(--g-dim)', color: 'var(--g)', fontSize: 11, padding: '2px 10px', borderRadius: 20, fontWeight: 700 }}>{p.niche}</span>}
-                    {p.forge_trust_scores?.tier_forge && (
+                    {TRUST_SCORE_SERVER_COMPUTED && p.forge_trust_scores?.tier_forge && (
                       <span style={{ background: `${TIER_COLORS[p.forge_trust_scores.tier_forge]}22`, color: TIER_COLORS[p.forge_trust_scores.tier_forge], fontSize: 11, padding: '2px 10px', borderRadius: 20, fontWeight: 800 }}>
                         <img src={TIER_IMAGES[p.forge_trust_scores.tier_forge] || TIER_IMAGES.bronze} alt={p.forge_trust_scores.tier_forge} style={{ width: 14, height: 14, verticalAlign: 'middle' }} /> {p.forge_trust_scores.tier_forge?.toUpperCase()} · {p.forge_trust_scores.score}/100
                       </span>
