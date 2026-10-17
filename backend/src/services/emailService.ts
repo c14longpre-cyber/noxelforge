@@ -1,7 +1,16 @@
 import { Resend } from "resend";
 
+// Sender address: its domain must be verified in the Resend account of RESEND_API_KEY
+export const EMAIL_FROM = process.env.EMAIL_FROM || "NOXEL Forge <noreply@noxelseo.com>";
+
+// Checked once at startup (this module is loaded with the routes): no key means no email can be sent
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+if (!RESEND_API_KEY) {
+  console.warn("[emailService] RESEND_API_KEY is not set: magic link emails are disabled until it is configured.");
+}
+
 function getResend() {
-  return new Resend(process.env.RESEND_API_KEY || "");
+  return new Resend(RESEND_API_KEY);
 }
 
 // Email templates for both FR and EN
@@ -52,20 +61,26 @@ export async function sendMagicLinkEmail(email: string, magicUrl: string, lang: 
   const template = getEmailTemplate(lang, "magicLink");
   const html = buildMagicLinkHTML(magicUrl, template);
 
+  // Without a key, new Resend() would throw on every attempt: fail cleanly instead
+  if (!RESEND_API_KEY) {
+    console.error("[emailService] Magic link not sent: RESEND_API_KEY is not set.");
+    return false;
+  }
+
   try {
     const result = await getResend().emails.send({
-      from: "NOXEL Forge <noreply@noxelforge.com>",
+      from: EMAIL_FROM,
       to: email,
       subject: template.subject,
       html: html,
     });
 
     if (result.error) {
-      console.error("[emailService] Resend returned an error:", JSON.stringify(result.error));
+      console.error(`[emailService] Resend returned an error (from: ${EMAIL_FROM}):`, JSON.stringify(result.error));
       return false;
     }
 
-    console.log("[emailService] Email sent, id:", result.data?.id);
+    console.log(`[emailService] Email sent (from: ${EMAIL_FROM}), id:`, result.data?.id);
     return true;
   } catch (err) {
     console.error("[emailService] sendMagicLinkEmail threw:", JSON.stringify(err, Object.getOwnPropertyNames(err)));
