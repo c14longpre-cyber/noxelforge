@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "latest",
-    "typescript": "latest",
     "@simplewebauthn/server": "^13.3.2",
     "@supabase/supabase-js": "latest",
     "bcryptjs": "^3.0.3",
@@ -18,11 +17,13 @@
     "cors": "latest",
     "dotenv": "latest",
     "express": "latest",
+    "express-rate-limit": "^8.7.1",
     "google-auth-library": "^10.9.0",
     "jsonwebtoken": "^9.0.3",
     "node-cron": "latest",
     "resend": "^6.17.1",
     "stripe": "^22.3.0",
+    "typescript": "latest",
     "ws": "^8.21.1"
   },
   "devDependencies": {
