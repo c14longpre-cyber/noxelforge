@@ -12,9 +12,15 @@ router.post('/checkout', requireAuth, async (req: Request, res: Response) => {
     const userId = (req as any).userId;
     const email = (req as any).user?.email;
     if (!userId || !email) return res.status(401).json({ ok: false, error: 'Non authentifié' });
-    // La remise badge n'est accordée que si le badge a été vérifié côté serveur.
-    const { data: membre } = await getSupabase().from('forge_members').select('badge_installe').eq('user_id', userId).maybeSingle();
-    const url = await creerCheckoutForge({ userId, email, tier, billing: billing === 'annual' ? 'annual' : 'monthly', badgeInstalle: membre?.badge_installe === true });
+    // badgeInstalle sent by the client is ignored: the discount applies only to a badge verified by the
+    // server (forge_badges.statut 'verifie'; forge_members.badge_installe stays true during the grace period)
+    const { data: badge, error: badgeError } = await getSupabase()
+      .from('forge_badges').select('statut').eq('user_id', userId).maybeSingle();
+    if (badgeError) {
+      console.error('[checkout] forge_badges:', badgeError.message);
+      return res.status(500).json({ ok: false, error: 'Erreur serveur.' });
+    }
+    const url = await creerCheckoutForge({ userId, email, tier, billing: billing === 'annual' ? 'annual' : 'monthly', badgeInstalle: badge?.statut === 'verifie' });
     res.json({ ok: true, url });
   } catch (err: any) {
     res.status(400).json({ ok: false, error: err.message });
@@ -27,13 +33,21 @@ export async function stripeWebhookHandler(req: Request, res: Response) {
   const sig = req.headers['stripe-signature'] as string;
   if (!sig) return res.status(400).json({ ok: false, error: 'Missing stripe-signature header' });
   if (!Buffer.isBuffer(req.body)) return res.status(400).json({ ok: false, error: 'Raw body required' });
+  let event: Stripe.Event;
   try {
-    const event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET!);
+    event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET!);
+  } catch (err: any) {
+    // Bad signature or payload: retrying would not help
+    console.error('[Stripe Webhook Error]', err.message);
+    return res.status(400).json({ ok: false, error: err.message });
+  }
+  try {
     await gererWebhookForge(event);
     res.json({ received: true });
   } catch (err: any) {
-    console.error('[Stripe Webhook Error]', err.message);
-    res.status(400).json({ ok: false, error: err.message });
+    // Processing failed (e.g. Supabase error): 500 so Stripe retries instead of considering it done
+    console.error(`[stripe webhook] ${event.type} ${event.id} failed:`, err?.message ?? err);
+    res.status(500).json({ ok: false, error: 'Webhook processing failed.' });
   }
 }
 

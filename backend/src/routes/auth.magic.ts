@@ -4,6 +4,7 @@ import { getSupabase } from "../lib/supabaseClient";
 import { upsertUser } from "../services/userStore";
 import { createSession } from "../services/session";
 import { sendMagicLinkEmail } from "../services/emailService";
+import { must } from "../lib/supabaseCheck";
 
 const router = Router();
 const COOKIE_NAME = process.env.FORGE_SESSION_COOKIE_NAME || "forge_session";
@@ -28,11 +29,11 @@ router.post("/request", async (req: Request, res: Response) => {
     const token = crypto.randomBytes(32).toString("hex");
     const expiresAt = new Date(Date.now() + 15 * 60 * 1000);
 
-    await supabase.from("magic_links").insert({
+    must(await supabase.from("magic_links").insert({
       email: email.toLowerCase(),
       token: token,
       expires_at: expiresAt.toISOString(),
-    });
+    }), "magic_links insert");
 
     const magicUrl = BACKEND_URL + "/api/auth/magic/verify?token=" + token;
     const emailSent = await sendMagicLinkEmail(email, magicUrl);
@@ -59,15 +60,15 @@ router.get("/verify", async (req: Request, res: Response) => {
       .select("*")
       .eq("token", token)
       .is("used_at", null)
-      .single();
+      .maybeSingle();
 
-    const link = result.data;
-    const error = result.error;
+    // A database error goes to the catch (server_error), not to "invalid token"
+    const link = must(result, "magic_links select");
 
-    if (error || !link) return res.redirect(FRONTEND_URL + "/forge?auth_error=invalid_token");
+    if (!link) return res.redirect(FRONTEND_URL + "/forge?auth_error=invalid_token");
     if (new Date(link.expires_at) < new Date()) return res.redirect(FRONTEND_URL + "/forge?auth_error=token_expired");
 
-    await supabase.from("magic_links").update({ used_at: new Date().toISOString() }).eq("token", token);
+    must(await supabase.from("magic_links").update({ used_at: new Date().toISOString() }).eq("token", token), 'magic_links update');
 
     const name = link.email.split("@")[0];
     const user = await upsertUser(link.email, name, link.email, "email", null);

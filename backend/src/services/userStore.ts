@@ -1,5 +1,6 @@
 // NOXEL Forge — User Store (shared public.users table with NOXEL SEO)
 import { getSupabase } from "../lib/supabaseClient";
+import { must } from "../lib/supabaseCheck";
 
 export type User = {
   id: string;
@@ -38,28 +39,28 @@ export function toPublicUser(user: User): PublicUser {
 
 export async function findUserById(id: string): Promise<User | null> {
   const supabase = getSupabase();
-  const { data } = await supabase.from("users").select("*").eq("id", id).single();
+  const data = must(await supabase.from("users").select("*").eq("id", id).maybeSingle(), 'users select');
   return data ? toUser(data) : null;
 }
 
 export async function findUserByEmail(email: string): Promise<User | null> {
   const supabase = getSupabase();
-  const { data } = await supabase
+  const data = must(await supabase
     .from("users")
     .select("*")
     .eq("email", email.toLowerCase())
-    .single();
+    .maybeSingle(), "users select");
   return data ? toUser(data) : null;
 }
 
 export async function findUserByProvider(providerId: string, provider = "google"): Promise<User | null> {
   const supabase = getSupabase();
-  const { data } = await supabase
+  const data = must(await supabase
     .from("users")
     .select("*")
     .eq("provider", provider)
     .eq("provider_id", providerId)
-    .single();
+    .maybeSingle(), "users select");
   return data ? toUser(data) : null;
 }
 
@@ -87,11 +88,11 @@ export async function upsertUser(
     .single();
 
   if (error || !data) {
-    const { data: ex } = await supabase
+    const ex = must(await supabase
       .from("users")
       .select("*")
       .eq("email", email.toLowerCase())
-      .single();
+      .maybeSingle(), "users select");
     if (ex) return toUser(ex);
     throw new Error(error?.message || "upsert failed");
   }

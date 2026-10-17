@@ -41,8 +41,13 @@ router.post('/badges/verify', requireAuth, verifierMonBadge);
 // TRUST SCORE
 // ============================================================
 
-// Recalcul Trust Score après scan NOXEL SEO
-router.post('/trust-score/recalculate', requireAuth, recalculerMonScore);
+// Recalcul Trust Score — DÉSACTIVÉ : recalculerMonScore prenait les 6 signaux dans req.body,
+// donc un membre pouvait s'attribuer n'importe quel score. Le contrôleur est gardé pour le
+// jour où le serveur calculera lui-même les signaux ; d'ici là, la route refuse tout appel.
+void recalculerMonScore;
+router.post('/trust-score/recalculate', (_req, res) => {
+  res.status(403).json({ ok: false, error: 'Recalcul désactivé : le score sera calculé par le serveur.' });
+});
 
 // ============================================================
 // MATCHMAKING

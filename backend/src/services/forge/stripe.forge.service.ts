@@ -1,5 +1,6 @@
 import Stripe from 'stripe';
 import { getSupabase } from '../../lib/supabaseClient';
+import { must } from '../../lib/supabaseCheck';
 
 function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2026-06-24.dahlia' });
@@ -62,14 +63,14 @@ export async function gererWebhookForge(event: Stripe.Event): Promise<void> {
     const { userId, tier } = session.metadata || {};
     if (!userId || !tier) return;
 
-    const { error } = await supabase.from('forge_members').upsert({
+    // A failure throws: the webhook route answers 500 so Stripe retries the event
+    must(await supabase.from('forge_members').upsert({
       user_id: userId,
       tier_abonnement: tier,
       stripe_customer_id: session.customer as string,
       stripe_subscription_id: session.subscription as string,
       updated_at: new Date().toISOString(),
-    }, { onConflict: 'user_id' });
-    if (error) console.error('[gererWebhookForge] Checkout upsert error:', error);
+    }, { onConflict: 'user_id' }), 'forge_members upsert (checkout.session.completed)');
   }
 
   if (event.type === 'customer.subscription.updated') {
@@ -91,10 +92,9 @@ export async function gererWebhookForge(event: Stripe.Event): Promise<void> {
     console.log(`[gererWebhookForge] Subscription updated for customer ${customerId}: ${previousSub?.items?.data?.[0]?.price?.id} → ${priceId}`);
 
     // Update member tier
-    const { error } = await supabase.from('forge_members')
+    must(await supabase.from('forge_members')
       .update({ tier_abonnement: newTier, updated_at: new Date().toISOString() })
-      .eq('stripe_customer_id', customerId);
-    if (error) console.error('[gererWebhookForge] Subscription update error:', error);
+      .eq('stripe_customer_id', customerId), 'forge_members update (customer.subscription.updated)');
 
     // Track refund window if subscription was just upgraded/downgraded
     if (previousSub?.items?.data?.[0]?.price?.id && sub.cancel_at_period_end !== true) {
@@ -107,7 +107,6 @@ export async function gererWebhookForge(event: Stripe.Event): Promise<void> {
 
   if (event.type === 'customer.subscription.deleted') {
     const sub = event.data.object as Stripe.Subscription;
-    const customerId = sub.customer as string;
 
     // Check if subscription was canceled within 14-day refund window
     const createdAt = new Date(sub.created * 1000).getTime();
@@ -119,9 +118,11 @@ export async function gererWebhookForge(event: Stripe.Event): Promise<void> {
       // TODO: Log to forge_refunds table with status: 'eligible'
     }
 
-    const { error } = await supabase.from('forge_members')
+    // Look the member up by the subscription that ended (a customer can have had several)
+    const rows = must(await supabase.from('forge_members')
       .update({ tier_abonnement: 'bronze', stripe_subscription_id: null, updated_at: new Date().toISOString() })
-      .eq('stripe_customer_id', customerId);
-    if (error) console.error('[gererWebhookForge] Subscription delete error:', error);
+      .eq('stripe_subscription_id', sub.id)
+      .select('user_id'), 'forge_members update (customer.subscription.deleted)');
+    if (!rows?.length) console.warn(`[stripe webhook] subscription.deleted: no member for subscription ${sub.id}`);
   }
 }

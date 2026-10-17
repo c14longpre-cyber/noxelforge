@@ -1,4 +1,5 @@
 import { getSupabase } from '../../lib/supabaseClient';
+import { must } from '../../lib/supabaseCheck';
 import { TierForge } from './trustScore.service';
 export interface SpamGateResult { passe: boolean; raison?: string; type?: 'spam' | 'bot' | 'pub_automatique' | 'contenu_interdit' | 'blacklist' | 'rate_limit'; }
 export interface SpamGateInput { url: string; titre: string; description?: string; contenu?: string; userId: string; tier?: TierForge; }
@@ -25,8 +26,7 @@ function verifierRatioLiens(contenu: string): SpamGateResult {
 }
 async function verifierBlacklist(domaine: string): Promise<SpamGateResult> {
   const supabase = getSupabase();
-  const { data, error } = await supabase.from('forge_blacklist').select('raison,type').eq('domaine', domaine).single();
-  if (error && error.code !== 'PGRST116') console.error('[verifierBlacklist] Query error:', error);
+  const data = must(await supabase.from('forge_blacklist').select('raison,type').eq('domaine', domaine).maybeSingle(), 'forge_blacklist select');
   if (data) return { passe: false, raison: `Domaine blacklisté : ${data.raison}`, type: 'blacklist' };
   return { passe: true };
 }
@@ -34,7 +34,7 @@ async function verifierRateLimit(userId: string, tier?: TierForge): Promise<Spam
   const supabase = getSupabase();
   const hier = new Date(Date.now() - 24*60*60*1000).toISOString();
   const { count, error } = await supabase.from('forge_submissions').select('*', { count: 'exact', head: true }).eq('user_id', userId).gte('created_at', hier);
-  if (error) console.error('[verifierRateLimit] Count error:', error);
+  must({ data: count, error }, 'forge_submissions count');
 
   const limiteParTier: Record<TierForge, number> = {
     silver: 5,

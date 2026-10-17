@@ -1,4 +1,5 @@
 import { getSupabase } from '../../lib/supabaseClient';
+import { must } from '../../lib/supabaseCheck';
 // ============================================================
 // NOXEL Forge™ — Matchmaking Engine V1 (rule-based)
 // backend/src/services/forge/matchmaking.service.ts
@@ -69,31 +70,30 @@ export async function getRecommendedPartners(
 ): Promise<PartnerSuggestion[]> {
   const supabase = getSupabase();
 
-  const { data: moi, error: moiError } = await supabase
+  const moi = must(await supabase
     .from('forge_members')
     .select('user_id, niche, tier_abonnement, badge_installe, scan_complete')
     .eq('user_id', userId)
-    .single();
+    .maybeSingle(), 'forge_members select');
 
-  if (moiError || !moi) return [];
+  if (!moi) return [];
 
-  const { data: candidats, error: candidatsError } = await supabase
+  const candidats = must(await supabase
     .from('forge_members')
     .select('user_id, url_site, niche, tier_abonnement, badge_installe, scan_complete, statut, updated_at')
     .eq('statut', 'actif')
     .neq('user_id', userId)
     .eq('badge_installe', true)
-    .limit(200);
+    .limit(200), 'forge_members select');
 
-  if (candidatsError || !candidats || candidats.length === 0) return [];
+  if (!candidats || candidats.length === 0) return [];
 
   const userIds = candidats.map((c) => c.user_id);
-  const { data: trustScores, error: trustError } = await supabase
+  const trustScores = must(await supabase
     .from('forge_trust_scores')
     .select('user_id, score, tier_forge')
-    .in('user_id', userIds);
+    .in('user_id', userIds), 'forge_trust_scores select');
 
-  if (trustError) console.error('[getRecommendedPartners] Trust scores query error:', trustError);
   const trustMap = new Map((trustScores ?? []).map((t) => [t.user_id, t]));
 
   const suggestions: PartnerSuggestion[] = candidats.map((c) => {

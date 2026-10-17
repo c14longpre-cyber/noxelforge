@@ -3,13 +3,13 @@ import { runSpamGate } from '../../services/forge/spamGate.service';
 import { traiterSoumission, determinerFlux } from '../../services/forge/alfred.forge.service';
 import { getTrustScore } from '../../services/forge/trustScore.service';
 import { getSupabase } from '../../lib/supabaseClient';
+import { must } from '../../lib/supabaseCheck';
 export async function creerSoumission(req: Request, res: Response): Promise<void> {
   const supabase = getSupabase();
   const userId = (req as any).userId;
   const { url_soumise, titre, description, contenu, niche } = req.body;
   if (!url_soumise || !titre) { res.status(400).json({ error: 'URL et titre obligatoires.' }); return; }
-  const { data: membre, error } = await supabase.from('forge_members').select('*').eq('user_id', userId).single();
-  if (error) { console.error('[creerSoumission] Query error:', error); res.status(500).json({ error: 'Erreur récupération.' }); return; }
+  const membre = must(await supabase.from('forge_members').select('*').eq('user_id', userId).maybeSingle(), 'forge_members select');
   if (!membre) { res.status(403).json({ error: 'Tu n\'es pas membre de NOXEL Forge.' }); return; }
   if (membre.tier_abonnement === 'bronze') { res.status(403).json({ error: 'Bronze = lecture seule. Upgrade vers Silver pour soumettre.' }); return; }
   const spamResult = await runSpamGate({ url: url_soumise, titre, description, contenu, userId, tier: membre.tier_abonnement });

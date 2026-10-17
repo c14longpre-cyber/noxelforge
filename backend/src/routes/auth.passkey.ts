@@ -8,6 +8,7 @@ import {
 import { getSupabase } from "../lib/supabaseClient";
 import { upsertUser, findUserById, toPublicUser } from "../services/userStore";
 import { createSession } from "../services/session";
+import { must } from "../lib/supabaseCheck";
 
 const router = Router();
 const COOKIE_NAME = process.env.FORGE_SESSION_COOKIE_NAME || "forge_session";
@@ -35,12 +36,12 @@ router.post("/register/start", async (req: Request, res: Response) => {
     });
 
     const supabase = getSupabase();
-    await supabase.from("passkey_challenges").insert({
+    must(await supabase.from("passkey_challenges").insert({
       challenge: options.challenge,
       user_id: email,
       type: "registration",
       expires_at: new Date(Date.now() + 5 * 60 * 1000).toISOString(),
-    });
+    }), "passkey_challenges insert");
 
     return res.json({ ok: true, options: options });
   } catch (err: any) {
@@ -63,9 +64,9 @@ router.post("/register/finish", async (req: Request, res: Response) => {
       .gt("expires_at", new Date().toISOString())
       .order("created_at", { ascending: false })
       .limit(1)
-      .single();
+      .maybeSingle();
 
-    const challengeRow = challengeResult.data;
+    const challengeRow = must(challengeResult, "passkey_challenges select");
     if (!challengeRow) return res.status(400).json({ ok: false, error: "Challenge expired or not found" });
 
     const verification = await verifyRegistrationResponse({
@@ -81,11 +82,11 @@ router.post("/register/finish", async (req: Request, res: Response) => {
 
     const cred = verification.registrationInfo.credential;
 
-    await supabase.from("passkey_challenges").delete().eq("id", challengeRow.id);
+    must(await supabase.from("passkey_challenges").delete().eq("id", challengeRow.id), 'passkey_challenges delete');
 
     const user = await upsertUser(email, name || email.split("@")[0], email, "passkey", null);
 
-    await supabase.from("passkeys").insert({
+    must(await supabase.from("passkeys").insert({
       user_id: user.id,
       credential_id: cred.id,
       public_key: Buffer.from(cred.publicKey).toString("base64"),
@@ -93,7 +94,7 @@ router.post("/register/finish", async (req: Request, res: Response) => {
       device_type: verification.registrationInfo.credentialDeviceType,
       backed_up: verification.registrationInfo.credentialBackedUp,
       transports: credential.response?.transports || [],
-    });
+    }), "passkeys insert");
 
     const session = createSession(user.id);
     res.cookie(COOKIE_NAME, session, COOKIE_OPTS);
@@ -109,11 +110,11 @@ router.post("/login/start", async (req: Request, res: Response) => {
     const options = await generateAuthenticationOptions({ rpID: RP_ID, userVerification: "preferred" });
 
     const supabase = getSupabase();
-    await supabase.from("passkey_challenges").insert({
+    must(await supabase.from("passkey_challenges").insert({
       challenge: options.challenge,
       type: "authentication",
       expires_at: new Date(Date.now() + 5 * 60 * 1000).toISOString(),
-    });
+    }), "passkey_challenges insert");
 
     return res.json({ ok: true, options: options });
   } catch (err: any) {
@@ -132,9 +133,9 @@ router.post("/login/finish", async (req: Request, res: Response) => {
       .from("passkeys")
       .select("*")
       .eq("credential_id", credential.id)
-      .single();
+      .maybeSingle();
 
-    const passkey = passkeyResult.data;
+    const passkey = must(passkeyResult, "passkeys select");
     if (!passkey) return res.status(400).json({ ok: false, error: "Passkey not found" });
 
     const challengeResult = await supabase
@@ -144,9 +145,9 @@ router.post("/login/finish", async (req: Request, res: Response) => {
       .gt("expires_at", new Date().toISOString())
       .order("created_at", { ascending: false })
       .limit(1)
-      .single();
+      .maybeSingle();
 
-    const challengeRow = challengeResult.data;
+    const challengeRow = must(challengeResult, "passkey_challenges select");
     if (!challengeRow) return res.status(400).json({ ok: false, error: "Challenge expired" });
 
     const publicKeyBuffer = Buffer.from(passkey.public_key, "base64");
@@ -166,12 +167,12 @@ router.post("/login/finish", async (req: Request, res: Response) => {
 
     if (!verification.verified) return res.status(400).json({ ok: false, error: "Verification failed" });
 
-    await supabase
+    must(await supabase
       .from("passkeys")
       .update({ counter: verification.authenticationInfo.newCounter, last_used_at: new Date().toISOString() })
-      .eq("credential_id", credential.id);
+      .eq("credential_id", credential.id), "passkeys update");
 
-    await supabase.from("passkey_challenges").delete().eq("id", challengeRow.id);
+    must(await supabase.from("passkey_challenges").delete().eq("id", challengeRow.id), 'passkey_challenges delete');
 
     const user = await findUserById(passkey.user_id);
     if (!user) return res.status(404).json({ ok: false, error: "User not found" });
