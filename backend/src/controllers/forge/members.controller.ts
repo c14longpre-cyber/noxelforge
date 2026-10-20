@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { recalculerTrustScore, getTrustScore } from '../../services/forge/trustScore.service';
+import * as trustScoreServeur from '../../services/forge/trustScoreServeur';
 import { reactiverMembre, verifierBadgeSurSite } from '../../services/forge/badgeChecker.service';
 import { determinerFlux } from '../../services/forge/alfred.forge.service';
 import { getSupabase } from '../../lib/supabaseClient';
@@ -56,13 +56,12 @@ export async function verifierMonBadge(req: Request, res: Response): Promise<voi
     res.json({ present: false, message: 'Badge non détecté. Ajoute un lien vers noxelseo.com sur ton site.' });
   }
 }
+// The body is ignored: every signal comes from a server source (see trustScoreServeur.ts)
 export async function recalculerMonScore(req: Request, res: Response): Promise<void> {
-  const supabase = getSupabase();
   const userId = (req as any).userId;
-  const { scoresTechnique, domainAuthority, spamScore, qualiteContenu, ageDomaineAnnees, publicationsParMois } = req.body;
-  const membre = must(await supabase.from('forge_members').select('url_site').eq('user_id', userId).maybeSingle(), 'forge_members select');
-  if (!membre) { res.status(404).json({ error: 'Membre non trouvé.' }); return; }
-  must(await supabase.from('forge_members').update({ scan_complete: true, updated_at: new Date().toISOString() }).eq('user_id', userId), 'forge_members update');
-  const result = await recalculerTrustScore({ userId, urlSite: membre.url_site, scoresTechnique, domainAuthority, spamScore, qualiteContenu, ageDomaineAnnees, publicationsParMois });
-  res.json({ success: true, trust_score: result, message: `Trust Score: ${result.score}/100 — Tier ${result.tier.toUpperCase()} 🔥` });
+  const attente = await trustScoreServeur.minutesAvantRecalcul(userId);
+  if (attente > 0) { res.status(429).json({ ok: false, error: `Trust Score déjà recalculé récemment. Réessaie dans ${attente} min.` }); return; }
+  const resultat = await trustScoreServeur.recalculerTrustScoreServeur(userId);
+  if (!resultat) { res.status(404).json({ ok: false, error: 'Membre non trouvé.' }); return; }
+  res.json({ ok: true, trust_score: resultat });
 }

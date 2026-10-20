@@ -5,6 +5,8 @@
 
 import { Router } from 'express';
 import { requireAuth } from '../../middleware/requireAuth'; // ton middleware auth existant
+import { requireAdmin } from '../../middleware/requireAdmin';
+import { saisirSignauxAdmin } from '../../controllers/forge/trustScoreAdmin.controller';
 import {
   registerMembre,
   getMonStatut,
@@ -41,13 +43,12 @@ router.post('/badges/verify', requireAuth, verifierMonBadge);
 // TRUST SCORE
 // ============================================================
 
-// Recalcul Trust Score — DÉSACTIVÉ : recalculerMonScore prenait les 6 signaux dans req.body,
-// donc un membre pouvait s'attribuer n'importe quel score. Le contrôleur est gardé pour le
-// jour où le serveur calculera lui-même les signaux ; d'ici là, la route refuse tout appel.
-void recalculerMonScore;
-router.post('/trust-score/recalculate', (_req, res) => {
-  res.status(403).json({ ok: false, error: 'Recalcul désactivé : le score sera calculé par le serveur.' });
-});
+// Recalcul Trust Score côté serveur : le corps de la requête est ignoré, chaque signal vient d'une
+// source serveur (NOXEL SEO, RDAP, sitemap/RSS, Alfred, saisie admin). Voir trustScoreServeur.ts.
+router.post('/trust-score/recalculate', requireAuth, recalculerMonScore);
+
+// Saisie admin de l'autorité et du spam (FORGE_ADMIN_EMAILS)
+router.post('/admin/trust-score/:userId', requireAuth, requireAdmin, saisirSignauxAdmin);
 
 // ============================================================
 // MATCHMAKING
