@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { useForgeT } from '../../hooks/useForgeT';
-import { useAuthStore } from '../../auth/AuthStore';
+import { useAuthStore } from '../../auth/authContext';
 import ForgeAccessModal from '../../components/ForgeAccessModal';
 import Footer from '../../components/Footer';
 import { HudButton } from '../../components/hud/HudButton';
 import HudRouterLink from '../../components/HudRouterLink';
+import type { MemberStatus, AnnuaireItem } from '../../types/forge';
 const NoxelInterface = lazy(() => import('../../components/NoxelInterface'));
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
@@ -24,9 +25,9 @@ export default function ForgeLanding() {
   const [showMap, setShowMap] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const { isAuthenticated, user, logout } = useAuthStore();
-  const [membre, setMembre] = useState<any>(null);
-  const [annuaire, setAnnuaire] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [membreCharge, setMembre] = useState<MemberStatus['membre'] | null>(null);
+  // Directory page loaded for (page, niche): loading until the last answer matches the current filters
+  const [charge, setCharge] = useState<{ cle: string; items: AnnuaireItem[] } | null>(null);
   const [nicheFilter, setNicheFilter] = useState('');
   const [page, setPage] = useState(1);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -51,26 +52,36 @@ export default function ForgeLanding() {
   }, [menuOpen]);
 
 
-  useEffect(() => { fetchAnnuaire(); }, [nicheFilter, page]);
+  const membre = isAuthenticated ? membreCharge : null; // signed out: never show a stale member
+  const cle = `${page}|${nicheFilter}`;
+  const loading = charge?.cle !== cle;
+  const annuaire = charge?.items ?? [];
+
   useEffect(() => {
-    if (!isAuthenticated) { setMembre(null); return; }
+    let actif = true;
+    (async () => {
+      let items: AnnuaireItem[] = [];
+      try {
+        const params = new URLSearchParams({ page: String(page) });
+        if (nicheFilter) params.append('niche', nicheFilter);
+        const res = await fetch(`${API_BASE}/api/forge/submissions/annuaire?${params}`);
+        const data = await res.json();
+        items = data.annuaire ?? [];
+      } catch { /* API unreachable: empty directory */ }
+      if (actif) setCharge({ cle: `${page}|${nicheFilter}`, items });
+    })();
+    return () => { actif = false; };
+  }, [nicheFilter, page]);
+
+  useEffect(() => {
+    if (!isAuthenticated) return;
+    let actif = true;
     fetch(`${API_BASE}/api/forge/members/status`, { credentials: 'include' })
       .then(res => res.ok ? res.json() : null)
-      .then(data => setMembre(data?.membre ?? null))
-      .catch(() => setMembre(null));
+      .then(data => { if (actif) setMembre(data?.membre ?? null); })
+      .catch(() => { if (actif) setMembre(null); });
+    return () => { actif = false; };
   }, [isAuthenticated]);
-
-  async function fetchAnnuaire() {
-    setLoading(true);
-    try {
-      const params = new URLSearchParams({ page: String(page) });
-      if (nicheFilter) params.append('niche', nicheFilter);
-      const res = await fetch(`${API_BASE}/api/forge/submissions/annuaire?${params}`);
-      const data = await res.json();
-      setAnnuaire(data.annuaire ?? []);
-    } catch { setAnnuaire([]); }
-    finally { setLoading(false); }
-  }
 
 
 
@@ -215,7 +226,7 @@ export default function ForgeLanding() {
           </div>
         ) : (
           <div style={{ display: 'grid', gap: 10 }}>
-            {annuaire.map((item: any) => (
+            {annuaire.map((item) => (
               <div key={item.id} className="nx-card" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
                 <div style={{ flex: 1, minWidth: 200 }}>
                   {item.niche && <span style={{ background: 'var(--g-dim)', color: 'var(--g)', fontSize: 11, padding: '2px 10px', borderRadius: 20, fontWeight: 700, marginBottom: 8, display: 'inline-block' }}>{item.niche}</span>}

@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { useAuthStore } from "../auth/AuthStore";
+import { useAuthStore } from "../auth/authContext";
 import PasskeyButton from "./PasskeyButton";
 import { HudButton } from "./hud/HudButton";
+import type { PublicUser } from "../types/forge";
 
 declare global {
   interface Window {
@@ -37,10 +38,10 @@ const inputStyle: React.CSSProperties = {
   outline: "none", boxSizing: "border-box",
 };
 
-function writeStored(user: any) {
+function writeStored(user: PublicUser | null | undefined) {
   // Champs publics seulement (jamais password_hash ni providerId).
   const { id, email, name, avatarUrl, provider, tier } = user ?? {};
-  try { localStorage.setItem("nxl_forge_user", JSON.stringify({ id, email, name, avatarUrl: avatarUrl ?? null, provider, tier })); } catch {}
+  try { localStorage.setItem("nxl_forge_user", JSON.stringify({ id, email, name, avatarUrl: avatarUrl ?? null, provider, tier })); } catch { /* storage blocked: the session cookie still works */ }
 }
 
 export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
@@ -125,7 +126,7 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
     setEmailLoading(true); setEmailError("");
     try {
       const endpoint = emailMode === "register" ? "/api/auth/register" : "/api/auth/login";
-      const body: any = { email: emailAddr.trim(), password: emailPass };
+      const body: { email: string; password: string; name?: string } = { email: emailAddr.trim(), password: emailPass };
       if (emailMode === "register" && emailName.trim()) body.name = emailName.trim();
       const res = await fetch(API_BASE + endpoint, {
         method: "POST", credentials: "include",
@@ -135,7 +136,7 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
       const data = await res.json();
       if (!data.ok) throw new Error(data.error);
       window.location.reload();
-    } catch (e: any) { setEmailError(e.message || "Authentication failed"); }
+    } catch (e) { setEmailError((e as Error).message || "Authentication failed"); }
     finally { setEmailLoading(false); }
   };
 
@@ -164,7 +165,8 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
     },
   ];
 
-  const BackBtn = () => (
+  // A JSX element, not a component declared during render (it would be remounted on every render)
+  const backBtn = (
     <button type="button" onClick={() => setScreen("grid")} style={{
       background: "none", border: "none", color: "rgba(255,255,255,0.4)",
       cursor: "pointer", fontFamily: "inherit", fontSize: 13, fontWeight: 600,
@@ -256,7 +258,7 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
 
         {screen === "magic" && (
           <>
-            <BackBtn />
+            {backBtn}
             <h2 style={{ margin: "0 0 6px", fontSize: 22, fontWeight: 900, color: "#fff" }}>Magic Link</h2>
             <p style={{ margin: "0 0 20px", fontSize: 13, color: "rgba(255,255,255,0.45)", lineHeight: 1.5 }}>
               Enter your email and we will send you a secure login link.
@@ -282,7 +284,7 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
 
         {screen === "email" && (
           <>
-            <BackBtn />
+            {backBtn}
             <h2 style={{ margin: "0 0 18px", fontSize: 22, fontWeight: 900, color: "#fff" }}>Sign in with email</h2>
             <div style={{ display: "flex", gap: 4, background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: 4, marginBottom: 14 }}>
               {(["login", "register"] as const).map((m) => (

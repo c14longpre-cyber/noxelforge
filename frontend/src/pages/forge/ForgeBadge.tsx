@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getForgeT } from '../../i18n/forge.translations';
 import { HudButton } from '../../components/hud/HudButton';
+import type { ForgeTranslations } from '../../i18n/forge.translations';
 
-const getBadges = (t: any) => [
+const getBadges = (t: ForgeTranslations) => [
   {
     id: 'partner',
     label: t.badge.partner,
@@ -57,7 +58,7 @@ function getBadgeHTML(badge: ReturnType<typeof getBadges>[number], baseUrl: stri
 }
 
 export default function ForgeBadge() {
-  const [t, setT] = useState<any>(null);
+  const [t, setT] = useState<ForgeTranslations | null>(null);
   const [copied, setCopied] = useState<string | null>(null);
   const baseUrl = 'https://noxelforge.com';
 

@@ -974,7 +974,7 @@ export const COUNTRY_DATA: Record<string, CountryInfo> = {
   YE: {
     iso2: "YE", iso3: "YEM",
     name: "Yemen",
-    capital: "Sana\'a",
+    capital: "Sana'a",
     region: "Asia", subregion: "Western Asia",
     domain: ".ye",
     currency: "﷼ (YER)", currencyCode: "YER",
@@ -1282,7 +1282,7 @@ export const COUNTRY_DATA: Record<string, CountryInfo> = {
   TD: {
     iso2: "TD", iso3: "TCD",
     name: "Chad",
-    capital: "N\'Djamena",
+    capital: "N'Djamena",
     region: "Africa", subregion: "Middle Africa",
     domain: ".td",
     currency: "CFA (XAF)", currencyCode: "XAF",

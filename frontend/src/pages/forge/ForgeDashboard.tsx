@@ -3,14 +3,15 @@ import { Link } from 'react-router-dom';
 import { HudButton } from '../../components/hud/HudButton';
 import HudRouterLink from '../../components/HudRouterLink';
 import { TRUST_SCORE_SERVER_COMPUTED, TRUST_SCORE_PENDING_LABEL, TRUST_SCORE_PENDING_MESSAGE, TRUST_SCORE_VERIFYING_LABEL, TRUST_SCORE_VERIFYING_MESSAGE, trustScoreAwaitingVerification } from '../../config/trustScore';
+import type { MemberStatus, Soumission } from '../../types/forge';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const TIER_COLORS: Record<string, string> = { bronze: '#CD7F32', silver: '#A8A9AD', gold: '#FFD700', platinum: '#E5E4E2', diamond: '#B9F2FF' };
 const TIER_IMAGES: Record<string, string> = { bronze: '/tiers/Bronze_tier.png', silver: '/tiers/Silver_tier.png', gold: '/tiers/Gold_tier.png', platinum: '/tiers/Platinum_tier.png', diamond: '/tiers/Diamond_tier.png' };
 
 export default function ForgeDashboard() {
-  const [statut, setStatut] = useState<any>(null);
-  const [soumissions, setSoumissions] = useState<any[]>([]);
+  const [statut, setStatut] = useState<MemberStatus | null>(null);
+  const [soumissions, setSoumissions] = useState<Soumission[]>([]);
   const [loading, setLoading] = useState(true);
   const [verifyingBadge, setVerifyingBadge] = useState(false);
   const [badgeMsg, setBadgeMsg] = useState('');
@@ -29,7 +30,7 @@ export default function ForgeDashboard() {
       ]);
       if (s.ok) setStatut(await s.json());
       if (r.ok) setSoumissions((await r.json()).soumissions ?? []);
-    } catch {}
+    } catch { /* API unreachable: the page shows its empty state */ }
     finally { setLoading(false); }
   }
 
@@ -139,7 +140,7 @@ export default function ForgeDashboard() {
           </div>
         )}
 
-        {rappels?.length > 0 && (
+        {rappels && rappels.length > 0 && (
           <div className="nx-card" style={{ marginBottom: 24 }}>
             <div style={{ fontWeight: 800, marginBottom: 10, color: 'var(--muted)', fontSize: 13 }}>💡 Recommended (not required to submit)</div>
             {rappels.map((r: string) => <div key={r} style={{ color: 'var(--muted)', fontSize: 13, marginBottom: 4 }}>→ {r}</div>)}
@@ -208,10 +209,10 @@ export default function ForgeDashboard() {
                 <div key={label}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6, fontSize: 12 }}>
                     <span style={{ color: 'var(--muted)' }}>{label}</span>
-                    <span style={{ color: 'var(--text)', fontWeight: 700 }}>{val}/{max}</span>
+                    <span style={{ color: 'var(--text)', fontWeight: 700 }}>{val ?? '—'}/{max}</span>
                   </div>
                   <div style={{ background: 'var(--surface2)', borderRadius: 4, height: 5 }}>
-                    <div style={{ background: tierColor, borderRadius: 4, height: 5, width: `${(val/max)*100}%`, transition: 'width 0.6s ease' }} />
+                    <div style={{ background: tierColor, borderRadius: 4, height: 5, width: `${((val ?? 0)/max)*100}%`, transition: 'width 0.6s ease' }} />
                   </div>
                 </div>
               ))}
@@ -230,7 +231,7 @@ export default function ForgeDashboard() {
             </div>
           ) : (
             <div style={{ display: 'grid', gap: 8 }}>
-              {soumissions.map((s: any) => (
+              {soumissions.map((s) => (
                 <div key={s.id} style={{ background: 'var(--surface)', borderRadius: 10, padding: '12px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10, border: '1px solid var(--border)' }}>
                   <div>
                     <div style={{ fontWeight: 700, fontSize: 13, marginBottom: 2 }}>{s.titre}</div>

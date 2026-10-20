@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { startRegistration, startAuthentication } from "@simplewebauthn/browser";
 import { HudButton } from "./hud/HudButton";
+import type { PublicUser } from "../types/forge";
 
 const API_BASE = import.meta.env.VITE_API_URL ?? "";
 
 type Props = {
-  onSuccess: (user: any) => void;
+  onSuccess: (user: PublicUser) => void;
   onError: (msg: string) => void;
 };
 
@@ -40,8 +41,8 @@ export default function PasskeyButton({ onSuccess, onError }: Props) {
       } else {
         onError(data.error || "Passkey login failed");
       }
-    } catch (e: any) {
-      onError(e.message || "Passkey login failed");
+    } catch (e) {
+      onError((e as Error).message || "Passkey login failed");
     } finally {
       setLoading(false);
     }
@@ -70,8 +71,8 @@ export default function PasskeyButton({ onSuccess, onError }: Props) {
       } else {
         onError(data.error || "Passkey registration failed");
       }
-    } catch (e: any) {
-      onError(e.message || "Passkey registration failed");
+    } catch (e) {
+      onError((e as Error).message || "Passkey registration failed");
     } finally {
       setLoading(false);
     }

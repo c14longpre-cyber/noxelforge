@@ -2,15 +2,17 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { getForgeT } from '../../i18n/forge.translations';
 import { HudButton } from '../../components/hud/HudButton';
+import type { SubmitResult } from '../../types/forge';
+import type { ForgeTranslations } from '../../i18n/forge.translations';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 export default function ForgeSubmit() {
   const navigate = useNavigate();
-  const [t, setT] = useState<any>(null);
+  const [t, setT] = useState<ForgeTranslations | null>(null);
   const [form, setForm] = useState({ url_soumise:'', titre:'', description:'', contenu:'', niche:'' });
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<SubmitResult | null>(null);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -25,6 +27,7 @@ export default function ForgeSubmit() {
   }
 
   async function handleSubmit() {
+    if (!t) return;
     if (!form.url_soumise || !form.titre) { setError(t.submit.requiredFields); return; }
     setLoading(true); setError(''); setResult(null);
     try {
@@ -53,8 +56,8 @@ export default function ForgeSubmit() {
             <h2 style={{ fontWeight: 900, fontSize: 22, marginBottom: 8, color: 'var(--g)' }}>
               {result.flux === 'auto_share' ? t.submit.successAuto : t.submit.successTitle}
             </h2>
-            <p style={{ color: 'var(--muted)', marginBottom: result.rappels?.length ? 12 : 28, fontSize: 14 }}>{result.message}</p>
-            {result.rappels?.length > 0 && (
+            <p style={{ color: 'var(--muted)', marginBottom: result.rappels && result.rappels.length ? 12 : 28, fontSize: 14 }}>{result.message}</p>
+            {result.rappels && result.rappels.length > 0 && (
               <div style={{ marginBottom: 28 }}>
                 {result.rappels.map((r: string) => <div key={r} style={{ color: 'var(--soft)', fontSize: 12, marginBottom: 4 }}>💡 {r}</div>)}
               </div>
