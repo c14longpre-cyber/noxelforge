@@ -53,7 +53,12 @@ export default function ForgeSubmit() {
             <h2 style={{ fontWeight: 900, fontSize: 22, marginBottom: 8, color: 'var(--g)' }}>
               {result.flux === 'auto_share' ? t.submit.successAuto : t.submit.successTitle}
             </h2>
-            <p style={{ color: 'var(--muted)', marginBottom: 28, fontSize: 14 }}>{result.message}</p>
+            <p style={{ color: 'var(--muted)', marginBottom: result.rappels?.length ? 12 : 28, fontSize: 14 }}>{result.message}</p>
+            {result.rappels?.length > 0 && (
+              <div style={{ marginBottom: 28 }}>
+                {result.rappels.map((r: string) => <div key={r} style={{ color: 'var(--soft)', fontSize: 12, marginBottom: 4 }}>💡 {r}</div>)}
+              </div>
+            )}
             <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
               <HudButton action="new-project" compact label={t.submit.submitAnother} onClick={() => { setResult(null); setForm({ url_soumise:'', titre:'', description:'', contenu:'', niche:'' }); }} />
               <HudButton action="open-project" compact label={t.submit.viewDashboard} onClick={() => navigate('/forge/dashboard')} />
