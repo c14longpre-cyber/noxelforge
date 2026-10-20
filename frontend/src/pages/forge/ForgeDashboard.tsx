@@ -113,6 +113,7 @@ export default function ForgeDashboard() {
           <span style={{ fontWeight: 900, fontSize: 15 }}>Dashboard</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          {statut.est_admin && <Link to="/forge/admin" style={{ color: 'var(--purple, #A855F7)', fontSize: 12, fontWeight: 800 }}>Admin</Link>}
           <Link to="/forge/pricing" style={{
             display: 'flex', alignItems: 'center', gap: 6,
             padding: '6px 14px', borderRadius: 20, fontSize: 12, fontWeight: 800,

@@ -6,7 +6,7 @@
 import { Router } from 'express';
 import { requireAuth } from '../../middleware/requireAuth'; // ton middleware auth existant
 import { requireAdmin } from '../../middleware/requireAdmin';
-import { saisirSignauxAdmin } from '../../controllers/forge/trustScoreAdmin.controller';
+import { saisirSignauxAdmin, listerTrustScoresAdmin, recalculerTrustScoreAdmin } from '../../controllers/forge/trustScoreAdmin.controller';
 import {
   registerMembre,
   getMonStatut,
@@ -48,7 +48,9 @@ router.post('/badges/verify', requireAuth, verifierMonBadge);
 router.post('/trust-score/recalculate', requireAuth, recalculerMonScore);
 
 // Saisie admin de l'autorité et du spam (FORGE_ADMIN_EMAILS)
+router.get('/admin/trust-scores', requireAuth, requireAdmin, listerTrustScoresAdmin);
 router.post('/admin/trust-score/:userId', requireAuth, requireAdmin, saisirSignauxAdmin);
+router.post('/admin/trust-score/:userId/recalculate', requireAuth, requireAdmin, recalculerTrustScoreAdmin);
 
 // ============================================================
 // MATCHMAKING

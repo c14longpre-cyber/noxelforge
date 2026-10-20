@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import * as trustScoreServeur from '../../services/forge/trustScoreServeur';
+import { estAdmin } from '../../middleware/requireAdmin';
 import { reactiverMembre, verifierBadgeSurSite } from '../../services/forge/badgeChecker.service';
 import { determinerFlux } from '../../services/forge/alfred.forge.service';
 import { getSupabase } from '../../lib/supabaseClient';
@@ -39,7 +40,7 @@ export async function getMonStatut(req: Request, res: Response): Promise<void> {
   if (!membre.scan_complete) etapesManquantes.push('Lance un scan NOXEL SEO sur ton site');
   if (!membre.badge_installe) etapesManquantes.push('Installe le badge NOXEL sur ton site');
   if (ageCompteDays < 15) etapesManquantes.push(`Compte actif depuis ${15-ageCompteDays} jours de plus`);
-  res.json({ membre, trust_score: t.data ?? null, points: p.data ?? { solde: 0 }, badge: b.data ?? null, flux_actuel: flux, age_compte_days: ageCompteDays, etapes_manquantes: flux === 'bloque' ? etapesManquantes : [] });
+  res.json({ membre, est_admin: estAdmin((req as any).user?.email), trust_score: t.data ?? null, points: p.data ?? { solde: 0 }, badge: b.data ?? null, flux_actuel: flux, age_compte_days: ageCompteDays, etapes_manquantes: flux === 'bloque' ? etapesManquantes : [] });
 }
 export async function verifierMonBadge(req: Request, res: Response): Promise<void> {
   const supabase = getSupabase();
