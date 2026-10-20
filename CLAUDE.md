@@ -12,7 +12,7 @@ noxelforge/
 │   │   ├── controllers/forge/  Submissions, members, matchmaking endpoints
 │   │   ├── routes/forge/       Forge routes (matchmaking, stripe)
 │   │   ├── routes/auth.*       OAuth flows (GitHub, Microsoft, LinkedIn, Magic Link, Passkeys, Email)
-│   │   ├── cron/               forgeBadgeCron (1st/15th monthly, 9AM EST, 7-day grace)
+│   │   ├── cron/               forgeBadgeCron (daily 9AM Toronto: all members on the 1st/15th, members in grace the other days; 7-day grace)
 │   │   ├── middleware/         requireAuth (all endpoints auth-gated)
 │   │   ├── lib/                supabaseClient.ts
 │   │   └── services/           emailService, session, userStore
@@ -53,10 +53,10 @@ noxelforge/
 ### 3. Badge System (Forge-Specific)
 - **Badge lifecycle**: 
   1. User registers/verifies domain → badge.routes issues provisional badge
-  2. Cron job (1st/15th, 9AM EST) triggers badgeChecker → Alfred review → Trust Score update
+  2. Cron job (daily 9AM Toronto; full check on the 1st/15th, grace members every day) triggers badgeChecker → Alfred review → Trust Score update
   3. 7-day grace period after Alfred approval before public publication
 - **Anti-spoofing**: Domain ownership verification required before badge issuance
-- **Badge cron**: forgeBadgeCron.ts runs monthly; failure = alert user, no auto-retry
+- **Badge cron**: forgeBadgeCron.ts runs daily (full check on the 1st/15th, grace members the other days); failure = alert user, no auto-retry
 - **Badge revocation**: Blacklist system for spam/abuse (via spamGate.service.ts)
 
 ### 4. Matchmaking Engine

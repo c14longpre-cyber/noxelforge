@@ -28,7 +28,7 @@ When invoked on mobile or with time constraints, execute a **focused audit** of 
 2. **Tier & Pricing Alignment** (3 min)
    - Verify 5 tiers exist: Bronze ($0), Silver ($20), Gold ($40), Platinum ($60), Diamond ($80) per month
    - Check Stripe FORGE_PRICES mapping covers all 5 tiers
-   - Validate scoreVersTimer aligns: Score 0-25 = Bronze, 25-55 = Silver, 55-70 = Gold, 70-85 = Platinum, 85-100 = Diamond
+   - Validate scoreVersTimer aligns: Score 0-40 = Bronze, 40-55 = Silver, 55-70 = Gold, 70-85 = Platinum, 85-100 = Diamond
    - Report: Missing tiers, price/score misalignment, Stripe gaps
 
 3. **Badge System Lifecycle** (2 min)
@@ -88,7 +88,7 @@ When time allows, run comprehensive validation:
    - Report: State transitions that fail, grace period miscalculation, revocation logic
 
 5. **Cron Job: Badge Checker** (5 min)
-   - Verify forgeBadgeCron.ts runs at 00:00 UTC (daily)
+   - Verify forgeBadgeCron.ts runs daily at 9AM Toronto (all members on the 1st/15th, members in grace the other days)
    - Check transitions: issue→verified (if Alfred approves), verified→published (if grace expired)
    - Validate error handling: Logs failures without crashing
    - Test 24-hour backlog (badges issued yesterday should publish today)
@@ -166,8 +166,8 @@ When time allows, run comprehensive validation:
 - Tiers defined: 5/5 ✓ (Bronze, Silver, Gold, Platinum, Diamond)
 - Prices: Bronze $0, Silver $20, Gold $40, Platinum $60, Diamond $80 ✓
 - Score tiers:
-  - Bronze: 0-25 ✓
-  - Silver: 25-55 ✓
+  - Bronze: 0-40 ✓
+  - Silver: 40-55 ✓
   - Gold: 55-70 ✓
   - Platinum: 70-85 ⚠️ [FOUND IN EARLIER AUDIT]
   - Diamond: 85-100 ✓
@@ -187,7 +187,7 @@ When time allows, run comprehensive validation:
 - State transitions: All valid ✓
 
 ### 5. Badge Cron (forgeBadgeCron.ts)
-- Schedule: 00:00 UTC daily ✓
+- Schedule: daily 9AM Toronto (full on 1st/15th, grace members daily) ✓
 - Transitions: verified→published after 7d ✓
 - Error handling: Logged without crash ✓
 - Backlog: 24-hour queue processes ✓

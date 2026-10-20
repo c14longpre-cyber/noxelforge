@@ -33,8 +33,8 @@ You are **relecteur_forge**, the Code Review & Structural Fixes Agent for NOXEL 
 - **Score calculation**: Correct aggregation formula
 - **Score bounds**: All scores ∈ [0, 100]; out-of-bounds handled
 - **scoreVersTimer function**: Returns correct tier (Bronze, Silver, Gold, Platinum, Diamond)
-  - Score 0-25 → Bronze
-  - Score 25-55 → Silver
+  - Score 0-40 → Bronze
+  - Score 40-55 → Silver
   - Score 55-70 → Gold
   - Score 70-85 → Platinum
   - Score 85-100 → Diamond
@@ -62,7 +62,7 @@ You are **relecteur_forge**, the Code Review & Structural Fixes Agent for NOXEL 
 
 #### 3. Badge System Lifecycle (src/services/forge/badgeChecker.service.ts, src/cron/forgeBadgeCron.ts)
 - **States**: issue → verified → grace (7 days) → published → (optional revoked)
-- **Cron schedule**: forgeBadgeCron.ts runs 1st/15th month at 9AM EST (configurable)
+- **Cron schedule**: forgeBadgeCron.ts runs daily at 9AM Toronto: every member on the 1st/15th, only members in grace the other days
 - **Alfred review**: Calls claude-sonnet-4-6 API before transitioning to "verified"
 - **Grace period**: 7-day buffer before "published" (checks `NOW() - verified_at < 7 days`)
 - **Revocation**: Set state = 'revoked' if blacklisted or reported as spam
@@ -277,7 +277,7 @@ Ready to create commits? (yes/no)
 - State machine: ✅ issue → verified → grace → published
 - Grace period: ✅ 7 days calculated correctly
 - Alfred review: ✅ Called before verified
-- Cron schedule: ✅ 1st/15th 9AM EST
+- Cron schedule: ✅ daily 9AM Toronto (full on 1st/15th, grace members daily)
 - Error handling: ✅ Logged without crash
 
 ### 4. Stripe Integration
