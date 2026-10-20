@@ -41,7 +41,7 @@ noxelforge/
 - **Score source**: `trustScore.service.ts` is single source of truth; no hardcoding elsewhere
 - **Signal weights immutable**: Each signal's weight never changes mid-calculation
 - **Score validation**: All scores must be ∈ [0, 100]; reject or clamp out-of-bounds values
-- **Server-side signals** (`trustScoreServeur.ts`): the member never sends a signal value. Technical → NOXEL SEO full-scan (not wired yet: counts 0 with a reason); Age → RDAP; Frequency → sitemap.xml, else RSS/Atom; Content → Alfred; Authority & Spam → admin entry (`POST /api/forge/admin/trust-score/:userId`, admins listed in `FORGE_ADMIN_EMAILS`). Each signal stores its source, date and failure reason in `forge_trust_scores.signaux_sources`; collected values are cached 30 days. Without both admin values the score is `en_attente` (shown as "awaiting verification", never 0). Silver starts at 40.
+- **Server-side signals** (`trustScoreServeur.ts`): the member never sends a signal value. Technical → NOXEL SEO full-scan (`scores.tech`, dated by the scan's `scannedAt`, refused if older than 30 days; a failure counts 0 with a reason; a usable scan sets `scan_complete`); Age → RDAP; Frequency → sitemap.xml, else RSS/Atom; Content → Alfred; Authority & Spam → admin entry (`POST /api/forge/admin/trust-score/:userId`, admins listed in `FORGE_ADMIN_EMAILS`). Each signal stores its source, date and failure reason in `forge_trust_scores.signaux_sources`; collected values are cached 30 days. Badge and NOXEL SEO scan are not required to submit: members only get non-blocking reminders (`rappels`). Without both admin values the score is `en_attente` (shown as "awaiting verification", never 0). Silver starts at 40.
 - **Alfred AI reviewer**: Uses claude-sonnet-4-6; autonomous validation of submissions per Trust Score Forge rules
 
 ### 2. Tier & Pricing Integrity
@@ -257,6 +257,7 @@ See `backend/.env.example`:
 - `CORS_ORIGIN`: Must match frontend deploy domain (e.g., `https://noxelforge.com`)
 - `JWT_SECRET`: Session signing key
 - `FORGE_ADMIN_EMAILS`: comma-separated admin e-mails allowed to enter authority/spam signals
+- `NSE_FULL_SCAN_URL` (optional): NOXEL SEO full-scan route, default `https://api.noxelseo.com/api/seo/full-scan` (called with `?url=https://<domain>/`)
 - `SMTP_*`: Email service credentials (Resend, SendGrid, etc.)
 
 ---

@@ -73,6 +73,7 @@ const fetchOk = (async (url: string) => {
   if (url === "https://rdap.org/domain/exemple.ca") return new Response(JSON.stringify({ events: [{ eventAction: "registration", eventDate: "2016-10-20T12:00:00Z" }] }));
   if (url === "https://exemple.ca/sitemap.xml") return new Response(`<urlset>${[2, 5, 9].map((d) => `<url><lastmod>${daysAgo(d)}</lastmod></url>`).join("")}</urlset>`);
   if (url === "https://exemple.ca/") return new Response(`<p>${"Contenu original et utile. ".repeat(20)}</p>`);
+  if (url === "https://api.noxelseo.com/api/seo/full-scan?url=https%3A%2F%2Fexemple.ca%2F") return new Response(JSON.stringify({ ok: true, status: "done", scannedAt: daysAgo(1), scores: { tech: 80 } }));
   return new Response("", { status: 404 });
 }) as any;
 const deps = (extra: Record<string, unknown> = {}) => ({ fetchImpl: fetchOk, evaluerContenu: async () => 80, now: () => NOW, ...extra });
@@ -96,7 +97,7 @@ test("first computation: auto signals collected with source and date, score pend
   assert.equal(r.statut, "en_attente");
   assert.equal(r.score, null);
   assert.equal(r.tier, null);
-  assert.deepEqual(r.sources.technique, { valeur: null, source: "nse", collecte_at: NOW.toISOString(), raison: "Source NOXEL SEO pas encore branchée" });
+  assert.deepEqual(r.sources.technique, { valeur: 80, source: "nse", collecte_at: daysAgo(1) });
   assert.equal(r.sources.anciennete.source, "rdap");
   assert.equal(r.sources.frequence.source, "sitemap");
   assert.deepEqual(r.sources.contenu, { valeur: 80, source: "alfred", collecte_at: NOW.toISOString() });
@@ -106,7 +107,8 @@ test("first computation: auto signals collected with source and date, score pend
   assert.equal(row.score, null);
   assert.equal(row.signal_autorite, null);
   assert.equal(row.signal_spam, null);
-  assert.equal(row.signal_technique, 0);
+  assert.equal(row.signal_technique, 20);
+  assert.equal(tables.forge_members[0].scan_complete, true, "a usable NOXEL SEO scan marks the scan as done");
   assert.deepEqual(row.signaux_sources, r.sources);
 });
 
@@ -128,13 +130,13 @@ test("admin entry of authority and spam: score computed, Silver from 40", async 
   reset();
   const r = await serveur.enregistrerSaisieAdmin("u-membre", { domainAuthority: 20, spamScore: 30 }, "Admin@Noxel.test", deps());
   assert.equal(r.statut, "calcule");
-  // technique 0 (NSE not wired) + autorite 10 + spam 14 + contenu 12 + anciennete 10 + frequence 2 = 48
-  assert.deepEqual(r.points, { technique: 0, autorite: 10, spam: 14, contenu: 12, anciennete: 10, frequence: 2 });
-  assert.equal(r.score, 48);
-  assert.equal(r.tier, "silver");
+  // technique 20 (NSE tech 80) + autorite 10 + spam 14 + contenu 12 + anciennete 10 + frequence 2 = 68
+  assert.deepEqual(r.points, { technique: 20, autorite: 10, spam: 14, contenu: 12, anciennete: 10, frequence: 2 });
+  assert.equal(r.score, 68);
+  assert.equal(r.tier, "gold");
   assert.deepEqual(r.sources.autorite, { valeur: 20, source: "admin", collecte_at: NOW.toISOString(), saisi_par: "admin@noxel.test" });
   assert.equal(stored().statut, "calcule");
-  assert.equal(stored().score, 48);
+  assert.equal(stored().score, 68);
 });
 
 test("only one admin value entered: still pending", async () => {
@@ -167,7 +169,7 @@ test("admin entry outside [0, 100] or missing is refused, nothing written", asyn
 test("invalid site URL: each auto signal counts 0 with a reason, no fetch", async () => {
   reset({ forge_members: [{ user_id: "u-membre", url_site: "pas une url" }] });
   const r = await serveur.recalculerTrustScoreServeur("u-membre", deps());
-  for (const n of ["anciennete", "frequence", "contenu"]) assert.equal(r.sources[n].raison, "URL du site invalide ou absente", n);
+  for (const n of ["technique", "anciennete", "frequence", "contenu"]) assert.equal(r.sources[n].raison, "URL du site invalide ou absente", n);
   assert.deepEqual(fetchCalls, []);
 });
 
@@ -284,4 +286,19 @@ test("admin recalculate: no 10-minute cooldown, member-only route still has it",
   } finally {
     serveur.recalculerTrustScoreServeur = origRecalc;
   }
+});
+
+test("technique: a cached NOXEL SEO scan under 30 days is reused; a failed scan counts 0 and keeps the reminder", async () => {
+  reset({ forge_trust_scores: [{ user_id: "u-membre", signaux_sources: { technique: { valeur: 90, source: "nse", collecte_at: daysAgo(20) } } }] });
+  let r = await serveur.recalculerTrustScoreServeur("u-membre", deps());
+  assert.equal(r.sources.technique.valeur, 90);
+  assert.ok(!fetchCalls.some((u) => u.startsWith("https://api.noxelseo.com/")), "NOXEL SEO not called again");
+
+  reset();
+  const fetchSansNse = (async (url: string) => (String(url).startsWith("https://api.noxelseo.com/") ? new Response("", { status: 502 }) : fetchOk(url))) as any;
+  r = await serveur.recalculerTrustScoreServeur("u-membre", deps({ fetchImpl: fetchSansNse }));
+  assert.equal(r.sources.technique.valeur, null);
+  assert.equal(r.sources.technique.raison, "NOXEL SEO HTTP 502");
+  assert.equal(r.points.technique, 0);
+  assert.equal(tables.forge_members[0].scan_complete, undefined, "scan not marked as done");
 });

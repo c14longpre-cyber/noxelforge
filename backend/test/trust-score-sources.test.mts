@@ -138,3 +138,45 @@ test("content: Alfred's answer must be a number in [0, 100], otherwise it is ref
   for (const bad of ['{"qualite": 140}', '{"qualite": -1}', '{"qualite": "90"}', '{}', "pas du json"])
     assert.throws(() => lireQualite(bad), undefined, bad);
 });
+
+// ─── Technical: NOXEL SEO full-scan ─────────────────────────────────────────
+const { collecterTechniqueNse, urlFullScan } = require("../dist/services/forge/signals/nse.js");
+const SCAN_REEL = require("./fixtures/nse-full-scan.json"); // real answer for noxelforge.com, 2026-10-20
+const NSE_URL = "https://api.noxelseo.com/api/seo/full-scan?url=https%3A%2F%2Fexemple.ca%2F";
+const nowApresScan = () => new Date("2026-10-21T08:00:00Z");
+
+test("NOXEL SEO: real full-scan answer -> scores.tech, dated by scannedAt, source nse", async () => {
+  assert.equal(urlFullScan("exemple.ca"), NSE_URL);
+  const { fn, calls } = fakeFetch({ [NSE_URL]: { body: JSON.stringify(SCAN_REEL) } });
+  const s = await collecterTechniqueNse("exemple.ca", { fetchImpl: fn, now: nowApresScan });
+  assert.deepEqual(s, { valeur: 100, source: "nse", collecte_at: "2026-10-20T13:54:56.536Z" });
+  assert.deepEqual(calls, [NSE_URL]);
+});
+
+test("NOXEL SEO failures: value null with a reason, never an invented score", async () => {
+  const variante = (patch: Record<string, unknown>) => ({ body: JSON.stringify({ ...SCAN_REEL, ...patch }) });
+  const cas: [Route, RegExp][] = [
+    [{ status: 503 }, /NOXEL SEO HTTP 503/],
+    [{ throws: "ECONNREFUSED" }, /NOXEL SEO Inaccessible/],
+    [{ body: "<html>" }, /illisible/],
+    [variante({ ok: false, error: "quota" }), /réponse en échec \(quota\)/],
+    [variante({ status: "running" }), /scan non terminé \(status: running\)/],
+    [variante({ scores: { ...SCAN_REEL.scores, tech: undefined } }), /scores\.tech invalide/],
+    [variante({ scores: { ...SCAN_REEL.scores, tech: 140 } }), /scores\.tech invalide \(140\)/],
+    [variante({ scannedAt: "2026-08-01T00:00:00Z" }), /scan trop ancien \(2026-08-01\)/],
+    [variante({ scannedAt: undefined }), /scannedAt\) absente/],
+  ];
+  for (const [route, re] of cas) {
+    const s = await collecterTechniqueNse("exemple.ca", { fetchImpl: fakeFetch({ [NSE_URL]: route }).fn, now: nowApresScan });
+    assert.equal(s.valeur, null, String(re));
+    assert.equal(s.source, "nse");
+    assert.equal(s.collecte_at, nowApresScan().toISOString());
+    assert.match(s.raison, re);
+  }
+});
+
+test("NOXEL SEO: NSE_FULL_SCAN_URL overrides the route", () => {
+  process.env.NSE_FULL_SCAN_URL = "https://staging.noxelseo.test/full-scan";
+  try { assert.equal(urlFullScan("a.ca"), "https://staging.noxelseo.test/full-scan?url=https%3A%2F%2Fa.ca%2F"); }
+  finally { delete process.env.NSE_FULL_SCAN_URL; }
+});
