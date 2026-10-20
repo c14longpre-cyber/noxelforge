@@ -69,14 +69,14 @@ noxelforge/
   - Acceptance probability (machine-learned likelihood of match success)
 - **Output contract**: Returns list of suggested partners sorted by match score (highest first)
 - **Endpoint**: `GET /api/forge/matchmaking/suggestions?limit=20` (auth required, returns array)
-- **Backlog**: Exchange history tracking (forge_exchanges table) to avoid repeated recommendations
+- **Exchanges** (`exchanges.service.ts`, table `forge_exchanges`): propose → accepte → publie (a side declared online) → verifie (both links verified by the server: the declared page must be on the member's own domain and contain a link to the partner's domain); terminal refuse / expire (14 days to accept, 60 days to verify both links) / rompu (a verified link missing for more than a 7-day grace, checked by forgeExchangeCron daily 10AM Toronto). Only `verifie` is a completed exchange; no Forge Points for exchanges (decision 2026-10-20). Bronze cannot propose or accept. The matchmaking no longer suggests a partner with an exchange in progress or verified
 
 ### 5. Data Integrity (Supabase)
 - **Core tables**:
   - `forge_members`: id, user_id (FK users), domain, trust_score, niche, badge_installe, statut, created_at, updated_at
   - `badge_clients`: id, domain (unique), trust_score, description, category, verified_at, issued_at, expires_at
   - `forge_submissions`: id, domain, content_url, niche, status, trust_score_candidate, alfred_notes, user_email, created_at
-  - `forge_exchanges` (future): id, member_a_id, member_b_id, exchange_status, initiated_at, completed_at
+  - `forge_exchanges`: id, membre_a (proposer), membre_b, statut, url_a, url_b, verifie_a, verifie_b, propose_at, accepte_at, verifie_at, termine_at, grace_expire_at, raison (one active exchange per pair)
 - **Foreign key constraints**: Strict (8 FK constraints applied; tier_abonnement field unified to match tier_forge naming)
 - **No orphans**: Always verify FK integrity before writes
 
@@ -201,7 +201,6 @@ Frontend: Push to GitHub → Vercel auto-deploys
 ## Backlog & Known Gaps
 
 ### High Priority
-- **Exchange history tracking** (forge_exchanges table): Log who matched with whom, when; use to avoid duplicate recommendations (V1.5)
 - **Tier badges**: the pages show 96 px PNG exports (`frontend/public/tiers/*_tier.png`, ~15–20 kB) rendered from the vector masters `frontend/public/*_tier.svg` (traced 1254 px, 200–600 kB, kept as sources). Re-export the PNG if a master changes
 - **Alfred safety guardrails**: Add additional checks to prevent Alfred from approving spam submissions
 

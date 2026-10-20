@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import HudRouterLink from '../../components/HudRouterLink';
 import { TRUST_SCORE_SERVER_COMPUTED, TRUST_SCORE_PENDING_LABEL } from '../../config/trustScore';
 import type { PartnerSubmission, PartnerSuggestion } from '../../types/forge';
+import { HudButton } from '../../components/hud/HudButton';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const NICHES = ['SEO','Marketing','AI','E-commerce','Web Dev','Business','Design','Finance','Health','Education'];
@@ -17,6 +18,20 @@ export default function ForgePartners() {
   const [page, setPage] = useState(1);
   const [recommandations, setRecommandations] = useState<PartnerSuggestion[]>([]);
   const [loadingReco, setLoadingReco] = useState(true);
+  const [propositions, setPropositions] = useState<Record<string, { busy?: boolean; ok?: boolean; erreur?: string }>>({});
+
+  async function proposer(partenaireId: string) {
+    setPropositions((p) => ({ ...p, [partenaireId]: { busy: true } }));
+    try {
+      const res = await fetch(`${API_BASE}/api/forge/exchanges`, {
+        method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ partenaire_id: partenaireId }),
+      });
+      const data = await res.json().catch(() => ({}));
+      setPropositions((p) => ({ ...p, [partenaireId]: res.ok ? { ok: true } : { erreur: data.error || `Error ${res.status}` } }));
+    } catch {
+      setPropositions((p) => ({ ...p, [partenaireId]: { erreur: 'API unreachable.' } }));
+    }
+  }
 
   const cle = `${page}|${nicheFilter}`;
   const loading = charge?.cle !== cle;
@@ -106,6 +121,14 @@ export default function ForgePartners() {
                     </div>
                     <a href={r.url_site} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text)', fontSize: 13, fontWeight: 700, display: 'block', marginBottom: 4 }}>{r.url_site} ↗</a>
                     <p style={{ margin: 0, color: 'var(--muted)', fontSize: 11, lineHeight: 1.5 }}>{r.raison}</p>
+                    <div style={{ marginTop: 10 }}>
+                      {propositions[r.user_id]?.ok ? (
+                        <span style={{ fontSize: 12, color: 'var(--ok)', fontWeight: 700 }}>✓ Exchange proposed — follow it on your dashboard</span>
+                      ) : (
+                        <HudButton action="continue" compact label="Propose exchange" busy={propositions[r.user_id]?.busy} onClick={() => proposer(r.user_id)} />
+                      )}
+                      {propositions[r.user_id]?.erreur && <div style={{ fontSize: 11, color: 'var(--danger)', marginTop: 4 }}>{propositions[r.user_id]?.erreur}</div>}
+                    </div>
                   </div>
                 ))}
               </div>

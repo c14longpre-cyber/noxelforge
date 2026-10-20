@@ -1,4 +1,5 @@
 import { getSupabase } from '../../lib/supabaseClient';
+import { partenairesActifs } from './exchanges.service';
 import { must } from '../../lib/supabaseCheck';
 // ============================================================
 // NOXEL Forge™ — Matchmaking Engine V1 (rule-based)
@@ -86,9 +87,12 @@ export async function getRecommendedPartners(
     .eq('badge_installe', true)
     .limit(200), 'forge_members select');
 
-  if (!candidats || candidats.length === 0) return [];
+  // A partner with an exchange in progress or verified is not suggested again
+  const dejaPartenaires = await partenairesActifs(userId);
+  const candidatsLibres = (candidats ?? []).filter((c) => !dejaPartenaires.has(c.user_id));
+  if (candidatsLibres.length === 0) return [];
 
-  const userIds = candidats.map((c) => c.user_id);
+  const userIds = candidatsLibres.map((c) => c.user_id);
   const trustScores = must(await supabase
     .from('forge_trust_scores')
     .select('user_id, score, tier_forge, statut')
@@ -96,7 +100,7 @@ export async function getRecommendedPartners(
 
   const trustMap = new Map((trustScores ?? []).map((t) => [t.user_id, t]));
 
-  const suggestions: PartnerSuggestion[] = candidats.map((c) => {
+  const suggestions: PartnerSuggestion[] = candidatsLibres.map((c) => {
     const t = trustMap.get(c.user_id);
     const trust = t && t.statut !== 'en_attente' && typeof t.score === 'number' ? t : undefined;
     const nicheScore = scoreNiche(moi.niche, c.niche);

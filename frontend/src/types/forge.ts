@@ -88,3 +88,20 @@ export interface PublicUser {
   provider?: string;
   tier?: string;
 }
+
+// GET /api/forge/exchanges
+export type ExchangeStatus = 'propose' | 'accepte' | 'publie' | 'verifie' | 'refuse' | 'expire' | 'rompu';
+export interface Exchange {
+  id: string;
+  statut: ExchangeStatus;
+  role: 'propose_par_moi' | 'recu';
+  partenaire: { user_id: string; url_site: string | null; niche: string | null };
+  mon_lien: { url: string | null; verifie: boolean };
+  son_lien: { url: string | null; verifie: boolean };
+  propose_at: string;
+  accepte_at: string | null;
+  verifie_at: string | null;
+  termine_at: string | null;
+  grace_expire_at: string | null;
+  raison: string | null;
+}
