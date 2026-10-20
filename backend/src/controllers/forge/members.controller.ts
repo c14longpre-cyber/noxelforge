@@ -19,7 +19,7 @@ export async function registerMembre(req: Request, res: Response): Promise<void>
   // The member is already created: a points failure is logged, not turned into a 500 (a retry would get 409)
   const { error: pointsError } = await supabase.from('forge_points').insert({ user_id: userId, solde: 0, total_gagne: 0, total_depense: 0 });
   if (pointsError) console.error('[registerMembre] Points insert error:', pointsError);
-  res.status(201).json({ success: true, membre, message: 'Bienvenue dans NOXEL Forge! 🔥' });
+  res.status(201).json({ ok: true, membre, message: 'Bienvenue dans NOXEL Forge! 🔥' });
 }
 export async function getMonStatut(req: Request, res: Response): Promise<void> {
   const supabase = getSupabase();
@@ -36,10 +36,8 @@ export async function getMonStatut(req: Request, res: Response): Promise<void> {
   if (!membre) { res.status(404).json({ error: 'Membre non trouvé.' }); return; }
   const ageCompteDays = Math.floor((Date.now() - new Date(membre.date_inscription).getTime()) / (1000*60*60*24));
   const flux = determinerFlux({ ageCompteDays, scanComplete: membre.scan_complete, badgeInstalle: membre.badge_installe, tierAbonnement: membre.tier_abonnement });
-  const etapesManquantes = [];
-  if (!membre.scan_complete) etapesManquantes.push('Lance un scan NOXEL SEO sur ton site');
-  if (!membre.badge_installe) etapesManquantes.push('Installe le badge NOXEL sur ton site');
-  if (ageCompteDays < 15) etapesManquantes.push(`Compte actif depuis ${15-ageCompteDays} jours de plus`);
+  // determinerFlux only blocks the free tier: list the step actually enforced, not scan/badge/age
+  const etapesManquantes = ['Passe à Silver ou plus pour soumettre du contenu'];
   res.json({ membre, est_admin: estAdmin((req as any).user?.email), trust_score: t.data ?? null, points: p.data ?? { solde: 0 }, badge: b.data ?? null, flux_actuel: flux, age_compte_days: ageCompteDays, etapes_manquantes: flux === 'bloque' ? etapesManquantes : [] });
 }
 export async function verifierMonBadge(req: Request, res: Response): Promise<void> {

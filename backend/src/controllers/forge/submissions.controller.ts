@@ -16,13 +16,13 @@ export async function creerSoumission(req: Request, res: Response): Promise<void
   if (!spamResult.passe) { res.status(400).json({ error: 'Rejeté par Spam Gate.', raison: spamResult.raison, type: spamResult.type }); return; }
   const ageCompteDays = Math.floor((Date.now() - new Date(membre.date_inscription).getTime()) / (1000*60*60*24));
   const flux = determinerFlux({ ageCompteDays, scanComplete: membre.scan_complete, badgeInstalle: membre.badge_installe, tierAbonnement: membre.tier_abonnement });
-  if (flux === 'bloque') { res.status(403).json({ error: 'Compte non éligible.', raison: !membre.scan_complete ? 'Lance un scan NOXEL SEO d\'abord.' : 'Installe le badge NOXEL sur ton site.' }); return; }
+  if (flux === 'bloque') { res.status(403).json({ error: 'Compte non éligible.', raison: 'Passe à Silver ou plus pour soumettre du contenu.' }); return; }
   const trustScoreData = await getTrustScore(userId);
   const { data: soumission, error: insertError } = await supabase.from('forge_submissions').insert({ user_id: userId, url_soumise, titre, description, niche, flux, statut: 'pending' }).select().single();
   if (insertError || !soumission) { console.error('[creerSoumission] Supabase insert error:', insertError); res.status(500).json({ error: 'Erreur création soumission.' }); return; }
   console.log(`[creerSoumission] Lancement traiterSoumission pour ${soumission.id}`);
   traiterSoumission(soumission.id, { userId, urlSoumise: url_soumise, titre, description, contenu, niche, trustScore: trustScoreData?.score ?? 0, tierForge: membre.tier_abonnement, ageCompteDays, scanComplete: membre.scan_complete, badgeInstalle: membre.badge_installe }).catch((e) => console.error('[creerSoumission] traiterSoumission a rejete:', e));
-  res.status(201).json({ success: true, soumission_id: soumission.id, flux, message: 'Soumission reçue — Alfred analyse ton contenu.' });
+  res.status(201).json({ ok: true, soumission_id: soumission.id, flux, message: 'Soumission reçue — Alfred analyse ton contenu.' });
 }
 export async function getMesSoumissions(req: Request, res: Response): Promise<void> {
   const supabase = getSupabase();

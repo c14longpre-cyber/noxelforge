@@ -40,7 +40,7 @@ async function verifierRateLimit(userId: string, tier?: TierForge): Promise<Spam
     silver: 5,
     gold: 20,
     platinum: 50,
-    diamond: 999, // unlimited
+    diamond: Infinity, // unlimited
     bronze: 0, // bronze cannot submit anyway
   };
   const limite = limiteParTier[tier ?? 'silver'] ?? 5;
