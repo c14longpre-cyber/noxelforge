@@ -1,5 +1,6 @@
 import Stripe from 'stripe';
 import { getSupabase } from '../../lib/supabaseClient';
+import { rembourserAnnulation, annulerMaintenantSiDansFenetre } from './remboursement.service';
 import { must } from '../../lib/supabaseCheck';
 
 function getStripe() {
@@ -96,27 +97,14 @@ export async function gererWebhookForge(event: Stripe.Event): Promise<void> {
       .update({ tier_abonnement: newTier, updated_at: new Date().toISOString() })
       .eq('stripe_customer_id', customerId), 'forge_members update (customer.subscription.updated)');
 
-    // Track refund window if subscription was just upgraded/downgraded
-    if (previousSub?.items?.data?.[0]?.price?.id && sub.cancel_at_period_end !== true) {
-      // Note: forge_refunds table required (id, user_id, subscription_id, refund_date, status)
-      // TODO: Create migration for forge_refunds table with 14-day refund window tracking
-      const refundEligibleUntil = new Date(Date.now() + 14*24*60*60*1000).toISOString();
-      console.log(`[gererWebhookForge] Refund eligible until ${refundEligibleUntil} for subscription ${sub.id}`);
+    // Cancellation at period end requested within the 14 days: cancel now -> subscription.deleted -> refund
+    if (await annulerMaintenantSiDansFenetre(sub, previousSub)) {
+      console.log(`[gererWebhookForge] ${sub.id} cancelled within 14 days: cancelled now for the refund`);
     }
   }
 
   if (event.type === 'customer.subscription.deleted') {
     const sub = event.data.object as Stripe.Subscription;
-
-    // Check if subscription was canceled within 14-day refund window
-    const createdAt = new Date(sub.created * 1000).getTime();
-    const canceledAt = Date.now();
-    const daysSinceCreation = Math.floor((canceledAt - createdAt) / (24*60*60*1000));
-
-    if (daysSinceCreation <= 14) {
-      console.log(`[gererWebhookForge] Refund eligible (${daysSinceCreation} days, within 14-day window) for subscription ${sub.id}`);
-      // TODO: Log to forge_refunds table with status: 'eligible'
-    }
 
     // Look the member up by the subscription that ended (a customer can have had several)
     const rows = must(await supabase.from('forge_members')
@@ -124,5 +112,9 @@ export async function gererWebhookForge(event: Stripe.Event): Promise<void> {
       .eq('stripe_subscription_id', sub.id)
       .select('user_id'), 'forge_members update (customer.subscription.deleted)');
     if (!rows?.length) console.warn(`[stripe webhook] subscription.deleted: no member for subscription ${sub.id}`);
+
+    // 14-day no-questions-asked refund: automatic, once per subscription (forge_refunds)
+    const remboursement = await rembourserAnnulation(sub);
+    if (remboursement) console.log(`[gererWebhookForge] ${sub.id} refund: ${remboursement}`);
   }
 }
