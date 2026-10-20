@@ -163,3 +163,17 @@ test("TRUST_SCORE_SERVER_COMPUTED: off unless exactly 'true'", () => {
   assert.equal(scoreServeurActif({ TRUST_SCORE_SERVER_COMPUTED: "1" }), false);
   assert.equal(scoreServeurActif({ TRUST_SCORE_SERVER_COMPUTED: "true" }), true);
 });
+
+test("server score waiting for the admin entry: pending 'à vérifier', no figure even with the switch on", async () => {
+  const dbAttente = fakeDb({
+    forge_members: [{ user_id: "att", url_site: "https://attente.ca", statut: "actif" }],
+    forge_badges: [{ user_id: "att", statut: "verifie" }],
+    forge_trust_scores: [{ ...score("att", 0), statut: "en_attente", score: null, tier_forge: null }],
+  });
+  const r: any = await chercherTrustScorePublic(dbAttente, "attente.ca", COMPUTED);
+  assert.equal(r.found, true);
+  assert.equal(r.status, "pending");
+  assert.equal(r.trust_score, null);
+  assert.equal(r.signals, null);
+  assert.equal(r.message, "Trust Score en attente de vérification par NOXEL.");
+});

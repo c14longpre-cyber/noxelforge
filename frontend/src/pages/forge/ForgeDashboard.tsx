@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HudButton } from '../../components/hud/HudButton';
 import HudRouterLink from '../../components/HudRouterLink';
-import { TRUST_SCORE_SERVER_COMPUTED, TRUST_SCORE_PENDING_LABEL, TRUST_SCORE_PENDING_MESSAGE } from '../../config/trustScore';
+import { TRUST_SCORE_SERVER_COMPUTED, TRUST_SCORE_PENDING_LABEL, TRUST_SCORE_PENDING_MESSAGE, TRUST_SCORE_VERIFYING_LABEL, TRUST_SCORE_VERIFYING_MESSAGE, trustScoreAwaitingVerification } from '../../config/trustScore';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const TIER_COLORS: Record<string, string> = { bronze: '#CD7F32', silver: '#A8A9AD', gold: '#FFD700', platinum: '#E5E4E2', diamond: '#B9F2FF' };
@@ -100,6 +100,8 @@ export default function ForgeDashboard() {
 
   const { trust_score, points, badge, flux_actuel, etapes_manquantes } = statut;
   const tier = trust_score?.tier_forge ?? 'bronze';
+  const awaitingVerification = trustScoreAwaitingVerification(trust_score);
+  const showScore = TRUST_SCORE_SERVER_COMPUTED && !awaitingVerification;
   const tierColor = TIER_COLORS[tier];
 
   return (
@@ -139,7 +141,7 @@ export default function ForgeDashboard() {
         <div className="nx-grid nx-grid--4" style={{ marginBottom: 24 }}>
           <div className="nx-card" style={{ borderColor: `${tierColor}44` }}>
             <div className="nx-kicker" style={{ marginBottom: 8 }}>Trust Score</div>
-            {TRUST_SCORE_SERVER_COMPUTED ? (
+            {showScore ? (
               <>
                 <div style={{ fontSize: 40, fontWeight: 900, color: tierColor, lineHeight: 1 }}>{trust_score?.score ?? 0}</div>
                 <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 2 }}>/100</div>
@@ -150,8 +152,8 @@ export default function ForgeDashboard() {
               </>
             ) : (
               <>
-                <div style={{ fontSize: 20, fontWeight: 900, color: 'var(--muted)', lineHeight: 1.2 }}>{TRUST_SCORE_PENDING_LABEL}</div>
-                <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 6 }}>{TRUST_SCORE_PENDING_MESSAGE}</div>
+                <div style={{ fontSize: 20, fontWeight: 900, color: 'var(--muted)', lineHeight: 1.2 }}>{TRUST_SCORE_SERVER_COMPUTED ? TRUST_SCORE_VERIFYING_LABEL : TRUST_SCORE_PENDING_LABEL}</div>
+                <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 6 }}>{TRUST_SCORE_SERVER_COMPUTED ? TRUST_SCORE_VERIFYING_MESSAGE : TRUST_SCORE_PENDING_MESSAGE}</div>
               </>
             )}
           </div>
@@ -183,7 +185,7 @@ export default function ForgeDashboard() {
           </div>
         </div>
 
-        {TRUST_SCORE_SERVER_COMPUTED && trust_score && (
+        {showScore && trust_score && (
           <div className="nx-card" style={{ marginBottom: 24 }}>
             <div className="nx-kicker" style={{ marginBottom: 16 }}>Trust Score Forge™ — Detail</div>
             <div className="nx-grid nx-grid--3">

@@ -110,15 +110,12 @@ const allSignals = {
   qualiteContenu: 100, ageDomaineAnnees: 20, publicationsParMois: 30,
 };
 
-// 1. Trust Score recalculation is disabled
-test("recalculate: refused with 403 (anonymous or logged in), nothing written", async () => {
-  for (const user of [undefined, "u-ok"]) {
-    reset();
-    const r = await call("POST", "/api/forge/trust-score/recalculate", allSignals, user);
-    assert.equal(r.status, 403, `user=${user}`);
-    assert.deepEqual(r.body, { ok: false, error: "Recalcul désactivé : le score sera calculé par le serveur." });
-    assert.deepEqual(writes, []);
-  }
+// 1. Trust Score recalculation requires a session (body values ignored: see trust-score-server.test.mts)
+test("recalculate: an anonymous call gets 401, nothing written", async () => {
+  reset();
+  const r = await call("POST", "/api/forge/trust-score/recalculate", allSignals);
+  assert.equal(r.status, 401);
+  assert.deepEqual(writes, []);
 });
 
 // 2. Checkout requires a session

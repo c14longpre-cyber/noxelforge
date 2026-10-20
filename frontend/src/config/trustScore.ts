@@ -5,3 +5,9 @@ export const TRUST_SCORE_SERVER_COMPUTED = import.meta.env.VITE_TRUST_SCORE_SERV
 
 export const TRUST_SCORE_PENDING_LABEL = 'Being calculated';
 export const TRUST_SCORE_PENDING_MESSAGE = 'Your Trust Score is being calculated by NOXEL.';
+
+// Server score computed but still waiting for the admin entry of authority and spam (statut 'en_attente')
+export const TRUST_SCORE_VERIFYING_LABEL = 'Awaiting verification';
+export const TRUST_SCORE_VERIFYING_MESSAGE = 'NOXEL is verifying your authority and spam signals.';
+export const trustScoreAwaitingVerification = (ts: { statut?: string; score?: number | null } | null | undefined) =>
+  !ts || ts.statut === 'en_attente' || typeof ts.score !== 'number';

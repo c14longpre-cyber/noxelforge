@@ -83,7 +83,7 @@ export default function ForgePartners() {
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
                         {r.niche && <span style={{ background: 'var(--g-dim)', color: 'var(--g)', fontSize: 10, padding: '2px 8px', borderRadius: 20, fontWeight: 700 }}>{r.niche}</span>}
-                        {TRUST_SCORE_SERVER_COMPUTED ? (
+                        {TRUST_SCORE_SERVER_COMPUTED && r.trust_score != null && r.trust_tier ? (
                           <span style={{ background: `${TIER_COLORS[r.trust_tier]}22`, color: TIER_COLORS[r.trust_tier], fontSize: 10, padding: '2px 8px', borderRadius: 20, fontWeight: 800 }}>
                             <img src={TIER_IMAGES[r.trust_tier] || TIER_IMAGES.bronze} alt={r.trust_tier} style={{ width: 14, height: 14, verticalAlign: 'middle' }} /> {r.trust_score}/100
                           </span>

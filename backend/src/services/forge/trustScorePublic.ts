@@ -78,15 +78,18 @@ export function construireReponseTrouvee(domain: string, row: Record<string, unk
 
 export const reponseNonTrouvee = (domain: string) => ({ ok: true as const, found: false as const, domain });
 
-// No server-side computation of the six signals exists yet: stored scores were entered by hand,
-// so no figure is published until TRUST_SCORE_SERVER_COMPUTED=true (set it once the server computes them).
+// Scores stored before the server computation were entered by hand: no figure is published until
+// TRUST_SCORE_SERVER_COMPUTED=true (set it once the migration has run and scores were recomputed by the server).
 export function scoreServeurActif(env: Record<string, string | undefined> = process.env): boolean {
   return env.TRUST_SCORE_SERVER_COMPUTED === 'true';
 }
 
 export const MESSAGE_SCORE_EN_ATTENTE = 'Trust Score en cours de calcul par NOXEL.';
 
-export const reponseEnAttente = (domain: string) => ({
+// Score computed by the server but still waiting for the admin entry of authority and spam
+export const MESSAGE_SCORE_A_VERIFIER = 'Trust Score en attente de vérification par NOXEL.';
+
+export const reponseEnAttente = (domain: string, message: string = MESSAGE_SCORE_EN_ATTENTE) => ({
   ok: true as const,
   found: true as const,
   domain,
@@ -96,7 +99,7 @@ export const reponseEnAttente = (domain: string) => ({
   max: { ...SIGNAL_MAX },
   weakest: null,
   computedAt: null,
-  message: MESSAGE_SCORE_EN_ATTENTE,
+  message,
 });
 
 // Minimal shape of the Supabase client used here (injected, so tests can pass a fake one)
@@ -146,12 +149,14 @@ export async function chercherTrustScorePublic(
 
   // Explicit column list: user_id, tier_forge and details are never read
   const scores = await db.from('forge_trust_scores')
-    .select('score,signal_technique,signal_autorite,signal_spam,signal_contenu,signal_anciennete,signal_frequence,calcule_at')
+    .select('statut,score,signal_technique,signal_autorite,signal_spam,signal_contenu,signal_anciennete,signal_frequence,calcule_at')
     .in('user_id', publics)
     .order('calcule_at', { ascending: false, nullsFirst: false })
     .limit(1);
   if (scores.error) throw new ErreurSupabase('forge_trust_scores', scores.error.message);
 
   const row = scores.data?.[0];
-  return row ? construireReponseTrouvee(domain, row) : reponseNonTrouvee(domain);
+  if (!row) return reponseNonTrouvee(domain);
+  if (row.statut === 'en_attente' || typeof row.score !== 'number') return reponseEnAttente(domain, MESSAGE_SCORE_A_VERIFIER);
+  return construireReponseTrouvee(domain, row);
 }

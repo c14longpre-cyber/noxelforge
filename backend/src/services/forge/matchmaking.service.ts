@@ -25,8 +25,8 @@ export interface PartnerSuggestion {
   url_site: string;
   niche: string;
   tier_abonnement: string;
-  trust_score: number;
-  trust_tier: string;
+  trust_score: number | null; // null while the score waits for verification (never shown as 0)
+  trust_tier: string | null;
   score_matchmaking: number;
   raison: string;
 }
@@ -91,13 +91,14 @@ export async function getRecommendedPartners(
   const userIds = candidats.map((c) => c.user_id);
   const trustScores = must(await supabase
     .from('forge_trust_scores')
-    .select('user_id, score, tier_forge')
+    .select('user_id, score, tier_forge, statut')
     .in('user_id', userIds), 'forge_trust_scores select');
 
   const trustMap = new Map((trustScores ?? []).map((t) => [t.user_id, t]));
 
   const suggestions: PartnerSuggestion[] = candidats.map((c) => {
-    const trust = trustMap.get(c.user_id);
+    const t = trustMap.get(c.user_id);
+    const trust = t && t.statut !== 'en_attente' && typeof t.score === 'number' ? t : undefined;
     const nicheScore = scoreNiche(moi.niche, c.niche);
     const tierScore = scoreTierProximity(moi.tier_abonnement, c.tier_abonnement);
     const activiteScore = scoreActivite(c.badge_installe, c.scan_complete);
@@ -113,8 +114,8 @@ export async function getRecommendedPartners(
       url_site: c.url_site,
       niche: c.niche,
       tier_abonnement: c.tier_abonnement,
-      trust_score: trust?.score ?? 0,
-      trust_tier: trust?.tier_forge ?? 'bronze',
+      trust_score: trust?.score ?? null,
+      trust_tier: trust?.tier_forge ?? null,
       score_matchmaking: total,
       raison,
     };

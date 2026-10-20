@@ -74,29 +74,11 @@ export function calculerTrustScore(input: TrustScoreInput): TrustScoreResult {
   return { score, tier: scoreVersTimer(score), signaux, details: { inputs: input, calcule_at: new Date().toISOString() } };
 }
 
-export async function sauvegarderTrustScore(userId: string, result: TrustScoreResult): Promise<void> {
-  const supabase = getSupabase();
-  must(await supabase.from('forge_trust_scores').upsert({
-    user_id: userId, score: result.score, tier_forge: result.tier,
-    signal_technique: result.signaux.technique, signal_autorite: result.signaux.autorite,
-    signal_spam: result.signaux.spam, signal_contenu: result.signaux.contenu,
-    signal_anciennete: result.signaux.anciennete, signal_frequence: result.signaux.frequence,
-    details: result.details, calcule_at: new Date().toISOString(),
-  }, { onConflict: 'user_id' }), 'forge_trust_scores upsert');
-}
-
-export async function recalculerTrustScore(input: TrustScoreInput): Promise<TrustScoreResult> {
-  const supabase = getSupabase();
-  const result = calculerTrustScore(input);
-  await sauvegarderTrustScore(input.userId, result);
-  must(await supabase.from('forge_members').update({ updated_at: new Date().toISOString() }).eq('user_id', input.userId), 'forge_members update');
-  return result;
-}
-
 export async function getTrustScore(userId: string): Promise<TrustScoreResult | null> {
   const supabase = getSupabase();
   const data = must(await supabase.from('forge_trust_scores').select('*').eq('user_id', userId).maybeSingle(), 'forge_trust_scores select');
-  if (!data) return null;
+  // A score still waiting for the admin entry (authority, spam) has no figure: treated as no score
+  if (!data || data.statut === 'en_attente' || typeof data.score !== 'number') return null;
   return {
     score: data.score, tier: data.tier_forge as TierForge,
     signaux: { technique: data.signal_technique, autorite: data.signal_autorite, spam: data.signal_spam, contenu: data.signal_contenu, anciennete: data.signal_anciennete, frequence: data.signal_frequence },
