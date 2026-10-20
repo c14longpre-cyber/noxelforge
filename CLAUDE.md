@@ -91,7 +91,7 @@ noxelforge/
 - **Products**: Pre-created in Stripe Dashboard (Bronze/Silver/Gold/Platinum/Diamond)
 - **Subscription webhook**: Handles subscription.created, subscription.updated, subscription.deleted
 - **Credit system**: Anthropic SDK costs credited against user's tier
-- **Refund webhook**: Triggers 14-day window on subscription.canceled
+- **Refunds (automatic)**: a subscription cancelled within 14 days of its start gets its last paid invoice refunded through Stripe (`remboursement.service.ts`), once per subscription (`forge_refunds`, idempotency key `forge-refund-<sub>`). A cancel-at-period-end requested within the 14 days is turned into an immediate cancellation so the refund happens. Stripe refusals are stored as `echec`; outages make the webhook answer 500 so Stripe retries
 - **Testing**: Use Stripe test keys in .env.example; switch to live keys in production
 
 ### 8. Known Gotchas & Pièges
