@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 import { getForgeT } from '../../i18n/forge.translations';
 import { HudButton } from '../../components/hud/HudButton';
 import HudRouterLink from '../../components/HudRouterLink';
+import type { ForgeTranslations } from '../../i18n/forge.translations';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
-const getTiers = (t: any) => [
+const getTiers = (t: ForgeTranslations) => [
   {
     key: 'bronze',
     label: 'Bronze',
@@ -81,7 +82,7 @@ export default function ForgePricing() {
   // Remise badge affichée seulement si le serveur a vérifié le badge (même règle que /checkout).
   const [badgeInstalle, setBadgeInstalle] = useState(false);
   const [loading, setLoading] = useState<string | null>(null);
-  const [t, setT] = useState<any>(null);
+  const [t, setT] = useState<ForgeTranslations | null>(null);
 
   useEffect(() => {
     const lang = navigator.language.split('-')[0] || 'en';
@@ -105,7 +106,7 @@ export default function ForgePricing() {
         body: JSON.stringify({ tier, billing }),
       });
       const data = await res.json().catch(() => ({}));
-      if (data.url) { window.location.href = data.url; return; }
+      if (data.url) { window.location.assign(data.url); return; }
       alert(res.status === 401 ? 'Please sign in first.' : (data.error || 'Error. Please try again.'));
     } catch { alert('Error. Please try again.'); }
     finally { setLoading(null); }

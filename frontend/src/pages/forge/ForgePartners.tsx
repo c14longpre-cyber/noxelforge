@@ -3,6 +3,7 @@ import Footer from '../../components/Footer';
 import { Link } from 'react-router-dom';
 import HudRouterLink from '../../components/HudRouterLink';
 import { TRUST_SCORE_SERVER_COMPUTED, TRUST_SCORE_PENDING_LABEL } from '../../config/trustScore';
+import type { PartnerSubmission, PartnerSuggestion } from '../../types/forge';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const NICHES = ['SEO','Marketing','AI','E-commerce','Web Dev','Business','Design','Finance','Health','Education'];
@@ -10,39 +11,47 @@ const TIER_COLORS: Record<string,string> = { bronze:'#CD7F32', silver:'#A8A9AD',
 const TIER_IMAGES: Record<string,string> = { bronze:'/tiers/Bronze_tier.png', silver:'/tiers/Silver_tier.png', gold:'/tiers/Gold_tier.png', platinum:'/tiers/Platinum_tier.png', diamond:'/tiers/Diamond_tier.png' };
 
 export default function ForgePartners() {
-  const [partenaires, setPartenaires] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  // Directory page loaded for (page, niche): loading until the last answer matches the current filters
+  const [charge, setCharge] = useState<{ cle: string; items: PartnerSubmission[] } | null>(null);
   const [nicheFilter, setNicheFilter] = useState('');
   const [page, setPage] = useState(1);
-  const [recommandations, setRecommandations] = useState<any[]>([]);
+  const [recommandations, setRecommandations] = useState<PartnerSuggestion[]>([]);
   const [loadingReco, setLoadingReco] = useState(true);
 
-  useEffect(() => { fetchPartenaires(); }, [nicheFilter, page]);
-  useEffect(() => { fetchRecommandations(); }, []);
+  const cle = `${page}|${nicheFilter}`;
+  const loading = charge?.cle !== cle;
+  const partenaires = charge?.items ?? [];
 
-  async function fetchRecommandations() {
-    setLoadingReco(true);
-    try {
-      const res = await fetch(`${API_BASE}/api/forge/matchmaking/suggestions?limit=6`, { credentials: 'include' });
-      if (res.ok) {
+  useEffect(() => {
+    let actif = true;
+    (async () => {
+      let items: PartnerSubmission[] = [];
+      try {
+        const params = new URLSearchParams({ page: String(page) });
+        if (nicheFilter) params.append('niche', nicheFilter);
+        const res = await fetch(`${API_BASE}/api/forge/submissions/annuaire?${params}`);
         const data = await res.json();
-        setRecommandations(data.suggestions ?? []);
-      }
-    } catch { setRecommandations([]); }
-    finally { setLoadingReco(false); }
-  }
+        items = data.annuaire ?? [];
+      } catch { /* API unreachable: empty directory */ }
+      if (actif) setCharge({ cle: `${page}|${nicheFilter}`, items });
+    })();
+    return () => { actif = false; };
+  }, [nicheFilter, page]);
 
-  async function fetchPartenaires() {
-    setLoading(true);
-    try {
-      const params = new URLSearchParams({ page: String(page) });
-      if (nicheFilter) params.append('niche', nicheFilter);
-      const res = await fetch(`${API_BASE}/api/forge/submissions/annuaire?${params}`);
-      const data = await res.json();
-      setPartenaires(data.annuaire ?? []);
-    } catch { setPartenaires([]); }
-    finally { setLoading(false); }
-  }
+  useEffect(() => {
+    let actif = true;
+    (async () => {
+      try {
+        const res = await fetch(`${API_BASE}/api/forge/matchmaking/suggestions?limit=6`, { credentials: 'include' });
+        if (res.ok && actif) {
+          const data = await res.json();
+          if (actif) setRecommandations(data.suggestions ?? []);
+        }
+      } catch { /* API unreachable: no recommendation */ }
+      finally { if (actif) setLoadingReco(false); }
+    })();
+    return () => { actif = false; };
+  }, []);
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', overflowY: 'auto' }}>
@@ -78,7 +87,7 @@ export default function ForgePartners() {
               <div style={{ color: 'var(--muted)', fontSize: 13, padding: '20px 0' }}>Calculating best matches...</div>
             ) : (
               <div style={{ display: 'grid', gap: 8, gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' }}>
-                {recommandations.map((r: any) => (
+                {recommandations.map((r) => (
                   <div key={r.user_id} className="nx-card" style={{ padding: 14 }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
@@ -121,7 +130,7 @@ export default function ForgePartners() {
           </div>
         ) : (
           <div style={{ display: 'grid', gap: 10 }}>
-            {partenaires.map((p: any) => (
+            {partenaires.map((p) => (
               <div key={p.id} className="nx-card" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
                 <div style={{ flex: 1, minWidth: 200 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8, flexWrap: 'wrap' }}>

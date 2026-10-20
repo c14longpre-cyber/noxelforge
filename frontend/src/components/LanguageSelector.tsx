@@ -1,6 +1,6 @@
 // NOXEL SEO — LanguageSelector
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { LANGUAGES_115, FULLY_TRANSLATED } from "../i18n/languages";
 import worldSvg from "../../public/world-map.svg?raw";
@@ -143,11 +143,11 @@ export default function LanguageSelector({ locale, onChange }: Props) {
     return raw.trim().toLowerCase() || null;
   };
 
-  const clearClass = (className: string) => {
+  const clearClass = useCallback((className: string) => {
     svgRef.current?.querySelectorAll<SVGElement>("." + className).forEach((n) => n.classList.remove(className));
-  };
+  }, []);
 
-  const applyClassById = (id: string | null, className: string, clearFirst = true) => {
+  const applyClassById = useCallback((id: string | null, className: string, clearFirst = true) => {
     const svg = svgRef.current;
     if (!svg) return;
     if (clearFirst) clearClass(className);
@@ -160,9 +160,9 @@ export default function LanguageSelector({ locale, onChange }: Props) {
       el.querySelectorAll<SVGElement>("path").forEach((p) => targets.push(p));
     });
     targets.forEach((n) => n.classList.add(className));
-  };
+  }, [clearClass]);
 
-  useEffect(() => { applyClassById(hoveredId, "is-hovered"); }, [hoveredId]);
+  useEffect(() => { applyClassById(hoveredId, "is-hovered"); }, [hoveredId, applyClassById]);
 
   useEffect(() => {
     const svg = svgRef.current;
@@ -170,7 +170,7 @@ export default function LanguageSelector({ locale, onChange }: Props) {
     clearClass("is-selected");
     const countries = LANG_TO_COUNTRIES[locale] ?? [];
     countries.forEach((countryId) => { applyClassById(countryId, "is-selected", false); });
-  }, [locale, viewMode, menuOpen]);
+  }, [locale, viewMode, menuOpen, clearClass, applyClassById]);
 
   const onPointerMove = (e: React.PointerEvent) => {
     const id = resolveDataId(e.target);
@@ -197,23 +197,36 @@ export default function LanguageSelector({ locale, onChange }: Props) {
     const langs = COUNTRY_LANGS[id];
     const next = langs.find((l) => l !== locale) ?? langs[0];
     onChange(next);
-    setMenuOpen(false);
+    fermerMenu();
   };
 
-  const updatePosition = () => {
+  const updatePosition = useCallback(() => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     setPanelPos({ top: rect.bottom + 8, right: Math.max(8, window.innerWidth - rect.right) });
+  }, []);
+
+  // Closing resets the search, "show all" and hover here, not in an effect after the fact
+  const fermerMenu = useCallback(() => {
+    setMenuOpen(false);
+    setQuery("");
+    setShowAll(false);
+    setHoveredId(null);
+  }, []);
+
+  const basculerMenu = () => {
+    if (menuOpen) { fermerMenu(); return; }
+    updatePosition();
+    setMenuOpen(true);
   };
 
   useEffect(() => {
-    if (!menuOpen) { setQuery(""); setShowAll(false); setHoveredId(null); return; }
-    updatePosition();
+    if (!menuOpen) return;
     const timer = setTimeout(() => { if (viewMode === "list") searchRef.current?.focus(); }, 50);
     const onDown = (e: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) setMenuOpen(false);
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) fermerMenu();
     };
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setMenuOpen(false); };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") fermerMenu(); };
     const onScroll = () => updatePosition();
     document.addEventListener("click", onDown);
     document.addEventListener("keydown", onKey);
@@ -226,7 +239,7 @@ export default function LanguageSelector({ locale, onChange }: Props) {
       window.removeEventListener("scroll", onScroll, true);
       window.removeEventListener("resize", onScroll);
     };
-  }, [menuOpen, viewMode]);
+  }, [menuOpen, viewMode, fermerMenu, updatePosition]);
 
   const translatedLanguages = useMemo(() => LANGUAGES_115.filter((l) => FULLY_TRANSLATED.has(l.code)), []);
   const sourceList = showAll ? LANGUAGES_115 : translatedLanguages;
@@ -240,7 +253,7 @@ export default function LanguageSelector({ locale, onChange }: Props) {
     );
   }, [query, sourceList]);
 
-  const handleSelect = (code: string) => { onChange(code); setMenuOpen(false); };
+  const handleSelect = (code: string) => { onChange(code); fermerMenu(); };
 
   const hovLangs = hoveredId ? COUNTRY_LANGS[hoveredId] ?? [] : [];
   const countryName = hoveredId ? COUNTRY_NAMES[hoveredId] ?? hoveredId.toUpperCase() : null;
@@ -250,7 +263,7 @@ export default function LanguageSelector({ locale, onChange }: Props) {
     <div ref={containerRef} style={{ position: "relative" }}>
       <button
         type="button"
-        onClick={() => setMenuOpen((v) => !v)}
+        onClick={basculerMenu}
         aria-haspopup="listbox"
         aria-expanded={menuOpen}
         style={{

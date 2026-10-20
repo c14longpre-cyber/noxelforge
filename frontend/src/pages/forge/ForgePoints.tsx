@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HudButton } from '../../components/hud/HudButton';
+import type { ForgePoints, PointsHistoryEntry } from '../../types/forge';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
@@ -20,21 +21,22 @@ const EARN_RULES = [
 ];
 
 export default function ForgePoints() {
-  const [points, setPoints] = useState<any>(null);
+  const [points, setPoints] = useState<ForgePoints | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => { fetchPoints(); }, []);
+  useEffect(() => {
+    let actif = true;
+    (async () => {
+      try {
+        const res = await fetch(`${API_BASE}/api/forge/members/status`, { credentials: 'include' });
+        if (res.ok) { const data = await res.json(); if (actif) setPoints(data.points); }
+      } catch { /* API unreachable: the page shows its empty state */ }
+      finally { if (actif) setLoading(false); }
+    })();
+    return () => { actif = false; };
+  }, []);
 
-  async function fetchPoints() {
-    setLoading(true);
-    try {
-      const res = await fetch(`${API_BASE}/api/forge/members/status`, { credentials: 'include' });
-      if (res.ok) { const data = await res.json(); setPoints(data.points); }
-    } catch {}
-    finally { setLoading(false); }
-  }
-
-  const historique: any[] = points?.historique ?? [];
+  const historique: PointsHistoryEntry[] = points?.historique ?? [];
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', overflowY: 'auto' }}>
@@ -111,7 +113,7 @@ export default function ForgePoints() {
                 </div>
               ) : (
                 <div style={{ display: 'grid', gap: 6 }}>
-                  {[...historique].reverse().map((t: any, i: number) => (
+                  {[...historique].reverse().map((t, i: number) => (
                     <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '9px 12px', background: 'var(--surface)', borderRadius: 8, border: '1px solid var(--border)' }}>
                       <div>
                         <div style={{ fontSize: 13, color: 'var(--text)' }}>{t.description}</div>
