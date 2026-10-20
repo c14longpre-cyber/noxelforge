@@ -11,6 +11,16 @@ export interface AlfredInput { userId: string; urlSoumise: string; titre: string
 export interface AlfredResult { verdict: AlfredVerdict; score: number; raison: string; blacklister: boolean; details: Record<string, any>; }
 export interface UrlScanResult { accessible: boolean; hasBacklink: boolean; raison?: string; }
 
+// Non-blocking reminders: neither the badge nor the NOXEL SEO scan is required to submit (decision of 2026-10-20)
+export const RAPPEL_BADGE = 'Recommandé : installe le badge NOXEL sur ton site (non obligatoire pour soumettre).';
+export const RAPPEL_SCAN = 'Recommandé : lance un scan NOXEL SEO de ton site (non obligatoire pour soumettre).';
+export function rappelsMembre(m: { badge_installe?: boolean | null; scan_complete?: boolean | null }): string[] {
+  const out: string[] = [];
+  if (!m.badge_installe) out.push(RAPPEL_BADGE);
+  if (!m.scan_complete) out.push(RAPPEL_SCAN);
+  return out;
+}
+
 export function determinerFlux(input: { ageCompteDays: number; scanComplete: boolean; badgeInstalle: boolean; tierAbonnement: string; }): 'alfred' | 'bloque' {
   if (input.tierAbonnement === 'bronze') return 'bloque';
   return 'alfred';

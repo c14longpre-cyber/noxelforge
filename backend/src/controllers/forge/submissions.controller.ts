@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { runSpamGate } from '../../services/forge/spamGate.service';
-import { traiterSoumission, determinerFlux } from '../../services/forge/alfred.forge.service';
+import { traiterSoumission, determinerFlux, rappelsMembre } from '../../services/forge/alfred.forge.service';
 import { getTrustScore } from '../../services/forge/trustScore.service';
 import { getSupabase } from '../../lib/supabaseClient';
 import { must } from '../../lib/supabaseCheck';
@@ -22,7 +22,7 @@ export async function creerSoumission(req: Request, res: Response): Promise<void
   if (insertError || !soumission) { console.error('[creerSoumission] Supabase insert error:', insertError); res.status(500).json({ error: 'Erreur création soumission.' }); return; }
   console.log(`[creerSoumission] Lancement traiterSoumission pour ${soumission.id}`);
   traiterSoumission(soumission.id, { userId, urlSoumise: url_soumise, titre, description, contenu, niche, trustScore: trustScoreData?.score ?? 0, tierForge: membre.tier_abonnement, ageCompteDays, scanComplete: membre.scan_complete, badgeInstalle: membre.badge_installe }).catch((e) => console.error('[creerSoumission] traiterSoumission a rejete:', e));
-  res.status(201).json({ ok: true, soumission_id: soumission.id, flux, message: 'Soumission reçue — Alfred analyse ton contenu.' });
+  res.status(201).json({ ok: true, soumission_id: soumission.id, flux, message: 'Soumission reçue — Alfred analyse ton contenu.', rappels: rappelsMembre(membre) });
 }
 export async function getMesSoumissions(req: Request, res: Response): Promise<void> {
   const supabase = getSupabase();

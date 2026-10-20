@@ -211,3 +211,22 @@ test("submission: Alfred receives the account age computed from date_inscription
   assert.equal(alfredInputs.length, 1);
   assert.equal(alfredInputs[0].ageCompteDays, 3);
 });
+
+test("reminders: badge and NOXEL SEO scan are recommended, never required to submit", async () => {
+  reset();
+  tables.forge_members = [{ user_id: "u-ok", tier_abonnement: "silver", scan_complete: false, badge_installe: false, statut: "actif", date_inscription: daysAgo(1) }];
+  const status = await call("GET", "/api/forge/members/status", undefined, "u-ok");
+  assert.equal(status.body.rappels.length, 2);
+  assert.deepEqual(status.body.etapes_manquantes, []);
+  const r = await call("POST", "/api/forge/submissions", { url_soumise: "https://exemple.ca/article", titre: "Guide plein air" }, "u-ok");
+  assert.equal(r.status, 201);
+  assert.match(r.body.rappels[0], /badge NOXEL.*non obligatoire/);
+  assert.match(r.body.rappels[1], /scan NOXEL SEO.*non obligatoire/);
+});
+
+test("reminders: none once the badge is installed and the scan is done", async () => {
+  reset();
+  tables.forge_members = [{ user_id: "u-ok", tier_abonnement: "silver", scan_complete: true, badge_installe: true, statut: "actif", date_inscription: daysAgo(1) }];
+  const status = await call("GET", "/api/forge/members/status", undefined, "u-ok");
+  assert.deepEqual(status.body.rappels, []);
+});

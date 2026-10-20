@@ -10,10 +10,10 @@ export type ResultatFetch =
   | { ok: false; status?: number; raison: string };
 
 export async function recupererTexte(
-  url: string, fetchImpl: FetchFn = fetch, headers: Record<string, string> = {},
+  url: string, fetchImpl: FetchFn = fetch, headers: Record<string, string> = {}, delaiMs: number = DELAI_MS,
 ): Promise<ResultatFetch> {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), DELAI_MS);
+  const timer = setTimeout(() => controller.abort(), delaiMs);
   try {
     const res = await fetchImpl(url, { signal: controller.signal, redirect: 'follow', headers: { 'User-Agent': USER_AGENT, ...headers } });
     if (!res.ok) return { ok: false, status: res.status, raison: `HTTP ${res.status}` };
@@ -22,7 +22,7 @@ export async function recupererTexte(
     const texte = (await res.text()).slice(0, TAILLE_MAX);
     return { ok: true, status: res.status, texte };
   } catch (err: any) {
-    return { ok: false, raison: err?.name === 'AbortError' ? `Délai dépassé (${DELAI_MS / 1000} s)` : `Inaccessible (${err?.message ?? err})` };
+    return { ok: false, raison: err?.name === 'AbortError' ? `Délai dépassé (${delaiMs / 1000} s)` : `Inaccessible (${err?.message ?? err})` };
   } finally {
     clearTimeout(timer);
   }

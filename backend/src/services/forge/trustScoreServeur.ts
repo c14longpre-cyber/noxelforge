@@ -1,5 +1,5 @@
 // Server-side Trust Score: every signal comes from a server source, never from the member.
-//   technique  -> NOXEL SEO full-scan (not wired yet: counts 0 with a reason)
+//   technique  -> NOXEL SEO full-scan (scores.tech, dated by the scan)
 //   anciennete -> RDAP                 frequence -> sitemap.xml, else RSS/Atom
 //   contenu    -> Alfred               autorite, spam -> admin entry (FORGE_ADMIN_EMAILS)
 // Collected values are cached 30 days; a failed source is retried on the next computation.
@@ -11,11 +11,11 @@ import { normaliserDomaine } from './trustScorePublic';
 import { collecterAgeDomaine } from './signals/rdap';
 import { collecterFrequence } from './signals/frequence';
 import { collecterContenu, EvaluateurContenu } from './signals/contenu';
+import { collecterTechniqueNse } from './signals/nse';
 import type { FetchFn, NomSignal, SignalCollecte, SourcesSignaux } from './signals/types';
 
 export const CACHE_JOURS = 30;
 const JOUR_MS = 24 * 60 * 60 * 1000;
-export const RAISON_NSE_NON_BRANCHE = 'Source NOXEL SEO pas encore branchée';
 export const RAISON_SITE_INVALIDE = 'URL du site invalide ou absente';
 
 export type StatutScore = 'en_attente' | 'calcule';
@@ -79,7 +79,9 @@ async function sauvegarder(userId: string, r: ResultatServeur, now: Date): Promi
     signal_contenu: r.points.contenu, signal_anciennete: r.points.anciennete, signal_frequence: r.points.frequence,
     signaux_sources: r.sources, details: { calcul: 'serveur' }, calcule_at: now.toISOString(),
   }, { onConflict: 'user_id' }), 'forge_trust_scores upsert');
-  must(await supabase.from('forge_members').update({ updated_at: now.toISOString() }).eq('user_id', userId), 'forge_members update');
+  // A usable NOXEL SEO scan marks the scan as done (it drives the non-blocking reminder)
+  const scanFait = r.sources.technique?.source === 'nse' && r.sources.technique.valeur !== null;
+  must(await supabase.from('forge_members').update({ updated_at: now.toISOString(), ...(scanFait ? { scan_complete: true } : {}) }).eq('user_id', userId), 'forge_members update');
 }
 
 // Collects what is missing or older than 30 days, computes, stores. Returns null if the member does not exist.
@@ -100,7 +102,7 @@ export async function recalculerTrustScoreServeur(userId: string, deps: DepsServ
   };
 
   const sources: SourcesSignaux = {
-    technique: encoreValide(precedentes.technique, now) ? precedentes.technique : echec('nse', RAISON_NSE_NON_BRANCHE),
+    technique: await collecter('technique', 'nse', (d) => collecterTechniqueNse(d, opts)),
     anciennete: await collecter('anciennete', 'rdap', (d) => collecterAgeDomaine(d, opts)),
     frequence: await collecter('frequence', 'sitemap', (d) => collecterFrequence(d, opts)),
     contenu: await collecter('contenu', 'alfred', (d) => collecterContenu(d, { ...opts, ...(deps.evaluerContenu ? { evaluer: deps.evaluerContenu } : {}) })),

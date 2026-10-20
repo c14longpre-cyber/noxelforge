@@ -98,7 +98,7 @@ export default function ForgeDashboard() {
     </div>
   );
 
-  const { trust_score, points, badge, flux_actuel, etapes_manquantes } = statut;
+  const { trust_score, points, badge, flux_actuel, etapes_manquantes, rappels } = statut;
   const tier = trust_score?.tier_forge ?? 'bronze';
   const awaitingVerification = trustScoreAwaitingVerification(trust_score);
   const showScore = TRUST_SCORE_SERVER_COMPUTED && !awaitingVerification;
@@ -136,6 +136,13 @@ export default function ForgeDashboard() {
           <div className="nx-card" style={{ marginBottom: 24, borderColor: 'rgba(255,183,77,0.3)', background: 'rgba(255,183,77,0.06)' }}>
             <div style={{ fontWeight: 800, marginBottom: 10, color: 'var(--warn)', fontSize: 13 }}>⚠️ Actions required to unlock submission</div>
             {etapes_manquantes.map((e: string) => <div key={e} style={{ color: 'var(--muted)', fontSize: 13, marginBottom: 4 }}>→ {e}</div>)}
+          </div>
+        )}
+
+        {rappels?.length > 0 && (
+          <div className="nx-card" style={{ marginBottom: 24 }}>
+            <div style={{ fontWeight: 800, marginBottom: 10, color: 'var(--muted)', fontSize: 13 }}>💡 Recommended (not required to submit)</div>
+            {rappels.map((r: string) => <div key={r} style={{ color: 'var(--muted)', fontSize: 13, marginBottom: 4 }}>→ {r}</div>)}
           </div>
         )}
 
