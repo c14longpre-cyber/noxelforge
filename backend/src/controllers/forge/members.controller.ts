@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import * as trustScoreServeur from '../../services/forge/trustScoreServeur';
+import { estAdmin } from '../../middleware/requireAdmin';
 import { reactiverMembre, verifierBadgeSurSite } from '../../services/forge/badgeChecker.service';
 import { determinerFlux } from '../../services/forge/alfred.forge.service';
 import { getSupabase } from '../../lib/supabaseClient';
@@ -37,7 +38,7 @@ export async function getMonStatut(req: Request, res: Response): Promise<void> {
   const flux = determinerFlux({ ageCompteDays, scanComplete: membre.scan_complete, badgeInstalle: membre.badge_installe, tierAbonnement: membre.tier_abonnement });
   // determinerFlux only blocks the free tier: list the step actually enforced, not scan/badge/age
   const etapesManquantes = ['Passe à Silver ou plus pour soumettre du contenu'];
-  res.json({ membre, trust_score: t.data ?? null, points: p.data ?? { solde: 0 }, badge: b.data ?? null, flux_actuel: flux, age_compte_days: ageCompteDays, etapes_manquantes: flux === 'bloque' ? etapesManquantes : [] });
+  res.json({ membre, est_admin: estAdmin((req as any).user?.email), trust_score: t.data ?? null, points: p.data ?? { solde: 0 }, badge: b.data ?? null, flux_actuel: flux, age_compte_days: ageCompteDays, etapes_manquantes: flux === 'bloque' ? etapesManquantes : [] });
 }
 export async function verifierMonBadge(req: Request, res: Response): Promise<void> {
   const supabase = getSupabase();

@@ -150,3 +150,42 @@ export async function enregistrerSaisieAdmin(
   must(await getSupabase().from('forge_trust_scores').upsert({ user_id: userId, signaux_sources: sources }, { onConflict: 'user_id' }), 'forge_trust_scores upsert');
   return recalculerTrustScoreServeur(userId, { ...deps, now: () => now });
 }
+
+// Admin list: every member with the state of their Trust Score, scores waiting for verification first
+export interface MembreAdmin {
+  user_id: string;
+  email: string | null;
+  url_site: string | null;
+  niche: string | null;
+  statut_membre: string | null;
+  tier_abonnement: string | null;
+  statut_score: StatutScore | null; // null: never computed
+  score: number | null;
+  tier_forge: string | null;
+  calcule_at: string | null;
+  sources: SourcesSignaux;
+}
+
+export async function listerMembresAdmin(): Promise<MembreAdmin[]> {
+  const supabase = getSupabase();
+  const membres = must(await supabase.from('forge_members')
+    .select('user_id,url_site,niche,statut,tier_abonnement').limit(1000), 'forge_members select') ?? [];
+  if (!membres.length) return [];
+  const ids = membres.map((m: any) => m.user_id);
+  const scores = must(await supabase.from('forge_trust_scores')
+    .select('user_id,statut,score,tier_forge,calcule_at,signaux_sources').in('user_id', ids), 'forge_trust_scores select') ?? [];
+  const users = must(await supabase.from('users').select('id,email').in('id', ids), 'users select') ?? [];
+  const scoreDe = new Map(scores.map((s: any) => [s.user_id, s]));
+  const emailDe = new Map(users.map((u: any) => [u.id, u.email]));
+  const rang = (s: StatutScore | null) => (s === 'en_attente' ? 0 : s === null ? 1 : 2);
+  return membres.map((m: any): MembreAdmin => {
+    const s: any = scoreDe.get(m.user_id);
+    return {
+      user_id: m.user_id, email: emailDe.get(m.user_id) ?? null, url_site: m.url_site ?? null, niche: m.niche ?? null,
+      statut_membre: m.statut ?? null, tier_abonnement: m.tier_abonnement ?? null,
+      statut_score: s?.statut ?? null, score: typeof s?.score === 'number' ? s.score : null,
+      tier_forge: s?.tier_forge ?? null, calcule_at: s?.calcule_at ?? null,
+      sources: s?.signaux_sources && typeof s.signaux_sources === 'object' ? s.signaux_sources : {},
+    };
+  }).sort((a, b) => rang(a.statut_score) - rang(b.statut_score) || String(a.url_site).localeCompare(String(b.url_site)));
+}

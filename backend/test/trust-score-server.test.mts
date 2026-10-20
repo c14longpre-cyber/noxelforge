@@ -26,9 +26,10 @@ function fakeSupabase() {
   return {
     from(table: string) {
       const filters: [string, unknown][] = [];
+      const inFilters: [string, unknown[]][] = [];
       let op = "select";
       let payload: Row | null = null;
-      const match = (r: Row) => filters.every(([c, v]) => r[c] === v);
+      const match = (r: Row) => filters.every(([c, v]) => r[c] === v) && inFilters.every(([c, vs]) => vs.includes(r[c]));
       const run = () => {
         const rows = (tables[table] ??= []);
         if (op === "upsert") {
@@ -48,6 +49,8 @@ function fakeSupabase() {
       const q: any = {
         select: () => q,
         eq: (c: string, v: unknown) => { filters.push([c, v]); return q; },
+        in: (c: string, vs: unknown[]) => { inFilters.push([c, vs]); return q; },
+        limit: () => q,
         upsert: (row: Row) => { op = "upsert"; payload = row; return q; },
         update: (row: Row) => { op = "update"; payload = row; return q; },
         single: () => Promise.resolve(one()),
@@ -244,6 +247,40 @@ test("recalculate route: at most one member recomputation every 10 minutes (429)
     assert.equal(r.status, 429);
     assert.match(r.body.error, /Réessaie dans 6 min/);
     assert.deepEqual(recalcArgs, []);
+  } finally {
+    serveur.recalculerTrustScoreServeur = origRecalc;
+  }
+});
+
+test("admin list: 403 for a member; for an admin, every member with e-mail, pending scores first", async () => {
+  reset({
+    forge_members: [
+      { user_id: "u-membre", url_site: "https://www.exemple.ca/", statut: "actif", tier_abonnement: "silver" },
+      { user_id: "u-ok", url_site: "https://ok.ca", statut: "actif", tier_abonnement: "gold" },
+      { user_id: "u-new", url_site: "https://new.ca", statut: "actif", tier_abonnement: "bronze" },
+    ],
+    forge_trust_scores: [
+      { user_id: "u-ok", statut: "calcule", score: 61, tier_forge: "gold", calcule_at: daysAgo(1), signaux_sources: { autorite: { valeur: 40, source: "admin", collecte_at: daysAgo(1), saisi_par: "admin@noxel.test" } } },
+      { user_id: "u-membre", statut: "en_attente", score: null, tier_forge: null, calcule_at: daysAgo(2), signaux_sources: {} },
+    ],
+  });
+  assert.equal((await call("GET", "/api/forge/admin/trust-scores", undefined, "u-membre")).status, 403);
+  const r = await call("GET", "/api/forge/admin/trust-scores", undefined, "u-admin");
+  assert.equal(r.status, 200);
+  assert.deepEqual(r.body.membres.map((m: any) => [m.user_id, m.statut_score]), [["u-membre", "en_attente"], ["u-new", null], ["u-ok", "calcule"]]);
+  assert.equal(r.body.membres[0].email, "membre@test");
+  assert.equal(r.body.membres[2].sources.autorite.saisi_par, "admin@noxel.test");
+});
+
+test("admin recalculate: no 10-minute cooldown, member-only route still has it", async () => {
+  reset({ forge_trust_scores: [{ user_id: "u-membre", calcule_at: new Date().toISOString() }] });
+  recalcArgs = [];
+  serveur.recalculerTrustScoreServeur = async (...args: any[]) => { recalcArgs.push(args); return { statut: "en_attente", score: null }; };
+  try {
+    assert.equal((await call("POST", "/api/forge/admin/trust-score/u-membre/recalculate", {}, "u-membre")).status, 403);
+    const r = await call("POST", "/api/forge/admin/trust-score/u-membre/recalculate", {}, "u-admin");
+    assert.equal(r.status, 200);
+    assert.deepEqual(recalcArgs, [["u-membre"]]);
   } finally {
     serveur.recalculerTrustScoreServeur = origRecalc;
   }
