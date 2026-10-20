@@ -19,6 +19,7 @@ import {
   getAnnuaire,
 } from '../../controllers/forge/submissions.controller';
 import { getSuggestions } from '../../controllers/forge/matchmaking.controller';
+import { listerEchanges, proposer, accepter, refuser, declarer } from '../../controllers/forge/exchanges.controller';
 
 const router = Router();
 
@@ -58,6 +59,16 @@ router.post('/admin/trust-score/:userId/recalculate', requireAuth, requireAdmin,
 
 // Suggestions de partenaires (scoring pondéré niche + trust score + activité)
 router.get('/matchmaking/suggestions', requireAuth, getSuggestions);
+
+// ============================================================
+// ÉCHANGES DE BACKLINKS (propose -> accepte -> publie -> verifie)
+// ============================================================
+
+router.get('/exchanges', requireAuth, listerEchanges);
+router.post('/exchanges', requireAuth, proposer);
+router.post('/exchanges/:id/accepter', requireAuth, accepter);
+router.post('/exchanges/:id/refuser', requireAuth, refuser);
+router.post('/exchanges/:id/lien', requireAuth, declarer);
 
 // ============================================================
 // SOUMISSIONS
