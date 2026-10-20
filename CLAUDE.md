@@ -55,7 +55,7 @@ noxelforge/
 - **Badge lifecycle**: 
   1. User registers/verifies domain → badge.routes issues provisional badge
   2. Cron job (daily 9AM Toronto; full check on the 1st/15th, grace members every day) triggers badgeChecker → Alfred review → Trust Score update
-  3. 7-day grace period after Alfred approval before public publication
+  3. Badge states (`forge_badges.statut`): non_verifie → verifie → grace (7 days, badge missing) → suspendu; back to verifie as soon as the badge is detected again. There is no separate "published" state: a member is public (directory, `/api/trust-score`) while the badge is `verifie`
 - **Anti-spoofing**: Domain ownership verification required before badge issuance
 - **Badge cron**: forgeBadgeCron.ts runs daily (full check on the 1st/15th, grace members the other days); failure = alert user, no auto-retry
 - **Badge revocation**: Blacklist system for spam/abuse (via spamGate.service.ts)

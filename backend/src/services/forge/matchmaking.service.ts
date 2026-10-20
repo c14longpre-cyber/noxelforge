@@ -45,8 +45,8 @@ function scoreTierProximity(tierA: string, tierB: string): { pts: number; label:
   const iB = TIER_ORDER.indexOf(tierB);
   if (iA < 0 || iB < 0) return { pts: 0, label: '' };
   const distance = Math.abs(iA - iB);
-  if (distance === 0) return { pts: 30, label: 'Trust Score équivalent' };
-  if (distance === 1) return { pts: 18, label: 'Trust Score proche' };
+  if (distance === 0) return { pts: 30, label: 'Même palier d’abonnement' };
+  if (distance === 1) return { pts: 18, label: 'Palier d’abonnement proche' };
   if (distance === 2) return { pts: 8, label: '' };
   return { pts: 0, label: '' };
 }

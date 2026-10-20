@@ -179,6 +179,15 @@ test("status: age_compte_days is computed from date_inscription", async () => {
   const r = await call("GET", "/api/forge/members/status", undefined, "u-ok");
   assert.equal(r.status, 200);
   assert.equal(r.body.age_compte_days, 20);
+  assert.deepEqual(r.body.etapes_manquantes, []);
+});
+
+test("status: a Bronze member is told the one step actually enforced (upgrade), not scan/badge/age", async () => {
+  reset();
+  tables.forge_members = [{ user_id: "u-ok", tier_abonnement: "bronze", scan_complete: false, badge_installe: false, statut: "actif", date_inscription: daysAgo(2) }];
+  const r = await call("GET", "/api/forge/members/status", undefined, "u-ok");
+  assert.equal(r.body.flux_actuel, "bloque");
+  assert.deepEqual(r.body.etapes_manquantes, ["Passe à Silver ou plus pour soumettre du contenu"]);
 });
 
 test("submission: Alfred receives the account age computed from date_inscription", async () => {

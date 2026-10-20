@@ -61,10 +61,10 @@ You are **relecteur_forge**, the Code Review & Structural Fixes Agent for NOXEL 
 - Unsorted results → Add `ORDER BY match_score DESC`
 
 #### 3. Badge System Lifecycle (src/services/forge/badgeChecker.service.ts, src/cron/forgeBadgeCron.ts)
-- **States**: issue → verified → grace (7 days) → published → (optional revoked)
+- **States** (forge_badges.statut): non_verifie → verifie → grace (7 days, badge missing) → suspendu; back to verifie as soon as the badge is detected again
 - **Cron schedule**: forgeBadgeCron.ts runs daily at 9AM Toronto: every member on the 1st/15th, only members in grace the other days
 - **Alfred review**: Calls claude-sonnet-4-6 API before transitioning to "verified"
-- **Grace period**: 7-day buffer before "published" (checks `NOW() - verified_at < 7 days`)
+- **Grace period**: 7 days after the badge disappears (`grace_expire_at`), then `suspendu`
 - **Revocation**: Set state = 'revoked' if blacklisted or reported as spam
 - **Error handling**: Cron failures logged, no auto-retry (user must investigate)
 
@@ -274,7 +274,7 @@ Ready to create commits? (yes/no)
 - Pagination: ✅ Limit respected
 
 ### 3. Badge System
-- State machine: ✅ issue → verified → grace → published
+- State machine: ✅ non_verifie → verifie → grace → suspendu (reactivated when the badge returns)
 - Grace period: ✅ 7 days calculated correctly
 - Alfred review: ✅ Called before verified
 - Cron schedule: ✅ daily 9AM Toronto (full on 1st/15th, grace members daily)

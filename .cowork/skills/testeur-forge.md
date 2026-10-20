@@ -32,7 +32,7 @@ When invoked on mobile or with time constraints, execute a **focused audit** of 
    - Report: Missing tiers, price/score misalignment, Stripe gaps
 
 3. **Badge System Lifecycle** (2 min)
-   - Verify badge states: issue → verified → grace period (7 days) → published
+   - Verify badge states: non_verifie → verifie → grace (7 days, badge missing) → suspendu; back to verifie as soon as the badge is detected again
    - Check cron job runs daily (forgeBadgeCron.ts)
    - Validate Alfred review step (AI Safety)
    - Report: Missing states, cron failures, Alfred bypass
@@ -49,7 +49,7 @@ When invoked on mobile or with time constraints, execute a **focused audit** of 
    ```
    ✅ Trust Score: 6-signal weights correct
    ✅ Tier Alignment: 5 tiers, prices match
-   ✅ Badge Lifecycle: issue → verified → grace → published
+   ✅ Badge Lifecycle: non_verifie → verifie → grace (7d) → suspendu
    ⚠️ Rate Limits: Bronze users still can submit — CRITICAL
    ```
 
@@ -83,13 +83,13 @@ When time allows, run comprehensive validation:
    - Issue badge: `badge.state = 'issue'`
    - Verify badge (Alfred review): `state = 'verified'` or rejected
    - Grace period (7 days): Checks if `NOW() - verified_at < 7 days`
-   - Publish badge: `state = 'published'` after grace
+   - Suspend: `statut = 'suspendu'` when the 7-day grace expires without the badge
    - Revoke badge: Set `state = 'revoked'` if member violates terms
    - Report: State transitions that fail, grace period miscalculation, revocation logic
 
 5. **Cron Job: Badge Checker** (5 min)
    - Verify forgeBadgeCron.ts runs daily at 9AM Toronto (all members on the 1st/15th, members in grace the other days)
-   - Check transitions: issue→verified (if Alfred approves), verified→published (if grace expired)
+   - Check transitions: verifie→grace (badge missing), grace→suspendu (grace expired), suspendu→verifie (badge back)
    - Validate error handling: Logs failures without crashing
    - Test 24-hour backlog (badges issued yesterday should publish today)
    - Report: Cron failures, state stuck in grace, error logging issues
@@ -140,7 +140,7 @@ When time allows, run comprehensive validation:
 
 ✅ Trust Score: 6-signal weights correct (Tech 25, Auth 25, Spam 20, Content 15, Age 10, Freq 5)
 ✅ Tier Alignment: Bronze $0, Silver $20, Gold $40, Platinum $60, Diamond $80
-✅ Badge Lifecycle: issue → verified → grace (7d) → published
+✅ Badge Lifecycle: non_verifie → verifie → grace (7d) → suspendu
 ❌ Rate Limits: NOT ENFORCED — Bronze users CAN submit (should be blocked)
 ⚠️ Stripe Webhook: subscription.updated handler MISSING
 
@@ -181,14 +181,14 @@ When time allows, run comprehensive validation:
 - Test run (5 niches): All filters pass ✓
 
 ### 4. Badge Lifecycle
-- States: issue → verified → grace → published ✓
+- States: non_verifie → verifie → grace → suspendu ✓
 - Grace period: 7 days ✓
-- Revocation: Possible after published ✓
+- Revocation: blacklist (spamGate) ✓
 - State transitions: All valid ✓
 
 ### 5. Badge Cron (forgeBadgeCron.ts)
 - Schedule: daily 9AM Toronto (full on 1st/15th, grace members daily) ✓
-- Transitions: verified→published after 7d ✓
+- Transitions: grace→suspendu after 7d ✓
 - Error handling: Logged without crash ✓
 - Backlog: 24-hour queue processes ✓
 
