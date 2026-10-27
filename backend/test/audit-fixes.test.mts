@@ -10,7 +10,7 @@ process.env.ANTHROPIC_API_KEY ??= "test";
 const require = createRequire(import.meta.url);
 const supabaseClient = require("../dist/lib/supabaseClient.js");
 const { calculerTrustScore } = require("../dist/services/forge/trustScore.service.js");
-const { traiterVerificationBadge } = require("../dist/services/forge/badgeChecker.service.js");
+const { traiterVerificationBadge, badgeDeps } = require("../dist/services/forge/badgeChecker.service.js");
 const spamGate = require("../dist/services/forge/spamGate.service.js");
 const alfred = require("../dist/services/forge/alfred.forge.service.js");
 const trustScore = require("../dist/services/forge/trustScore.service.js");
@@ -101,8 +101,8 @@ test("submission: a Silver member without a Trust Score is processed as Silver, 
 // ─── Badge check reactivates a suspended member ─────────────────────────────
 test("badge check: a suspended member whose badge is back becomes active again", async () => {
   reset({ forge_badges: [{ user_id: "u2", statut: "suspendu", tentatives_echec: 3 }] });
-  const origFetch = globalThis.fetch;
-  globalThis.fetch = (async () => new Response('<a href="https://noxelseo.com">NOXEL</a>', { status: 200 })) as any;
+  const origFetch = badgeDeps.fetch;
+  badgeDeps.fetch = (async () => new Response('<a href="https://noxelseo.com">NOXEL</a>', { status: 200 })) as any;
   try {
     const r = await traiterVerificationBadge("u2", "https://site.com");
     assert.equal(r.statut, "verifie");
@@ -110,19 +110,19 @@ test("badge check: a suspended member whose badge is back becomes active again",
     assert.ok(memberWrites.some((w) => w.row.statut === "actif"), "forge_members.statut set to actif");
     assert.ok(writes.some((w) => w.table === "forge_submissions" && w.row.backlink_noxel_actif === true), "approved backlinks re-enabled");
   } finally {
-    globalThis.fetch = origFetch;
+    badgeDeps.fetch = origFetch;
   }
 });
 
 test("badge check: an active member with the badge is not touched beyond the badge itself", async () => {
   reset({ forge_badges: [{ user_id: "u3", statut: "verifie", tentatives_echec: 0 }] });
-  const origFetch = globalThis.fetch;
-  globalThis.fetch = (async () => new Response('<a href="https://noxelseo.com">NOXEL</a>', { status: 200 })) as any;
+  const origFetch = badgeDeps.fetch;
+  badgeDeps.fetch = (async () => new Response('<a href="https://noxelseo.com">NOXEL</a>', { status: 200 })) as any;
   try {
     await traiterVerificationBadge("u3", "https://site.com");
     assert.ok(!writes.some((w) => w.row.statut === "actif"), "no reactivation write");
     assert.ok(!writes.some((w) => w.table === "forge_submissions"), "submissions untouched");
   } finally {
-    globalThis.fetch = origFetch;
+    badgeDeps.fetch = origFetch;
   }
 });

@@ -1,6 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { recupererTexte } from './http';
 import type { FetchFn, SignalCollecte } from './types';
+import { fetchSur } from '../../../lib/safeFetch';
 
 // Content quality of the member's home page, rated 0-100 by Alfred (same model as the submission review).
 export const MODELE_ALFRED = 'claude-sonnet-4-6';
@@ -51,7 +52,7 @@ export function evaluateurAlfred(client?: Anthropic): EvaluateurContenu {
 
 export async function collecterContenu(
   domaine: string,
-  { fetchImpl = fetch, evaluer = evaluateurAlfred(), now = () => new Date() }:
+  { fetchImpl = fetchSur, evaluer = evaluateurAlfred(), now = () => new Date() }:
     { fetchImpl?: FetchFn; evaluer?: EvaluateurContenu; now?: () => Date } = {},
 ): Promise<SignalCollecte> {
   const collecte_at = now().toISOString();

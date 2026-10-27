@@ -1,5 +1,6 @@
 import { recupererTexte } from './http';
 import type { FetchFn, SignalCollecte } from './types';
+import { fetchSur } from '../../../lib/safeFetch';
 
 // Publication frequency: dates found in sitemap.xml (<lastmod>), or else in an RSS/Atom feed.
 // Value: pages or posts dated in the last 90 days, per month.
@@ -44,7 +45,7 @@ export function publicationsParMois(liste: Date[], now: Date): number {
 }
 
 export async function collecterFrequence(
-  domaine: string, { fetchImpl = fetch, now = () => new Date() }: { fetchImpl?: FetchFn; now?: () => Date } = {},
+  domaine: string, { fetchImpl = fetchSur, now = () => new Date() }: { fetchImpl?: FetchFn; now?: () => Date } = {},
 ): Promise<SignalCollecte> {
   const maintenant = now();
   const collecte_at = maintenant.toISOString();

@@ -35,6 +35,8 @@ export function normaliserDomaine(input: unknown): string | null {
     return null;
   }
   host = host.replace(/\.$/, '').replace(/^www\./, '');
+  // A site is a domain name: IP addresses (10.0.0.1, 169.254.169.254…) are refused (last label all digits)
+  if (/\.\d+$/.test(host)) return null;
   return /^[a-z0-9-]+(\.[a-z0-9-]+)+$/.test(host) ? host : null;
 }
 

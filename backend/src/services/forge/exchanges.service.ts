@@ -9,6 +9,7 @@ import { must } from '../../lib/supabaseCheck';
 import { normaliserDomaine } from './trustScorePublic';
 import { recupererTexte } from './signals/http';
 import type { FetchFn } from './signals/types';
+import { fetchSur } from '../../lib/safeFetch';
 
 export type StatutEchange = 'propose' | 'accepte' | 'publie' | 'verifie' | 'refuse' | 'expire' | 'rompu';
 export const STATUTS_ACTIFS: StatutEchange[] = ['propose', 'accepte', 'publie', 'verifie'];
@@ -51,7 +52,7 @@ export function contientLienVers(html: string, domainePartenaire: string): boole
   return false;
 }
 
-export async function verifierLien(url: string, domainePartenaire: string, fetchImpl: FetchFn = fetch): Promise<{ present: boolean; raison?: string }> {
+export async function verifierLien(url: string, domainePartenaire: string, fetchImpl: FetchFn = fetchSur): Promise<{ present: boolean; raison?: string }> {
   const page = await recupererTexte(url, fetchImpl);
   if (!page.ok) return { present: false, raison: `Page ${page.raison}` };
   return contientLienVers(page.texte, domainePartenaire)

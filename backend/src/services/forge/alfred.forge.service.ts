@@ -2,6 +2,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import { ajouterBlacklist } from './spamGate.service';
 import { getSupabase } from '../../lib/supabaseClient';
 import { must } from '../../lib/supabaseCheck';
+import { safeFetch } from '../../lib/safeFetch';
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! });
 
@@ -30,7 +31,7 @@ async function scanUrl(url: string): Promise<UrlScanResult> {
   try {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 8000);
-    const res = await fetch(url, { method: 'GET', signal: controller.signal, headers: { 'User-Agent': 'NOXELForge-Bot/1.0' } });
+    const res = await safeFetch(url, { method: 'GET', signal: controller.signal, headers: { 'User-Agent': 'NOXELForge-Bot/1.0' } });
     clearTimeout(timeout);
     if (!res.ok) return { accessible: false, hasBacklink: false, raison: `URL inaccessible (HTTP ${res.status})` };
     const html = await res.text();
