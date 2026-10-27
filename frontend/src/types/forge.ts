@@ -37,6 +37,13 @@ export interface MemberStatus {
   age_compte_days: number;
   etapes_manquantes: string[];
   rappels?: string[];
+  domaine_verification?: {
+    domaine: string;
+    verifie: boolean;
+    verifie_at: string | null;
+    jeton: string;
+    instructions: { meta: string; fichier: { url: string; contenu: string }; dns: { nom: string; valeur: string } };
+  } | null;
 }
 
 export interface Soumission {

@@ -95,10 +95,10 @@ const score = (user_id: string, s: number) => ({
 });
 const db = fakeDb({
   forge_members: [
-    { user_id: "pub", url_site: "https://www.public.ca/", statut: "actif" },
-    { user_id: "grace", url_site: "http://grace.ca", statut: "actif" },
-    { user_id: "susp", url_site: "suspendu.ca", statut: "suspendu" },
-    { user_id: "other", url_site: "https://notpublic.ca", statut: "actif" },
+    { user_id: "pub", domaine_verifie_at: "2026-10-01T00:00:00.000Z", url_site: "https://www.public.ca/", statut: "actif" },
+    { user_id: "grace", domaine_verifie_at: "2026-10-01T00:00:00.000Z", url_site: "http://grace.ca", statut: "actif" },
+    { user_id: "susp", domaine_verifie_at: "2026-10-01T00:00:00.000Z", url_site: "suspendu.ca", statut: "suspendu" },
+    { user_id: "other", domaine_verifie_at: "2026-10-01T00:00:00.000Z", url_site: "https://notpublic.ca", statut: "actif" },
   ],
   forge_badges: [
     { user_id: "pub", statut: "verifie" },
@@ -131,7 +131,7 @@ test("ilike narrowing does not match a different domain containing the same text
 test("a Supabase { error } is raised, never treated as 'not found'", async () => {
   for (const table of ["forge_members", "forge_badges", "forge_trust_scores"])
     await assert.rejects(chercherTrustScorePublic(fakeDb({
-      forge_members: [{ user_id: "pub", url_site: "public.ca", statut: "actif" }],
+      forge_members: [{ user_id: "pub", domaine_verifie_at: "2026-10-01T00:00:00.000Z", url_site: "public.ca", statut: "actif" }],
       forge_badges: [{ user_id: "pub", statut: "verifie" }],
       forge_trust_scores: [score("pub", 71)],
     }, table), "public.ca", COMPUTED), ErreurSupabase, table);
@@ -151,7 +151,7 @@ test("default (flag off): a public member gets status pending, no score, no sign
 test("default (flag off): forge_trust_scores is not even read", async () => {
   // A failure on forge_trust_scores would throw if it were queried
   const r: any = await chercherTrustScorePublic(fakeDb({
-    forge_members: [{ user_id: "pub", url_site: "public.ca", statut: "actif" }],
+    forge_members: [{ user_id: "pub", domaine_verifie_at: "2026-10-01T00:00:00.000Z", url_site: "public.ca", statut: "actif" }],
     forge_badges: [{ user_id: "pub", statut: "verifie" }],
   }, "forge_trust_scores"), "public.ca");
   assert.equal(r.status, "pending");
@@ -166,7 +166,7 @@ test("TRUST_SCORE_SERVER_COMPUTED: off unless exactly 'true'", () => {
 
 test("server score waiting for the admin entry: pending 'à vérifier', no figure even with the switch on", async () => {
   const dbAttente = fakeDb({
-    forge_members: [{ user_id: "att", url_site: "https://attente.ca", statut: "actif" }],
+    forge_members: [{ user_id: "att", domaine_verifie_at: "2026-10-01T00:00:00.000Z", url_site: "https://attente.ca", statut: "actif" }],
     forge_badges: [{ user_id: "att", statut: "verifie" }],
     forge_trust_scores: [{ ...score("att", 0), statut: "en_attente", score: null, tier_forge: null }],
   });

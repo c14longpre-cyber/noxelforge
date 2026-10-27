@@ -3,6 +3,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
+const NOT_NULL = Symbol('not null');
 
 process.env.FORGE_JWT_SECRET = "test-secret";
 process.env.ANTHROPIC_API_KEY ??= "test";
@@ -32,7 +33,7 @@ function fakeSupabase() {
           writes.push({ table, op, row: payload!, filters: [...filters] });
           return { data: { id: "new", ...payload }, error: null };
         }
-        const rows = (tables[table] ?? []).filter((r) => filters.every(([c, v]) => r[c] === v));
+        const rows = (tables[table] ?? []).filter((r) => filters.every(([c, v]) => (v === NOT_NULL ? r[c] != null : r[c] === v)));
         return { data: rows, error: null };
       };
       const one = () => {
@@ -42,6 +43,7 @@ function fakeSupabase() {
       const q: any = {
         select: () => q,
         eq: (c: string, v: unknown) => { filters.push([c, v]); return q; },
+        not: (c: string) => { filters.push([c, NOT_NULL]); return q; }, // .not(c, 'is', null)
         insert: (row: Row) => { op = "insert"; payload = row; return q; },
         upsert: (row: Row) => { op = "upsert"; payload = row; return q; },
         update: (row: Row) => { op = "update"; payload = row; return q; },
@@ -81,7 +83,7 @@ test("Trust Score: weights unchanged for normal inputs (25/25/20/15/10/5)", () =
 
 // ─── Submissions use the paid tier, not the Trust Score tier ─────────────────
 test("submission: a Silver member without a Trust Score is processed as Silver, not Bronze", async () => {
-  reset({ forge_members: [{ user_id: "u1", tier_abonnement: "silver", scan_complete: true, badge_installe: true, date_inscription: new Date().toISOString() }] });
+  reset({ forge_members: [{ user_id: "u1", url_site: "https://a.com", domaine_verifie_at: "2026-10-01T00:00:00.000Z", tier_abonnement: "silver", scan_complete: true, badge_installe: true, date_inscription: new Date().toISOString() }] });
   const origSpam = spamGate.runSpamGate, origAlfred = alfred.traiterSoumission, origTs = trustScore.getTrustScore;
   let alfredInput: any = null;
   spamGate.runSpamGate = async () => ({ passe: true });

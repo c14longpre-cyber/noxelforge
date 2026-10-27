@@ -19,6 +19,8 @@ export default function ForgeDashboard() {
   const [joining, setJoining] = useState(false);
   const [joinForm, setJoinForm] = useState({ url_site: '', niche: '' });
   const [joinError, setJoinError] = useState('');
+  const [verifyingDomain, setVerifyingDomain] = useState(false);
+  const [domainMsg, setDomainMsg] = useState('');
 
   useEffect(() => { fetchDashboard(); }, []);
 
@@ -44,6 +46,17 @@ export default function ForgeDashboard() {
       fetchDashboard();
     } catch { setBadgeMsg('Verification error.'); }
     finally { setVerifyingBadge(false); }
+  }
+
+  async function verifierDomaine() {
+    setVerifyingDomain(true); setDomainMsg('');
+    try {
+      const res = await fetch(`${API_BASE}/api/forge/members/domain/verify`, { method: 'POST', credentials: 'include' });
+      const d = await res.json().catch(() => ({}));
+      if (d.verifie) { setDomainMsg('Domain verified ✓'); await fetchDashboard(); }
+      else setDomainMsg(d.error || `Not found yet: ${d.raison ?? 'add one of the three proofs, then try again'}`);
+    } catch { setDomainMsg('Error. Please try again.'); }
+    finally { setVerifyingDomain(false); }
   }
 
   async function handleJoin() {
@@ -133,6 +146,23 @@ export default function ForgeDashboard() {
       </nav>
 
       <div style={{ maxWidth: 960, margin: '0 auto', padding: '32px 32px 80px' }}>
+
+        {statut.domaine_verification && !statut.domaine_verification.verifie && (
+          <div className="nx-card" style={{ marginBottom: 24, borderColor: 'rgba(168,85,247,0.35)', background: 'rgba(168,85,247,0.06)' }}>
+            <div style={{ fontWeight: 800, marginBottom: 6, fontSize: 14 }}>🔐 Prove you own {statut.domaine_verification.domaine}</div>
+            <div style={{ color: 'var(--muted)', fontSize: 13, marginBottom: 12 }}>
+              Your site appears in Forge (matchmaking, directory, public Trust Score, exchanges) once its ownership is proven. Use any one of these:
+            </div>
+            <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 4 }}>1. Add this tag inside the &lt;head&gt; of your home page</div>
+            <code style={{ display: 'block', fontSize: 12, padding: '8px 10px', borderRadius: 8, background: 'rgba(255,255,255,0.05)', marginBottom: 10, wordBreak: 'break-all' }}>{statut.domaine_verification.instructions.meta}</code>
+            <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 4 }}>2. Or publish a file at {statut.domaine_verification.instructions.fichier.url} containing</div>
+            <code style={{ display: 'block', fontSize: 12, padding: '8px 10px', borderRadius: 8, background: 'rgba(255,255,255,0.05)', marginBottom: 10, wordBreak: 'break-all' }}>{statut.domaine_verification.instructions.fichier.contenu}</code>
+            <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 4 }}>3. Or add a DNS TXT record on {statut.domaine_verification.instructions.dns.nom}</div>
+            <code style={{ display: 'block', fontSize: 12, padding: '8px 10px', borderRadius: 8, background: 'rgba(255,255,255,0.05)', marginBottom: 12, wordBreak: 'break-all' }}>{statut.domaine_verification.instructions.dns.valeur}</code>
+            <HudButton action="ok" compact label="Verify now" busy={verifyingDomain} busyLabel="Checking..." onClick={verifierDomaine} />
+            {domainMsg && <div role="status" style={{ marginTop: 10, fontSize: 12, color: 'var(--muted)' }}>{domainMsg}</div>}
+          </div>
+        )}
 
         {etapes_manquantes?.length > 0 && (
           <div className="nx-card" style={{ marginBottom: 24, borderColor: 'rgba(255,183,77,0.3)', background: 'rgba(255,183,77,0.06)' }}>

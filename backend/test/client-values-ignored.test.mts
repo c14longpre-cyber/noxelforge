@@ -5,6 +5,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
 import type { AddressInfo } from "node:net";
+const NOT_NULL = Symbol('not null');
 
 process.env.FORGE_JWT_SECRET = "test-secret";
 process.env.ANTHROPIC_API_KEY ??= "test";
@@ -35,7 +36,7 @@ function fakeSupabase() {
           writes.push({ table, op, row: payload! });
           return { data: { id: "new", ...payload }, error: null };
         }
-        const rows = (tables[table] ?? []).filter((r) => filters.every(([c, v]) => r[c] === v));
+        const rows = (tables[table] ?? []).filter((r) => filters.every(([c, v]) => (v === NOT_NULL ? r[c] != null : r[c] === v)));
         return { data: rows, error: null };
       };
       const one = () => {
@@ -45,6 +46,7 @@ function fakeSupabase() {
       const q: any = {
         select: () => q,
         eq: (c: string, v: unknown) => { filters.push([c, v]); return q; },
+        not: (c: string) => { filters.push([c, NOT_NULL]); return q; }, // .not(c, 'is', null)
         gte: () => q, // only used by the submissions counter (no rows here)
         insert: (row: Row) => { op = "insert"; payload = row; return q; },
         upsert: (row: Row) => { op = "upsert"; payload = row; return q; },
@@ -175,7 +177,7 @@ const daysAgo = (n: number) => new Date(Date.now() - n * 24 * 60 * 60 * 1000).to
 
 test("status: age_compte_days is computed from date_inscription", async () => {
   reset();
-  tables.forge_members = [{ user_id: "u-ok", tier_abonnement: "silver", scan_complete: true, badge_installe: true, statut: "actif", date_inscription: daysAgo(20) }];
+  tables.forge_members = [{ user_id: "u-ok", domaine_verifie_at: "2026-10-01T00:00:00.000Z", tier_abonnement: "silver", scan_complete: true, badge_installe: true, statut: "actif", date_inscription: daysAgo(20) }];
   const r = await call("GET", "/api/forge/members/status", undefined, "u-ok");
   assert.equal(r.status, 200);
   assert.equal(r.body.age_compte_days, 20);
@@ -185,7 +187,7 @@ test("status: age_compte_days is computed from date_inscription", async () => {
 
 test("status: a Bronze member is told the one step actually enforced (upgrade), not scan/badge/age", async () => {
   reset();
-  tables.forge_members = [{ user_id: "u-ok", tier_abonnement: "bronze", scan_complete: false, badge_installe: false, statut: "actif", date_inscription: daysAgo(2) }];
+  tables.forge_members = [{ user_id: "u-ok", domaine_verifie_at: "2026-10-01T00:00:00.000Z", tier_abonnement: "bronze", scan_complete: false, badge_installe: false, statut: "actif", date_inscription: daysAgo(2) }];
   const r = await call("GET", "/api/forge/members/status", undefined, "u-ok");
   assert.equal(r.body.flux_actuel, "bloque");
   assert.deepEqual(r.body.etapes_manquantes, ["Passe à Silver ou plus pour soumettre du contenu"]);
@@ -193,7 +195,7 @@ test("status: a Bronze member is told the one step actually enforced (upgrade), 
 
 test("status: est_admin is true only for an e-mail listed in FORGE_ADMIN_EMAILS", async () => {
   reset();
-  tables.forge_members = [{ user_id: "u-ok", tier_abonnement: "silver", statut: "actif", date_inscription: daysAgo(1) }];
+  tables.forge_members = [{ user_id: "u-ok", domaine_verifie_at: "2026-10-01T00:00:00.000Z", tier_abonnement: "silver", statut: "actif", date_inscription: daysAgo(1) }];
   process.env.FORGE_ADMIN_EMAILS = "OK@test";
   try {
     const r = await call("GET", "/api/forge/members/status", undefined, "u-ok");
@@ -205,7 +207,7 @@ test("status: est_admin is true only for an e-mail listed in FORGE_ADMIN_EMAILS"
 
 test("submission: Alfred receives the account age computed from date_inscription", async () => {
   reset();
-  tables.forge_members = [{ user_id: "u-ok", tier_abonnement: "silver", scan_complete: true, badge_installe: true, statut: "actif", date_inscription: daysAgo(3) }];
+  tables.forge_members = [{ user_id: "u-ok", url_site: "https://exemple.ca", domaine_verifie_at: "2026-10-01T00:00:00.000Z", tier_abonnement: "silver", scan_complete: true, badge_installe: true, statut: "actif", date_inscription: daysAgo(3) }];
   const r = await call("POST", "/api/forge/submissions", { url_soumise: "https://exemple.ca/article", titre: "Guide plein air" }, "u-ok");
   assert.equal(r.status, 201);
   assert.equal(alfredInputs.length, 1);
@@ -214,7 +216,7 @@ test("submission: Alfred receives the account age computed from date_inscription
 
 test("reminders: badge and NOXEL SEO scan are recommended, never required to submit", async () => {
   reset();
-  tables.forge_members = [{ user_id: "u-ok", tier_abonnement: "silver", scan_complete: false, badge_installe: false, statut: "actif", date_inscription: daysAgo(1) }];
+  tables.forge_members = [{ user_id: "u-ok", url_site: "https://exemple.ca", domaine_verifie_at: "2026-10-01T00:00:00.000Z", tier_abonnement: "silver", scan_complete: false, badge_installe: false, statut: "actif", date_inscription: daysAgo(1) }];
   const status = await call("GET", "/api/forge/members/status", undefined, "u-ok");
   assert.equal(status.body.rappels.length, 2);
   assert.deepEqual(status.body.etapes_manquantes, []);
@@ -226,7 +228,7 @@ test("reminders: badge and NOXEL SEO scan are recommended, never required to sub
 
 test("reminders: none once the badge is installed and the scan is done", async () => {
   reset();
-  tables.forge_members = [{ user_id: "u-ok", tier_abonnement: "silver", scan_complete: true, badge_installe: true, statut: "actif", date_inscription: daysAgo(1) }];
+  tables.forge_members = [{ user_id: "u-ok", url_site: "https://exemple.ca", domaine_verifie_at: "2026-10-01T00:00:00.000Z", tier_abonnement: "silver", scan_complete: true, badge_installe: true, statut: "actif", date_inscription: daysAgo(1) }];
   const status = await call("GET", "/api/forge/members/status", undefined, "u-ok");
   assert.deepEqual(status.body.rappels, []);
 });

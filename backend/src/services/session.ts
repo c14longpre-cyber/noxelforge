@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import jwt from "jsonwebtoken";
 
 const SECRET = process.env.FORGE_JWT_SECRET as string;
@@ -41,4 +42,9 @@ export function verifierJeton<T = Record<string, unknown>>(token: string, purpos
   } catch {
     return null;
   }
+}
+
+// Deterministic, unguessable value derived from the server secret (domain ownership tokens): nothing to store
+export function signerValeur(value: string): string {
+  return crypto.createHmac("sha256", SECRET).update(value).digest("hex").slice(0, 32);
 }

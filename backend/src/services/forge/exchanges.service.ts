@@ -63,7 +63,7 @@ export async function verifierLien(url: string, domainePartenaire: string, fetch
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
 async function membre(userId: string) {
-  return must(await getSupabase().from('forge_members').select('user_id,url_site,statut,tier_abonnement').eq('user_id', userId).maybeSingle(), 'forge_members select');
+  return must(await getSupabase().from('forge_members').select('user_id,url_site,domaine,domaine_verifie_at,statut,tier_abonnement').eq('user_id', userId).maybeSingle(), 'forge_members select');
 }
 
 async function echangesDe(userId: string): Promise<Echange[]> {
@@ -101,8 +101,9 @@ export async function proposerEchange(userId: string, partenaireId: unknown, now
   if (partenaireId === userId) throw new ErreurEchange(400, 'Impossible d’échanger avec soi-même.');
   const moi = await membre(userId);
   if (lectureSeule(moi)) throw new ErreurEchange(403, 'Passe à Silver ou plus pour échanger des backlinks.');
+  if (!moi?.domaine_verifie_at) throw new ErreurEchange(403, 'Vérifie d’abord la propriété de ton domaine.');
   const lui = await membre(partenaireId);
-  if (!lui || lui.statut !== 'actif') throw new ErreurEchange(404, 'Partenaire introuvable ou inactif.');
+  if (!lui || lui.statut !== 'actif' || !lui.domaine_verifie_at) throw new ErreurEchange(404, 'Partenaire introuvable ou inactif.');
   if ((await partenairesActifs(userId)).has(partenaireId)) throw new ErreurEchange(409, 'Un échange est déjà en cours avec ce partenaire.');
   const e = must(await getSupabase().from('forge_exchanges').insert({
     membre_a: userId, membre_b: partenaireId, statut: 'propose', verifie_a: false, verifie_b: false, propose_at: now.toISOString(),
@@ -114,7 +115,11 @@ export async function repondreEchange(userId: string, id: string, accepter: bool
   const { e, cote } = await echangeDe(userId, id);
   if (cote !== 'b') throw new ErreurEchange(403, 'Seul le partenaire invité peut répondre.');
   if (e.statut !== 'propose') throw new ErreurEchange(409, `Échange déjà ${e.statut}.`);
-  if (accepter && lectureSeule(await membre(userId))) throw new ErreurEchange(403, 'Passe à Silver ou plus pour échanger des backlinks.');
+  if (accepter) {
+    const moi = await membre(userId);
+    if (lectureSeule(moi)) throw new ErreurEchange(403, 'Passe à Silver ou plus pour échanger des backlinks.');
+    if (!moi?.domaine_verifie_at) throw new ErreurEchange(403, 'Vérifie d’abord la propriété de ton domaine.');
+  }
   const statut: StatutEchange = accepter ? 'accepte' : 'refuse';
   await majEchange(id, accepter ? { statut, accepte_at: now.toISOString() } : { statut, termine_at: now.toISOString() });
   return statut;

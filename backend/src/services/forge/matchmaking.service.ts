@@ -85,6 +85,7 @@ export async function getRecommendedPartners(
     .eq('statut', 'actif')
     .neq('user_id', userId)
     .eq('badge_installe', true)
+    .not('domaine_verifie_at', 'is', null) // a domain not yet proven is never suggested
     .limit(200), 'forge_members select');
 
   // A partner with an exchange in progress or verified is not suggested again
