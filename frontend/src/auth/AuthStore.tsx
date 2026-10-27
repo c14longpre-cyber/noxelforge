@@ -84,6 +84,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // The mount effect above already reads the session set by the OAuth redirect: only clean the URL here
     if (authSuccess || authError) window.history.replaceState({}, "", window.location.pathname);
     if (authError) devWarn("OAuth error: " + authError);
+    // Errors the member can act on are shown (they used to be logged only)
+    const fr = (navigator.language || "").toLowerCase().startsWith("fr");
+    const messages: Record<string, string> = fr ? {
+      email_in_use: "Un compte existe déjà avec ce courriel. Connectez-vous avec la méthode utilisée à l’inscription (ou un lien magique).",
+      invalid_token: "Ce lien n’est plus valide. Recommencez l’inscription.",
+    } : {
+      email_in_use: "An account already exists with this email. Sign in with the method you used to sign up (or a magic link).",
+      invalid_token: "This link is no longer valid. Please sign up again.",
+    };
+    if (authError && messages[authError]) window.setTimeout(() => window.alert(messages[authError]), 0);
   }, []);
 
   const loginWithGoogle = useCallback(async (idToken: string) => {

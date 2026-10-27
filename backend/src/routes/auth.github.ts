@@ -1,6 +1,6 @@
 import { Router, type Request, type Response } from "express";
 import crypto from "crypto";
-import { upsertUser } from "../services/userStore";
+import { connecterOuCreer, EmailDejaUtilise } from "../services/userStore";
 import { createSession } from "../services/session";
 
 const router = Router();
@@ -72,7 +72,9 @@ router.get("/github/callback", async (req: Request, res: Response) => {
     const userJson = await readJsonSafe(userRes);
     if (!userRes.ok || !userJson.id) return res.redirect(`${FRONTEND_URL}/forge?auth_error=profile_failed`);
 
+    // GitHub only shows a verified address as the public profile e-mail; otherwise the primary verified one
     let email = userJson.email || "";
+    let emailVerified = !!email;
     if (!email) {
       const emailRes = await fetch("https://api.github.com/user/emails", {
         headers: { Authorization: `Bearer ${tokenJson.access_token}`, Accept: "application/json" },
@@ -80,19 +82,21 @@ router.get("/github/callback", async (req: Request, res: Response) => {
       const emails = await readJsonSafe(emailRes);
       if (Array.isArray(emails)) {
         const primary = emails.find((e: any) => e.primary && e.verified);
-        email = primary?.email || emails[0]?.email || `gh_${userJson.id}@noxelforge.local`;
+        email = primary?.email || `gh_${userJson.id}@noxelforge.local`;
+        emailVerified = !!primary;
       }
     }
 
     const name = userJson.name || userJson.login || "GitHub User";
     const avatarUrl = userJson.avatar_url || null;
 
-    const user = await upsertUser(email, name, String(userJson.id), "github", avatarUrl);
+    const user = await connecterOuCreer({ email, name, providerId: String(userJson.id), provider: "github", avatarUrl, emailVerified });
     const session = createSession(user.id);
     res.cookie(COOKIE_NAME, session, COOKIE_OPTS);
 
     return res.redirect(`${FRONTEND_URL}/forge?auth_success=github`);
   } catch (error) {
+    if (error instanceof EmailDejaUtilise) return res.redirect(`${FRONTEND_URL}/forge?auth_error=email_in_use`);
     console.error("[auth/github/callback]", error);
     return res.redirect(`${FRONTEND_URL}/forge?auth_error=server_error`);
   }

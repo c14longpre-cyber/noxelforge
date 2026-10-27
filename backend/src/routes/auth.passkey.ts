@@ -6,7 +6,10 @@ import {
   verifyAuthenticationResponse,
 } from "@simplewebauthn/server";
 import { getSupabase } from "../lib/supabaseClient";
-import { upsertUser, findUserById, toPublicUser } from "../services/userStore";
+import { connecterOuCreer, findUserById, findUserByEmail, findUserByProvider, toPublicUser, EmailDejaUtilise } from "../services/userStore";
+import { verifySession, signerJeton, verifierJeton } from "../services/session";
+import { sendSignupConfirmationEmail } from "../services/emailService";
+import { authLimiter, emailIpLimiter, emailRecipientLimiter } from "../middleware/authLimiter";
 import { createSession } from "../services/session";
 import { must } from "../lib/supabaseCheck";
 
@@ -17,11 +20,25 @@ const RP_NAME = "NOXEL Forge";
 const RP_ID = IS_PROD ? "noxelforge.com" : "localhost";
 const ORIGIN = IS_PROD ? ["https://noxelforge.com", "https://www.noxelforge.com"] : ["http://localhost:5173"];
 
+const FRONTEND_URL = IS_PROD ? (process.env.FRONTEND_URL || "https://noxelforge.com") : "http://localhost:5173";
+const BACKEND_URL = IS_PROD
+  ? (process.env.BACKEND_PUBLIC_URL || "https://api.noxelforge.com")
+  : ("http://localhost:" + (process.env.PORT || 3001));
+
+type PasskeyNeuve = { id: string; publicKey: string; counter: number; deviceType: string; backedUp: boolean; transports: string[] };
+
+async function enregistrerPasskey(userId: string, p: PasskeyNeuve) {
+  must(await getSupabase().from("passkeys").insert({
+    user_id: userId, credential_id: p.id, public_key: p.publicKey, counter: p.counter,
+    device_type: p.deviceType, backed_up: p.backedUp, transports: p.transports,
+  }), "passkeys insert");
+}
+
 const COOKIE_OPTS = IS_PROD
   ? { httpOnly: true, sameSite: "none" as const, secure: true, maxAge: 7 * 24 * 60 * 60 * 1000 }
   : { httpOnly: true, sameSite: "lax" as const, secure: false, maxAge: 7 * 24 * 60 * 60 * 1000 };
 
-router.post("/register/start", async (req: Request, res: Response) => {
+router.post("/register/start", authLimiter, async (req: Request, res: Response) => {
   try {
     const { email, name } = req.body as { email?: string; name?: string };
     if (!email) return res.status(400).json({ ok: false, error: "Email required" });
@@ -50,7 +67,7 @@ router.post("/register/start", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/register/finish", async (req: Request, res: Response) => {
+router.post("/register/finish", authLimiter, emailIpLimiter, emailRecipientLimiter, async (req: Request, res: Response) => {
   try {
     const { email, name, credential } = req.body;
     if (!email || !credential) return res.status(400).json({ ok: false, error: "Missing fields" });
@@ -84,28 +101,63 @@ router.post("/register/finish", async (req: Request, res: Response) => {
 
     must(await supabase.from("passkey_challenges").delete().eq("id", challengeRow.id), 'passkey_challenges delete');
 
-    const user = await upsertUser(email, name || email.split("@")[0], email, "passkey", null);
-
-    must(await supabase.from("passkeys").insert({
-      user_id: user.id,
-      credential_id: cred.id,
-      public_key: Buffer.from(cred.publicKey).toString("base64"),
-      counter: cred.counter,
-      device_type: verification.registrationInfo.credentialDeviceType,
-      backed_up: verification.registrationInfo.credentialBackedUp,
+    const neuve: PasskeyNeuve = {
+      id: cred.id, publicKey: Buffer.from(cred.publicKey).toString("base64"), counter: cred.counter,
+      deviceType: verification.registrationInfo.credentialDeviceType, backedUp: verification.registrationInfo.credentialBackedUp,
       transports: credential.response?.transports || [],
-    }), "passkeys insert");
+    };
+    const adresse = String(email).trim().toLowerCase();
+    const existant = await findUserByEmail(adresse);
 
-    const session = createSession(user.id);
-    res.cookie(COOKIE_NAME, session, COOKIE_OPTS);
-    return res.json({ ok: true, user: toPublicUser(user) });
+    if (existant) {
+      // Adding a passkey to an existing account needs that account's own session: the e-mail alone
+      // used to be enough to attach a new passkey to anyone's account and sign in as them
+      const session = verifySession((req as any).cookies?.[COOKIE_NAME] ?? "");
+      if (session?.userId !== existant.id) {
+        return res.status(409).json({ ok: false, code: "email_in_use", error: "An account already exists for this email. Sign in with your usual method first, then add a passkey." });
+      }
+      await enregistrerPasskey(existant.id, neuve);
+      return res.json({ ok: true, user: toPublicUser(existant) });
+    }
+
+    // New account: created only once the address is confirmed by the link e-mailed below
+    const token = signerJeton({ email: adresse, name: String(name || "").slice(0, 80), kind: "passkey", pk: neuve }, "signup", "24h");
+    const sent = await sendSignupConfirmationEmail(adresse, `${BACKEND_URL}/api/auth/passkey/register/verify?token=${encodeURIComponent(token)}`, String(req.body?.lang || "en"));
+    if (!sent) return res.status(500).json({ ok: false, error: "Could not send the confirmation e-mail. Please try again later." });
+    return res.json({ ok: true, pending: true, message: "Check your inbox: open the link we sent to create your account. Your passkey will work right after." });
   } catch (err: any) {
     console.error("[passkey/register/finish]", err);
-    return res.status(500).json({ ok: false, error: err.message });
+    return res.status(500).json({ ok: false, error: "Passkey registration failed" });
   }
 });
 
-router.post("/login/start", async (req: Request, res: Response) => {
+// GET /api/auth/passkey/register/verify?token= — creates the confirmed account with its passkey
+router.get("/register/verify", async (req: Request, res: Response) => {
+  const t = verifierJeton<{ email: string; name: string; kind: string; pk: PasskeyNeuve }>(String(req.query.token || ""), "signup");
+  if (!t || t.kind !== "passkey" || !t.pk?.id) return res.redirect(FRONTEND_URL + "/forge?auth_error=invalid_token");
+  try {
+    const supabase = getSupabase();
+    const dejaCle = must(await supabase.from("passkeys").select("user_id").eq("credential_id", t.pk.id).maybeSingle(), "passkeys select");
+    let user;
+    if (dejaCle) {
+      // Link opened twice (or by a mail scanner): the account made from this passkey signs in again
+      user = await findUserById(dejaCle.user_id);
+    } else {
+      user = (await findUserByProvider(t.email, "passkey"))
+        ?? await connecterOuCreer({ email: t.email, name: t.name, provider: "passkey", providerId: t.email, emailVerified: false });
+      await enregistrerPasskey(user.id, t.pk);
+    }
+    if (!user) return res.redirect(FRONTEND_URL + "/forge?auth_error=server_error");
+    res.cookie(COOKIE_NAME, createSession(user.id), COOKIE_OPTS);
+    return res.redirect(FRONTEND_URL + "/forge/dashboard?auth_success=passkey");
+  } catch (err) {
+    if (err instanceof EmailDejaUtilise) return res.redirect(FRONTEND_URL + "/forge?auth_error=email_in_use");
+    console.error("[passkey/register/verify]", err);
+    return res.redirect(FRONTEND_URL + "/forge?auth_error=server_error");
+  }
+});
+
+router.post("/login/start", authLimiter, async (req: Request, res: Response) => {
   try {
     const options = await generateAuthenticationOptions({ rpID: RP_ID, userVerification: "preferred" });
 
