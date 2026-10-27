@@ -47,6 +47,8 @@ const fr: ForgeTranslations = {
     badgeInfoTitle: 'Comment déverrouiller les réductions badge',
     badgeInfoDesc: 'Affichez un lien vers noxelseo.com ou noxelforge.com sur votre site. Alfred le vérifie automatiquement à chaque soumission. La réduction s\'applique de manière permanente tant que le badge est actif.',
     billedPerYear: 'facturé ${price}/an',
+    currencyNote: 'Tous les prix sont en dollars canadiens (CAD).',
+    alreadySubscribed: 'Tu as déjà un abonnement. Change de forfait ou annule depuis « Gérer mon abonnement ».',
   },
   badge: {
     kicker: 'Afficher sur votre site',

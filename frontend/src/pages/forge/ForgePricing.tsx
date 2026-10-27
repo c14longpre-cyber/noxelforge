@@ -95,6 +95,13 @@ export default function ForgePricing() {
 
   if (!t) return <div style={{ minHeight: '100vh', background: 'var(--bg)' }} />;
 
+  async function ouvrirPortail() {
+    const res = await fetch(`${API_BASE}/api/forge/stripe/portal`, { method: 'POST', credentials: 'include' });
+    const data = await res.json().catch(() => ({}));
+    if (data.url) window.location.assign(data.url);
+    else alert(data.error || 'Error. Please try again.');
+  }
+
   async function handleCheckout(tier: string) {
     if (tier === 'bronze') return;
     setLoading(tier);
@@ -107,6 +114,11 @@ export default function ForgePricing() {
       });
       const data = await res.json().catch(() => ({}));
       if (data.url) { window.location.assign(data.url); return; }
+      // One subscription per member: plan changes and cancellation go through the Stripe portal
+      if (data.code === 'already_subscribed') {
+        if (window.confirm(t?.pricing.alreadySubscribed ?? data.error)) await ouvrirPortail();
+        return;
+      }
       alert(res.status === 401 ? 'Please sign in first.' : (data.error || 'Error. Please try again.'));
     } catch { alert('Error. Please try again.'); }
     finally { setLoading(null); }
@@ -117,13 +129,13 @@ export default function ForgePricing() {
     const base = billing === 'monthly' ? tier.monthly : Math.round(tier.annual / 12);
     const discount = badgeInstalle ? (BADGE_DISCOUNTS[tier.key] ?? 0) : 0;
     const final = Math.round(base * (1 - discount));
-    return `$${final}`;
+    return `$${final} CAD`;
   }
 
   function getOriginalPrice(tier: ReturnType<typeof getTiers>[number]): string | null {
     if (tier.monthly === 0 || !badgeInstalle) return null;
     const base = billing === 'monthly' ? tier.monthly : Math.round(tier.annual / 12);
-    return `$${base}`;
+    return `$${base} CAD`;
   }
 
   return (
@@ -156,6 +168,8 @@ export default function ForgePricing() {
             </button>
           </div>
 
+          <p style={{ color: 'var(--muted)', fontSize: 12, marginBottom: 16 }}>{t.pricing.currencyNote}</p>
+
           {/* BADGE : remise appliquée si vérifiée, sinon lien vers la page du badge */}
           {badgeInstalle ? (
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '10px 20px', borderRadius: 'var(--r)', border: '1px solid var(--g-border)', background: 'var(--g-dim)' }}>
@@ -185,7 +199,7 @@ export default function ForgePricing() {
                   {tier.monthly > 0 && <span style={{ fontSize: 12, color: 'var(--muted)' }}>{t.pricing.perMonth}</span>}
                 </div>
                 {billing === 'annual' && tier.annual > 0 && (
-                  <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 2 }}>billed ${tier.annual}/{t.pricing.annual.toLowerCase()}</div>
+                  <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 2 }}>{t.pricing.billedPerYear.replace('{price}', `${tier.annual} CAD`)}</div>
                 )}
               </div>
 

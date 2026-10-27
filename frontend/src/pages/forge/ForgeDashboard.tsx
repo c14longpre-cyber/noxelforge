@@ -48,6 +48,14 @@ export default function ForgeDashboard() {
     finally { setVerifyingBadge(false); }
   }
 
+  async function gererAbonnement() {
+    // Stripe customer portal: cancel, change plan, card, invoices
+    const res = await fetch(`${API_BASE}/api/forge/stripe/portal`, { method: 'POST', credentials: 'include' });
+    const d = await res.json().catch(() => ({}));
+    if (d.url) window.location.assign(d.url);
+    else alert(d.error || 'Error. Please try again.');
+  }
+
   async function verifierDomaine() {
     setVerifyingDomain(true); setDomainMsg('');
     try {
@@ -141,6 +149,7 @@ export default function ForgeDashboard() {
             <span>{statut.membre.tier_abonnement}</span>
             {statut.membre.tier_abonnement !== 'diamond' && <span className="forge-subbar__upgrade" style={{ opacity: 0.7 }}> · Upgrade ↗</span>}
           </Link>
+          {statut.membre.tier_abonnement !== 'bronze' && <HudButton action="continue" compact label="Manage subscription" onClick={gererAbonnement} />}
           <HudRouterLink to="/forge/submit" action="new-project" compact label="Submit" />
         </div>
       </nav>
