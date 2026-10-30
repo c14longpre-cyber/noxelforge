@@ -1,4 +1,5 @@
 import type { FetchFn } from './types';
+import { fetchSur } from '../../../lib/safeFetch';
 
 // Every collector fetches pages chosen by the member (their own site): bounded time and size.
 export const DELAI_MS = 8000;
@@ -10,7 +11,7 @@ export type ResultatFetch =
   | { ok: false; status?: number; raison: string };
 
 export async function recupererTexte(
-  url: string, fetchImpl: FetchFn = fetch, headers: Record<string, string> = {}, delaiMs: number = DELAI_MS,
+  url: string, fetchImpl: FetchFn = fetchSur, headers: Record<string, string> = {}, delaiMs: number = DELAI_MS,
 ): Promise<ResultatFetch> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), delaiMs);

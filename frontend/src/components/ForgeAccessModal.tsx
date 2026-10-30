@@ -58,6 +58,7 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
   const [emailMode, setEmailMode] = useState<"login" | "register">("login");
   const [emailLoading, setEmailLoading] = useState(false);
   const [emailError, setEmailError] = useState("");
+  const [notice, setNotice] = useState("");
 
   const [magicEmail, setMagicEmail] = useState("");
   const [magicStatus, setMagicStatus] = useState<"idle" | "loading" | "sent" | "error">("idle");
@@ -135,6 +136,8 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
       });
       const data = await res.json();
       if (!data.ok) throw new Error(data.error);
+      // Sign-up: the account is created when the e-mailed link is opened
+      if (data.pending) { setNotice(data.message || "Check your inbox to confirm your account."); return; }
       window.location.reload();
     } catch (e) { setEmailError((e as Error).message || "Authentication failed"); }
     finally { setEmailLoading(false); }
@@ -233,8 +236,10 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
 
             <PasskeyButton
               onSuccess={(u) => { writeStored(u); void refreshAuth(); onClose(); }}
-              onError={(msg) => console.error("Passkey error:", msg)}
+              onError={(msg) => setNotice(msg)}
+              onPending={(msg) => setNotice(msg)}
             />
+            {notice && <div role="status" style={{ fontSize: 12, color: "#3ddc84", padding: "8px 12px", marginTop: 8, background: "rgba(61,220,132,0.08)", borderRadius: 8, border: "1px solid rgba(61,220,132,0.2)" }}>{notice}</div>}
 
             <button type="button" onClick={() => setScreen("magic")} style={{
               width: "100%", padding: "11px", borderRadius: 12, marginTop: 8,
@@ -300,6 +305,7 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
               {emailMode === "register" && <input type="text" value={emailName} onChange={(e) => setEmailName(e.target.value)} placeholder="Your name" style={inputStyle} />}
               <input type="email" value={emailAddr} onChange={(e) => setEmailAddr(e.target.value)} placeholder="your@email.com" onKeyDown={(e) => e.key === "Enter" && handleEmailAuth()} style={inputStyle} />
               <input type="password" value={emailPass} onChange={(e) => setEmailPass(e.target.value)} placeholder="Password (min 6 characters)" onKeyDown={(e) => e.key === "Enter" && handleEmailAuth()} style={inputStyle} />
+              {notice && <div role="status" style={{ fontSize: 12, color: "#3ddc84", padding: "8px 12px", background: "rgba(61,220,132,0.08)", borderRadius: 8, border: "1px solid rgba(61,220,132,0.2)" }}>{notice}</div>}
               {emailError && <div style={{ fontSize: 12, color: "#ff5c7a", padding: "8px 12px", background: "rgba(255,92,122,0.08)", borderRadius: 8, border: "1px solid rgba(255,92,122,0.2)" }}>{emailError}</div>}
               <HudButton action={emailMode === "login" ? "continue" : "new-project"} compact
                 label={emailMode === "login" ? "Sign In" : "Create Account"} busy={emailLoading} busyLabel="Please wait..."

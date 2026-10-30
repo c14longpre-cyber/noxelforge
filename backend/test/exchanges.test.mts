@@ -34,6 +34,7 @@ supabaseClient.getSupabase = () => ({
     const q: any = {
       select: () => q,
       eq: (c: string, v: unknown) => { preds.push((r) => r[c] === v); return q; },
+      not: (c: string) => { preds.push((r) => r[c] != null); return q; },
       neq: (c: string, v: unknown) => { preds.push((r) => r[c] !== v); return q; },
       in: (c: string, vs: unknown[]) => { preds.push((r) => vs.includes(r[c])); return q; },
       limit: () => q,
@@ -60,9 +61,9 @@ function reset() {
   tables = {
     users: [{ id: "a", email: "a@t" }, { id: "b", email: "b@t" }, { id: "c", email: "c@t" }],
     forge_members: [
-      { user_id: "a", url_site: "https://www.site-a.ca/", statut: "actif", tier_abonnement: "silver", badge_installe: true, niche: "SEO", updated_at: NOW.toISOString() },
-      { user_id: "b", url_site: "https://site-b.com", statut: "actif", tier_abonnement: "gold", badge_installe: true, niche: "SEO", updated_at: NOW.toISOString() },
-      { user_id: "c", url_site: "https://site-c.org", statut: "actif", tier_abonnement: "bronze", badge_installe: true, niche: "SEO", updated_at: NOW.toISOString() },
+      { user_id: "a", domaine_verifie_at: "2026-10-01T00:00:00.000Z", url_site: "https://www.site-a.ca/", statut: "actif", tier_abonnement: "silver", badge_installe: true, niche: "SEO", updated_at: NOW.toISOString() },
+      { user_id: "b", domaine_verifie_at: "2026-10-01T00:00:00.000Z", url_site: "https://site-b.com", statut: "actif", tier_abonnement: "gold", badge_installe: true, niche: "SEO", updated_at: NOW.toISOString() },
+      { user_id: "c", domaine_verifie_at: "2026-10-01T00:00:00.000Z", url_site: "https://site-c.org", statut: "actif", tier_abonnement: "bronze", badge_installe: true, niche: "SEO", updated_at: NOW.toISOString() },
     ],
     forge_exchanges: [], forge_trust_scores: [],
   };
@@ -199,7 +200,7 @@ test("cron re-check: missing link opens a 7-day grace, back online clears it, st
 // ─── Matchmaking ────────────────────────────────────────────────────────────
 test("matchmaking: a partner with an exchange in progress or verified is not suggested again; a declined one is", async () => {
   reset();
-  tables.forge_members.push({ user_id: "d", url_site: "https://site-d.net", statut: "actif", tier_abonnement: "gold", badge_installe: true, niche: "SEO", updated_at: NOW.toISOString() });
+  tables.forge_members.push({ user_id: "d", domaine_verifie_at: "2026-10-01T00:00:00.000Z", url_site: "https://site-d.net", statut: "actif", tier_abonnement: "gold", badge_installe: true, niche: "SEO", updated_at: NOW.toISOString() });
   tables.forge_exchanges = [echange({ statut: "verifie", membre_a: "b", membre_b: "a" }), echange({ statut: "refuse", membre_b: "c" })];
   const ids = (await getRecommendedPartners("a")).map((p: any) => p.user_id).sort();
   assert.deepEqual(ids, ["c", "d"]);

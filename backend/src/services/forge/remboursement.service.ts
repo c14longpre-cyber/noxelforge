@@ -28,7 +28,16 @@ export function annuleeDansFenetre(sub: Sub, nowS: number = Math.floor(Date.now(
   return ecart >= 0 && ecart <= FENETRE_REMBOURSEMENT_JOURS * JOUR_S;
 }
 
-export type StatutRemboursement = 'rembourse' | 'aucun_paiement' | 'echec';
+export type StatutRemboursement = 'rembourse' | 'aucun_paiement' | 'echec' | 'deja_rembourse';
+
+// The 14-day refund is a first-subscription guarantee: once per customer. Without this limit,
+// subscribing, cancelling within 14 days and subscribing again every month made Forge free.
+export async function remboursementDejaUtilise(customerId: string | null, subscriptionId: string): Promise<boolean> {
+  if (!customerId) return false;
+  const rows = must(await getSupabase().from('forge_refunds').select('stripe_subscription_id')
+    .eq('stripe_customer_id', customerId).eq('statut', 'rembourse'), 'forge_refunds select') ?? [];
+  return rows.some((r: any) => r.stripe_subscription_id !== subscriptionId);
+}
 
 // Refunds once; returns the stored outcome, or null when the cancellation is outside the window.
 // A network/API outage throws (the webhook answers 500 and Stripe retries); a refusal from Stripe
@@ -52,6 +61,9 @@ export async function rembourserAnnulation(sub: Sub, nowS?: number): Promise<Sta
     return statut;
   };
 
+  if (await remboursementDejaUtilise(customerId, sub.id)) {
+    return enregistrer('deja_rembourse', { raison: 'Remboursement de 14 jours déjà utilisé par ce client (une seule fois par client)' });
+  }
   if (!ligne.invoice_id) return enregistrer('aucun_paiement', { raison: 'Aucune facture sur l’abonnement' });
   const stripe = remboursementDeps.stripe();
   const paiements = await stripe.invoicePayments.list({ invoice: ligne.invoice_id, status: 'paid', limit: 1 });
@@ -86,6 +98,8 @@ export async function annulerMaintenantSiDansFenetre(
   const demandeeMaintenant = (sub.cancel_at_period_end === true && previous?.cancel_at_period_end === false)
     || (typeof sub.cancel_at === 'number' && previous !== undefined && 'cancel_at' in previous && previous.cancel_at == null);
   if (!demandeeMaintenant || sub.status === 'canceled' || !annuleeDansFenetre(sub, nowS)) return false;
+  // Not refundable any more (already used by this customer): keep the paid period, cancel at its end
+  if (await remboursementDejaUtilise(idDe(sub.customer), sub.id)) return false;
   await remboursementDeps.stripe().subscriptions.cancel(sub.id, { prorate: false });
   return true;
 }

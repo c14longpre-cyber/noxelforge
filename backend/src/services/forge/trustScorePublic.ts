@@ -35,6 +35,8 @@ export function normaliserDomaine(input: unknown): string | null {
     return null;
   }
   host = host.replace(/\.$/, '').replace(/^www\./, '');
+  // A site is a domain name: IP addresses (10.0.0.1, 169.254.169.254…) are refused (last label all digits)
+  if (/\.\d+$/.test(host)) return null;
   return /^[a-z0-9-]+(\.[a-z0-9-]+)+$/.test(host) ? host : null;
 }
 
@@ -128,12 +130,13 @@ export async function chercherTrustScorePublic(
 ) {
   // url_site is stored as entered (protocol, www, path…): narrow with ilike, then compare normalized.
   // domain is normalized to [a-z0-9.-], so it cannot carry ilike wildcards.
-  const membres = await db.from('forge_members').select('user_id,url_site')
+  const membres = await db.from('forge_members').select('user_id,url_site,domaine_verifie_at')
     .eq('statut', 'actif').ilike('url_site', `%${domain}%`);
   if (membres.error) throw new ErreurSupabase('forge_members', membres.error.message);
 
   const userIds = (membres.data ?? [])
-    .filter((m) => normaliserDomaine(m.url_site) === domain)
+    // Only the member who proved this domain: a member who merely registered it is never its public score
+    .filter((m) => normaliserDomaine(m.url_site) === domain && !!m.domaine_verifie_at)
     .map((m) => m.user_id);
   if (!userIds.length) return reponseNonTrouvee(domain);
 

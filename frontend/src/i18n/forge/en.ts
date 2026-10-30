@@ -47,6 +47,8 @@ const en: ForgeTranslations = {
     badgeInfoTitle: 'How to unlock badge discounts',
     badgeInfoDesc: 'Display a link to noxelseo.com or noxelforge.com on your site. Alfred verifies it automatically on every submission. Discount applies permanently as long as the badge is active.',
     billedPerYear: 'billed ${price}/year',
+    currencyNote: 'All prices in Canadian dollars (CAD).',
+    alreadySubscribed: 'You already have a subscription. Change plan or cancel from “Manage subscription”.',
   },
   badge: {
     kicker: 'Display on your site',

@@ -8,9 +8,10 @@ const API_BASE = import.meta.env.VITE_API_URL ?? "";
 type Props = {
   onSuccess: (user: PublicUser) => void;
   onError: (msg: string) => void;
+  onPending?: (msg: string) => void;
 };
 
-export default function PasskeyButton({ onSuccess, onError }: Props) {
+export default function PasskeyButton({ onSuccess, onError, onPending }: Props) {
   const [mode, setMode] = useState<"idle" | "register">("idle");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -36,7 +37,11 @@ export default function PasskeyButton({ onSuccess, onError }: Props) {
         body: JSON.stringify({ credential: credential }),
       });
       const data = await finishRes.json();
-      if (data.ok) {
+      if (data.ok && data.pending) {
+        // New account: confirmed by the link e-mailed to the address
+        setMode("idle");
+        onPending?.(data.message || "Check your inbox to confirm your account.");
+      } else if (data.ok) {
         onSuccess(data.user);
       } else {
         onError(data.error || "Passkey login failed");

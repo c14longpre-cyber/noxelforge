@@ -3,6 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
 import type { AddressInfo } from "node:net";
+const NOT_NULL = Symbol('not null');
 
 process.env.FORGE_JWT_SECRET = "test-secret";
 process.env.ANTHROPIC_API_KEY ??= "test";
@@ -29,7 +30,7 @@ function fakeSupabase() {
       const inFilters: [string, unknown[]][] = [];
       let op = "select";
       let payload: Row | null = null;
-      const match = (r: Row) => filters.every(([c, v]) => r[c] === v) && inFilters.every(([c, vs]) => vs.includes(r[c]));
+      const match = (r: Row) => filters.every(([c, v]) => (v === NOT_NULL ? r[c] != null : r[c] === v)) && inFilters.every(([c, vs]) => vs.includes(r[c]));
       const run = () => {
         const rows = (tables[table] ??= []);
         if (op === "upsert") {
@@ -49,6 +50,7 @@ function fakeSupabase() {
       const q: any = {
         select: () => q,
         eq: (c: string, v: unknown) => { filters.push([c, v]); return q; },
+        not: (c: string) => { filters.push([c, NOT_NULL]); return q; }, // .not(c, 'is', null)
         in: (c: string, vs: unknown[]) => { inFilters.push([c, vs]); return q; },
         limit: () => q,
         upsert: (row: Row) => { op = "upsert"; payload = row; return q; },
@@ -81,7 +83,7 @@ const deps = (extra: Record<string, unknown> = {}) => ({ fetchImpl: fetchOk, eva
 function reset(extra: Record<string, Row[]> = {}) {
   tables = {
     users: [{ id: "u-admin", email: "admin@noxel.test" }, { id: "u-membre", email: "membre@test" }],
-    forge_members: [{ user_id: "u-membre", url_site: "https://www.exemple.ca/" }],
+    forge_members: [{ user_id: "u-membre", domaine_verifie_at: "2026-10-01T00:00:00.000Z", url_site: "https://www.exemple.ca/" }],
     forge_trust_scores: [],
     ...extra,
   };
@@ -257,9 +259,9 @@ test("recalculate route: at most one member recomputation every 10 minutes (429)
 test("admin list: 403 for a member; for an admin, every member with e-mail, pending scores first", async () => {
   reset({
     forge_members: [
-      { user_id: "u-membre", url_site: "https://www.exemple.ca/", statut: "actif", tier_abonnement: "silver" },
-      { user_id: "u-ok", url_site: "https://ok.ca", statut: "actif", tier_abonnement: "gold" },
-      { user_id: "u-new", url_site: "https://new.ca", statut: "actif", tier_abonnement: "bronze" },
+      { user_id: "u-membre", domaine_verifie_at: "2026-10-01T00:00:00.000Z", url_site: "https://www.exemple.ca/", statut: "actif", tier_abonnement: "silver" },
+      { user_id: "u-ok", domaine_verifie_at: "2026-10-01T00:00:00.000Z", url_site: "https://ok.ca", statut: "actif", tier_abonnement: "gold" },
+      { user_id: "u-new", domaine_verifie_at: "2026-10-01T00:00:00.000Z", url_site: "https://new.ca", statut: "actif", tier_abonnement: "bronze" },
     ],
     forge_trust_scores: [
       { user_id: "u-ok", statut: "calcule", score: 61, tier_forge: "gold", calcule_at: daysAgo(1), signaux_sources: { autorite: { valeur: 40, source: "admin", collecte_at: daysAgo(1), saisi_par: "admin@noxel.test" } } },

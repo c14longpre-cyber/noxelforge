@@ -45,18 +45,20 @@ noxelforge/
 - **Alfred AI reviewer**: Uses claude-sonnet-4-6; autonomous validation of submissions per Trust Score Forge rules
 
 ### 2. Tier & Pricing Integrity
-- **5 tiers**: Bronze (free, limited submissions), Silver ($20/mo), Gold ($40/mo), Platinum ($60/mo), Diamond ($80/mo)
+- **5 tiers**: Bronze (free, limited submissions), Silver ($20 CAD/mo), Gold ($40 CAD/mo), Platinum ($60 CAD/mo), Diamond ($80 CAD/mo); annual 199 / 399 / 599 / 799 CAD. Prices are in Canadian dollars since 2026-10-27: new checkouts use the CAD Stripe prices given by `FORGE_PRICE_<TIER>_<MONTHLY|ANNUAL>`; the former USD price ids stay in `FORGE_PRICES_USD` so existing subscriptions are still recognized
 - **Submission caps**: Tier-dependent daily/monthly limits in badge.routes or submission controller
 - **Pricing discounts**: 17% annual discount, 20% loyalty discount (configurable in Stripe Dashboard)
 - **Refund policy**: 14-day no-questions-asked (legal requirement, not negotiable)
 - **Payment flow**: Stripe integration via stripe.forge.service.ts + stripe.forge.routes.ts
+- **One subscription per member**: `/checkout` refuses a second one (409 `already_subscribed`) and reuses the member's Stripe customer; plan changes, cancellation, card and invoices go through the Stripe customer portal (`POST /api/forge/stripe/portal`, "Manage subscription" on the dashboard; portal options are set in the Stripe dashboard)
+- **Subscription status**: active/trialing → paid tier; past_due/incomplete → unchanged; unpaid/canceled/incomplete_expired/paused → bronze; an unknown price never downgrades
 
 ### 3. Badge System (Forge-Specific)
 - **Badge lifecycle**: 
   1. User registers/verifies domain → badge.routes issues provisional badge
   2. Cron job (daily 9AM Toronto; full check on the 1st/15th, grace members every day) triggers badgeChecker → Alfred review → Trust Score update
   3. Badge states (`forge_badges.statut`): non_verifie → verifie → grace (7 days, badge missing) → suspendu; back to verifie as soon as the badge is detected again. There is no separate "published" state: a member is public (directory, `/api/trust-score`) while the badge is `verifie`
-- **Anti-spoofing**: Domain ownership verification required before badge issuance
+- **Anti-spoofing / domain ownership** (`domainOwnership.ts`): a member's domain is public (matchmaking, directory, public Trust Score, exchanges, submissions, Trust Score recalculation) only once proven by a meta tag `noxel-forge-verification`, the file `/.well-known/noxel-forge-verification.txt` or a DNS TXT record, with a per-member token (`jetonDomaine`); `POST /api/forge/members/domain/verify`; one member per proven domain (unique partial index on `forge_members.domaine`). A submission must be a page of the member's proven domain
 - **Badge cron**: forgeBadgeCron.ts runs daily (full check on the 1st/15th, grace members the other days); failure = alert user, no auto-retry
 - **Badge revocation**: Blacklist system for spam/abuse (via spamGate.service.ts)
 
@@ -86,12 +88,14 @@ noxelforge/
 - **Session pattern**: Reuses NSE cookie+JWT architecture
 - **requireAuth middleware**: Wraps all protected routes; returns 401 if missing/expired token
 - **Cross-domain auth**: Cookie scope carefully set for noxelforge.com (not noxelseo.com)
+- **Never attach a login to someone else's account** (`userStore.connecterOuCreer`, table `users` shared with NOXEL SEO): a login opens an existing account of the same e-mail only if the provider vouches for the e-mail (Google `email_verified`, magic link, GitHub verified, LinkedIn `email_verified`) and that account's provider is proven (never Microsoft, whose `mail` is unverified). Password and passkey sign-ups create the account only when the e-mailed link (signed 24 h token, `signerJeton`) is opened; adding a passkey to an existing account needs that account's session. Rate limits in `middleware/authLimiter.ts`
+- **Outbound requests to member URLs**: always `safeFetch` / `fetchSur` (`lib/safeFetch.ts`), never `fetch()` (private, local and metadata addresses refused); `normaliserDomaine` refuses IP addresses
 
 ### 7. Stripe Integration
 - **Products**: Pre-created in Stripe Dashboard (Bronze/Silver/Gold/Platinum/Diamond)
 - **Subscription webhook**: Handles subscription.created, subscription.updated, subscription.deleted
 - **Credit system**: Anthropic SDK costs credited against user's tier
-- **Refunds (automatic)**: a subscription cancelled within 14 days of its start gets its last paid invoice refunded through Stripe (`remboursement.service.ts`), once per subscription (`forge_refunds`, idempotency key `forge-refund-<sub>`). A cancel-at-period-end requested within the 14 days is turned into an immediate cancellation so the refund happens. Stripe refusals are stored as `echec`; outages make the webhook answer 500 so Stripe retries
+- **Refunds (automatic)**: a subscription cancelled within 14 days of its start gets its last paid invoice refunded through Stripe (`remboursement.service.ts`), once per subscription (`forge_refunds`, idempotency key `forge-refund-<sub>`) and once per customer: a later subscription cancelled within 14 days is stored `deja_rembourse` and keeps its paid period. A cancel-at-period-end requested within the 14 days is turned into an immediate cancellation so the refund happens. Stripe refusals are stored as `echec`; outages make the webhook answer 500 so Stripe retries
 - **Testing**: Use Stripe test keys in .env.example; switch to live keys in production
 
 ### 8. Known Gotchas & Pièges

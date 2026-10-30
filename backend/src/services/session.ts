@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import jwt from "jsonwebtoken";
 
 const SECRET = process.env.FORGE_JWT_SECRET as string;
@@ -19,8 +20,31 @@ export function createSession(userId: string): string {
 
 export function verifySession(token: string): SessionPayload | null {
   try {
-    return jwt.verify(token, SECRET) as SessionPayload;
+    const p = jwt.verify(token, SECRET) as SessionPayload & { purpose?: string };
+    // A confirmation token (signerJeton) is never a session
+    if (!p || p.purpose || typeof p.userId !== "string") return null;
+    return p;
   } catch {
     return null;
   }
+}
+
+// Signed, single-purpose tokens (e-mail confirmation of a sign-up): nothing to store, expire on their own.
+// The purpose is checked so a session token can never be used as a confirmation token, and vice versa.
+export function signerJeton(payload: Record<string, unknown>, purpose: string, expiresIn: string): string {
+  return jwt.sign({ ...payload, purpose }, SECRET, { expiresIn } as jwt.SignOptions);
+}
+
+export function verifierJeton<T = Record<string, unknown>>(token: string, purpose: string): (T & { purpose: string }) | null {
+  try {
+    const p = jwt.verify(token, SECRET) as any;
+    return p && p.purpose === purpose ? p : null;
+  } catch {
+    return null;
+  }
+}
+
+// Deterministic, unguessable value derived from the server secret (domain ownership tokens): nothing to store
+export function signerValeur(value: string): string {
+  return crypto.createHmac("sha256", SECRET).update(value).digest("hex").slice(0, 32);
 }

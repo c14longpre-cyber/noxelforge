@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import Stripe from 'stripe';
-import { creerCheckoutForge, gererWebhookForge } from '../../services/forge/stripe.forge.service';
+import { creerCheckoutForge, gererWebhookForge, creerPortailForge, ErreurAbonnement } from '../../services/forge/stripe.forge.service';
 import { requireAuth } from '../../middleware/requireAuth';
 import { getSupabase } from '../../lib/supabaseClient';
 
@@ -23,7 +23,19 @@ router.post('/checkout', requireAuth, async (req: Request, res: Response) => {
     const url = await creerCheckoutForge({ userId, email, tier, billing: billing === 'annual' ? 'annual' : 'monthly', badgeInstalle: badge?.statut === 'verifie' });
     res.json({ ok: true, url });
   } catch (err: any) {
+    if (err instanceof ErreurAbonnement) return res.status(err.status).json({ ok: false, code: err.code, error: err.message });
     res.status(400).json({ ok: false, error: err.message });
+  }
+});
+
+// POST /api/forge/stripe/portal — the member's own Stripe customer, from the session
+router.post('/portal', requireAuth, async (req: Request, res: Response) => {
+  try {
+    res.json({ ok: true, url: await creerPortailForge((req as any).userId) });
+  } catch (err: any) {
+    if (err instanceof ErreurAbonnement) return res.status(err.status).json({ ok: false, code: err.code, error: err.message });
+    console.error('[portal]', err?.message ?? err);
+    res.status(500).json({ ok: false, error: 'Billing portal unavailable.' });
   }
 });
 

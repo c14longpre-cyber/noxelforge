@@ -87,3 +87,27 @@ export async function sendMagicLinkEmail(email: string, magicUrl: string, lang: 
     return false;
   }
 }
+
+// Sign-up confirmation (password or passkey): the account is only created once this link is opened
+export async function sendSignupConfirmationEmail(email: string, confirmUrl: string, lang: string = "en"): Promise<boolean> {
+  const fr = lang.toLowerCase().startsWith("fr");
+  const subject = fr ? "Confirmez votre compte NOXEL Forge" : "Confirm your NOXEL Forge account";
+  const title = fr ? "Confirmez votre adresse" : "Confirm your e-mail address";
+  const body = fr
+    ? "Cliquez sur le bouton pour créer votre compte NOXEL Forge. Si vous n'avez rien demandé, ignorez ce courriel : aucun compte ne sera créé."
+    : "Click the button to create your NOXEL Forge account. If you did not ask for this, ignore this e-mail: no account will be created.";
+  const cta = fr ? "Créer mon compte" : "Create my account";
+  const expiry = fr ? "Ce lien expire dans 24 heures." : "This link expires in 24 hours.";
+  const html = buildMagicLinkHTML(confirmUrl, { title, description: body, cta, expiry });
+  try {
+    const result = await getResend().emails.send({ from: EMAIL_FROM, to: email, subject, html });
+    if ((result as any).error) {
+      console.error("[emailService] signup confirmation error:", JSON.stringify((result as any).error));
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.error("[emailService] signup confirmation failed:", err);
+    return false;
+  }
+}

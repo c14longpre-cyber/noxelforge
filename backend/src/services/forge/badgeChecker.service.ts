@@ -1,5 +1,9 @@
 import { getSupabase } from '../../lib/supabaseClient';
 import { must } from '../../lib/supabaseCheck';
+import { fetchSur } from '../../lib/safeFetch';
+
+// The member's own site is fetched through fetchSur (no private / internal address); tests replace it
+export const badgeDeps = { fetch: fetchSur as typeof fetch };
 export type BadgeStatut = 'verifie' | 'non_verifie' | 'grace' | 'suspendu';
 
 export interface BadgeCheckResult {
@@ -21,7 +25,7 @@ export async function verifierBadgeSurSite(urlSite: string): Promise<boolean> {
   try {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 10000);
-    const response = await fetch(urlSite, {
+    const response = await badgeDeps.fetch(urlSite, {
       signal: controller.signal,
       headers: { 'User-Agent': 'NOXEL-Forge-BadgeVerifier/1.0 (+https://noxelseo.com/forge)' },
     });

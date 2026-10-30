@@ -1,6 +1,6 @@
 import { Router, type Request, type Response } from "express";
 import crypto from "crypto";
-import { upsertUser } from "../services/userStore";
+import { connecterOuCreer, EmailDejaUtilise } from "../services/userStore";
 import { createSession } from "../services/session";
 
 const router = Router();
@@ -87,12 +87,14 @@ router.get("/microsoft/callback", async (req: Request, res: Response) => {
     const email = userJson.mail || userJson.userPrincipalName || ("ms_" + userJson.id + "@noxelforge.local");
     const name = userJson.displayName || userJson.givenName || "MicrosoftUser";
 
-    const user = await upsertUser(email, name, userJson.id, "microsoft", null);
+    // Microsoft's "mail" field is not verified by Microsoft: never attached to an existing account
+    const user = await connecterOuCreer({ email, name, providerId: userJson.id, provider: "microsoft", emailVerified: false });
     const session = createSession(user.id);
     res.cookie(COOKIE_NAME, session, COOKIE_OPTS);
 
     return res.redirect(FRONTEND_URL + "/forge?auth_success=microsoft");
   } catch (error) {
+    if (error instanceof EmailDejaUtilise) return res.redirect(`${FRONTEND_URL}/forge?auth_error=email_in_use`);
     console.error("[auth/microsoft/callback]", error);
     return res.redirect(FRONTEND_URL + "/forge?auth_error=server_error");
   }

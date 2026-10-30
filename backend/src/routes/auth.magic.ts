@@ -1,7 +1,8 @@
 import { Router, type Request, type Response } from "express";
 import crypto from "crypto";
 import { getSupabase } from "../lib/supabaseClient";
-import { upsertUser } from "../services/userStore";
+import { connecterOuCreer, EmailDejaUtilise } from "../services/userStore";
+import { emailIpLimiter, emailRecipientLimiter } from "../middleware/authLimiter";
 import { createSession } from "../services/session";
 import { sendMagicLinkEmail } from "../services/emailService";
 import { must } from "../lib/supabaseCheck";
@@ -11,14 +12,14 @@ const COOKIE_NAME = process.env.FORGE_SESSION_COOKIE_NAME || "forge_session";
 const IS_PROD = process.env.NODE_ENV === "production";
 const FRONTEND_URL = IS_PROD ? (process.env.FRONTEND_URL || "https://noxelforge.com") : "http://localhost:5173";
 const BACKEND_URL = IS_PROD
-  ? (process.env.BACKEND_PUBLIC_URL || "https://noxelforge-production.up.railway.app")
+  ? (process.env.BACKEND_PUBLIC_URL || "https://api.noxelforge.com")
   : ("http://localhost:" + (process.env.PORT || 3001));
 
 const COOKIE_OPTS = IS_PROD
   ? { httpOnly: true, sameSite: "none" as const, secure: true, maxAge: 7 * 24 * 60 * 60 * 1000 }
   : { httpOnly: true, sameSite: "lax" as const, secure: false, maxAge: 7 * 24 * 60 * 60 * 1000 };
 
-router.post("/request", async (req: Request, res: Response) => {
+router.post("/request", emailIpLimiter, emailRecipientLimiter, async (req: Request, res: Response) => {
   try {
     const { email } = req.body as { email?: string };
     if (!email || !email.includes("@")) {
@@ -71,12 +72,14 @@ router.get("/verify", async (req: Request, res: Response) => {
     must(await supabase.from("magic_links").update({ used_at: new Date().toISOString() }).eq("token", token), 'magic_links update');
 
     const name = link.email.split("@")[0];
-    const user = await upsertUser(link.email, name, link.email, "email", null);
+    // The link proves the address: it may sign in to the existing account of that e-mail
+    const user = await connecterOuCreer({ email: link.email, name, provider: "email", providerId: link.email, emailVerified: true });
     const session = createSession(user.id);
 
     res.cookie(COOKIE_NAME, session, COOKIE_OPTS);
     return res.redirect(FRONTEND_URL + "/forge?auth_success=magic");
   } catch (err: any) {
+    if (err instanceof EmailDejaUtilise) return res.redirect(FRONTEND_URL + "/forge?auth_error=email_in_use");
     console.error("[magic/verify]", err);
     return res.redirect(FRONTEND_URL + "/forge?auth_error=server_error");
   }

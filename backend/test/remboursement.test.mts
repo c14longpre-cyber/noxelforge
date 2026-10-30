@@ -4,6 +4,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
 import type { AddressInfo } from "node:net";
+const NOT_NULL = Symbol('not null');
 
 process.env.FORGE_JWT_SECRET = "test-secret";
 process.env.STRIPE_SECRET_KEY = "sk_test_dummy";
@@ -23,7 +24,7 @@ supabaseClient.getSupabase = () => ({
     const filters: [string, unknown][] = [];
     let op = "select"; let payload: Row | null = null;
     const rows = () => (tables[table] ??= []);
-    const match = (r: Row) => filters.every(([c, v]) => r[c] === v);
+    const match = (r: Row) => filters.every(([c, v]) => (v === NOT_NULL ? r[c] != null : r[c] === v));
     const run = () => {
       if (op === "upsert") { rows().push({ ...payload }); return { data: null, error: null }; }
       if (op === "update") { const m = rows().filter(match); m.forEach((r) => Object.assign(r, payload)); return { data: m, error: null }; }
@@ -32,6 +33,7 @@ supabaseClient.getSupabase = () => ({
     const q: any = {
       select: () => q,
       eq: (c: string, v: unknown) => { filters.push([c, v]); return q; },
+        not: (c: string) => { filters.push([c, NOT_NULL]); return q; }, // .not(c, 'is', null)
       upsert: (p: Row) => { op = "upsert"; payload = p; return q; },
       update: (p: Row) => { op = "update"; payload = p; return q; },
       maybeSingle: () => Promise.resolve({ data: run().data?.[0] ?? null, error: null }),

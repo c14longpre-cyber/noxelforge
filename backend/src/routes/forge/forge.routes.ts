@@ -12,6 +12,7 @@ import {
   getMonStatut,
   verifierMonBadge,
   recalculerMonScore,
+  verifierMonDomaine,
 } from '../../controllers/forge/members.controller';
 import {
   creerSoumission,
@@ -32,6 +33,9 @@ router.post('/members/register', requireAuth, registerMembre);
 
 // Statut complet du membre connecté
 router.get('/members/status', requireAuth, getMonStatut);
+
+// Preuve de propriété du domaine (balise meta, fichier .well-known ou DNS TXT)
+router.post('/members/domain/verify', requireAuth, verifierMonDomaine);
 
 // ============================================================
 // BADGES

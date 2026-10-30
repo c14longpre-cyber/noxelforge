@@ -1,6 +1,6 @@
 import { Router, type Request, type Response } from "express";
 import crypto from "crypto";
-import { upsertUser } from "../services/userStore";
+import { connecterOuCreer, EmailDejaUtilise } from "../services/userStore";
 import { createSession } from "../services/session";
 
 const router = Router();
@@ -92,12 +92,13 @@ router.get("/linkedin/callback", async (req: Request, res: Response) => {
     const email = userJson.email || "";
     const avatarUrl = userJson.picture || null;
 
-    const user = await upsertUser(email, name, userJson.sub, "linkedin", avatarUrl);
+    const user = await connecterOuCreer({ email, name, providerId: userJson.sub, provider: "linkedin", avatarUrl, emailVerified: userJson.email_verified === true });
     const session = createSession(user.id);
     res.cookie(COOKIE_NAME, session, COOKIE_OPTS);
 
     return res.redirect(`${frontendUrl}/forge?auth_success=linkedin`);
   } catch (error) {
+    if (error instanceof EmailDejaUtilise) return res.redirect(`${frontendUrl}/forge?auth_error=email_in_use`);
     console.error("[auth/linkedin/callback]", error);
     return res.redirect(`${frontendUrl}/forge?auth_error=server_error`);
   }
