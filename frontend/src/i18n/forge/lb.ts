@@ -8,7 +8,7 @@ const lb: ForgePartialTranslations = {
     badges: "Badges"
   },
   hero: {
-    kicker: "NOXEL Forge - Backlink Exchange Ökosystem",
+    kicker: "NOXEL FORGE - Backlink Exchange Ökosystem",
     title: "Schmied deng",
     titleAccent: "Autoritéit",
     subtitle: "Tausch Backlinks mat verifiéierte Siten, gefiltert vun Alfred. Qualitéit garantéiert, Spam onméiglech. Gëff een, kriss een.",
@@ -46,11 +46,11 @@ const lb: ForgePartialTranslations = {
     descLabel: "Kuerz Beschreiwung",
     contentLabel: "Haaptinhalt",
     contentHint: "fakultativ, hëlleft Alfred besser z'analyséieren",
-    submitBtn: "Bei NOXEL Forge abschécken",
+    submitBtn: "Bei NOXEL FORGE abschécken",
     analyzing: "Gëtt analyséiert..."
   },
   pricing: {
-    kicker: "NOXEL Forge Präisser",
+    kicker: "NOXEL FORGE Präisser",
     title: "Bau däin",
     titleAccent: "Autoritéitsnetzwierk",
     subtitle: "Weist de NOXEL Badge op denger Säit an entspär exklusiv Remisen op all Niveau.",
@@ -66,7 +66,7 @@ const lb: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Op ärer Säit affichéieren",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Badges",
     subtitle: "Kopéiert a klëmmt e Badge an de Footer vun ärer Säit.",
     copy: "Snippet kopéieren",
@@ -76,7 +76,7 @@ const lb: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Prett fir ze schmidden?",
-    title: "NOXEL Forge bäitrieden",
+    title: "NOXEL FORGE bäitrieden",
     subtitle: "Fänkt haut un, äre verifiéierten Backlink-Netzwierk opzebauen."
   }
 };

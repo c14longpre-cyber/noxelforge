@@ -8,7 +8,7 @@ const tk: ForgePartialTranslations = {
     badges: "Nyşanlar"
   },
   hero: {
-    kicker: "NOXEL Forge - Backlink Alyş-çalyş Ekosistemi",
+    kicker: "NOXEL FORGE - Backlink Alyş-çalyş Ekosistemi",
     title: "Öz",
     titleAccent: "abraýyňy",
     subtitle: "Alfred tarapyndan süzgüçlenen tassyklanan saýtlar bilen backlink alyşyň. Hil kepillendirildi, spam mümkin däl. Birini ber, birini al.",
@@ -46,11 +46,11 @@ const tk: ForgePartialTranslations = {
     descLabel: "Gysga düşündiriş",
     contentLabel: "Esasy mazmun",
     contentHint: "islege bagly, Alfred-e has gowy derňemäge kömek edýär",
-    submitBtn: "NOXEL Forge-a iber",
+    submitBtn: "NOXEL FORGE-a iber",
     analyzing: "Derňelýär..."
   },
   pricing: {
-    kicker: "NOXEL Forge Bahalary",
+    kicker: "NOXEL FORGE Bahalary",
     title: "Öz",
     titleAccent: "ygtyýar toruňy",
     subtitle: "Saýtyňyzda NOXEL nyşanyny görkeziň we her derejedäki ýeňillikleri açyň.",
@@ -66,7 +66,7 @@ const tk: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Saýtyňyzda görkeziň",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Nyşanlary",
     subtitle: "Islendik nyşany saýtyňyzyň aşagyndaky bölümine göçüriň we goýuň.",
     copy: "Kody göçür",
@@ -76,7 +76,7 @@ const tk: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Başlamaga taýynmy?",
-    title: "NOXEL Forge-a goşulyň",
+    title: "NOXEL FORGE-a goşulyň",
     subtitle: "Tassyklanan backlink toruňyzy şu gün gurup başlaň."
   }
 };

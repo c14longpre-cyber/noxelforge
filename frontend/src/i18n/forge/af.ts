@@ -8,7 +8,7 @@ const af: ForgePartialTranslations = {
     badges: "Kentekens"
   },
   hero: {
-    kicker: "NOXEL Forge - Terugskakels Uitruilekosisteem",
+    kicker: "NOXEL FORGE - Terugskakels Uitruilekosisteem",
     title: "Smee jou",
     titleAccent: "gesag",
     subtitle: "Ruil terugskakels uit met geverifieerde werwe gefilterde deur Alfred. Kwaliteit gewaarborg, strooipos onmoontlik. Gee een, kry een.",
@@ -46,11 +46,11 @@ const af: ForgePartialTranslations = {
     descLabel: "Kort beskrywing",
     contentLabel: "Hoofinhoud",
     contentHint: "opsioneel, help Alfred beter analiseer",
-    submitBtn: "Indien by NOXEL Forge",
+    submitBtn: "Indien by NOXEL FORGE",
     analyzing: "Besig om te analiseer..."
   },
   pricing: {
-    kicker: "NOXEL Forge Pryse",
+    kicker: "NOXEL FORGE Pryse",
     title: "Bou jou",
     titleAccent: "gesagsnetwerk",
     subtitle: "Vertoon die NOXEL kenteken op jou werf en ontsluit eksklusiewe kortings op elke vlak.",
@@ -66,7 +66,7 @@ const af: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Vertoon op jou werf",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Kentekens",
     subtitle: "Kopieer en plak enige kenteken in jou werf se voetskrif.",
     copy: "Kopieer kode",
@@ -76,7 +76,7 @@ const af: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Gereed om te smee?",
-    title: "Sluit aan by NOXEL Forge",
+    title: "Sluit aan by NOXEL FORGE",
     subtitle: "Begin vandag met die bou van jou geverifieerde terugskakelsnetwerk."
   }
 };

@@ -8,7 +8,7 @@ const sq: ForgePartialTranslations = {
     badges: "Distinktivët"
   },
   hero: {
-    kicker: "NOXEL Forge - Ekosistemi i Shkëmbimit të Backlink-ëve",
+    kicker: "NOXEL FORGE - Ekosistemi i Shkëmbimit të Backlink-ëve",
     title: "Forgo",
     titleAccent: "autoritetin tënd",
     subtitle: "Shkëmbe backlink-e me faqe të verifikuara të filtruara nga Alfred. Cilësia e garantuar, spam i pamundur. Jep një, merr një.",
@@ -46,11 +46,11 @@ const sq: ForgePartialTranslations = {
     descLabel: "Përshkrim i shkurtër",
     contentLabel: "Përmbajtja kryesore",
     contentHint: "opsionale, ndihmon Alfred të analizojë më mirë",
-    submitBtn: "Dërgo në NOXEL Forge",
+    submitBtn: "Dërgo në NOXEL FORGE",
     analyzing: "Po analizohet..."
   },
   pricing: {
-    kicker: "Çmimet e NOXEL Forge",
+    kicker: "Çmimet e NOXEL FORGE",
     title: "Ndërto",
     titleAccent: "rrjetin tënd të autoritetit",
     subtitle: "Shfaq distinktivun NOXEL në faqen tënde dhe zhblloko zbritje ekskluzive në çdo nivel.",
@@ -66,7 +66,7 @@ const sq: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Shfaq në faqen tënde",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Distinktivët",
     subtitle: "Kopjo dhe ngjit çdo distinktiv në fundin e faqes tënde.",
     copy: "Kopjo fragmentin",
@@ -76,7 +76,7 @@ const sq: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Gati të forgoing?",
-    title: "Bashkohu me NOXEL Forge",
+    title: "Bashkohu me NOXEL FORGE",
     subtitle: "Fillo të ndërtosh rrjetin tënd të verifikuar të backlink-ëve sot."
   }
 };

@@ -8,7 +8,7 @@ const ur: ForgePartialTranslations = {
     badges: "بیجز"
   },
   hero: {
-    kicker: "NOXEL Forge - بیک لنک ایکسچینج ایکو سسٹم",
+    kicker: "NOXEL FORGE - بیک لنک ایکسچینج ایکو سسٹم",
     title: "اپنی",
     titleAccent: "اتھارٹی",
     subtitle: "Alfred کی طرف سے فلٹر کردہ تصدیق شدہ سائٹس کے ساتھ بیک لنکس کا تبادلہ کریں۔ معیار کی ضمانت، سپیم ناممکن۔ ایک دیں، ایک پائیں۔",
@@ -46,11 +46,11 @@ const ur: ForgePartialTranslations = {
     descLabel: "مختصر تفصیل",
     contentLabel: "مرکزی مواد",
     contentHint: "اختیاری، Alfred کو بہتر تجزیہ کرنے میں مدد کرتا ہے",
-    submitBtn: "NOXEL Forge میں جمع کروائیں",
+    submitBtn: "NOXEL FORGE میں جمع کروائیں",
     analyzing: "تجزیہ ہو رہا ہے..."
   },
   pricing: {
-    kicker: "NOXEL Forge قیمتیں",
+    kicker: "NOXEL FORGE قیمتیں",
     title: "اپنا",
     titleAccent: "اتھارٹی نیٹ ورک",
     subtitle: "اپنی سائٹ پر NOXEL بیج لگائیں اور ہر درجے پر خصوصی چھوٹ حاصل کریں۔",
@@ -66,7 +66,7 @@ const ur: ForgePartialTranslations = {
   },
   badge: {
     kicker: "اپنی سائٹ پر دکھائیں",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "بیجز",
     subtitle: "کوئی بھی بیج اپنی سائٹ کے فوٹر میں کاپی اور پیسٹ کریں۔",
     copy: "کوڈ کاپی کریں",
@@ -76,7 +76,7 @@ const ur: ForgePartialTranslations = {
   },
   cta: {
     kicker: "فورج کرنے کے لیے تیار ہیں؟",
-    title: "NOXEL Forge میں شامل ہوں",
+    title: "NOXEL FORGE میں شامل ہوں",
     subtitle: "آج ہی اپنا تصدیق شدہ بیک لنک نیٹ ورک بنانا شروع کریں۔"
   }
 };

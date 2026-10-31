@@ -8,7 +8,7 @@ const lv: ForgePartialTranslations = {
     badges: "Nozīmītes"
   },
   hero: {
-    kicker: "NOXEL Forge - Saišu apmaiņas ekosistēma",
+    kicker: "NOXEL FORGE - Saišu apmaiņas ekosistēma",
     title: "Kaldiniet savu",
     titleAccent: "autoritāti",
     subtitle: "Apmainiet atpakaļsaites ar Alfred pārbaudītām vietnēm. Kvalitāte garantēta, surogātpasts neiespējams. Dod vienu, saņem vienu.",
@@ -46,11 +46,11 @@ const lv: ForgePartialTranslations = {
     descLabel: "Īss apraksts",
     contentLabel: "Galvenais saturs",
     contentHint: "neobligāts, palīdz Alfred labāk analizēt",
-    submitBtn: "Iesniegt NOXEL Forge",
+    submitBtn: "Iesniegt NOXEL FORGE",
     analyzing: "Analizē..."
   },
   pricing: {
-    kicker: "NOXEL Forge cenas",
+    kicker: "NOXEL FORGE cenas",
     title: "Veidojiet savu",
     titleAccent: "autoritātes tīklu",
     subtitle: "Rādiet NOXEL nozīmīti savā vietnē un atbloķējiet ekskluzīvas atlaides katrā līmenī.",
@@ -66,7 +66,7 @@ const lv: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Rādiet savā vietnē",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Nozīmītes",
     subtitle: "Kopējiet un ielīmējiet jebkuru nozīmīti savas vietnes kājenē.",
     copy: "Kopēt fragmentu",
@@ -76,7 +76,7 @@ const lv: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Gatavs kaldināt?",
-    title: "Pievienojieties NOXEL Forge",
+    title: "Pievienojieties NOXEL FORGE",
     subtitle: "Sāciet veidot savu pārbaudīto atpakaļsaišu tīklu jau šodien."
   }
 };

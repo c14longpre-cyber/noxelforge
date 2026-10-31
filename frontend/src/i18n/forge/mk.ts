@@ -8,7 +8,7 @@ const mk: ForgePartialTranslations = {
     badges: "Значки"
   },
   hero: {
-    kicker: "NOXEL Forge - Екосистем за размена на бекlinks",
+    kicker: "NOXEL FORGE - Екосистем за размена на бекlinks",
     title: "Изгради го својот",
     titleAccent: "авторитет",
     subtitle: "Разменувај бекlinks со верифицирани сајтови филтрирани од Alfred. Квалитетот е загарантиран, спамот е невозможен. Дај еден, добиј еден.",
@@ -46,11 +46,11 @@ const mk: ForgePartialTranslations = {
     descLabel: "Кратко опишување",
     contentLabel: "Главна содржина",
     contentHint: "опционално, помага Alfred да анализира подобро",
-    submitBtn: "Поднеси до NOXEL Forge",
+    submitBtn: "Поднеси до NOXEL FORGE",
     analyzing: "Се анализира..."
   },
   pricing: {
-    kicker: "NOXEL Forge Цени",
+    kicker: "NOXEL FORGE Цени",
     title: "Изгради ја својата",
     titleAccent: "мрежа на авторитет",
     subtitle: "Прикажи го NOXEL значката на твојот сајт и отклучи ексклузивни попусти на секое ниво.",
@@ -66,7 +66,7 @@ const mk: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Прикажи на твојот сајт",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Значки",
     subtitle: "Копирај и залепи која било значка во подножјето на твојот сајт.",
     copy: "Копирај код",
@@ -76,7 +76,7 @@ const mk: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Подготвен да градиш?",
-    title: "Придружи се на NOXEL Forge",
+    title: "Придружи се на NOXEL FORGE",
     subtitle: "Започни да ја градиш својата верифицирана мрежа на бекlinks денес."
   }
 };

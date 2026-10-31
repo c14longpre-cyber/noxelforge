@@ -8,7 +8,7 @@ const gv: ForgePartialTranslations = {
     badges: "Badgeyn"
   },
   hero: {
-    kicker: "NOXEL Forge - Ecosystem Coonrey Backlink",
+    kicker: "NOXEL FORGE - Ecosystem Coonrey Backlink",
     title: "Jeant dty",
     titleAccent: "ughthassys",
     subtitle: "Coonrey backlinkaghyn lesh ynnydyn prowalit er nyn lhiggey liorish Alfred. Caaill garantit, spam neu-phossible. Cur fer, fow fer.",
@@ -46,11 +46,11 @@ const gv: ForgePartialTranslations = {
     descLabel: "Myn-insh giare",
     contentLabel: "Ard-chooid",
     contentHint: "reiht, cooney lesh Alfred jannoo bun-ronsaghey ny share",
-    submitBtn: "Cur stiagh gys NOXEL Forge",
+    submitBtn: "Cur stiagh gys NOXEL FORGE",
     analyzing: "Scrutaghey..."
   },
   pricing: {
-    kicker: "Priceil NOXEL Forge",
+    kicker: "Priceil NOXEL FORGE",
     title: "Trog dty",
     titleAccent: "lieen ughthassys",
     subtitle: "Soilshee badge NOXEL er dty ynnyd as feddyn lhiasaghyn ry-lhiassaghey er dy chooilley chast.",
@@ -66,7 +66,7 @@ const gv: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Soilshee er dty ynnyd",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Badgeyn",
     subtitle: "Coip as cur stiagh badge erbee ayns bun-choshee dty ynnyd.",
     copy: "Coip myr-shen",
@@ -76,7 +76,7 @@ const gv: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Aarloo dy jeant?",
-    title: "Gow ayrn ayns NOXEL Forge",
+    title: "Gow ayrn ayns NOXEL FORGE",
     subtitle: "Toshiaght troggal dty lieen backlink prowalit jiu."
   }
 };

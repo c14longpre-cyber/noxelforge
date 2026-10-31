@@ -8,7 +8,7 @@ const eu: ForgePartialTranslations = {
     badges: "Txapak"
   },
   hero: {
-    kicker: "NOXEL Forge - Esteka-truke Ekosistema",
+    kicker: "NOXEL FORGE - Esteka-truke Ekosistema",
     title: "Forjatu zure",
     titleAccent: "agintea",
     subtitle: "Trukatu estekak Alfred-ek iragazitako egiaztutako guneekin. Kalitatea bermatuta, spama ezinezkoa. Bat eman, bat jaso.",
@@ -46,11 +46,11 @@ const eu: ForgePartialTranslations = {
     descLabel: "Deskripzio laburra",
     contentLabel: "Eduki nagusia",
     contentHint: "aukerakoa, Alfred-i hobeto analizatzen laguntzen dio",
-    submitBtn: "Bidali NOXEL Forge-ra",
+    submitBtn: "Bidali NOXEL FORGE-ra",
     analyzing: "Analizatzen..."
   },
   pricing: {
-    kicker: "NOXEL Forge Prezioak",
+    kicker: "NOXEL FORGE Prezioak",
     title: "Eraiki zure",
     titleAccent: "aginte sarea",
     subtitle: "Erakutsi NOXEL txapa zure gunean eta desblokeatu deskontu esklusiboak maila guztietan.",
@@ -66,7 +66,7 @@ const eu: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Erakutsi zure gunean",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Txapak",
     subtitle: "Kopiatu eta itsatsi edozein txapa zure gunearen oinean.",
     copy: "Kopiatu zatia",
@@ -76,7 +76,7 @@ const eu: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Prest forjatzeko?",
-    title: "Sartu NOXEL Forge-n",
+    title: "Sartu NOXEL FORGE-n",
     subtitle: "Hasi zure egiaztutako esteka-sarea eraikitzen gaur."
   }
 };

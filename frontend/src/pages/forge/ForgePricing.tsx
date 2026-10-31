@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import Footer from '../../components/Footer';
 import { Link } from 'react-router-dom';
-import { getForgeT } from '../../i18n/forge.translations';
+import { useForgeT } from '../../hooks/useForgeT';
 import { HudButton } from '../../components/hud/HudButton';
 import HudRouterLink from '../../components/HudRouterLink';
 import type { ForgeTranslations } from '../../i18n/forge.translations';
 
+import ForgeTopbar from '../../components/ForgeTopbar';
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 const getTiers = (t: ForgeTranslations) => [
@@ -14,7 +15,7 @@ const getTiers = (t: ForgeTranslations) => [
     label: 'Bronze',
     icon: '🥉',
     image: '/tiers/Bronze_tier.png',
-    color: '#CD7F32',
+    color: '#cd7f32',
     monthly: 0,
     annual: 0,
     priceLabel: 'Free',
@@ -27,7 +28,7 @@ const getTiers = (t: ForgeTranslations) => [
     label: 'Silver',
     icon: '🥈',
     image: '/tiers/Silver_tier.png',
-    color: '#A8A9AD',
+    color: '#aab0cc',
     monthly: 20,
     annual: 199,
     features: ['Submit your site', 'Alfred review', 'Earn Forge Points', 'Badge discount 10%'],
@@ -39,7 +40,7 @@ const getTiers = (t: ForgeTranslations) => [
     label: 'Gold',
     icon: '🥇',
     image: '/tiers/Gold_tier.png',
-    color: '#FFD700',
+    color: '#ffb74d',
     monthly: 40,
     annual: 399,
     features: ['Priority Alfred review', '1.5x Forge Points', 'Badge discount 15%', 'Verified partner badge'],
@@ -52,7 +53,7 @@ const getTiers = (t: ForgeTranslations) => [
     label: 'Platinum',
     icon: '⬡',
     image: '/tiers/Platinum_tier.png',
-    color: '#E5E4E2',
+    color: '#ce93d8',
     monthly: 60,
     annual: 599,
     features: ['VIP Alfred review', '2x Forge Points', 'Badge discount 20%', 'Advanced placement'],
@@ -64,7 +65,7 @@ const getTiers = (t: ForgeTranslations) => [
     label: 'Diamond',
     icon: '💎',
     image: '/tiers/Diamond_tier.png',
-    color: '#B9F2FF',
+    color: '#3ddc84',
     monthly: 80,
     annual: 799,
     features: ['Elite Alfred VIP', '3x Forge Points', 'Badge discount 25%', 'Featured listing'],
@@ -82,18 +83,19 @@ export default function ForgePricing() {
   // Remise badge affichée seulement si le serveur a vérifié le badge (même règle que /checkout).
   const [badgeInstalle, setBadgeInstalle] = useState(false);
   const [loading, setLoading] = useState<string | null>(null);
-  const [t, setT] = useState<ForgeTranslations | null>(null);
+  const [tierActuel, setTierActuel] = useState<string | null>(null);
+  // Langue choisie dans l'en-tête (forge_lang), comme les autres pages
+  const { t } = useForgeT();
 
   useEffect(() => {
-    const lang = navigator.language.split('-')[0] || 'en';
-    getForgeT(lang).then(setT).catch(() => getForgeT('en').then(setT));
     fetch(`${API_BASE}/api/forge/members/status`, { credentials: 'include' })
       .then(r => (r.ok ? r.json() : null))
-      .then(d => setBadgeInstalle(d?.membre?.badge_installe === true))
+      .then(d => {
+        setBadgeInstalle(d?.membre?.badge_installe === true);
+        setTierActuel(d?.membre?.tier_abonnement ?? null);
+      })
       .catch(() => {});
   }, []);
-
-  if (!t) return <div style={{ minHeight: '100vh', background: 'var(--bg)' }} />;
 
   async function ouvrirPortail() {
     const res = await fetch(`${API_BASE}/api/forge/stripe/portal`, { method: 'POST', credentials: 'include' });
@@ -116,7 +118,7 @@ export default function ForgePricing() {
       if (data.url) { window.location.assign(data.url); return; }
       // One subscription per member: plan changes and cancellation go through the Stripe portal
       if (data.code === 'already_subscribed') {
-        if (window.confirm(t?.pricing.alreadySubscribed ?? data.error)) await ouvrirPortail();
+        if (window.confirm(t.pricing.alreadySubscribed ?? data.error)) await ouvrirPortail();
         return;
       }
       alert(res.status === 401 ? 'Please sign in first.' : (data.error || 'Error. Please try again.'));
@@ -140,100 +142,81 @@ export default function ForgePricing() {
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', overflowY: 'auto' }}>
+      <ForgeTopbar active="pricing" />
 
-      {/* NAV */}
-      <nav className="forge-subbar" style={{ borderBottom: '1px solid var(--border)', height: 56, display: 'flex', alignItems: 'center', gap: 12, background: 'var(--bg2)', position: 'sticky', top: 0, zIndex: 100 }}>
-        <Link to="/forge" style={{ color: 'var(--muted)', fontSize: 13 }}>{t.nav.back}</Link>
-        <span style={{ color: 'var(--soft)' }}>·</span>
-        <span style={{ fontWeight: 900, fontSize: 15 }}>{t.nav.pricing}</span>
-      </nav>
+      {/* Même page de prix que NOXEL SEO (noxel-shell.css) */}
+      <main className="nx-page">
+        <div className="nx-page-header">
+          <h1 className="nx-page-title">{t.nav.pricing}</h1>
+          <span className="nx-page-subtitle">{t.pricing.title} {t.pricing.titleAccent}. {t.pricing.subtitle}</span>
+        </div>
 
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 32px 80px' }}>
-
-        {/* HEADER */}
-        <div style={{ textAlign: 'center', marginBottom: 48 }}>
-          <div className="nx-kicker" style={{ marginBottom: 12 }}>{t.pricing.kicker}</div>
-          <h1 style={{ fontSize: 'clamp(1.8rem,4vw,2.8rem)', fontWeight: 900, marginBottom: 16, letterSpacing: '-0.5px' }}>
-            {t.pricing.title} <span style={{ color: 'var(--g)' }}>{t.pricing.titleAccent}</span>
-          </h1>
-          <p style={{ color: 'var(--muted)', fontSize: 15, marginBottom: 32 }}>
-            {t.pricing.subtitle}
-          </p>
-
-          {/* BILLING TOGGLE */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, marginBottom: 20 }}>
-            <button onClick={() => setBilling('monthly')} style={{ padding: '8px 20px', borderRadius: 'var(--r)', border: '1px solid var(--border)', background: billing === 'monthly' ? 'var(--g)' : 'transparent', color: billing === 'monthly' ? '#07090f' : 'var(--muted)', fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>{t.pricing.monthly}</button>
-            <button onClick={() => setBilling('annual')} style={{ padding: '8px 20px', borderRadius: 'var(--r)', border: '1px solid var(--border)', background: billing === 'annual' ? 'var(--g)' : 'transparent', color: billing === 'annual' ? '#07090f' : 'var(--muted)', fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>
-              {t.pricing.annual} <span style={{ fontSize: 11, marginLeft: 4, color: billing === 'annual' ? '#07090f' : 'var(--g)' }}>{t.pricing.discount}</span>
+        <div className="nx-cycle">
+          <div className="nx-cycle__track" role="group" aria-label={t.nav.pricing}>
+            <button type="button" className="nx-cycle__btn" aria-pressed={billing === 'monthly'} onClick={() => setBilling('monthly')}>{t.pricing.monthly}</button>
+            <button type="button" className="nx-cycle__btn" aria-pressed={billing === 'annual'} onClick={() => setBilling('annual')}>
+              {t.pricing.annual} <span className="nx-save">{t.pricing.discount}</span>
             </button>
           </div>
+        </div>
+        <div className="nx-price-note">{t.pricing.currencyNote}</div>
 
-          <p style={{ color: 'var(--muted)', fontSize: 12, marginBottom: 16 }}>{t.pricing.currencyNote}</p>
-
-          {/* BADGE : remise appliquée si vérifiée, sinon lien vers la page du badge */}
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
           {badgeInstalle ? (
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '10px 20px', borderRadius: 'var(--r)', border: '1px solid var(--g-border)', background: 'var(--g-dim)' }}>
-              <img src="/chain-link.avif" alt="Badge" style={{ width: 20, height: 20, objectFit: 'contain' }} />
-              <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--g)' }}>{'✓ ' + t.pricing.badgeApplied}</span>
-            </div>
+            <span className="nx-pill" style={{ cursor: 'default', borderColor: 'rgba(61,220,132,0.35)', color: 'var(--g)' }}>
+              <img src="/chain-link.avif" alt="" width={18} height={18} /> {'✓ ' + t.pricing.badgeApplied}
+            </span>
           ) : (
-            <Link to="/forge/badge" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '10px 20px', borderRadius: 'var(--r)', border: '1px solid var(--border)', textDecoration: 'none' }}>
-              <img src="/chain-link.avif" alt="Badge" style={{ width: 20, height: 20, objectFit: 'contain' }} />
-              <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--muted)' }}>{t.pricing.badgeToggle}</span>
+            <Link to="/forge/badge" className="nx-pill" style={{ textDecoration: 'none' }}>
+              <img src="/chain-link.avif" alt="" width={18} height={18} /> <span className="nx-pill__muted" style={{ display: 'inline' }}>{t.pricing.badgeToggle}</span>
             </Link>
           )}
         </div>
 
-        {/* TIERS GRID */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 16 }}>
-          {getTiers(t).map(tier => (
-            <div key={tier.key} className="nx-card" style={{ position: 'relative', borderColor: tier.popular ? 'var(--g-border)' : undefined, background: tier.popular ? 'var(--g-dim)' : undefined, display: 'flex', flexDirection: 'column' }}>
-              {tier.popular && (
-                <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', background: 'var(--g)', color: '#07090f', fontSize: 11, fontWeight: 800, padding: '3px 14px', borderRadius: 20, whiteSpace: 'nowrap' }}>{t.pricing.mostPopular}</div>
-              )}
-              <div style={{ textAlign: 'center', marginBottom: 16 }}>
-                <div style={{ color: tier.color, fontWeight: 900, fontSize: 15, marginBottom: 4 }}><img src={tier.image} alt={tier.label} style={{ width: 24, height: 24, verticalAlign: 'middle', marginRight: 6 }} /> {tier.label}</div>
-                <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: 6 }}>
-                  {getOriginalPrice(tier) && <span style={{ fontSize: 13, color: 'var(--muted)', textDecoration: 'line-through' }}>{getOriginalPrice(tier)}</span>}
-                  <span style={{ fontSize: 28, fontWeight: 900, color: 'var(--text)' }}>{getPrice(tier)}</span>
-                  {tier.monthly > 0 && <span style={{ fontSize: 12, color: 'var(--muted)' }}>{t.pricing.perMonth}</span>}
+        <div className="nx-pricing-grid">
+          {getTiers(t).map(tier => {
+            const actif = tierActuel === tier.key;
+            const original = getOriginalPrice(tier);
+            return (
+              <div key={tier.key} className={`nx-pcard${tier.popular ? ' nx-pcard--featured' : ''}${actif ? ' nx-pcard--active' : ''}`}>
+                {actif ? <div className="nx-pcard__flag">✓ Current plan</div> : tier.popular && <div className="nx-pcard__flag">{t.pricing.mostPopular}</div>}
+                <div className="nx-pcard__head">
+                  <img src={tier.image} alt={tier.label} width={48} height={48} />
+                  <div className="nx-pcard__name" style={{ color: tier.color }}>{tier.label}</div>
                 </div>
+                <div className="nx-pcard__price">
+                  {getPrice(tier)}
+                  {tier.monthly > 0 && <span className="nx-pcard__period">{t.pricing.perMonth}</span>}
+                </div>
+                {original && <div className="nx-pcard__sub" style={{ textDecoration: 'line-through' }}>{original}</div>}
                 {billing === 'annual' && tier.annual > 0 && (
-                  <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 2 }}>{t.pricing.billedPerYear.replace('{price}', `${tier.annual} CAD`)}</div>
+                  <div className="nx-pcard__sub">{t.pricing.billedPerYear.replace('{price}', `${tier.annual} CAD`)}</div>
+                )}
+                <ul className="nx-pcard__items">
+                  {tier.features.map(f => (
+                    <li key={f}><span style={{ color: tier.color, flexShrink: 0 }}>✓</span>{f}</li>
+                  ))}
+                </ul>
+                {tier.key === 'bronze' ? (
+                  <HudRouterLink to="/forge" action="continue" compact label={tier.cta} className="nx-pcard__cta" />
+                ) : (
+                  <HudButton action="continue" compact label={actif ? 'Current plan' : tier.cta} disabled={actif} busy={loading === tier.key} busyLabel="Loading..." onClick={() => handleCheckout(tier.key)} className="nx-pcard__cta" />
                 )}
               </div>
-
-              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 20px', flex: 1 }}>
-                {tier.features.map(f => (
-                  <li key={f} style={{ fontSize: 12, color: 'var(--muted)', padding: '4px 0', display: 'flex', gap: 8, alignItems: 'flex-start' }}>
-                    <span style={{ color: 'var(--g)', flexShrink: 0 }}>✓</span> {f}
-                  </li>
-                ))}
-              </ul>
-
-              {tier.key === 'bronze' ? (
-                <HudRouterLink to="/forge" action="continue" compact label={tier.cta} style={{ alignSelf: 'center' }} />
-              ) : (
-                <HudButton action="continue" compact label={tier.cta} busy={loading === tier.key} busyLabel="Loading..." onClick={() => handleCheckout(tier.key)} style={{ alignSelf: 'center' }} />
-              )}
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* BADGE INFO */}
-        <div className="nx-card" style={{ marginTop: 40, display: 'flex', gap: 14, alignItems: 'center', borderColor: 'var(--g-border)', background: 'var(--g-dim)' }}>
-          <img src="/chain-link.avif" alt="Badge" style={{ width: 36, height: 36, objectFit: 'contain', flexShrink: 0 }} />
+        <div className="nx-info" style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
+          <img src="/chain-link.avif" alt="" width={32} height={32} style={{ flexShrink: 0 }} />
           <div>
-            <div style={{ fontWeight: 800, fontSize: 14, marginBottom: 4 }}>{t.pricing.badgeInfoTitle}</div>
-            <div style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.6 }}>
-              {t.pricing.badgeInfoDesc}
-            </div>
+            <div className="nx-info__title">{t.pricing.badgeInfoTitle}</div>
+            <div className="nx-info__desc">{t.pricing.badgeInfoDesc}</div>
           </div>
         </div>
-
-      </div>
+      </main>
       <Footer
-        brand="NOXEL Forge"
+        brand="NOXEL FORGE"
         siteUrl="https://noxelforge.com"
         contactEmail="founder@noxel360.com"
         links={[

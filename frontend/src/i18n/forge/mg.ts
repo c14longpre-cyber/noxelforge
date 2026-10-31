@@ -8,7 +8,7 @@ const mg: ForgePartialTranslations = {
     badges: "Famantarana"
   },
   hero: {
-    kicker: "NOXEL Forge - Tambajotra fifanakalozana backlink",
+    kicker: "NOXEL FORGE - Tambajotra fifanakalozana backlink",
     title: "Ataovy mafy ny",
     titleAccent: "fahefanao",
     subtitle: "Fifanakalozana backlink amin'ny tranokala voamarina nefa notsaraina an'i Alfred. Kalitao voatohtohy, spam tsy mety. Omeo iray, azao iray.",
@@ -46,11 +46,11 @@ const mg: ForgePartialTranslations = {
     descLabel: "Famaritana fohy",
     contentLabel: "Votoatiny lehibe",
     contentHint: "tsy voatery, manampy an'i Alfred hanadihadiana tsara kokoa",
-    submitBtn: "Alefa amin'ny NOXEL Forge",
+    submitBtn: "Alefa amin'ny NOXEL FORGE",
     analyzing: "Eo am-panadihadiana..."
   },
   pricing: {
-    kicker: "Vidiny NOXEL Forge",
+    kicker: "Vidiny NOXEL FORGE",
     title: "Manaova ny",
     titleAccent: "tambajotra fahefana",
     subtitle: "Asehoy ny famantarana NOXEL amin'ny tranokala ary manokatra fihenam-bidy manokana amin'ny ambaratonga rehetra.",
@@ -66,7 +66,7 @@ const mg: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Asehoy amin'ny tranokala",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Famantarana",
     subtitle: "Adikao sy asiana famantarana iray amin'ny footer ny tranokala.",
     copy: "Adikao ny snippet",
@@ -76,7 +76,7 @@ const mg: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Vonona hampiasa?",
-    title: "Hiditra ao amin'ny NOXEL Forge",
+    title: "Hiditra ao amin'ny NOXEL FORGE",
     subtitle: "Atombohy ny fananganana ny tambajotra backlink voamarinao androany."
   }
 };

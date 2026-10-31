@@ -8,7 +8,7 @@ const uk: ForgePartialTranslations = {
     badges: "Бейджі"
   },
   hero: {
-    kicker: "NOXEL Forge - Екосистема обміну зворотними посиланнями",
+    kicker: "NOXEL FORGE - Екосистема обміну зворотними посиланнями",
     title: "Куйте свій",
     titleAccent: "авторитет",
     subtitle: "Обмінюйтесь зворотними посиланнями з перевіреними сайтами, відфільтрованими Alfred. Якість гарантована, спам неможливий. Дай одне — отримай одне.",
@@ -46,11 +46,11 @@ const uk: ForgePartialTranslations = {
     descLabel: "Короткий опис",
     contentLabel: "Основний контент",
     contentHint: "необов'язково, допомагає Alfred краще аналізувати",
-    submitBtn: "Надіслати до NOXEL Forge",
+    submitBtn: "Надіслати до NOXEL FORGE",
     analyzing: "Аналізується..."
   },
   pricing: {
-    kicker: "Ціни NOXEL Forge",
+    kicker: "Ціни NOXEL FORGE",
     title: "Будуйте свою",
     titleAccent: "мережу авторитету",
     subtitle: "Розмістіть бейдж NOXEL на своєму сайті та отримайтеексклюзивні знижки на кожному рівні.",
@@ -66,7 +66,7 @@ const uk: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Розмістіть на своєму сайті",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Бейджі",
     subtitle: "Скопіюйте та вставте будь-який бейдж у футер свого сайту.",
     copy: "Копіювати код",
@@ -76,7 +76,7 @@ const uk: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Готові кувати?",
-    title: "Приєднуйтесь до NOXEL Forge",
+    title: "Приєднуйтесь до NOXEL FORGE",
     subtitle: "Почніть будувати свою перевірену мережу зворотних посилань вже сьогодні."
   }
 };

@@ -8,7 +8,7 @@ const nr: ForgePartialTranslations = {
     badges: "Izibaxa"
   },
   hero: {
-    kicker: "NOXEL Forge - Indawo yokushintshana kwezikhonkwane",
+    kicker: "NOXEL FORGE - Indawo yokushintshana kwezikhonkwane",
     title: "Akha",
     titleAccent: "igunya lakho",
     subtitle: "Shintshanisa izikhonkwane nezizinda eziqinisekisiwe ezihlungwa yi-Alfred. Ikhwalithi iqinisekisiwe, ugcwele ukukhohlisa akukwenzeki. Nika elilodwa, thola elilodwa.",
@@ -46,11 +46,11 @@ const nr: ForgePartialTranslations = {
     descLabel: "Incazelo emfushane",
     contentLabel: "Okuqukethwe okukhulu",
     contentHint: "okukhethekile, kusiza i-Alfred ukuhlaziya kangcono",
-    submitBtn: "Thumela ku-NOXEL Forge",
+    submitBtn: "Thumela ku-NOXEL FORGE",
     analyzing: "Iyahlaziya..."
   },
   pricing: {
-    kicker: "Amanani we-NOXEL Forge",
+    kicker: "Amanani we-NOXEL FORGE",
     title: "Akha",
     titleAccent: "inethiwekhi yakho yegunya",
     subtitle: "Bonisa ibaxa le-NOXEL esizindeni sakho futhi uvule izaphulelo ezikhethekile kumazinga wonke.",
@@ -66,7 +66,7 @@ const nr: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Bonisa esizindeni sakho",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Izibaxa",
     subtitle: "Kopisha bese ufaka noma yiliphi ibaxa ekhasini lemvelo lesizinda sakho.",
     copy: "Kopisha ucezu",
@@ -76,7 +76,7 @@ const nr: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Ulungele ukwakha?",
-    title: "Joyina i-NOXEL Forge",
+    title: "Joyina i-NOXEL FORGE",
     subtitle: "Qala ukwakha inethiwekhi yakho yezikhonkwane eziQinisekisiwe namuhla."
   }
 };

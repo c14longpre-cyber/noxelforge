@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * NOXEL — Shared Footer Component
- * Used across NOXEL SEO (noxelseo.com) and NOXEL Forge (noxelforge.com)
+ * Used across NOXEL SEO (noxelseo.com) and NOXEL FORGE (noxelforge.com)
  *
  * - Real <a href> links to owned social properties (no nofollow)
  * - rel="me" for IndieWeb / identity verification
@@ -32,7 +32,7 @@ export interface FooterLink {
 }
 
 export interface FooterProps {
-  /** Product name shown in aria-labels, e.g. "NOXEL SEO" or "NOXEL Forge" */
+  /** Product name shown in aria-labels, e.g. "NOXEL SEO" or "NOXEL FORGE" */
   brand: string;
   /** Canonical site URL, e.g. "https://noxelseo.com" — used for JSON-LD "url" */
   siteUrl: string;

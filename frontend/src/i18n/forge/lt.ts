@@ -8,7 +8,7 @@ const lt: ForgePartialTranslations = {
     badges: "Ženkleliai"
   },
   hero: {
-    kicker: "NOXEL Forge - Nuorodų mainų ekosistema",
+    kicker: "NOXEL FORGE - Nuorodų mainų ekosistema",
     title: "Kurkite savo",
     titleAccent: "autoritetą",
     subtitle: "Keiskitės nuorodomis su Alfred patikrintais svetainėmis. Kokybė garantuota, šiukšlės neįmanomos. Duok vieną, gauk vieną.",
@@ -46,11 +46,11 @@ const lt: ForgePartialTranslations = {
     descLabel: "Trumpas aprašymas",
     contentLabel: "Pagrindinis turinys",
     contentHint: "neprivaloma, padeda Alfred geriau analizuoti",
-    submitBtn: "Pateikti į NOXEL Forge",
+    submitBtn: "Pateikti į NOXEL FORGE",
     analyzing: "Analizuojama..."
   },
   pricing: {
-    kicker: "NOXEL Forge kainos",
+    kicker: "NOXEL FORGE kainos",
     title: "Kurkite savo",
     titleAccent: "autoritetų tinklą",
     subtitle: "Rodykite NOXEL ženklelį savo svetainėje ir atrakinkite išskirtines nuolaidas kiekviename plane.",
@@ -66,7 +66,7 @@ const lt: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Rodykite savo svetainėje",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "ženkleliai",
     subtitle: "Nukopijuokite ir įklijuokite bet kurį ženklelį į savo svetainės poraštę.",
     copy: "Kopijuoti kodą",
@@ -76,7 +76,7 @@ const lt: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Pasiruošę kurti?",
-    title: "Prisijunkite prie NOXEL Forge",
+    title: "Prisijunkite prie NOXEL FORGE",
     subtitle: "Pradėkite kurti savo patikrintą nuorodų tinklą jau šiandien."
   }
 };

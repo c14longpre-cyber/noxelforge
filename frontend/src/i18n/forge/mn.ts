@@ -8,7 +8,7 @@ const mn: ForgePartialTranslations = {
     badges: "Тэмдэгүүд"
   },
   hero: {
-    kicker: "NOXEL Forge - Буцах холбоос солилцооны экосистем",
+    kicker: "NOXEL FORGE - Буцах холбоос солилцооны экосистем",
     title: "Өөрийн",
     titleAccent: "эрх мэдлээ",
     subtitle: "Alfred-ийн шүүлтүүрээр баталгаажсан сайтуудтай буцах холбоос солил. Чанар баталгаатай, спам боломжгүй. Нэг өг, нэг ав.",
@@ -46,11 +46,11 @@ const mn: ForgePartialTranslations = {
     descLabel: "Товч тайлбар",
     contentLabel: "Үндсэн контент",
     contentHint: "заавал биш, Alfred-д илүү сайн шинжлэхэд тусалдаг",
-    submitBtn: "NOXEL Forge-д илгээх",
+    submitBtn: "NOXEL FORGE-д илгээх",
     analyzing: "Шинжилж байна..."
   },
   pricing: {
-    kicker: "NOXEL Forge үнэ",
+    kicker: "NOXEL FORGE үнэ",
     title: "Өөрийн",
     titleAccent: "эрх мэдлийн сүлжээгээ",
     subtitle: "Сайтдаа NOXEL тэмдэг харуулж, бүх түвшинд онцгой хөнгөлөлт авна уу.",
@@ -66,7 +66,7 @@ const mn: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Сайтдаа харуул",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Тэмдгүүд",
     subtitle: "Сайтынхаа footer-т дурын тэмдгийг хуулж буулгана уу.",
     copy: "Кодыг хуулах",
@@ -76,7 +76,7 @@ const mn: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Forge хийхэд бэлэн үү?",
-    title: "NOXEL Forge-д нэгдэх",
+    title: "NOXEL FORGE-д нэгдэх",
     subtitle: "Өнөөдөр баталгаажсан буцах холбоосны сүлжээгээ бүтээж эхлээрэй."
   }
 };

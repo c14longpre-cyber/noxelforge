@@ -8,7 +8,7 @@ const cs: ForgePartialTranslations = {
     badges: "Odznaky"
   },
   hero: {
-    kicker: "NOXEL Forge - Ekosystém výměny zpětných odkazů",
+    kicker: "NOXEL FORGE - Ekosystém výměny zpětných odkazů",
     title: "Vybudujte svou",
     titleAccent: "autoritu",
     subtitle: "Vyměňujte zpětné odkazy s ověřenými weby filtrovanými Alfredem. Kvalita zaručena, spam nemožný. Dáš jeden, dostaneš jeden.",
@@ -46,11 +46,11 @@ const cs: ForgePartialTranslations = {
     descLabel: "Krátký popis",
     contentLabel: "Hlavní obsah",
     contentHint: "volitelné, pomáhá Alfredovi lépe analyzovat",
-    submitBtn: "Odeslat do NOXEL Forge",
+    submitBtn: "Odeslat do NOXEL FORGE",
     analyzing: "Analyzování..."
   },
   pricing: {
-    kicker: "Ceník NOXEL Forge",
+    kicker: "Ceník NOXEL FORGE",
     title: "Budujte svou",
     titleAccent: "síť autority",
     subtitle: "Zobrazte odznak NOXEL na svém webu a odemkněte exkluzivní slevy na každé úrovni.",
@@ -66,7 +66,7 @@ const cs: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Zobrazte na svém webu",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Odznaky",
     subtitle: "Zkopírujte a vložte libovolný odznak do patičky svého webu.",
     copy: "Kopírovat kód",
@@ -76,7 +76,7 @@ const cs: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Připraveni kovat?",
-    title: "Připojte se k NOXEL Forge",
+    title: "Připojte se k NOXEL FORGE",
     subtitle: "Začněte budovat svou ověřenou síť zpětných odkazů ještě dnes."
   }
 };

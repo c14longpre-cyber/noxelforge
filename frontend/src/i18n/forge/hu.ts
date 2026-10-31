@@ -8,7 +8,7 @@ const hu: ForgePartialTranslations = {
     badges: "Jelvények"
   },
   hero: {
-    kicker: "NOXEL Forge - Backlinkcsere-ökoszisztéma",
+    kicker: "NOXEL FORGE - Backlinkcsere-ökoszisztéma",
     title: "Kovácsold meg",
     titleAccent: "tekintélyedet",
     subtitle: "Cserélje backlinkjeit Alfred által szűrt, ellenőrzött oldalakkal. Minőség garantálva, spam lehetetlen. Adj egyet, kapj egyet.",
@@ -46,11 +46,11 @@ const hu: ForgePartialTranslations = {
     descLabel: "Rövid leírás",
     contentLabel: "Fő tartalom",
     contentHint: "opcionális, segít Alfrednek jobb elemzést végezni",
-    submitBtn: "Beküldés a NOXEL Forge-ba",
+    submitBtn: "Beküldés a NOXEL FORGE-ba",
     analyzing: "Elemzés folyamatban..."
   },
   pricing: {
-    kicker: "NOXEL Forge Árak",
+    kicker: "NOXEL FORGE Árak",
     title: "Építsd fel",
     titleAccent: "tekintélyhálózatodat",
     subtitle: "Jelenítsd meg a NOXEL jelvényt az oldaladon, és oldd fel az exkluzív kedvezményeket minden szinten.",
@@ -66,7 +66,7 @@ const hu: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Jelenítsd meg az oldaladon",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Jelvények",
     subtitle: "Másold be bármelyik jelvényt az oldalad láblécébe.",
     copy: "Kód másolása",
@@ -76,7 +76,7 @@ const hu: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Készen állsz a kovácsolásra?",
-    title: "Csatlakozz a NOXEL Forge-hoz",
+    title: "Csatlakozz a NOXEL FORGE-hoz",
     subtitle: "Kezdd el építeni az ellenőrzött backlinkjeid hálózatát még ma."
   }
 };

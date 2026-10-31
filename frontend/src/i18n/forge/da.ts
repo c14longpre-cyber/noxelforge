@@ -8,7 +8,7 @@ const da: ForgePartialTranslations = {
     badges: "Badges"
   },
   hero: {
-    kicker: "NOXEL Forge - Backlink Exchange Ecosystem",
+    kicker: "NOXEL FORGE - Backlink Exchange Ecosystem",
     title: "Smedj din",
     titleAccent: "autoritet",
     subtitle: "Udveksl backlinks med verificerede sider filtreret af Alfred. Kvalitet garanteret, spam umuligt. Giv én, få én.",
@@ -46,11 +46,11 @@ const da: ForgePartialTranslations = {
     descLabel: "Kort beskrivelse",
     contentLabel: "Hovedindhold",
     contentHint: "valgfrit, hjælper Alfred med at analysere bedre",
-    submitBtn: "Indsend til NOXEL Forge",
+    submitBtn: "Indsend til NOXEL FORGE",
     analyzing: "Analyserer..."
   },
   pricing: {
-    kicker: "NOXEL Forge Priser",
+    kicker: "NOXEL FORGE Priser",
     title: "Byg dit",
     titleAccent: "autoritetsnetværk",
     subtitle: "Vis NOXEL-badgen på dit websted og lås eksklusive rabatter op på hvert niveau.",
@@ -66,7 +66,7 @@ const da: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Vis på dit websted",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Badges",
     subtitle: "Kopiér og indsæt en hvilken som helst badge i din webstedssidefod.",
     copy: "Kopiér kode",
@@ -76,7 +76,7 @@ const da: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Klar til at smede?",
-    title: "Tilmeld dig NOXEL Forge",
+    title: "Tilmeld dig NOXEL FORGE",
     subtitle: "Begynd at opbygge dit verificerede backlinknetværk i dag."
   }
 };

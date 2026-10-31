@@ -8,7 +8,7 @@ const fo: ForgePartialTranslations = {
     badges: "Merkir"
   },
   hero: {
-    kicker: "NOXEL Forge - Backlink Skiftisfelag",
+    kicker: "NOXEL FORGE - Backlink Skiftisfelag",
     title: "Smíð tína",
     titleAccent: "myndugleika",
     subtitle: "Skift backlinks við staðfest síður sívaðar av Alfred. Góðsku tryggað, spam ómøguligt. Gev ein, fá ein.",
@@ -46,11 +46,11 @@ const fo: ForgePartialTranslations = {
     descLabel: "Stuttur lýsing",
     contentLabel: "Høvuðsinnihald",
     contentHint: "valfrítt, hjálpir Alfred at greina betur",
-    submitBtn: "Send inn til NOXEL Forge",
+    submitBtn: "Send inn til NOXEL FORGE",
     analyzing: "Greinir..."
   },
   pricing: {
-    kicker: "NOXEL Forge Prísir",
+    kicker: "NOXEL FORGE Prísir",
     title: "Bygg títt",
     titleAccent: "myndugleikanet",
     subtitle: "Vís NOXEL merkið á tínari síðu og opna einastu avslætt á hvørjum stigi.",
@@ -66,7 +66,7 @@ const fo: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Vís á tínari síðu",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Merkir",
     subtitle: "Kopíer og límur eitt hvørt sem er merki í botnfót á tínari síðu.",
     copy: "Kopíer brot",
@@ -76,7 +76,7 @@ const fo: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Tíðugur at smíða?",
-    title: "Sluttaðu til NOXEL Forge",
+    title: "Sluttaðu til NOXEL FORGE",
     subtitle: "Byrja at byggja títt staðfesta backlink net í dag."
   }
 };

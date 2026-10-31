@@ -8,7 +8,7 @@ const na: ForgePartialTranslations = {
     badges: "Baj"
   },
   hero: {
-    kicker: "NOXEL Forge - Ekosistem Baklinkuia",
+    kicker: "NOXEL FORGE - Ekosistem Baklinkuia",
     title: "Wiawi ewi",
     titleAccent: "maron",
     subtitle: "Wiawi baklinkuia me wab iat ibɨwɨ Alfred. Inamaim ibuobuot, spam tsuri. Ania itak, anir itak.",
@@ -46,11 +46,11 @@ const na: ForgePartialTranslations = {
     descLabel: "Nɨnɨ maraiwa",
     contentLabel: "Nɨnɨ irɨirɨ",
     contentHint: "tsuri ibuobuot, Alfred irɨir buobuot",
-    submitBtn: "Wiawi amen NOXEL Forge",
+    submitBtn: "Wiawi amen NOXEL FORGE",
     analyzing: "Irɨir ongɨ..."
   },
   pricing: {
-    kicker: "NOXEL Forge Irau",
+    kicker: "NOXEL FORGE Irau",
     title: "Wiawi ewi",
     titleAccent: "network maron",
     subtitle: "Bikin baj NOXEL amen wab itɨm me kabwir irau buobuot anen tier ariri.",
@@ -66,7 +66,7 @@ const na: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Bikin amen wab itɨm",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Baj",
     subtitle: "Kopi me peis baj ariri amen futer wab itɨm.",
     copy: "Kopi snipet",
@@ -76,7 +76,7 @@ const na: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Eirei wiawi?",
-    title: "Owiir NOXEL Forge",
+    title: "Owiir NOXEL FORGE",
     subtitle: "Ongɨ wiawi network baklinkuia ibɨwɨ itɨm nɨkɨ."
   }
 };

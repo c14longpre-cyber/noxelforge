@@ -8,7 +8,7 @@ const ff: ForgePartialTranslations = {
     badges: "Kawritaaji"
   },
   hero: {
-    kicker: "NOXEL Forge - Ekosisteem Cambital Backlink",
+    kicker: "NOXEL FORGE - Ekosisteem Cambital Backlink",
     title: "Solf",
     titleAccent: " authority maa",
     subtitle: "Cambitu backlinks e geɗe confirtaaɗe filtiraaɗe Alfred. Liggal moƴƴal garantitiima, spam haɗaama. Haw go'o, heɓ go'o.",
@@ -46,11 +46,11 @@ const ff: ForgePartialTranslations = {
     descLabel: "Firoore dogoore",
     contentLabel: "Jaaynde mawnde",
     contentHint: "waɗaani tiɗtunde, wallitotoo Alfred anndude moƴƴo",
-    submitBtn: "Natt to NOXEL Forge",
+    submitBtn: "Natt to NOXEL FORGE",
     analyzing: "Etaama..."
   },
   pricing: {
-    kicker: "Njaru NOXEL Forge",
+    kicker: "Njaru NOXEL FORGE",
     title: "Solf",
     titleAccent: "netwoorku authority maa",
     subtitle: "Hollu kawrital NOXEL to geɗal maa e uddit tiifannooji keeriiɗi to kala keerol.",
@@ -66,7 +66,7 @@ const ff: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Hollu to geɗal maa",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Kawritaaji",
     subtitle: "Natto e kuɓɓitu kawrital kala to bowre geɗal maa.",
     copy: "Natto snippet",
@@ -76,7 +76,7 @@ const ff: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Aɗa moƴƴi forge?",
-    title: "Naatu NOXEL Forge",
+    title: "Naatu NOXEL FORGE",
     subtitle: "Fuɗɗit solfude netwoorku backlink confirtaangal maa hannde."
   }
 };

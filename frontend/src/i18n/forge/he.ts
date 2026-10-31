@@ -8,7 +8,7 @@ const he: ForgePartialTranslations = {
     badges: "תגים"
   },
   hero: {
-    kicker: "NOXEL Forge - מערכת אקוסיסטם להחלפת קישורים נכנסים",
+    kicker: "NOXEL FORGE - מערכת אקוסיסטם להחלפת קישורים נכנסים",
     title: "זייף את",
     titleAccent: "הסמכות שלך",
     subtitle: "החלף קישורים נכנסים עם אתרים מאומתים שסוננו על ידי Alfred. איכות מובטחת, ספאם בלתי אפשרי. תן אחד, קבל אחד.",
@@ -46,11 +46,11 @@ const he: ForgePartialTranslations = {
     descLabel: "תיאור קצר",
     contentLabel: "תוכן ראשי",
     contentHint: "אופציונלי, עוזר ל-Alfred לנתח טוב יותר",
-    submitBtn: "שלח ל-NOXEL Forge",
+    submitBtn: "שלח ל-NOXEL FORGE",
     analyzing: "מנתח..."
   },
   pricing: {
-    kicker: "תמחור NOXEL Forge",
+    kicker: "תמחור NOXEL FORGE",
     title: "בנה את",
     titleAccent: "רשת הסמכות שלך",
     subtitle: "הצג את תג NOXEL באתרך ופתח הנחות בלעדיות בכל רמה.",
@@ -66,7 +66,7 @@ const he: ForgePartialTranslations = {
   },
   badge: {
     kicker: "הצג באתרך",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "תגים",
     subtitle: "העתק והדבק תג כלשהו בתחתית האתר שלך.",
     copy: "העתק קוד",
@@ -76,7 +76,7 @@ const he: ForgePartialTranslations = {
   },
   cta: {
     kicker: "מוכן לזייף?",
-    title: "הצטרף ל-NOXEL Forge",
+    title: "הצטרף ל-NOXEL FORGE",
     subtitle: "התחל לבנות את רשת הקישורים הנכנסים המאומתת שלך היום."
   }
 };

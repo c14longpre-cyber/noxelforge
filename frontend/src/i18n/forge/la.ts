@@ -8,7 +8,7 @@ const la: ForgePartialTranslations = {
     badges: "Insignia"
   },
   hero: {
-    kicker: "NOXEL Forge - Oecosystema Permutationis Nexuum",
+    kicker: "NOXEL FORGE - Oecosystema Permutationis Nexuum",
     title: "Fabricare tuam",
     titleAccent: "auctoritatem",
     subtitle: "Permuta nexus cum sitibus verificatis ab Alfred selectis. Qualitas garantita, gravamen impossibile. Da unum, accipe unum.",
@@ -46,11 +46,11 @@ const la: ForgePartialTranslations = {
     descLabel: "Brevis descriptio",
     contentLabel: "Tenor principalis",
     contentHint: "facultativum, adiuvat Alfred melius analysi",
-    submitBtn: "Submitte ad NOXEL Forge",
+    submitBtn: "Submitte ad NOXEL FORGE",
     analyzing: "Analysans..."
   },
   pricing: {
-    kicker: "NOXEL Forge Pretium",
+    kicker: "NOXEL FORGE Pretium",
     title: "Aedifica tuam",
     titleAccent: "reticulam auctoritatis",
     subtitle: "Ostende insigne NOXEL in situ tuo et reclude concessiones exclusivas in omni gradu.",
@@ -66,7 +66,7 @@ const la: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Ostende in situ tuo",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Insignia",
     subtitle: "Copia et insere quodlibet insigne in pede paginae situs tui.",
     copy: "Copia fragmentum",
@@ -76,7 +76,7 @@ const la: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Paratus es fabricare?",
-    title: "Adiunge NOXEL Forge",
+    title: "Adiunge NOXEL FORGE",
     subtitle: "Incipe hodie aedificare reticulam tuam verificatam nexuum."
   }
 };

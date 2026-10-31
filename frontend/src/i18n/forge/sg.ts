@@ -8,7 +8,7 @@ const sg: ForgePartialTranslations = {
     badges: "Badges"
   },
   hero: {
-    kicker: "NOXEL Forge - Système na Lege ti Backlink",
+    kicker: "NOXEL FORGE - Système na Lege ti Backlink",
     title: "Sango ni",
     titleAccent: "atoriti",
     subtitle: "Lege backlinks na sites vérifiés na Alfred. Kalité garantie, spam possible ala. Fa môndô, sô môndô.",
@@ -46,11 +46,11 @@ const sg: ForgePartialTranslations = {
     descLabel: "Description peke",
     contentLabel: "Contenu principal",
     contentHint: "optionnel, d'ûte Alfred analyser nzïânî",
-    submitBtn: "Tongana na NOXEL Forge",
+    submitBtn: "Tongana na NOXEL FORGE",
     analyzing: "Analyse li tî na..."
   },
   pricing: {
-    kicker: "Mbongo ti NOXEL Forge",
+    kicker: "Mbongo ti NOXEL FORGE",
     title: "Sango ni",
     titleAccent: "réseau ti atoriti",
     subtitle: "Veke badge ti NOXEL na site ti mo sô réductions exclusives na tier niënga niënga.",
@@ -66,7 +66,7 @@ const sg: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Veke na site ti mo",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Badges",
     subtitle: "Copie na colle badge niënga na footer ti site ti mo.",
     copy: "Copie snippet",
@@ -76,7 +76,7 @@ const sg: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Prêt na forger?",
-    title: "Kûmbï NOXEL Forge",
+    title: "Kûmbï NOXEL FORGE",
     subtitle: "Dëngbi sango ni réseau ti backlinks vérifiés ti mo sêse."
   }
 };

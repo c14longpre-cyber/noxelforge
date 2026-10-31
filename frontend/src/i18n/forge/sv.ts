@@ -8,7 +8,7 @@ const sv: ForgePartialTranslations = {
     badges: "Märken"
   },
   hero: {
-    kicker: "NOXEL Forge - Ekosystem för länkutbyte",
+    kicker: "NOXEL FORGE - Ekosystem för länkutbyte",
     title: "Smid din",
     titleAccent: "auktoritet",
     subtitle: "Utbyt bakåtlänkar med verifierade sajter filtrerade av Alfred. Kvalitet garanterad, spam omöjligt. Ge en, få en.",
@@ -46,11 +46,11 @@ const sv: ForgePartialTranslations = {
     descLabel: "Kort beskrivning",
     contentLabel: "Huvudinnehåll",
     contentHint: "valfritt, hjälper Alfred att analysera bättre",
-    submitBtn: "Skicka in till NOXEL Forge",
+    submitBtn: "Skicka in till NOXEL FORGE",
     analyzing: "Analyserar..."
   },
   pricing: {
-    kicker: "NOXEL Forge Priser",
+    kicker: "NOXEL FORGE Priser",
     title: "Bygg ditt",
     titleAccent: "auktoritetsnätverk",
     subtitle: "Visa NOXEL-märket på din sajt och lås upp exklusiva rabatter på varje nivå.",
@@ -66,7 +66,7 @@ const sv: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Visa på din sajt",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Märken",
     subtitle: "Kopiera och klistra in valfritt märke i din sajts sidfot.",
     copy: "Kopiera kodavsnitt",
@@ -76,7 +76,7 @@ const sv: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Redo att smida?",
-    title: "Gå med i NOXEL Forge",
+    title: "Gå med i NOXEL FORGE",
     subtitle: "Börja bygga ditt verifierade bakåtlänksnätverk idag."
   }
 };

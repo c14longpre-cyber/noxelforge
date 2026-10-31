@@ -8,7 +8,7 @@ const lo: ForgePartialTranslations = {
     badges: "ແບດຈ໌"
   },
   hero: {
-    kicker: "NOXEL Forge - ລະບົບນິເວດການແລກປ່ຽນແບັກລິງ",
+    kicker: "NOXEL FORGE - ລະບົບນິເວດການແລກປ່ຽນແບັກລິງ",
     title: "ສ້າງ",
     titleAccent: "ອຳນາດ",
     subtitle: "ແລກປ່ຽນແບັກລິງກັບເວັບໄຊທ໌ທີ່ຜ່ານການກວດສອບໂດຍ Alfred. ຮັບປະກັນຄຸນນະພາບ, ສະແປມເປັນໄປບໍ່ໄດ້. ໃຫ້ໜຶ່ງ, ໄດ້ຮັບໜຶ່ງ.",
@@ -46,11 +46,11 @@ const lo: ForgePartialTranslations = {
     descLabel: "ຄຳອະທິບາຍສັ້ນ",
     contentLabel: "ເນື້ອຫາຫຼັກ",
     contentHint: "ທາງເລືອກ, ຊ່ວຍໃຫ້ Alfred ວິເຄາະໄດ້ດີຂຶ້ນ",
-    submitBtn: "ສົ່ງໃຫ້ NOXEL Forge",
+    submitBtn: "ສົ່ງໃຫ້ NOXEL FORGE",
     analyzing: "ກຳລັງວິເຄາະ..."
   },
   pricing: {
-    kicker: "ລາຄາ NOXEL Forge",
+    kicker: "ລາຄາ NOXEL FORGE",
     title: "ສ້າງ",
     titleAccent: "ເຄືອຂ່າຍອຳນາດ",
     subtitle: "ສະແດງແບດຈ໌ NOXEL ໃນເວັບໄຊທ໌ຂອງທ່ານແລະປົດລັອກສ່ວນຫຼຸດສະເພາະໃນທຸກລະດັບ.",
@@ -66,7 +66,7 @@ const lo: ForgePartialTranslations = {
   },
   badge: {
     kicker: "ສະແດງໃນເວັບໄຊທ໌ຂອງທ່ານ",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "ແບດຈ໌",
     subtitle: "ຄັດລອກແລະວາງແບດຈ໌ໃດໆໃນສ່ວນທ້າຍຂອງເວັບໄຊທ໌ຂອງທ່ານ.",
     copy: "ຄັດລອກໂຄດ",
@@ -76,7 +76,7 @@ const lo: ForgePartialTranslations = {
   },
   cta: {
     kicker: "ພ້ອມທີ່ຈະສ້າງແລ້ວບໍ?",
-    title: "ເຂົ້າຮ່ວມ NOXEL Forge",
+    title: "ເຂົ້າຮ່ວມ NOXEL FORGE",
     subtitle: "ເລີ່ມສ້າງເຄືອຂ່າຍແບັກລິງທີ່ຜ່ານການກວດສອບຂອງທ່ານໃນມື້ນີ້."
   }
 };

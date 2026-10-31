@@ -8,7 +8,7 @@ const th: ForgePartialTranslations = {
     badges: "แบดจ์"
   },
   hero: {
-    kicker: "NOXEL Forge - ระบบนิเวศแลกเปลี่ยนแบ็คลิงก์",
+    kicker: "NOXEL FORGE - ระบบนิเวศแลกเปลี่ยนแบ็คลิงก์",
     title: "สร้าง",
     titleAccent: "อำนาจของคุณ",
     subtitle: "แลกเปลี่ยนแบ็คลิงก์กับเว็บไซต์ที่ได้รับการยืนยันและกรองโดย Alfred รับประกันคุณภาพ ป้องกันสแปมได้อย่างสมบูรณ์ ให้หนึ่ง รับหนึ่ง",
@@ -46,11 +46,11 @@ const th: ForgePartialTranslations = {
     descLabel: "คำอธิบายสั้น",
     contentLabel: "เนื้อหาหลัก",
     contentHint: "ไม่บังคับ ช่วยให้ Alfred วิเคราะห์ได้ดีขึ้น",
-    submitBtn: "ส่งไปยัง NOXEL Forge",
+    submitBtn: "ส่งไปยัง NOXEL FORGE",
     analyzing: "กำลังวิเคราะห์..."
   },
   pricing: {
-    kicker: "ราคา NOXEL Forge",
+    kicker: "ราคา NOXEL FORGE",
     title: "สร้าง",
     titleAccent: "เครือข่ายอำนาจของคุณ",
     subtitle: "แสดงแบดจ์ NOXEL บนเว็บไซต์ของคุณและรับส่วนลดพิเศษในทุกระดับ",
@@ -66,7 +66,7 @@ const th: ForgePartialTranslations = {
   },
   badge: {
     kicker: "แสดงบนเว็บไซต์ของคุณ",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "แบดจ์",
     subtitle: "คัดลอกและวางแบดจ์ใดก็ได้ในส่วนท้ายเว็บไซต์ของคุณ",
     copy: "คัดลอกโค้ด",
@@ -76,7 +76,7 @@ const th: ForgePartialTranslations = {
   },
   cta: {
     kicker: "พร้อมที่จะสร้างแล้วหรือยัง?",
-    title: "เข้าร่วม NOXEL Forge",
+    title: "เข้าร่วม NOXEL FORGE",
     subtitle: "เริ่มสร้างเครือข่ายแบ็คลิงก์ที่ได้รับการยืนยันของคุณวันนี้"
   }
 };

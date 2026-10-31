@@ -8,7 +8,7 @@ const et: ForgePartialTranslations = {
     badges: "Märgid"
   },
   hero: {
-    kicker: "NOXEL Forge - Tagasilingi vahetuse ökosüsteem",
+    kicker: "NOXEL FORGE - Tagasilingi vahetuse ökosüsteem",
     title: "Sepista oma",
     titleAccent: "autoriteet",
     subtitle: "Vaheta tagasilinke Alfred'i poolt kontrollitud saitidega. Kvaliteet garanteeritud, rämpspost võimatu. Anna üks, saa üks.",
@@ -46,11 +46,11 @@ const et: ForgePartialTranslations = {
     descLabel: "Lühikirjeldus",
     contentLabel: "Põhisisu",
     contentHint: "vabatahtlik, aitab Alfred'il paremini analüüsida",
-    submitBtn: "Esita NOXEL Forge'ile",
+    submitBtn: "Esita NOXEL FORGE'ile",
     analyzing: "Analüüsin..."
   },
   pricing: {
-    kicker: "NOXEL Forge hinnad",
+    kicker: "NOXEL FORGE hinnad",
     title: "Ehita oma",
     titleAccent: "autoriteedivõrgustik",
     subtitle: "Kuva oma saidil NOXEL märki ja ava eksklusiivsed allahindlused kõigil tasemetel.",
@@ -66,7 +66,7 @@ const et: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Kuva oma saidil",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Märgid",
     subtitle: "Kopeeri ja kleebi suvaline märk oma saidi jalusesse.",
     copy: "Kopeeri kood",
@@ -76,7 +76,7 @@ const et: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Valmis sepistama?",
-    title: "Liitu NOXEL Forge'iga",
+    title: "Liitu NOXEL FORGE'iga",
     subtitle: "Alusta oma kontrollitud tagasilinkide võrgustiku loomist juba täna."
   }
 };

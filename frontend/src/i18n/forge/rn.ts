@@ -8,7 +8,7 @@ const rn: ForgePartialTranslations = {
     badges: "Ibimenyetso"
   },
   hero: {
-    kicker: "NOXEL Forge - Uburyo bwo guhana amalink",
+    kicker: "NOXEL FORGE - Uburyo bwo guhana amalink",
     title: "Ubake",
     titleAccent: "ububasha bwawe",
     subtitle: "Hana amalink na za site zemejwe zisuzumwa na Alfred. Ubuziranenge bwishingiwe, spam ntishoboka. Tanga rimwe, ubone rimwe.",
@@ -46,11 +46,11 @@ const rn: ForgePartialTranslations = {
     descLabel: "Ibisobanuro bigufi",
     contentLabel: "Ibiri mu nyandiko",
     contentHint: "si ngombwa, bifasha Alfred gusesengura neza",
-    submitBtn: "Ohereza kuri NOXEL Forge",
+    submitBtn: "Ohereza kuri NOXEL FORGE",
     analyzing: "Gusesengura..."
   },
   pricing: {
-    kicker: "Ibiciro bya NOXEL Forge",
+    kicker: "Ibiciro bya NOXEL FORGE",
     title: "Ubake",
     titleAccent: "urwego rwawe rw'ububasha",
     subtitle: "Erekana ikimenyetso cya NOXEL ku site yawe ubone amangarike y'umwihariko ku rwego ruri rwose.",
@@ -66,7 +66,7 @@ const rn: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Erekana ku site yawe",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Ibimenyetso",
     subtitle: "Kopi hanyuma wishyire ikimenyetso icyo aricyo cyose mu footer ya site yawe.",
     copy: "Kopi kode",
@@ -76,7 +76,7 @@ const rn: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Witeguye kubaka?",
-    title: "Injira muri NOXEL Forge",
+    title: "Injira muri NOXEL FORGE",
     subtitle: "Tangira kubaka urwego rwawe rw'amalink yemejwe uyu munsi."
   }
 };

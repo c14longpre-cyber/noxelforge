@@ -8,7 +8,7 @@ const tn: ForgePartialTranslations = {
     badges: "Dibetšo"
   },
   hero: {
-    kicker: "NOXEL Forge - Tikologo ya Phetiso ya Backlink",
+    kicker: "NOXEL FORGE - Tikologo ya Phetiso ya Backlink",
     title: "Bopa",
     titleAccent: "taolo ya gago",
     subtitle: "Fetisana ka ditshupo tsa backlink le disaete tse ikemetseng tse hlahlobiwa ke Alfred. Boleng bo netefadiwa, spam ga e kake ya nna teng. Naya e nngwe, bona e nngwe.",
@@ -46,11 +46,11 @@ const tn: ForgePartialTranslations = {
     descLabel: "Tlhaloso e khutshwane",
     contentLabel: "Diteng tse dikgolo",
     contentHint: "ga e a tlhokega, e thusa Alfred go sekaseka sentle",
-    submitBtn: "Romela go NOXEL Forge",
+    submitBtn: "Romela go NOXEL FORGE",
     analyzing: "E a sekaseka..."
   },
   pricing: {
-    kicker: "Ditheko tsa NOXEL Forge",
+    kicker: "Ditheko tsa NOXEL FORGE",
     title: "Aga",
     titleAccent: "netiweke ya taolo",
     subtitle: "Bontsha letshwao la NOXEL mo saeteng ya gago mme o bule phokotso e e ikgethileng mo segateng sengwe le sengwe.",
@@ -66,7 +66,7 @@ const tn: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Bontsha mo saeteng ya gago",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Dibetšo",
     subtitle: "Kopa le go kena letshwao lefe kapa lefe mo footer ya saete ya gago.",
     copy: "Kopa sengwe",
@@ -76,7 +76,7 @@ const tn: ForgePartialTranslations = {
   },
   cta: {
     kicker: "O itokisitse go bopa?",
-    title: "Tsena mo NOXEL Forge",
+    title: "Tsena mo NOXEL FORGE",
     subtitle: "Simolola go aga netiweke ya gago ya backlink e e netefaditsweng gompieno."
   }
 };

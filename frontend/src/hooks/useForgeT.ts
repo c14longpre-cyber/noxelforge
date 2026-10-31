@@ -4,6 +4,7 @@ import type { ForgeTranslations } from '../i18n/forge.translations';
 import en from '../i18n/forge/en';
 
 const STORAGE_KEY = 'forge_lang';
+const LANG_EVENT = 'forge-lang-change';
 
 export function useForgeT() {
   const [lang, setLang] = useState<string>(() => {
@@ -26,9 +27,18 @@ export function useForgeT() {
     return () => { cancelled = true; };
   }, [lang]);
 
+  // L'en-tête et la page ont chacun leur useForgeT : un changement de langue est
+  // annoncé à toute la page pour que tout passe dans la même langue.
+  useEffect(() => {
+    const onLang = (e: Event) => setLang((e as CustomEvent<string>).detail);
+    window.addEventListener(LANG_EVENT, onLang);
+    return () => window.removeEventListener(LANG_EVENT, onLang);
+  }, []);
+
   function changeLang(code: string) {
     setLang(code);
-    localStorage.setItem(STORAGE_KEY, code);
+    try { localStorage.setItem(STORAGE_KEY, code); } catch { /* stockage indisponible */ }
+    window.dispatchEvent(new CustomEvent(LANG_EVENT, { detail: code }));
   }
 
   return { t, lang, changeLang, languages: LANGUAGES_115 };

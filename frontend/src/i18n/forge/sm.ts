@@ -8,7 +8,7 @@ const sm: ForgePartialTranslations = {
     badges: "Fa'ailoga"
   },
   hero: {
-    kicker: "NOXEL Forge - Fa'alapotopotoga Fesuia'i Backlink",
+    kicker: "NOXEL FORGE - Fa'alapotopotoga Fesuia'i Backlink",
     title: "Fau lou",
     titleAccent: "pule",
     subtitle: "Fesuia'i backlink ma saite fa'amaonia na fa'amamaina e Alfred. Fa'amautinoa lelei, e le mafai le spam. Tu'u se tasi, maua se tasi.",
@@ -46,11 +46,11 @@ const sm: ForgePartialTranslations = {
     descLabel: "Fa'amatalaga puupuu",
     contentLabel: "Anotusi autu",
     contentHint: "fa'afesoasoani, e fesoasoani ia Alfred e su'esu'e atili",
-    submitBtn: "Tu'uina atu i NOXEL Forge",
+    submitBtn: "Tu'uina atu i NOXEL FORGE",
     analyzing: "O su'esu'e..."
   },
   pricing: {
-    kicker: "Tau o NOXEL Forge",
+    kicker: "Tau o NOXEL FORGE",
     title: "Fausia lou",
     titleAccent: "feso'otaiga pule",
     subtitle: "Fa'aali le fa'ailoga NOXEL i lau saite ma tatalaina tau fa'apitoa i luga o vaega uma.",
@@ -66,7 +66,7 @@ const sm: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Fa'aali i lau saite",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Fa'ailoga",
     subtitle: "Kopi ma fa'apipi'i so'o se fa'ailoga i lalo o lau saite.",
     copy: "Kopi snippet",
@@ -76,7 +76,7 @@ const sm: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Ua saunia e fau?",
-    title: "Auai i NOXEL Forge",
+    title: "Auai i NOXEL FORGE",
     subtitle: "Amata le fausiaina o lou feso'otaiga backlink fa'amaonia i le asō."
   }
 };

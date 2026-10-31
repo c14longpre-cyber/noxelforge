@@ -8,7 +8,7 @@ const fj: ForgePartialTranslations = {
     badges: "Mata ni Cakacaka"
   },
   hero: {
-    kicker: "NOXEL Forge - Backlink Exchange Ecosystem",
+    kicker: "NOXEL FORGE - Backlink Exchange Ecosystem",
     title: "Vakatorocaketaka na nomu",
     titleAccent: "mana",
     subtitle: "Veitauri backlink kei na veivakatorocaketaki filtered mai Alfred. Kalougata cecere, spam e sega ni rawa. Solia e dua, rawata e dua.",
@@ -46,11 +46,11 @@ const fj: ForgePartialTranslations = {
     descLabel: "Isausaumi lailai",
     contentLabel: "Kenacova na inaki",
     contentHint: "sega ni gadrevi, e vukei Alfred me vakacavacavataka vinaka cake",
-    submitBtn: "Solomani ki NOXEL Forge",
+    submitBtn: "Solomani ki NOXEL FORGE",
     analyzing: "Vakacavacavataka..."
   },
   pricing: {
-    kicker: "NOXEL Forge Isau",
+    kicker: "NOXEL FORGE Isau",
     title: "Tara na nomu",
     titleAccent: "network ni mana",
     subtitle: "Vakacaqe na mata ni NOXEL ena nomu saiti ka dolava na isau vakavinaka ena tier kece.",
@@ -66,7 +66,7 @@ const fj: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Vakacaqe ena nomu saiti",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Mata ni Cakacaka",
     subtitle: "Kopi ka peisti e dua na mata ena koto ni nomu saiti.",
     copy: "Kopi na snippet",
@@ -76,7 +76,7 @@ const fj: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Dua na gauna me tara?",
-    title: "Vakauqeti NOXEL Forge",
+    title: "Vakauqeti NOXEL FORGE",
     subtitle: "Vakatikina tiko na tara ni nomu network backlink vakatorocaki nikua."
   }
 };

@@ -8,7 +8,7 @@ const gn: ForgePartialTranslations = {
     badges: "Insignia"
   },
   hero: {
-    kicker: "NOXEL Forge - Backlink Myakãvéva Renda",
+    kicker: "NOXEL FORGE - Backlink Myakãvéva Renda",
     title: "Japo nde",
     titleAccent: "autoridad",
     subtitle: "Jepuru backlink ne rógape ijehecháva Alfred ndive. Calidad oñemboguapyva, spam ndaipóri. Emombe'u peteĩ, erecibe peteĩ.",
@@ -46,11 +46,11 @@ const gn: ForgePartialTranslations = {
     descLabel: "Descripción moĩmbýva",
     contentLabel: "Contenido yvate",
     contentHint: "ndojehechakuaái, Alfred ombojoavy porãvéva",
-    submitBtn: "Manda NOXEL Forge-pe",
+    submitBtn: "Manda NOXEL FORGE-pe",
     analyzing: "Oñehesa'ỹijo..."
   },
   pricing: {
-    kicker: "NOXEL Forge Tepy",
+    kicker: "NOXEL FORGE Tepy",
     title: "Japo nde",
     titleAccent: "red de autoridad",
     subtitle: "Ehecha NOXEL insignia ne rogápe ha eike descuento exclusivo oimeraẽva nivelpe.",
@@ -66,7 +66,7 @@ const gn: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Ehecha ne rogápe",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Insignia",
     subtitle: "Copea ha pegua oimeraẽva insignia ne roga pie-pe.",
     copy: "Copea fragmento",
@@ -76,7 +76,7 @@ const gn: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Eñerõ jajapo?",
-    title: "Eĩ NOXEL Forge-pe",
+    title: "Eĩ NOXEL FORGE-pe",
     subtitle: "Eñepyrũ nde backlink red ijehecháva jajapo ko árape."
   }
 };

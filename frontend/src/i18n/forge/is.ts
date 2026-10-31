@@ -8,7 +8,7 @@ const is: ForgePartialTranslations = {
     badges: "Merki"
   },
   hero: {
-    kicker: "NOXEL Forge - Vistkerfi fyrir baktenglaskipti",
+    kicker: "NOXEL FORGE - Vistkerfi fyrir baktenglaskipti",
     title: "Smíðaðu þína",
     titleAccent: "yfirvald",
     subtitle: "Skiptu baktenglar með staðfestum síðum síaðar af Alfred. Gæði tryggð, ruslpóstur ómögulegt. Gefðu einn, fáðu einn.",
@@ -46,11 +46,11 @@ const is: ForgePartialTranslations = {
     descLabel: "Stutt lýsing",
     contentLabel: "Aðalefni",
     contentHint: "valkvætt, hjálpar Alfred að greina betur",
-    submitBtn: "Senda inn á NOXEL Forge",
+    submitBtn: "Senda inn á NOXEL FORGE",
     analyzing: "Greinir..."
   },
   pricing: {
-    kicker: "NOXEL Forge verðlag",
+    kicker: "NOXEL FORGE verðlag",
     title: "Byggðu þitt",
     titleAccent: "yfirvaldanet",
     subtitle: "Birtu NOXEL merkið á síðunni þinni og opnaðu einkaafslætti á hverju þrepi.",
@@ -66,7 +66,7 @@ const is: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Birtu á síðunni þinni",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Merki",
     subtitle: "Afritaðu og límdu eitthvert merki í fæt síðunnar þinnar.",
     copy: "Afrita brot",
@@ -76,7 +76,7 @@ const is: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Tilbúinn til að smíða?",
-    title: "Gangstu til liðs við NOXEL Forge",
+    title: "Gangstu til liðs við NOXEL FORGE",
     subtitle: "Byrjaðu að byggja staðfesta baktenglakerfið þitt í dag."
   }
 };

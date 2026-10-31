@@ -8,7 +8,7 @@ const it: ForgePartialTranslations = {
     badges: "Badge"
   },
   hero: {
-    kicker: "NOXEL Forge - Ecosistema di Scambio Backlink",
+    kicker: "NOXEL FORGE - Ecosistema di Scambio Backlink",
     title: "Forgia la tua",
     titleAccent: "autorità",
     subtitle: "Scambia backlink con siti verificati filtrati da Alfred. Qualità garantita, spam impossibile. Dai uno, ricevi uno.",
@@ -46,11 +46,11 @@ const it: ForgePartialTranslations = {
     descLabel: "Breve descrizione",
     contentLabel: "Contenuto principale",
     contentHint: "facoltativo, aiuta Alfred ad analizzare meglio",
-    submitBtn: "Invia a NOXEL Forge",
+    submitBtn: "Invia a NOXEL FORGE",
     analyzing: "Analisi in corso..."
   },
   pricing: {
-    kicker: "Prezzi NOXEL Forge",
+    kicker: "Prezzi NOXEL FORGE",
     title: "Costruisci la tua",
     titleAccent: "rete di autorità",
     subtitle: "Mostra il badge NOXEL sul tuo sito e sblocca sconti esclusivi su ogni piano.",
@@ -66,7 +66,7 @@ const it: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Mostra sul tuo sito",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Badge",
     subtitle: "Copia e incolla qualsiasi badge nel footer del tuo sito.",
     copy: "Copia snippet",
@@ -76,7 +76,7 @@ const it: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Pronto a forgiare?",
-    title: "Unisciti a NOXEL Forge",
+    title: "Unisciti a NOXEL FORGE",
     subtitle: "Inizia oggi a costruire la tua rete di backlink verificati."
   }
 };

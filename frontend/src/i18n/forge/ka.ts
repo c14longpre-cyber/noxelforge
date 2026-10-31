@@ -8,7 +8,7 @@ const ka: ForgePartialTranslations = {
     badges: "ბეჯები"
   },
   hero: {
-    kicker: "NOXEL Forge - Backlink-ების გაცვლის ეკოსისტემა",
+    kicker: "NOXEL FORGE - Backlink-ების გაცვლის ეკოსისტემა",
     title: "გამოჭედე შენი",
     titleAccent: "ავტორიტეტი",
     subtitle: "გაცვალე backlink-ები Alfred-ის მიერ გაფილტრულ დადასტურებულ საიტებთან. ხარისხი გარანტირებულია, სპამი შეუძლებელია. მიეცი ერთი, მიიღე ერთი.",
@@ -46,11 +46,11 @@ const ka: ForgePartialTranslations = {
     descLabel: "მოკლე აღწერა",
     contentLabel: "მთავარი კონტენტი",
     contentHint: "არასავალდებულო, ეხმარება Alfred-ს უკეთ გაანალიზებაში",
-    submitBtn: "NOXEL Forge-ში გაგზავნა",
+    submitBtn: "NOXEL FORGE-ში გაგზავნა",
     analyzing: "ანალიზი მიმდინარეობს..."
   },
   pricing: {
-    kicker: "NOXEL Forge ფასები",
+    kicker: "NOXEL FORGE ფასები",
     title: "ააგე შენი",
     titleAccent: "ავტორიტეტის ქსელი",
     subtitle: "გამოაჩინე NOXEL ბეჯი შენს საიტზე და განბლოკე ექსკლუზიური ფასდაკლებები ყოველ დონეზე.",
@@ -66,7 +66,7 @@ const ka: ForgePartialTranslations = {
   },
   badge: {
     kicker: "გამოაჩინე შენს საიტზე",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "ბეჯები",
     subtitle: "დააკოპირე და ჩასვი ნებისმიერი ბეჯი შენი საიტის footer-ში.",
     copy: "კოდის კოპირება",
@@ -76,7 +76,7 @@ const ka: ForgePartialTranslations = {
   },
   cta: {
     kicker: "მზად ხარ გამოსაჭედად?",
-    title: "შემოუერთდი NOXEL Forge-ს",
+    title: "შემოუერთდი NOXEL FORGE-ს",
     subtitle: "დაიწყე შენი დადასტურებული backlink ქსელის აგება დღესვე."
   }
 };

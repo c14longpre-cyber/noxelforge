@@ -8,7 +8,7 @@ const so: ForgePartialTranslations = {
     badges: "Calaamadaha"
   },
   hero: {
-    kicker: "NOXEL Forge - Nidaamka Isweydaarsiga Backlink",
+    kicker: "NOXEL FORGE - Nidaamka Isweydaarsiga Backlink",
     title: "Dhis",
     titleAccent: "awoortaada",
     subtitle: "Isweydaarso backlinks goobaha la xaqiijiyay ee Alfred shaandheeyay. Tayada la dammaanad qaaday, spam ma suurtogasho. Sii mid, hel mid.",
@@ -46,11 +46,11 @@ const so: ForgePartialTranslations = {
     descLabel: "Sharaxaad gaaban",
     contentLabel: "Waxa ugu weyn",
     contentHint: "ikhtiyaari, Alfred u caawiya falanqayn wanaagsan",
-    submitBtn: "Gudbi NOXEL Forge",
+    submitBtn: "Gudbi NOXEL FORGE",
     analyzing: "Waa la falanqaynayaa..."
   },
   pricing: {
-    kicker: "Qiimaha NOXEL Forge",
+    kicker: "Qiimaha NOXEL FORGE",
     title: "Dhis",
     titleAccent: "shabakaddaada awooda",
     subtitle: "Soo bandhig calaamadda NOXEL goobtagaaga oo fur dhimisyo gaar ah gobol kasta.",
@@ -66,7 +66,7 @@ const so: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Ku soo bandhig goobtagaaga",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Calaamadaha",
     subtitle: "Koobi oo ku dhejiso calaamad kasta footer goobtagaaga.",
     copy: "Koobi qoraalka",
@@ -76,7 +76,7 @@ const so: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Diyaar baad u tahay in aad dhisato?",
-    title: "Ku biir NOXEL Forge",
+    title: "Ku biir NOXEL FORGE",
     subtitle: "Bilow dhisida shabakaddaada backlink ee la xaqiijiyay maanta."
   }
 };

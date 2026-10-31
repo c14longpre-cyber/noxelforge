@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import Footer from '../../components/Footer';
-import { Link } from 'react-router-dom';
 import HudRouterLink from '../../components/HudRouterLink';
 import { TRUST_SCORE_SERVER_COMPUTED, TRUST_SCORE_PENDING_LABEL } from '../../config/trustScore';
 import type { PartnerSubmission, PartnerSuggestion } from '../../types/forge';
 import { HudButton } from '../../components/hud/HudButton';
 
+import ForgeTopbar from '../../components/ForgeTopbar';
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const NICHES = ['SEO','Marketing','AI','E-commerce','Web Dev','Business','Design','Finance','Health','Education'];
 const TIER_COLORS: Record<string,string> = { bronze:'#CD7F32', silver:'#A8A9AD', gold:'#FFD700', platinum:'#E5E4E2', diamond:'#B9F2FF' };
@@ -70,14 +70,7 @@ export default function ForgePartners() {
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', overflowY: 'auto' }}>
-      <nav className="forge-subbar" style={{ borderBottom: '1px solid var(--border)', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--bg2)', position: 'sticky', top: 0, zIndex: 100 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <Link to="/forge" style={{ color: 'var(--muted)', fontSize: 13 }}>← Forge</Link>
-          <span style={{ color: 'var(--soft)' }}>·</span>
-          <span style={{ fontWeight: 900, fontSize: 15 }}>Forge Partners</span>
-        </div>
-        <HudRouterLink to="/forge/submit" action="new-project" compact label="Submit" />
-      </nav>
+      <ForgeTopbar active="partners" />
 
       <div style={{ maxWidth: 960, margin: '0 auto', padding: '32px 32px 80px' }}>
         <div className="nx-card" style={{ marginBottom: 24, display: 'flex', gap: 32, flexWrap: 'wrap' }}>
@@ -183,7 +176,7 @@ export default function ForgePartners() {
         )}
       </div>
       <Footer
-        brand="NOXEL Forge"
+        brand="NOXEL FORGE"
         siteUrl="https://noxelforge.com"
         contactEmail="founder@noxel360.com"
         links={[

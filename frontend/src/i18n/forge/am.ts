@@ -8,7 +8,7 @@ const am: ForgePartialTranslations = {
     badges: "ባጆች"
   },
   hero: {
-    kicker: "NOXEL Forge - የጀርባ አገናኝ ልውውጥ ስነ-ምህዳር",
+    kicker: "NOXEL FORGE - የጀርባ አገናኝ ልውውጥ ስነ-ምህዳር",
     title: "ስልጣንህን",
     titleAccent: "አቅም",
     subtitle: "በ Alfred በተጣሩ የተረጋገጡ ጣቢያዎች ጋር የጀርባ አገናኞችን ተለዋወጥ። ጥራት የተረጋገጠ፣ ስፓም የማይቻል። አንድ ስጥ፣ አንድ ተቀበል።",
@@ -46,11 +46,11 @@ const am: ForgePartialTranslations = {
     descLabel: "አጭር መግለጫ",
     contentLabel: "ዋና ይዘት",
     contentHint: "አማራጭ ነው፣ Alfred በተሻለ እንዲተነትን ይረዳል",
-    submitBtn: "ወደ NOXEL Forge አስገባ",
+    submitBtn: "ወደ NOXEL FORGE አስገባ",
     analyzing: "በመተንተን ላይ..."
   },
   pricing: {
-    kicker: "NOXEL Forge ዋጋ",
+    kicker: "NOXEL FORGE ዋጋ",
     title: "የስልጣን",
     titleAccent: "አውታረ መረብህን ገንባ",
     subtitle: "የ NOXEL ባጅ በጣቢያህ ላይ አሳይ እና በእያንዳንዱ እርከን ልዩ ቅናሾችን ክፈት።",
@@ -66,7 +66,7 @@ const am: ForgePartialTranslations = {
   },
   badge: {
     kicker: "በጣቢያህ ላይ አሳይ",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "ባጆች",
     subtitle: "ማንኛውንም ባጅ ወደ ጣቢያህ ግርጌ ቅዳ እና ለጥፍ።",
     copy: "ቅንጥብ ቅዳ",
@@ -76,7 +76,7 @@ const am: ForgePartialTranslations = {
   },
   cta: {
     kicker: "ለመቅረጽ ዝግጁ ነህ?",
-    title: "NOXEL Forge ይቀላቀሉ",
+    title: "NOXEL FORGE ይቀላቀሉ",
     subtitle: "ዛሬ የተረጋገጠ የጀርባ አገናኝ አውታረ መረብህን መገንባት ጀምር።"
   }
 };

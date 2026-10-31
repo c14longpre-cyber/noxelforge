@@ -8,7 +8,7 @@ const sw: ForgePartialTranslations = {
     badges: "Beji"
   },
   hero: {
-    kicker: "NOXEL Forge - Mfumo wa Kubadilishana Viungo",
+    kicker: "NOXEL FORGE - Mfumo wa Kubadilishana Viungo",
     title: "Jenga",
     titleAccent: "mamlaka yako",
     subtitle: "Badilishana viungo na tovuti zilizothibitishwa zilizochujwa na Alfred. Ubora unahakikishiwa, taka haiwezekani. Toa moja, pata moja.",
@@ -46,11 +46,11 @@ const sw: ForgePartialTranslations = {
     descLabel: "Maelezo mafupi",
     contentLabel: "Maudhui makuu",
     contentHint: "si lazima, husaidia Alfred kuchambua vizuri zaidi",
-    submitBtn: "Wasilisha kwa NOXEL Forge",
+    submitBtn: "Wasilisha kwa NOXEL FORGE",
     analyzing: "Inachambua..."
   },
   pricing: {
-    kicker: "Bei za NOXEL Forge",
+    kicker: "Bei za NOXEL FORGE",
     title: "Jenga",
     titleAccent: "mtandao wako wa mamlaka",
     subtitle: "Onyesha beji ya NOXEL kwenye tovuti yako na fungua punguzo za kipekee kwa kila ngazi.",
@@ -66,7 +66,7 @@ const sw: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Onyesha kwenye tovuti yako",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Beji",
     subtitle: "Nakili na ubandike beji yoyote kwenye sehemu ya chini ya tovuti yako.",
     copy: "Nakili msimbo",
@@ -76,7 +76,7 @@ const sw: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Uko tayari kuunda?",
-    title: "Jiunge na NOXEL Forge",
+    title: "Jiunge na NOXEL FORGE",
     subtitle: "Anza kujenga mtandao wako wa viungo vilivyothibitishwa leo."
   }
 };

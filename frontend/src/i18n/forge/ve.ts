@@ -8,7 +8,7 @@ const ve: ForgePartialTranslations = {
     badges: "Zwitanda"
   },
   hero: {
-    kicker: "NOXEL Forge - Ekosisitema ya Kubvhangana kwa Backlink",
+    kicker: "NOXEL FORGE - Ekosisitema ya Kubvhangana kwa Backlink",
     title: "Bumba",
     titleAccent: "maanda",
     subtitle: "Bvhangana na zwivhanda zwo khwinifhadzwaho nga Alfred. Khwine yo tikedza, spamu a yo koni. Ipa ṱhanu, wana ṱhanu.",
@@ -46,11 +46,11 @@ const ve: ForgePartialTranslations = {
     descLabel: "Ṱalusedzo pfufhi",
     contentLabel: "Zwine zwa vha tshikolo",
     contentHint: "si ya lazima, zwi thusa Alfred u ṱalutshedzea zwavhuḓi",
-    submitBtn: "Tumiša kha NOXEL Forge",
+    submitBtn: "Tumiša kha NOXEL FORGE",
     analyzing: "Hu khou sedzuluswa..."
   },
   pricing: {
-    kicker: "Mitengo ya NOXEL Forge",
+    kicker: "Mitengo ya NOXEL FORGE",
     title: "Vaka",
     titleAccent: "netweke ya maanda",
     subtitle: "Shumisa tshitanda tsha NOXEL kha saiti yavho u pfuke tsireledzo dzo khetheaho kha nyimele nngwe na nngwe.",
@@ -66,7 +66,7 @@ const ve: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Shumisa kha saiti yavho",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Zwitanda",
     subtitle: "Kopa u bvela u isa tshitanda tshine na tshine kha tsinde ya saiti yavho.",
     copy: "Kopa snipit",
@@ -76,7 +76,7 @@ const ve: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Vho lugela u bumba?",
-    title: "Dzhena NOXEL Forge",
+    title: "Dzhena NOXEL FORGE",
     subtitle: "Thoma u vaka netweke yavho ya backlink yo khwinifhadzwaho namusi."
   }
 };

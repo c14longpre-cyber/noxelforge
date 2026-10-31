@@ -8,7 +8,7 @@ const st: ForgePartialTranslations = {
     badges: "Dibetšo"
   },
   hero: {
-    kicker: "NOXEL Forge - Ekosisteme ea Phetiso ea Backlink",
+    kicker: "NOXEL FORGE - Ekosisteme ea Phetiso ea Backlink",
     title: "Haha",
     titleAccent: "bolaodi ba hao",
     subtitle: "Fetisana li-backlink le lisaete tse netefatsweng tse hlolwa ke Alfred. Boleng bo netefaliswa, spam ha e khonehe. Fa e le nngwe, fumana e le nngwe.",
@@ -46,11 +46,11 @@ const st: ForgePartialTranslations = {
     descLabel: "Tlhaloso e khutšoane",
     contentLabel: "Litaba tsa mantlha",
     contentHint: "ha e hlokahale, e thusa Alfred ho hlahlobo e betere",
-    submitBtn: "Romela ho NOXEL Forge",
+    submitBtn: "Romela ho NOXEL FORGE",
     analyzing: "E hlahloба..."
   },
   pricing: {
-    kicker: "Litheko tsa NOXEL Forge",
+    kicker: "Litheko tsa NOXEL FORGE",
     title: "Haha",
     titleAccent: "marang-rang a bolaodi",
     subtitle: "Bonts'a letšoao la NOXEL saeteng ea hao mme u bulele lientlelo tsa ikgethelo ho mochato o mong le o mong.",
@@ -66,7 +66,7 @@ const st: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Bonts'a saeteng ea hao",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Dibetšo",
     subtitle: "Kopa le ho kenya letšoao lefe kapa lefe fateng la saete ea hao.",
     copy: "Kopa sengolwa",
@@ -76,7 +76,7 @@ const st: ForgePartialTranslations = {
   },
   cta: {
     kicker: "U lukile ho haha?",
-    title: "Kenela NOXEL Forge",
+    title: "Kenela NOXEL FORGE",
     subtitle: "Qala ho haha marang-rang a hao a li-backlink tse netefatsweng kajeno."
   }
 };

@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getForgeT } from '../../i18n/forge.translations';
 import { HudButton } from '../../components/hud/HudButton';
 import type { SubmitResult } from '../../types/forge';
 import type { ForgeTranslations } from '../../i18n/forge.translations';
 
+import ForgeTopbar from '../../components/ForgeTopbar';
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 export default function ForgeSubmit() {
@@ -43,11 +44,7 @@ export default function ForgeSubmit() {
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', overflowY: 'auto' }}>
-      <nav className="forge-subbar" style={{ borderBottom: '1px solid var(--border)', height: 56, display: 'flex', alignItems: 'center', gap: 12, background: 'var(--bg2)', position: 'sticky', top: 0, zIndex: 100 }}>
-        <Link to="/forge" style={{ color: 'var(--muted)', fontSize: 13 }}>{t.nav.back}</Link>
-        <span style={{ color: 'var(--soft)' }}>·</span>
-        <span style={{ fontWeight: 900, fontSize: 15 }}>{t.nav.submit}</span>
-      </nav>
+      <ForgeTopbar active="submit" />
 
       <div style={{ maxWidth: 680, margin: '0 auto', padding: '40px 32px 80px' }}>
         {result ? (

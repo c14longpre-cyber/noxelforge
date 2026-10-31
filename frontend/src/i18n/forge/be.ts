@@ -8,7 +8,7 @@ const be: ForgePartialTranslations = {
     badges: "Значкі"
   },
   hero: {
-    kicker: "NOXEL Forge - Экасістэма абмену бэклінкамі",
+    kicker: "NOXEL FORGE - Экасістэма абмену бэклінкамі",
     title: "Выкуйце свой",
     titleAccent: "аўтарытэт",
     subtitle: "Абменьвайцеся бэклінкамі з верыфікаванымі сайтамі, адфільтраванымі Alfred. Якасць гарантавана, спам немагчымы. Дайце адзін — атрымайце адзін.",
@@ -46,11 +46,11 @@ const be: ForgePartialTranslations = {
     descLabel: "Кароткае апісанне",
     contentLabel: "Асноўны кантэнт",
     contentHint: "неабавязкова, дапамагае Alfred лепш аналізаваць",
-    submitBtn: "Дадаць у NOXEL Forge",
+    submitBtn: "Дадаць у NOXEL FORGE",
     analyzing: "Аналіз..."
   },
   pricing: {
-    kicker: "Цэны NOXEL Forge",
+    kicker: "Цэны NOXEL FORGE",
     title: "Пабудуйце сваю",
     titleAccent: "сетку аўтарытэту",
     subtitle: "Разместзіце значок NOXEL на сваім сайце і атрымайце эксклюзіўныя зніжкі на кожным узроўні.",
@@ -66,7 +66,7 @@ const be: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Разместзіце на сваім сайце",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Значкі",
     subtitle: "Скапіруйце і ўстаўце любы значок у ніжні калонтытул вашага сайта.",
     copy: "Скапіраваць код",
@@ -76,7 +76,7 @@ const be: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Гатовы каваць?",
-    title: "Далучайцеся да NOXEL Forge",
+    title: "Далучайцеся да NOXEL FORGE",
     subtitle: "Пачніце будаваць сваю верыфікаваную сетку бэклінкаў сёння."
   }
 };
