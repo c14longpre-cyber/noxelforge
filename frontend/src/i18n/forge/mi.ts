@@ -8,7 +8,7 @@ const mi: ForgePartialTranslations = {
     badges: "Tohu"
   },
   hero: {
-    kicker: "NOXEL Forge - Punaha Whakawhiti Hononga Tūāhononga",
+    kicker: "NOXEL FORGE - Punaha Whakawhiti Hononga Tūāhononga",
     title: "Hangaia tō",
     titleAccent: "mana",
     subtitle: "Whakawhitia ngā hononga tūāhononga me ngā pae i tirohia e Alfred. Ko te kounga i whakatinanahia, kāore e taea te tūkino. Homai kotahi, whiwhi kotahi.",
@@ -46,11 +46,11 @@ const mi: ForgePartialTranslations = {
     descLabel: "Whakaahuatanga poto",
     contentLabel: "Ihirangi matua",
     contentHint: "ārahina, āwhina ana ia Alfred ki te tātari pai ake",
-    submitBtn: "Tukua ki NOXEL Forge",
+    submitBtn: "Tukua ki NOXEL FORGE",
     analyzing: "Kei te tātari..."
   },
   pricing: {
-    kicker: "Utu NOXEL Forge",
+    kicker: "Utu NOXEL FORGE",
     title: "Hangaia tō",
     titleAccent: "whatunga mana",
     subtitle: "Whakaaturia te tohu NOXEL ki tō pae me te whakatuwhera i ngā whakaheke motuhake ki ia paepae.",
@@ -66,7 +66,7 @@ const mi: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Whakaaturia ki tō pae",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Ngā Tohu",
     subtitle: "Tāruatia, pēhia hoki tētahi tohu ki raro o tō pae.",
     copy: "Tāruatia te māpura",
@@ -76,7 +76,7 @@ const mi: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Kua rite ki te hanga?",
-    title: "Hono ki NOXEL Forge",
+    title: "Hono ki NOXEL FORGE",
     subtitle: "Tīmata te hanga i tō whatunga hononga tūāhononga kua tirohia i tēnei rā."
   }
 };

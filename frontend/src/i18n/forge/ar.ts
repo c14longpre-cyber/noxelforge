@@ -8,7 +8,7 @@ const ar: ForgePartialTranslations = {
     badges: "الشارات"
   },
   hero: {
-    kicker: "NOXEL Forge - نظام تبادل الروابط الخلفية",
+    kicker: "NOXEL FORGE - نظام تبادل الروابط الخلفية",
     title: "اصنع",
     titleAccent: "سلطتك",
     subtitle: "تبادل الروابط الخلفية مع المواقع الموثقة التي يصفيها Alfred. جودة مضمونة، والبريد العشوائي مستحيل. أعطِ واحدة، واحصل على واحدة.",
@@ -46,11 +46,11 @@ const ar: ForgePartialTranslations = {
     descLabel: "وصف مختصر",
     contentLabel: "المحتوى الرئيسي",
     contentHint: "اختياري، يساعد Alfred على تحليل أفضل",
-    submitBtn: "إرسال إلى NOXEL Forge",
+    submitBtn: "إرسال إلى NOXEL FORGE",
     analyzing: "جاري التحليل..."
   },
   pricing: {
-    kicker: "أسعار NOXEL Forge",
+    kicker: "أسعار NOXEL FORGE",
     title: "ابنِ",
     titleAccent: "شبكة سلطتك",
     subtitle: "اعرض شارة NOXEL على موقعك وافتح خصومات حصرية على كل مستوى.",
@@ -66,7 +66,7 @@ const ar: ForgePartialTranslations = {
   },
   badge: {
     kicker: "اعرضها على موقعك",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "الشارات",
     subtitle: "انسخ والصق أي شارة في تذييل موقعك.",
     copy: "نسخ الكود",
@@ -76,7 +76,7 @@ const ar: ForgePartialTranslations = {
   },
   cta: {
     kicker: "هل أنت مستعد للصياغة؟",
-    title: "انضم إلى NOXEL Forge",
+    title: "انضم إلى NOXEL FORGE",
     subtitle: "ابدأ في بناء شبكة الروابط الخلفية الموثقة الخاصة بك اليوم."
   }
 };

@@ -6,6 +6,7 @@ import HudRouterLink from '../../components/HudRouterLink';
 import { TRUST_SCORE_SERVER_COMPUTED, TRUST_SCORE_PENDING_LABEL, TRUST_SCORE_PENDING_MESSAGE, TRUST_SCORE_VERIFYING_LABEL, TRUST_SCORE_VERIFYING_MESSAGE, trustScoreAwaitingVerification } from '../../config/trustScore';
 import type { MemberStatus, Soumission } from '../../types/forge';
 
+import ForgeTopbar from '../../components/ForgeTopbar';
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const TIER_COLORS: Record<string, string> = { bronze: '#CD7F32', silver: '#A8A9AD', gold: '#FFD700', platinum: '#E5E4E2', diamond: '#B9F2FF' };
 const TIER_IMAGES: Record<string, string> = { bronze: '/tiers/Bronze_tier.png', silver: '/tiers/Silver_tier.png', gold: '/tiers/Gold_tier.png', platinum: '/tiers/Platinum_tier.png', diamond: '/tiers/Diamond_tier.png' };
@@ -93,7 +94,7 @@ export default function ForgeDashboard() {
   if (!statut?.membre) return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16, padding: 24 }}>
       <div style={{ fontSize: 48 }}>⚒️</div>
-      <h2 style={{ fontWeight: 900, fontSize: 20, textAlign: 'center' }}>You are not yet a member of NOXEL Forge</h2>
+      <h2 style={{ fontWeight: 900, fontSize: 20, textAlign: 'center' }}>You are not yet a member of NOXEL FORGE</h2>
       <div className="nx-card" style={{ width: '100%', maxWidth: 420, display: 'grid', gap: 12 }}>
         <div>
           <label style={{ display: 'block', fontSize: 12, fontWeight: 800, marginBottom: 6, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Your site URL</label>
@@ -129,32 +130,17 @@ export default function ForgeDashboard() {
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', overflowY: 'auto' }}>
-      <nav className="forge-subbar" style={{ borderBottom: '1px solid var(--border)', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--bg2)', position: 'sticky', top: 0, zIndex: 100 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <Link to="/forge" style={{ color: 'var(--muted)', fontSize: 13 }}>← Forge</Link>
-          <span style={{ color: 'var(--soft)' }}>·</span>
-          <span style={{ fontWeight: 900, fontSize: 15 }}>Dashboard</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          {statut.est_admin && <Link to="/forge/admin" style={{ color: 'var(--purple, #A855F7)', fontSize: 12, fontWeight: 800 }}>Admin</Link>}
-          <Link to="/forge/pricing" style={{
-            display: 'flex', alignItems: 'center', gap: 6,
-            padding: '6px 14px', borderRadius: 20, fontSize: 12, fontWeight: 800,
-            textDecoration: 'none', textTransform: 'capitalize',
-            background: (TIER_COLORS[statut.membre.tier_abonnement] || '#888') + '20',
-            color: TIER_COLORS[statut.membre.tier_abonnement] || '#888',
-            border: `1px solid ${(TIER_COLORS[statut.membre.tier_abonnement] || '#888')}40`,
-          }}>
-            <img src={TIER_IMAGES[statut.membre.tier_abonnement] || TIER_IMAGES.bronze} alt={statut.membre.tier_abonnement} style={{ width: 16, height: 16, verticalAlign: 'middle' }} />
-            <span>{statut.membre.tier_abonnement}</span>
-            {statut.membre.tier_abonnement !== 'diamond' && <span className="forge-subbar__upgrade" style={{ opacity: 0.7 }}> · Upgrade ↗</span>}
-          </Link>
-          {statut.membre.tier_abonnement !== 'bronze' && <HudButton action="continue" compact label="Manage subscription" onClick={gererAbonnement} />}
-          <HudRouterLink to="/forge/submit" action="new-project" compact label="Submit" />
-        </div>
-      </nav>
+      <ForgeTopbar active="dashboard" />
 
       <div style={{ maxWidth: 960, margin: '0 auto', padding: '32px 32px 80px' }}>
+
+        <div className="nx-page-header" style={{ marginBottom: 20, justifyContent: 'space-between' }}>
+          <h1 className="nx-page-title">Dashboard</h1>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+            {statut.membre.tier_abonnement !== 'bronze' && <HudButton action="continue" compact label="Manage subscription" onClick={gererAbonnement} />}
+            <HudRouterLink to="/forge/submit" action="new-project" compact label="Submit" />
+          </div>
+        </div>
 
         {statut.domaine_verification && !statut.domaine_verification.verifie && (
           <div className="nx-card" style={{ marginBottom: 24, borderColor: 'rgba(168,85,247,0.35)', background: 'rgba(168,85,247,0.06)' }}>

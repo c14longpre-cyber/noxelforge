@@ -8,7 +8,7 @@ const ps: ForgePartialTranslations = {
     badges: "بیجونه"
   },
   hero: {
-    kicker: "NOXEL Forge - د بیک لینک تبادلې ایکوسیستم",
+    kicker: "NOXEL FORGE - د بیک لینک تبادلې ایکوسیستم",
     title: "خپل",
     titleAccent: "واک",
     subtitle: "د Alfred لخوا چک شوو سایټونو سره بیک لینکونه تبادله کړئ. کیفیت ضمانت شوی، سپام ناممکن دی. یو ورکړئ، یو واخلئ.",
@@ -46,11 +46,11 @@ const ps: ForgePartialTranslations = {
     descLabel: "لنډه توضیح",
     contentLabel: "اصلي مینځپانګه",
     contentHint: "اختیاري، Alfred ته د ښه تحلیل کولو کې مرسته کوي",
-    submitBtn: "NOXEL Forge ته وسپارئ",
+    submitBtn: "NOXEL FORGE ته وسپارئ",
     analyzing: "تحلیلیږي..."
   },
   pricing: {
-    kicker: "د NOXEL Forge نرخونه",
+    kicker: "د NOXEL FORGE نرخونه",
     title: "خپل",
     titleAccent: "واک شبکه",
     subtitle: "خپل سایټ کې د NOXEL بیج ښکاره کړئ او د هر درجې پر مهال ځانګړي تخفیفونه خلاص کړئ.",
@@ -66,7 +66,7 @@ const ps: ForgePartialTranslations = {
   },
   badge: {
     kicker: "خپل سایټ کې ښکاره کړئ",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "بیجونه",
     subtitle: "خپل سایټ فوټر کې هر بیج کاپي او پیسټ کړئ.",
     copy: "کوډ کاپي کړئ",
@@ -76,7 +76,7 @@ const ps: ForgePartialTranslations = {
   },
   cta: {
     kicker: "د فورج کولو لپاره چمتو یاست؟",
-    title: "NOXEL Forge سره یوځای شئ",
+    title: "NOXEL FORGE سره یوځای شئ",
     subtitle: "نن ورځ خپله تصدیق شوې بیک لینک شبکه جوړول پیل کړئ."
   }
 };

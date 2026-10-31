@@ -8,7 +8,7 @@ const bn: ForgePartialTranslations = {
     badges: "ব্যাজ"
   },
   hero: {
-    kicker: "NOXEL Forge - ব্যাকলিংক এক্সচেঞ্জ ইকোসিস্টেম",
+    kicker: "NOXEL FORGE - ব্যাকলিংক এক্সচেঞ্জ ইকোসিস্টেম",
     title: "আপনার",
     titleAccent: "কর্তৃত্ব",
     subtitle: "Alfred দ্বারা যাচাইকৃত সাইটগুলির সাথে ব্যাকলিংক বিনিময় করুন। গুণমান নিশ্চিত, স্প্যাম অসম্ভব। একটি দিন, একটি পান।",
@@ -46,11 +46,11 @@ const bn: ForgePartialTranslations = {
     descLabel: "সংক্ষিপ্ত বিবরণ",
     contentLabel: "মূল কন্টেন্ট",
     contentHint: "ঐচ্ছিক, Alfred কে আরও ভালো বিশ্লেষণ করতে সাহায্য করে",
-    submitBtn: "NOXEL Forge এ জমা দিন",
+    submitBtn: "NOXEL FORGE এ জমা দিন",
     analyzing: "বিশ্লেষণ করা হচ্ছে..."
   },
   pricing: {
-    kicker: "NOXEL Forge মূল্য নির্ধারণ",
+    kicker: "NOXEL FORGE মূল্য নির্ধারণ",
     title: "আপনার",
     titleAccent: "অথরিটি নেটওয়ার্ক",
     subtitle: "আপনার সাইটে NOXEL ব্যাজ প্রদর্শন করুন এবং প্রতিটি স্তরে একচেটিয়া ছাড় আনলক করুন।",
@@ -66,7 +66,7 @@ const bn: ForgePartialTranslations = {
   },
   badge: {
     kicker: "আপনার সাইটে প্রদর্শন করুন",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "ব্যাজ",
     subtitle: "যেকোনো ব্যাজ কপি করে আপনার সাইটের ফুটারে পেস্ট করুন।",
     copy: "স্নিপেট কপি করুন",
@@ -76,7 +76,7 @@ const bn: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Forge করতে প্রস্তুত?",
-    title: "NOXEL Forge এ যোগ দিন",
+    title: "NOXEL FORGE এ যোগ দিন",
     subtitle: "আজই আপনার যাচাইকৃত ব্যাকলিংক নেটওয়ার্ক তৈরি শুরু করুন।"
   }
 };

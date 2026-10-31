@@ -8,7 +8,7 @@ const kg: ForgePartialTranslations = {
     badges: "Bibadge"
   },
   hero: {
-    kicker: "NOXEL Forge - Ekosisteme ya Kubadilishana Backlink",
+    kicker: "NOXEL FORGE - Ekosisteme ya Kubadilishana Backlink",
     title: "Buka",
     titleAccent: "mamlaka yako",
     subtitle: "Badilishana backlink na masaiti yakinifu yaliyochujwa na Alfred. Ubora wahakikishwa, spam haiwezekani. Pana moja, pata moja.",
@@ -46,11 +46,11 @@ const kg: ForgePartialTranslations = {
     descLabel: "Maelezo mafupi",
     contentLabel: "Maudhui makuu",
     contentHint: "si lazima, inasaidia Alfred kuchambua vizuri zaidi",
-    submitBtn: "Tuma kwa NOXEL Forge",
+    submitBtn: "Tuma kwa NOXEL FORGE",
     analyzing: "Inachambua..."
   },
   pricing: {
-    kicker: "Mitengo ya NOXEL Forge",
+    kicker: "Mitengo ya NOXEL FORGE",
     title: "Jenga",
     titleAccent: "mtandao wa mamlaka yako",
     subtitle: "Onyesha badge ya NOXEL kwenye saiti yako na fungua punguzo maalum kwa kila ngazi.",
@@ -66,7 +66,7 @@ const kg: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Onyesha kwenye saiti yako",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Bibadge",
     subtitle: "Nakili na ubandike badge yoyote kwenye footer ya saiti yako.",
     copy: "Nakili kipande",
@@ -76,7 +76,7 @@ const kg: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Uko tayari kutengeneza?",
-    title: "Jiunge na NOXEL Forge",
+    title: "Jiunge na NOXEL FORGE",
     subtitle: "Anza kujenga mtandao wako wa backlink yakinifu leo."
   }
 };

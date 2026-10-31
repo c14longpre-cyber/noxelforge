@@ -8,7 +8,7 @@ const sl: ForgePartialTranslations = {
     badges: "Značke"
   },
   hero: {
-    kicker: "NOXEL Forge - Ekosistem izmenjave povratnih povezav",
+    kicker: "NOXEL FORGE - Ekosistem izmenjave povratnih povezav",
     title: "Skujte svojo",
     titleAccent: "avtoriteto",
     subtitle: "Izmenjajte povratne povezave s preverjenimi spletišči, ki jih filtrira Alfred. Kakovost zagotovljena, neželena vsebina nemogoča. Daj eno, prejmi eno.",
@@ -46,11 +46,11 @@ const sl: ForgePartialTranslations = {
     descLabel: "Kratek opis",
     contentLabel: "Glavna vsebina",
     contentHint: "neobvezno, pomaga Alfredu pri boljši analizi",
-    submitBtn: "Oddaj v NOXEL Forge",
+    submitBtn: "Oddaj v NOXEL FORGE",
     analyzing: "Analiziranje..."
   },
   pricing: {
-    kicker: "Cenik NOXEL Forge",
+    kicker: "Cenik NOXEL FORGE",
     title: "Zgradite svojo",
     titleAccent: "avtoritetno mrežo",
     subtitle: "Prikažite značko NOXEL na svojem spletišču in odklenite ekskluzivne popuste pri vsakem paketu.",
@@ -66,7 +66,7 @@ const sl: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Prikažite na svojem spletišču",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Značke",
     subtitle: "Kopirajte in prilepite katero koli značko v nogo svojega spletišča.",
     copy: "Kopiraj kodo",
@@ -76,7 +76,7 @@ const sl: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Pripravljeni na kovanje?",
-    title: "Pridružite se NOXEL Forge",
+    title: "Pridružite se NOXEL FORGE",
     subtitle: "Začnite graditi svojo prevereno mrežo povratnih povezav še danes."
   }
 };

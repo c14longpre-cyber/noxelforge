@@ -8,7 +8,7 @@ const ss: ForgePartialTranslations = {
     badges: "Tichibi"
   },
   hero: {
-    kicker: "NOXEL Forge - Inhlelo yekushintshanisa Backlink",
+    kicker: "NOXEL FORGE - Inhlelo yekushintshanisa Backlink",
     title: "Akha",
     titleAccent: "ligunya lakho",
     subtitle: "Shintshanisa tikhonkhetho ngetisayithi leticondzisiwe letihloliwe ngu Alfred. Ikhwalithi icinisekisiwe, sipaму asinakwenteka. Nipa sinye, utfole sinye.",
@@ -46,11 +46,11 @@ const ss: ForgePartialTranslations = {
     descLabel: "Incazelo lefishane",
     contentLabel: "Sikhungo lesiyinhloko",
     contentHint: "kungatfukeki, kusita Alfred ukuhlola ngcono",
-    submitBtn: "Tfulatela ku NOXEL Forge",
+    submitBtn: "Tfulatela ku NOXEL FORGE",
     analyzing: "Kuhlola..."
   },
   pricing: {
-    kicker: "Intengo ya NOXEL Forge",
+    kicker: "Intengo ya NOXEL FORGE",
     title: "Akha",
     titleAccent: "inethiwekhi yeligunya",
     subtitle: "Bonisa ichibi la NOXEL esayithini sakho uphinde uvule tisaphulelo letizimaphiko kuyo yonkhe inhlelo.",
@@ -66,7 +66,7 @@ const ss: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Bonisa esayithini sakho",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Tichibi",
     subtitle: "Kopisha uphinde ubeke noma yiliphi ichibi esineni sesayithi sakho.",
     copy: "Kopisha ingcenye",
@@ -76,7 +76,7 @@ const ss: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Ulungele ukwakha?",
-    title: "Joyina NOXEL Forge",
+    title: "Joyina NOXEL FORGE",
     subtitle: "Cala ukwakha inethiwekhi yakho yetikhonkhetho leticondzisiwe lamuhla."
   }
 };

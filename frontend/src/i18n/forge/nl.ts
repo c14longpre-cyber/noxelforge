@@ -8,7 +8,7 @@ const nl: ForgePartialTranslations = {
     badges: "Badges"
   },
   hero: {
-    kicker: "NOXEL Forge - Backlink Uitwisselingsecosysteem",
+    kicker: "NOXEL FORGE - Backlink Uitwisselingsecosysteem",
     title: "Smeed jouw",
     titleAccent: "autoriteit",
     subtitle: "Wissel backlinks uit met geverifieerde sites gefilterd door Alfred. Kwaliteit gegarandeerd, spam onmogelijk. Geef één, ontvang één.",
@@ -46,11 +46,11 @@ const nl: ForgePartialTranslations = {
     descLabel: "Korte beschrijving",
     contentLabel: "Hoofdinhoud",
     contentHint: "optioneel, helpt Alfred beter te analyseren",
-    submitBtn: "Indienen bij NOXEL Forge",
+    submitBtn: "Indienen bij NOXEL FORGE",
     analyzing: "Analyseren..."
   },
   pricing: {
-    kicker: "NOXEL Forge Prijzen",
+    kicker: "NOXEL FORGE Prijzen",
     title: "Bouw jouw",
     titleAccent: "autoriteitsnetwerk",
     subtitle: "Toon de NOXEL badge op jouw site en ontgrendel exclusieve kortingen op elk niveau.",
@@ -66,7 +66,7 @@ const nl: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Toon op jouw site",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Badges",
     subtitle: "Kopieer en plak een badge in de voettekst van jouw site.",
     copy: "Fragment kopiëren",
@@ -76,7 +76,7 @@ const nl: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Klaar om te smeden?",
-    title: "Sluit je aan bij NOXEL Forge",
+    title: "Sluit je aan bij NOXEL FORGE",
     subtitle: "Begin vandaag nog met het opbouwen van jouw geverifieerde backlinknetwerk."
   }
 };

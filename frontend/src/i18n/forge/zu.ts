@@ -8,7 +8,7 @@ const zu: ForgePartialTranslations = {
     badges: "Izimpawu"
   },
   hero: {
-    kicker: "NOXEL Forge - Backlink Exchange Ecosystem",
+    kicker: "NOXEL FORGE - Backlink Exchange Ecosystem",
     title: "Bumba",
     titleAccent: "igunya lakho",
     subtitle: "Shintshana ngezikhonkwane namawebhusayithi aqinisekisiwe ahlunyeleliswa u-Alfred. Ikhwalithi inikelelwe, ucwangco alwenzeki. Nika okukodwa, uthole okukodwa.",
@@ -46,11 +46,11 @@ const zu: ForgePartialTranslations = {
     descLabel: "Incazelo emfushane",
     contentLabel: "Okuqukethwe okuyinhloko",
     contentHint: "akudingeki, kusiza u-Alfred ukuhlaziya kangcono",
-    submitBtn: "Thumela ku-NOXEL Forge",
+    submitBtn: "Thumela ku-NOXEL FORGE",
     analyzing: "Iyahlaziya..."
   },
   pricing: {
-    kicker: "Amanani e-NOXEL Forge",
+    kicker: "Amanani e-NOXEL FORGE",
     title: "Yakha",
     titleAccent: "inethiwekhi yegunya lakho",
     subtitle: "Bonisa uphawu lwe-NOXEL esayithini lakho uvule izaphulelo ezikhethekile kumazinga wonke.",
@@ -66,7 +66,7 @@ const zu: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Bonisa esayithini lakho",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Izimpawu",
     subtitle: "Kopisha ufake noma yiluphi uphawu ekhasini elingezansi lesayithi lakho.",
     copy: "Kopisha isiqephu",
@@ -76,7 +76,7 @@ const zu: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Ulungele ukubumba?",
-    title: "Joyina i-NOXEL Forge",
+    title: "Joyina i-NOXEL FORGE",
     subtitle: "Qala ukwakha inethiwekhi yakho yezikhonkwane eziqinisekisiwe namuhla."
   }
 };

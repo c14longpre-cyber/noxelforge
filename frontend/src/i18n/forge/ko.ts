@@ -8,7 +8,7 @@ const ko: ForgePartialTranslations = {
     badges: "배지"
   },
   hero: {
-    kicker: "NOXEL Forge - 백링크 교환 생태계",
+    kicker: "NOXEL FORGE - 백링크 교환 생태계",
     title: "당신의",
     titleAccent: "권위",
     subtitle: "Alfred가 필터링한 검증된 사이트와 백링크를 교환하세요. 품질 보장, 스팸 불가. 하나 주고, 하나 받기.",
@@ -46,11 +46,11 @@ const ko: ForgePartialTranslations = {
     descLabel: "간단한 설명",
     contentLabel: "주요 콘텐츠",
     contentHint: "선택 사항, Alfred의 분석에 도움이 됩니다",
-    submitBtn: "NOXEL Forge에 제출하기",
+    submitBtn: "NOXEL FORGE에 제출하기",
     analyzing: "분석 중..."
   },
   pricing: {
-    kicker: "NOXEL Forge 요금제",
+    kicker: "NOXEL FORGE 요금제",
     title: "당신의",
     titleAccent: "권위 네트워크 구축",
     subtitle: "사이트에 NOXEL 배지를 표시하고 모든 등급에서 독점 할인을 받으세요.",
@@ -66,7 +66,7 @@ const ko: ForgePartialTranslations = {
   },
   badge: {
     kicker: "사이트에 표시하기",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "배지",
     subtitle: "사이트 푸터에 배지를 복사하여 붙여넣으세요.",
     copy: "코드 복사",
@@ -76,7 +76,7 @@ const ko: ForgePartialTranslations = {
   },
   cta: {
     kicker: "포징할 준비가 되셨나요?",
-    title: "NOXEL Forge에 참여하세요",
+    title: "NOXEL FORGE에 참여하세요",
     subtitle: "오늘부터 검증된 백링크 네트워크를 구축하세요."
   }
 };

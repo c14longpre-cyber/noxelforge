@@ -8,7 +8,7 @@ const dv: ForgePartialTranslations = {
     badges: "ބެޖްތައް"
   },
   hero: {
-    kicker: "NOXEL Forge - ބެކްލިންކް އެކްސްޗޭންޖް އިކޯސިސްޓަމް",
+    kicker: "NOXEL FORGE - ބެކްލިންކް އެކްސްޗޭންޖް އިކޯސިސްޓަމް",
     title: "ތިބާގެ",
     titleAccent: "އޮތޯރިޓީ",
     subtitle: "Alfred ފިލްޓަރ ކޮށްފައިވާ ވެރިފައިޑް ސައިޓްތަކާ އެކު ބެކްލިންކް ބަދަލުކޮށްލާ. ކޮލިޓީ ގެރެންޓީ، ސްޕޭމް ނުވާނެ. އެއް ދީ، އެއް ލިބޭ.",
@@ -46,11 +46,11 @@ const dv: ForgePartialTranslations = {
     descLabel: "ކުރު ތަފްސީލު",
     contentLabel: "މައި ކޮންޓެންޓް",
     contentHint: "އިހްތިޔާރީ، Alfred ބަލާ ރަނގަޅުވޭ",
-    submitBtn: "NOXEL Forge އަށް ހުށަހަޅާ",
+    submitBtn: "NOXEL FORGE އަށް ހުށަހަޅާ",
     analyzing: "ވިލަންޓެ ވަނީ..."
   },
   pricing: {
-    kicker: "NOXEL Forge އަގުތައް",
+    kicker: "NOXEL FORGE އަގުތައް",
     title: "ތިބާގެ",
     titleAccent: "އޮތޯރިޓީ ނެޓްވޯކް",
     subtitle: "ތިބާގެ ސައިޓްގައި NOXEL ބެޖް ދައްކާ، ކޮންމެ ޓިއަރއަކުން އެކްސްކްލޫސިވް ޑިސްކައުންޓް ހޯދާ.",
@@ -66,7 +66,7 @@ const dv: ForgePartialTranslations = {
   },
   badge: {
     kicker: "ތިބާގެ ސައިޓްގައި ދައްކާ",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "ބެޖްތައް",
     subtitle: "ތިބާގެ ސައިޓް ފޫޓަރގައި ބެޖެއް ކޮޕީ ކޮށް ޕޭސްޓް ކޮށްލާ.",
     copy: "ސްނިޕެޓް ކޮޕީ ކޮށްލާ",
@@ -76,7 +76,7 @@ const dv: ForgePartialTranslations = {
   },
   cta: {
     kicker: "ފޯޖް ކުރަން ތައްޔާރުތަ؟",
-    title: "NOXEL Forge އާ ގުޅޭ",
+    title: "NOXEL FORGE އާ ގުޅޭ",
     subtitle: "މިއަދު ތިބާގެ ވެރިފައިޑް ބެކްލިންކް ނެޓްވޯކް ބިނާ ކުުރަން ފަށާ."
   }
 };

@@ -8,7 +8,7 @@ const mt: ForgePartialTranslations = {
     badges: "Badges"
   },
   hero: {
-    kicker: "NOXEL Forge - Ekosistema ta' Skambju ta' Backlinks",
+    kicker: "NOXEL FORGE - Ekosistema ta' Skambju ta' Backlinks",
     title: "Forġa l-",
     titleAccent: "awtorità",
     subtitle: "Skambbja backlinks ma' siti verifikati ffiltrati minn Alfred. Kwalità garantita, spam impossibbli. Agħti wieħed, ħu wieħed.",
@@ -46,11 +46,11 @@ const mt: ForgePartialTranslations = {
     descLabel: "Deskrizzjoni qasira",
     contentLabel: "Kontenut ewlieni",
     contentHint: "fakultattiv, jgħin lil Alfred janaliżża aħjar",
-    submitBtn: "Ibgħat lil NOXEL Forge",
+    submitBtn: "Ibgħat lil NOXEL FORGE",
     analyzing: "Qed janalizza..."
   },
   pricing: {
-    kicker: "Prezzijiet ta' NOXEL Forge",
+    kicker: "Prezzijiet ta' NOXEL FORGE",
     title: "Ibni n-",
     titleAccent: "netwerk ta' awtorità tiegħek",
     subtitle: "Uri l-badge ta' NOXEL fuq is-sit tiegħek u sib skontijiet esklużivi fuq kull livell.",
@@ -66,7 +66,7 @@ const mt: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Uri fuq is-sit tiegħek",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Badges",
     subtitle: "Ikkopja u waħħal kwalunkwe badge fil-footer tas-sit tiegħek.",
     copy: "Ikkopja s-snippet",
@@ -76,7 +76,7 @@ const mt: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Lest biex tibda tforġa?",
-    title: "Ingħaqad ma' NOXEL Forge",
+    title: "Ingħaqad ma' NOXEL FORGE",
     subtitle: "Ibda tibni n-netwerk tiegħek ta' backlinks verifikati llum."
   }
 };

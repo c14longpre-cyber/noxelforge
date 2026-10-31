@@ -8,7 +8,7 @@ const ts: ForgePartialTranslations = {
     badges: "Tibheji"
   },
   hero: {
-    kicker: "NOXEL Forge - Xifumo xa Ku Hlanganisa Tikhonekelo",
+    kicker: "NOXEL FORGE - Xifumo xa Ku Hlanganisa Tikhonekelo",
     title: "Aka",
     titleAccent: "vululami bya wena",
     subtitle: "Hlanganisa tikhonekelo na matsalwa lawa ya pfuxiwa hi Alfred. Ndlelo wa ntiyiso, spam a yi koteki. Nyika yin'we, amukela yin'we.",
@@ -46,11 +46,11 @@ const ts: ForgePartialTranslations = {
     descLabel: "Vunweti lebyi fupfhi",
     contentLabel: "Ndhawu ya Ntlawa",
     contentHint: "a yi laveki, yi pfuna Alfred ku xopaxopa kahle",
-    submitBtn: "Nyikela eka NOXEL Forge",
+    submitBtn: "Nyikela eka NOXEL FORGE",
     analyzing: "Ku xopaxopa..."
   },
   pricing: {
-    kicker: "Mitengo ya NOXEL Forge",
+    kicker: "Mitengo ya NOXEL FORGE",
     title: "Aka",
     titleAccent: "xifumo xa vululami",
     subtitle: "Kombisa bheji ya NOXEL eka saiti ya wena naswona u pfula tikhombo ta nkoka eka nhlayo yin'wana ni yin'wana.",
@@ -66,7 +66,7 @@ const ts: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Kombisa eka saiti ya wena",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Tibheji",
     subtitle: "Kopela naswona u khomela bheji yin'wana na yin'wana eka nhlayo ya saiti ya wena.",
     copy: "Kopela xichopetelo",
@@ -76,7 +76,7 @@ const ts: ForgePartialTranslations = {
   },
   cta: {
     kicker: "U lunghile ku aka?",
-    title: "Nghena eka NOXEL Forge",
+    title: "Nghena eka NOXEL FORGE",
     subtitle: "Sungula ku aka xifumo xa tikhonekelo leti pfuxiweke namuntlha."
   }
 };

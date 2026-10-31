@@ -8,7 +8,7 @@ const ms: ForgePartialTranslations = {
     badges: "Lencana"
   },
   hero: {
-    kicker: "NOXEL Forge - Ekosistem Pertukaran Pautan Balik",
+    kicker: "NOXEL FORGE - Ekosistem Pertukaran Pautan Balik",
     title: "Tempa",
     titleAccent: "autoriti",
     subtitle: "Tukar pautan balik dengan laman yang disahkan dan ditapis oleh Alfred. Kualiti terjamin, spam mustahil. Beri satu, dapat satu.",
@@ -46,11 +46,11 @@ const ms: ForgePartialTranslations = {
     descLabel: "Penerangan ringkas",
     contentLabel: "Kandungan utama",
     contentHint: "pilihan, membantu Alfred menganalisis dengan lebih baik",
-    submitBtn: "Hantar ke NOXEL Forge",
+    submitBtn: "Hantar ke NOXEL FORGE",
     analyzing: "Menganalisis..."
   },
   pricing: {
-    kicker: "Harga NOXEL Forge",
+    kicker: "Harga NOXEL FORGE",
     title: "Bina",
     titleAccent: "rangkaian autoriti anda",
     subtitle: "Paparkan lencana NOXEL di laman anda dan buka kunci diskaun eksklusif pada setiap peringkat.",
@@ -66,7 +66,7 @@ const ms: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Papar di laman anda",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Lencana",
     subtitle: "Salin dan tampal mana-mana lencana di footer laman anda.",
     copy: "Salin kod",
@@ -76,7 +76,7 @@ const ms: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Bersedia untuk bertempa?",
-    title: "Sertai NOXEL Forge",
+    title: "Sertai NOXEL FORGE",
     subtitle: "Mula membina rangkaian pautan balik yang disahkan anda hari ini."
   }
 };

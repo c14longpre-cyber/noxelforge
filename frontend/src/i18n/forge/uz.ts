@@ -8,7 +8,7 @@ const uz: ForgePartialTranslations = {
     badges: "Nishonlar"
   },
   hero: {
-    kicker: "NOXEL Forge - Backlink Almashinuv Ekotizimi",
+    kicker: "NOXEL FORGE - Backlink Almashinuv Ekotizimi",
     title: "O'z",
     titleAccent: "obro'ingizni",
     subtitle: "Alfred tomonidan filtrlangan tasdiqlangan saytlar bilan backlinklar almashing. Sifat kafolatlangan, spam imkonsiz. Birini bering, birini oling.",
@@ -46,11 +46,11 @@ const uz: ForgePartialTranslations = {
     descLabel: "Qisqa tavsif",
     contentLabel: "Asosiy kontent",
     contentHint: "ixtiyoriy, Alfredga yaxshiroq tahlil qilishda yordam beradi",
-    submitBtn: "NOXEL Forge ga yuborish",
+    submitBtn: "NOXEL FORGE ga yuborish",
     analyzing: "Tahlil qilinmoqda..."
   },
   pricing: {
-    kicker: "NOXEL Forge Narxlari",
+    kicker: "NOXEL FORGE Narxlari",
     title: "O'z",
     titleAccent: "obro' tarmog'ingizni",
     subtitle: "Saytingizda NOXEL nishonini ko'rsating va har bir tarifda eksklyuziv chegirmalarni oching.",
@@ -66,7 +66,7 @@ const uz: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Saytingizda ko'rsating",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Nishonlari",
     subtitle: "Istalgan nishon kodini saytingizning pastki qismiga nusxa ko'chiring va joylashtiring.",
     copy: "Kodni nusxalash",
@@ -76,7 +76,7 @@ const uz: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Boshlashga tayyormisiz?",
-    title: "NOXEL Forge ga qo'shiling",
+    title: "NOXEL FORGE ga qo'shiling",
     subtitle: "Bugun tasdiqlangan backlink tarmog'ingizni qurishni boshlang."
   }
 };

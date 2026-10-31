@@ -8,7 +8,7 @@ const km: ForgePartialTranslations = {
     badges: "បាដហ្ស"
   },
   hero: {
-    kicker: "NOXEL Forge - ប្រព័ន្ធផ្លាស់ប្តូរ Backlink",
+    kicker: "NOXEL FORGE - ប្រព័ន្ធផ្លាស់ប្តូរ Backlink",
     title: "បង្កើត",
     titleAccent: "សិទ្ធិអំណាច",
     subtitle: "ផ្លាស់ប្តូរ backlink ជាមួយគេហទំព័រដែលបានផ្ទៀងផ្ទាត់ដោយ Alfred ។ ធានាគុណភាព មិនអាចមានសារឥតបានការ។ ផ្តល់មួយ ទទួលមួយ។",
@@ -46,11 +46,11 @@ const km: ForgePartialTranslations = {
     descLabel: "ការពិពណ៌នាខ្លី",
     contentLabel: "ខ្លឹមសារចម្បង",
     contentHint: "ស្រេចចិត្ត ជួយ Alfred វិភាគបានល្អជាងមុន",
-    submitBtn: "ដាក់ស្នើទៅ NOXEL Forge",
+    submitBtn: "ដាក់ស្នើទៅ NOXEL FORGE",
     analyzing: "កំពុងវិភាគ..."
   },
   pricing: {
-    kicker: "តម្លៃ NOXEL Forge",
+    kicker: "តម្លៃ NOXEL FORGE",
     title: "បង្កើត",
     titleAccent: "បណ្តាញសិទ្ធិអំណាច",
     subtitle: "បង្ហាញបាដហ្ស NOXEL នៅលើគេហទំព័ររបស់អ្នក និងដោះសោការបញ្ចុះតម្លៃផ្តាច់មុខលើគ្រប់កម្រិត។",
@@ -66,7 +66,7 @@ const km: ForgePartialTranslations = {
   },
   badge: {
     kicker: "បង្ហាញនៅលើគេហទំព័ររបស់អ្នក",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "បាដហ្ស",
     subtitle: "ចម្លង និងបិទភ្ជាប់បាដហ្សណាមួយនៅក្នុង footer គេហទំព័ររបស់អ្នក។",
     copy: "ចម្លង snippet",
@@ -76,7 +76,7 @@ const km: ForgePartialTranslations = {
   },
   cta: {
     kicker: "រួចរាល់ក្នុងការបង្កើតហើយឬ?",
-    title: "ចូលរួម NOXEL Forge",
+    title: "ចូលរួម NOXEL FORGE",
     subtitle: "ចាប់ផ្តើមបង្កើតបណ្តាញ backlink ដែលបានផ្ទៀងផ្ទាត់របស់អ្នកថ្ងៃនេះ។"
   }
 };

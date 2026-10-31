@@ -8,7 +8,7 @@ const ln: ForgePartialTranslations = {
     badges: "Badges"
   },
   hero: {
-    kicker: "NOXEL Forge - Ekosistème ya kobongola balinks",
+    kicker: "NOXEL FORGE - Ekosistème ya kobongola balinks",
     title: "Bongisa",
     titleAccent: "bokonzi na yo",
     subtitle: "Bosana balinks na basit oyo Alfred asaleli verification. Kalité ekombisamá, spam ezali mpossible. Pesa moko, zwa moko.",
@@ -46,11 +46,11 @@ const ln: ForgePartialTranslations = {
     descLabel: "Kekele ya mokuse",
     contentLabel: "Content ya miboko",
     contentHint: "ya bonsomi, esalisi Alfred koanaliser malamu",
-    submitBtn: "Tinda na NOXEL Forge",
+    submitBtn: "Tinda na NOXEL FORGE",
     analyzing: "Ezali koanaliser..."
   },
   pricing: {
-    kicker: "Ntalo ya NOXEL Forge",
+    kicker: "Ntalo ya NOXEL FORGE",
     title: "Tonga",
     titleAccent: "réseau ya bokonzi",
     subtitle: "Bimisa badge ya NOXEL na site na yo mpe fungola réductions ya kokamwa na niveau nyonso.",
@@ -66,7 +66,7 @@ const ln: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Bimisa na site na yo",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Badges",
     subtitle: "Kopie mpe kolakisa badge nyonso na footer ya site na yo.",
     copy: "Kopie snippet",
@@ -76,7 +76,7 @@ const ln: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Ozali libready ya koforger?",
-    title: "Kota na NOXEL Forge",
+    title: "Kota na NOXEL FORGE",
     subtitle: "Banda kotonga réseau na yo ya balinks verified lelo."
   }
 };

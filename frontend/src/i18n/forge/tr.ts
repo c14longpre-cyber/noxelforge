@@ -8,7 +8,7 @@ const tr: ForgePartialTranslations = {
     badges: "Rozetler"
   },
   hero: {
-    kicker: "NOXEL Forge - Backlink Değişim Ekosistemi",
+    kicker: "NOXEL FORGE - Backlink Değişim Ekosistemi",
     title: "Otoritenizi",
     titleAccent: "güçlendirin",
     subtitle: "Alfred tarafından filtrelenmiş doğrulanmış sitelerle backlink değişimi yapın. Kalite garantili, spam imkansız. Bir verin, bir alın.",
@@ -46,11 +46,11 @@ const tr: ForgePartialTranslations = {
     descLabel: "Kısa açıklama",
     contentLabel: "Ana içerik",
     contentHint: "isteğe bağlı, Alfred'in daha iyi analiz etmesine yardımcı olur",
-    submitBtn: "NOXEL Forge'a Gönder",
+    submitBtn: "NOXEL FORGE'a Gönder",
     analyzing: "Analiz ediliyor..."
   },
   pricing: {
-    kicker: "NOXEL Forge Fiyatlandırması",
+    kicker: "NOXEL FORGE Fiyatlandırması",
     title: "Otorite",
     titleAccent: "ağınızı kurun",
     subtitle: "Sitenizde NOXEL rozetini gösterin ve her planda özel indirimlerden yararlanın.",
@@ -66,7 +66,7 @@ const tr: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Sitenizde görüntüleyin",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Rozetleri",
     subtitle: "Herhangi bir rozeti kopyalayıp sitenizin altbilgisine yapıştırın.",
     copy: "Kodu kopyala",
@@ -76,7 +76,7 @@ const tr: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Forge'a hazır mısınız?",
-    title: "NOXEL Forge'a Katılın",
+    title: "NOXEL FORGE'a Katılın",
     subtitle: "Doğrulanmış backlink ağınızı bugün oluşturmaya başlayın."
   }
 };

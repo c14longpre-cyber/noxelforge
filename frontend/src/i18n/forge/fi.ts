@@ -8,7 +8,7 @@ const fi: ForgePartialTranslations = {
     badges: "Merkit"
   },
   hero: {
-    kicker: "NOXEL Forge - Takalinkkien vaihtoekosysteemi",
+    kicker: "NOXEL FORGE - Takalinkkien vaihtoekosysteemi",
     title: "Rakenna",
     titleAccent: "auktoriteettisi",
     subtitle: "Vaihda takalinkkejä Alfреdin suodattamien vahvistettujen sivustojen kanssa. Laatu taattu, roskaposti mahdotonta. Anna yksi, saa yksi.",
@@ -50,7 +50,7 @@ const fi: ForgePartialTranslations = {
     analyzing: "Analysoidaan..."
   },
   pricing: {
-    kicker: "NOXEL Forge hinnoittelu",
+    kicker: "NOXEL FORGE hinnoittelu",
     title: "Rakenna oma",
     titleAccent: "auktoriteettiverkostosi",
     subtitle: "Näytä NOXEL-merkki sivustollasi ja avaa eksklusiiviset alennukset jokaisella tasolla.",
@@ -66,7 +66,7 @@ const fi: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Näytä sivustollasi",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Merkit",
     subtitle: "Kopioi ja liitä mikä tahansa merkki sivustosi alatunnisteeseen.",
     copy: "Kopioi koodi",

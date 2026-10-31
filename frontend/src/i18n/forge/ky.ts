@@ -8,7 +8,7 @@ const ky: ForgePartialTranslations = {
     badges: "Белгилер"
   },
   hero: {
-    kicker: "NOXEL Forge - Шилтеме алмашуу экосистемасы",
+    kicker: "NOXEL FORGE - Шилтеме алмашуу экосистемасы",
     title: "Өзүңүздүн",
     titleAccent: "авторитетиңизди",
     subtitle: "Alfred тарабынан чыпкаланган текшерилген сайттар менен шилтемелер алмашыңыз. Сапат кепилденген, спам мүмкүн эмес. Бирөөнү бер, бирөөнү ал.",
@@ -46,11 +46,11 @@ const ky: ForgePartialTranslations = {
     descLabel: "Кыскача сүрөттөмө",
     contentLabel: "Негизги мазмун",
     contentHint: "милдеттүү эмес, Alfred үчүн талдоону жакшыртат",
-    submitBtn: "NOXEL Forge жөнөтүү",
+    submitBtn: "NOXEL FORGE жөнөтүү",
     analyzing: "Талдоо жүрүүдө..."
   },
   pricing: {
-    kicker: "NOXEL Forge Баалары",
+    kicker: "NOXEL FORGE Баалары",
     title: "Өзүңүздүн",
     titleAccent: "авторитет тармагыңызды",
     subtitle: "Сайтыңызда NOXEL белгисин көрсөтүп, ар бир деңгээлде өзгөчө арзандатууларды ачыңыз.",
@@ -66,7 +66,7 @@ const ky: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Сайтыңызда көрсөтүңүз",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Белгилери",
     subtitle: "Каалаган белгини сайтыңыздын футерине көчүрүп чаптаңыз.",
     copy: "Кодду көчүрүү",
@@ -76,7 +76,7 @@ const ky: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Баштоого даярсызбы?",
-    title: "NOXEL Forge кошулуңуз",
+    title: "NOXEL FORGE кошулуңуз",
     subtitle: "Бүгүн текшерилген шилтеме тармагыңызды куруп баштаңыз."
   }
 };

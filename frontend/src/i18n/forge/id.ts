@@ -8,7 +8,7 @@ const id: ForgePartialTranslations = {
     badges: "Lencana"
   },
   hero: {
-    kicker: "NOXEL Forge - Ekosistem Pertukaran Backlink",
+    kicker: "NOXEL FORGE - Ekosistem Pertukaran Backlink",
     title: "Tempa",
     titleAccent: "otoritasmu",
     subtitle: "Tukar backlink dengan situs terverifikasi yang disaring oleh Alfred. Kualitas terjamin, spam tidak mungkin terjadi. Beri satu, dapatkan satu.",
@@ -46,11 +46,11 @@ const id: ForgePartialTranslations = {
     descLabel: "Deskripsi singkat",
     contentLabel: "Konten utama",
     contentHint: "opsional, membantu Alfred menganalisis lebih baik",
-    submitBtn: "Kirim ke NOXEL Forge",
+    submitBtn: "Kirim ke NOXEL FORGE",
     analyzing: "Menganalisis..."
   },
   pricing: {
-    kicker: "Harga NOXEL Forge",
+    kicker: "Harga NOXEL FORGE",
     title: "Bangun",
     titleAccent: "jaringan otoritasmu",
     subtitle: "Tampilkan lencana NOXEL di situs Anda dan buka diskon eksklusif untuk setiap paket.",
@@ -66,7 +66,7 @@ const id: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Tampilkan di situs Anda",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Lencana",
     subtitle: "Salin dan tempel lencana apa pun di footer situs Anda.",
     copy: "Salin kode",
@@ -76,7 +76,7 @@ const id: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Siap untuk menempa?",
-    title: "Bergabung dengan NOXEL Forge",
+    title: "Bergabung dengan NOXEL FORGE",
     subtitle: "Mulai bangun jaringan backlink terverifikasi Anda hari ini."
   }
 };

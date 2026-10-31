@@ -8,7 +8,7 @@ const bi: ForgePartialTranslations = {
     badges: "Badges"
   },
   hero: {
-    kicker: "NOXEL Forge - Ekosistem blong Eksaenj Backlink",
+    kicker: "NOXEL FORGE - Ekosistem blong Eksaenj Backlink",
     title: "Fojem",
     titleAccent: "otorite blong yu",
     subtitle: "Eksaenj backlink wetem ol saet we Alfred i verifae finis. Kwaliti i garantim, spam i no posibel. Givim wan, kisim wan bak.",
@@ -46,11 +46,11 @@ const bi: ForgePartialTranslations = {
     descLabel: "Sot diskripsen",
     contentLabel: "Konten prinsip",
     contentHint: "opsonal, i helpem Alfred blong analysen blong hem i go betta",
-    submitBtn: "Sanem long NOXEL Forge",
+    submitBtn: "Sanem long NOXEL FORGE",
     analyzing: "Analysen i stap..."
   },
   pricing: {
-    kicker: "Praes blong NOXEL Forge",
+    kicker: "Praes blong NOXEL FORGE",
     title: "Bildim",
     titleAccent: "netwok blong otorite blong yu",
     subtitle: "Soem NOXEL badge long saet blong yu mo openem ol diskaont eksklisiv long evri tia.",
@@ -66,7 +66,7 @@ const bi: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Soem long saet blong yu",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Badges",
     subtitle: "Kopio mo peitem eni badge long futa blong saet blong yu.",
     copy: "Kopio snippet",
@@ -76,7 +76,7 @@ const bi: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Yu redi blong fojem?",
-    title: "Joinim NOXEL Forge",
+    title: "Joinim NOXEL FORGE",
     subtitle: "Statem bildim netwok blong ol backlink verifae blong yu tede."
   }
 };

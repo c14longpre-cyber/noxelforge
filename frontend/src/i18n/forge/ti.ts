@@ -8,7 +8,7 @@ const ti: ForgePartialTranslations = {
     badges: "ባጅታት"
   },
   hero: {
-    kicker: "NOXEL Forge - ናይ ባክሊንክ ምልውዋጥ ኢኮሲስተም",
+    kicker: "NOXEL FORGE - ናይ ባክሊንክ ምልውዋጥ ኢኮሲስተም",
     title: "ስልጣንካ",
     titleAccent: "ፍጠር",
     subtitle: "ምስ ብ Alfred ዝተረጋገጹ ሳይታት ባክሊንክ ተለዋወጥ። ጥራይነት ዋስትና ዘለዎ፣ ስፓም ዘይከኣል። ሓደ ሃብ፣ ሓደ ውሰድ።",
@@ -46,11 +46,11 @@ const ti: ForgePartialTranslations = {
     descLabel: "ሓጺር መግለጺ",
     contentLabel: "ዋና ትሕዝቶ",
     contentHint: "ወሃቢ፣ Alfred ንምሕጋዝ ዝበለጸ ክምርምር ይሕግዝ",
-    submitBtn: "ናብ NOXEL Forge ኣቕርብ",
+    submitBtn: "ናብ NOXEL FORGE ኣቕርብ",
     analyzing: "ይምርምር ኣሎ..."
   },
   pricing: {
-    kicker: "NOXEL Forge ዋጋ",
+    kicker: "NOXEL FORGE ዋጋ",
     title: "ናይ",
     titleAccent: "ስልጣን ኔትወርክካ ስራሕ",
     subtitle: "ኣብ ሳይትካ ናይ NOXEL ባጅ ኣርኢ ናይ ነፍሲ ወከፍ ደረጃ ልሉይ ቅናሽ ኣልቅስ።",
@@ -66,7 +66,7 @@ const ti: ForgePartialTranslations = {
   },
   badge: {
     kicker: "ኣብ ሳይትካ ኣርኢ",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "ባጅታት",
     subtitle: "ዝኾነ ባጅ ኣብ ፉተር ሳይትካ ቅዳሕ ለጥፍ።",
     copy: "ስኒፐት ቅዳሕ",
@@ -76,7 +76,7 @@ const ti: ForgePartialTranslations = {
   },
   cta: {
     kicker: "ንምፍጣር ድሉው ዲኻ?",
-    title: "NOXEL Forge ተጸምበር",
+    title: "NOXEL FORGE ተጸምበር",
     subtitle: "ሎሚ ዝተረጋገጸ ናይ ባክሊንክ ኔትወርክካ ምህናጽ ጀምር።"
   }
 };

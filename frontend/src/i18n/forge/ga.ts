@@ -8,7 +8,7 @@ const ga: ForgePartialTranslations = {
     badges: "Suaitheantas"
   },
   hero: {
-    kicker: "NOXEL Forge - Éiceachóras Malartaithe Nasc Cúil",
+    kicker: "NOXEL FORGE - Éiceachóras Malartaithe Nasc Cúil",
     title: "Ceap do",
     titleAccent: "údarás",
     subtitle: "Malartaigh naisc chúil le suíomhanna fíoraithe scagtha ag Alfred. Cáilíocht ráthaithe, spam dodhéanta. Tabhair ceann, faigh ceann.",
@@ -46,11 +46,11 @@ const ga: ForgePartialTranslations = {
     descLabel: "Cur síos gearr",
     contentLabel: "Príomhábhar",
     contentHint: "roghnach, cabhraíonn sé le Alfred anailís níos fearr a dhéanamh",
-    submitBtn: "Cuir isteach chuig NOXEL Forge",
+    submitBtn: "Cuir isteach chuig NOXEL FORGE",
     analyzing: "Ag anailísiú..."
   },
   pricing: {
-    kicker: "Praghsáil NOXEL Forge",
+    kicker: "Praghsáil NOXEL FORGE",
     title: "Tóg do",
     titleAccent: "líonra údaráis",
     subtitle: "Taispeáin suaitheantas NOXEL ar do shuíomh agus díghlasáil lascainí eisiacha ar gach leibhéal.",
@@ -66,7 +66,7 @@ const ga: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Taispeáin ar do shuíomh",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Suaitheantas",
     subtitle: "Cóipeáil agus greamaigh aon suaitheantas i gcochall do shuíomh.",
     copy: "Cóipeáil blúire",
@@ -76,7 +76,7 @@ const ga: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Réidh le ceap?",
-    title: "Glac páirt i NOXEL Forge",
+    title: "Glac páirt i NOXEL FORGE",
     subtitle: "Tosaigh ag tógáil do líonra nasc cúil fíoraithe inniu."
   }
 };

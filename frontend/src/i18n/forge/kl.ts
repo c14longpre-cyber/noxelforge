@@ -8,7 +8,7 @@ const kl: ForgePartialTranslations = {
     badges: "Nalunaarsorpassuit"
   },
   hero: {
-    kicker: "NOXEL Forge - Backlink Allanotinneqarsinnaanissarmut Ekosystemi",
+    kicker: "NOXEL FORGE - Backlink Allanotinneqarsinnaanissarmut Ekosystemi",
     title: "Piumasarivaatit",
     titleAccent: "naliginnaanngitsumik malinnaassineq",
     subtitle: "Backlinkkit allanngorsinnaavat Alfred pillugit nalilersorneqarsinnaasumik sitertitsisoqarsinnaasumik. Kvaliteti nalunngissumik, spam-it naleqqinngilaq. Ataqqinninneqassasoq ataqqinneqassasoq.",
@@ -46,11 +46,11 @@ const kl: ForgePartialTranslations = {
     descLabel: "Kissaatigineqartariaqarpoq nalunaarsorneq",
     contentLabel: "Pingaaruteqartumik atugarissaat",
     contentHint: "kissaatissarsiorfigineqarsinnaanngilaq, Alfred kissaatigineqartariaqarpoq nalilersorneqassasoq",
-    submitBtn: "NOXEL Forge-mut inatsit",
+    submitBtn: "NOXEL FORGE-mut inatsit",
     analyzing: "Nalilersorneqassasoq..."
   },
   pricing: {
-    kicker: "NOXEL Forge Akissorsaat",
+    kicker: "NOXEL FORGE Akissorsaat",
     title: "Piumasarivaatit",
     titleAccent: "naliginnaanngitsumik malinnaassineq neqatigiiffigineqassasoq",
     subtitle: "NOXEL nalunaarsorpassuit nassatarisassaminni nalunaarsorpakkit aamma kissaatissarsiorfigineqarsinnaasumik allanngortitsissineqarsinnaapput.",
@@ -66,7 +66,7 @@ const kl: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Nassatarisassaminni nalunaarsorpakkit",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Nalunaarsorpassuit",
     subtitle: "Nalunaarsorpassuit nassatarisassaminni kissaatigineqartariaqarpoq.",
     copy: "Kissaatigineqartariaqarpoq",
@@ -76,7 +76,7 @@ const kl: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Piumasarivaatit aallartissavarpit?",
-    title: "NOXEL Forge-mut isigassavat",
+    title: "NOXEL FORGE-mut isigassavat",
     subtitle: "Nalilersorneqarsinnaasumik backlink neqatigiiffigineqassasoq ulloriartoortinneqassasoq."
   }
 };

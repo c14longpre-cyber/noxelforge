@@ -8,7 +8,7 @@ const tl: ForgePartialTranslations = {
     badges: "Mga Badge"
   },
   hero: {
-    kicker: "NOXEL Forge - Backlink Exchange Ecosystem",
+    kicker: "NOXEL FORGE - Backlink Exchange Ecosystem",
     title: "Ihubog ang iyong",
     titleAccent: "awtoridad",
     subtitle: "Mag-exchange ng mga backlink sa mga verified na site na sinala ni Alfred. Kalidad na garantisado, imposibleng may spam. Magbigay ng isa, makakuha ng isa.",
@@ -46,11 +46,11 @@ const tl: ForgePartialTranslations = {
     descLabel: "Maikling paglalarawan",
     contentLabel: "Pangunahing nilalaman",
     contentHint: "opsyonal, nakakatulong kay Alfred na mas mapabuti ang pagsusuri",
-    submitBtn: "Isumite sa NOXEL Forge",
+    submitBtn: "Isumite sa NOXEL FORGE",
     analyzing: "Sinusuri..."
   },
   pricing: {
-    kicker: "NOXEL Forge Pagpepresyo",
+    kicker: "NOXEL FORGE Pagpepresyo",
     title: "Buuin ang iyong",
     titleAccent: "network ng awtoridad",
     subtitle: "Ipakita ang badge ng NOXEL sa iyong site at i-unlock ang mga eksklusibong diskwento sa bawat antas.",
@@ -66,7 +66,7 @@ const tl: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Ipakita sa iyong site",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Mga Badge",
     subtitle: "Kopyahin at i-paste ang anumang badge sa footer ng iyong site.",
     copy: "Kopyahin ang snippet",
@@ -76,7 +76,7 @@ const tl: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Handa nang mag-forge?",
-    title: "Sumali sa NOXEL Forge",
+    title: "Sumali sa NOXEL FORGE",
     subtitle: "Simulan ang pagbuo ng iyong verified na backlink network ngayon."
   }
 };

@@ -8,7 +8,7 @@ const ku: ForgePartialTranslations = {
     badges: "نیشانەکان"
   },
   hero: {
-    kicker: "NOXEL Forge - ئیکۆسیستەمی گەڕاندنەوەی بەکلینک",
+    kicker: "NOXEL FORGE - ئیکۆسیستەمی گەڕاندنەوەی بەکلینک",
     title: "دەسەڵاتت",
     titleAccent: "بدرووست بکە",
     subtitle: "بەکلینک پێشکەش بکە بە ماڵپەڕە دروستکراوەکان کە لەلایەن Alfred فلتەر کراون. کوالیتی دڵنیابووە، سپام ناکرێت. یەکێک بدە، یەکێک وەربگرە.",
@@ -46,11 +46,11 @@ const ku: ForgePartialTranslations = {
     descLabel: "پێناسەی کورت",
     contentLabel: "ناوەڕۆکی سەرەکی",
     contentHint: "ئەرەیی نییە، بەلام Alfred ی یارمەتی دەدات باشتر شیکاری بکات",
-    submitBtn: "بنێرە بۆ NOXEL Forge",
+    submitBtn: "بنێرە بۆ NOXEL FORGE",
     analyzing: "شیکاری دەکرێت..."
   },
   pricing: {
-    kicker: "نرخەکانی NOXEL Forge",
+    kicker: "نرخەکانی NOXEL FORGE",
     title: "تۆڕی",
     titleAccent: "دەسەڵاتەکەت بدرووست بکە",
     subtitle: "نیشانەی NOXEL لە ماڵپەڕەکەت پیشان بدە و داشکاندنی تایبەت لە هەر ئاستێک بکەرەوە.",
@@ -66,7 +66,7 @@ const ku: ForgePartialTranslations = {
   },
   badge: {
     kicker: "لە ماڵپەڕەکەت پیشان بدە",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "نیشانەکان",
     subtitle: "هەر نیشانەیەک کۆپی بکە و لە فووتەری ماڵپەڕەکەت جێگیر بکە.",
     copy: "کۆپی کردنی کۆد",
@@ -76,7 +76,7 @@ const ku: ForgePartialTranslations = {
   },
   cta: {
     kicker: "ئامادەی دروستکردنی؟",
-    title: "بەشداری NOXEL Forge بکە",
+    title: "بەشداری NOXEL FORGE بکە",
     subtitle: "ئەمڕۆ دەست بە دروستکردنی تۆڕی بەکلینکە دروستکراوەکەت بکە."
   }
 };

@@ -8,7 +8,7 @@ const fa: ForgePartialTranslations = {
     badges: "نشان‌ها"
   },
   hero: {
-    kicker: "NOXEL Forge - اکوسیستم تبادل بک‌لینک",
+    kicker: "NOXEL FORGE - اکوسیستم تبادل بک‌لینک",
     title: "اعتبار خود را",
     titleAccent: "آهنگری کنید",
     subtitle: "بک‌لینک را با سایت‌های تأییدشده فیلترشده توسط Alfred تبادل کنید. کیفیت تضمین‌شده، اسپم غیرممکن. یکی بده، یکی بگیر.",
@@ -46,11 +46,11 @@ const fa: ForgePartialTranslations = {
     descLabel: "توضیح کوتاه",
     contentLabel: "محتوای اصلی",
     contentHint: "اختیاری، به Alfred کمک می‌کند بهتر تحلیل کند",
-    submitBtn: "ارسال به NOXEL Forge",
+    submitBtn: "ارسال به NOXEL FORGE",
     analyzing: "در حال تحلیل..."
   },
   pricing: {
-    kicker: "قیمت‌گذاری NOXEL Forge",
+    kicker: "قیمت‌گذاری NOXEL FORGE",
     title: "شبکه",
     titleAccent: "اعتبار خود را بسازید",
     subtitle: "نشان NOXEL را در سایت خود نمایش دهید و تخفیف‌های انحصاری در هر سطح را باز کنید.",
@@ -66,7 +66,7 @@ const fa: ForgePartialTranslations = {
   },
   badge: {
     kicker: "در سایت خود نمایش دهید",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "نشان‌ها",
     subtitle: "هر نشان را کپی کرده و در فوتر سایت خود قرار دهید.",
     copy: "کپی کد",
@@ -76,7 +76,7 @@ const fa: ForgePartialTranslations = {
   },
   cta: {
     kicker: "آماده آهنگری هستید؟",
-    title: "به NOXEL Forge بپیوندید",
+    title: "به NOXEL FORGE بپیوندید",
     subtitle: "همین امروز شبکه بک‌لینک تأییدشده خود را بسازید."
   }
 };

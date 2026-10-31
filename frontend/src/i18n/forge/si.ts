@@ -8,7 +8,7 @@ const si: ForgePartialTranslations = {
     badges: "බැජ්"
   },
   hero: {
-    kicker: "NOXEL Forge - බැක්ලිංක් හුවමාරු පරිසර පද්ධතිය",
+    kicker: "NOXEL FORGE - බැක්ලිංක් හුවමාරු පරිසර පද්ධතිය",
     title: "ඔබේ",
     titleAccent: "අධිකාරිය",
     subtitle: "Alfred විසින් පෙරන ලද සත්යාපිත අඩවි සමඟ බැක්ලිංක් හුවමාරු කරන්න. ගුණත්වය සහතිකයි, ස්පෑම් කළ නොහැක. එකක් දෙන්න, එකක් ගන්න.",
@@ -46,11 +46,11 @@ const si: ForgePartialTranslations = {
     descLabel: "කෙටි විස්තරය",
     contentLabel: "ප්රධාන අන්තර්ගතය",
     contentHint: "විකල්පය, Alfred ට වඩා හොඳින් විශ්ලේෂණය කිරීමට උපකාරී වේ",
-    submitBtn: "NOXEL Forge වෙත ඉදිරිපත් කරන්න",
+    submitBtn: "NOXEL FORGE වෙත ඉදිරිපත් කරන්න",
     analyzing: "විශ්ලේෂණය වෙමින්..."
   },
   pricing: {
-    kicker: "NOXEL Forge මිල නිර්ණය",
+    kicker: "NOXEL FORGE මිල නිර්ණය",
     title: "ඔබේ",
     titleAccent: "අධිකාරි ජාලය",
     subtitle: "ඔබේ අඩවියේ NOXEL බැජ් දර්ශනය කර සෑම මට්ටමකම සුවිශේෂ වට්ටම් අගුළු අරින්න.",
@@ -66,7 +66,7 @@ const si: ForgePartialTranslations = {
   },
   badge: {
     kicker: "ඔබේ අඩවියේ දර්ශනය කරන්න",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "බැජ්",
     subtitle: "ඔබේ අඩවි පාදකයේ ඕනෑම බැජ් එකක් පිටපත් කර අලවන්න.",
     copy: "කේතය පිටපත් කරන්න",
@@ -76,7 +76,7 @@ const si: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Forge කිරීමට සූදානම්ද?",
-    title: "NOXEL Forge හා එක් වන්න",
+    title: "NOXEL FORGE හා එක් වන්න",
     subtitle: "අද ඔබේ සත්යාපිත බැක්ලිංක් ජාලය ගොඩනැගීම ආරම්භ කරන්න."
   }
 };

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { HudButton } from '../../components/hud/HudButton';
 
+import ForgeTopbar from '../../components/ForgeTopbar';
 // Admin page (FORGE_ADMIN_EMAILS): entry of the authority and spam signals, per member.
 // Every other signal is collected by the server; this page only shows them.
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
@@ -157,11 +157,7 @@ export default function ForgeAdmin() {
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', overflowY: 'auto' }}>
-      <nav className="forge-subbar" style={{ borderBottom: '1px solid var(--border)', height: 56, display: 'flex', alignItems: 'center', background: 'var(--bg2)', position: 'sticky', top: 0, zIndex: 100, gap: 10 }}>
-        <Link to="/forge/dashboard" style={{ color: 'var(--muted)', fontSize: 13 }}>← Dashboard</Link>
-        <span style={{ color: 'var(--soft)' }}>·</span>
-        <span style={{ fontWeight: 900, fontSize: 15 }}>Admin · Trust Score</span>
-      </nav>
+      <ForgeTopbar active="admin" />
 
       <div style={{ maxWidth: 960, margin: '0 auto', padding: '24px 16px 80px' }}>
         {erreur ? (

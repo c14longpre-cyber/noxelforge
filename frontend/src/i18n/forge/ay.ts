@@ -8,7 +8,7 @@ const ay: ForgePartialTranslations = {
     badges: "Arkatanakapa"
   },
   hero: {
-    kicker: "NOXEL Forge - Backlink Aynacha Jakawipacha",
+    kicker: "NOXEL FORGE - Backlink Aynacha Jakawipacha",
     title: "Lurta",
     titleAccent: "kamachipa",
     subtitle: "Alfred katatañataki sint'ayata sitionakampiw backlink aynacha. Aliccha khuskhusitawa, spam jan utjirakiti. Mayni qu, mayni chuymata.",
@@ -46,11 +46,11 @@ const ay: ForgePartialTranslations = {
     descLabel: "Jisk'a utt'ayaña",
     contentLabel: "Nayr amuyupa",
     contentHint: "jan munaspa, Alfred suma uñakipañatakiw yanapxiwa",
-    submitBtn: "NOXEL Forge ukaru apanipaña",
+    submitBtn: "NOXEL FORGE ukaru apanipaña",
     analyzing: "Uñakipayasiwa..."
   },
   pricing: {
-    kicker: "NOXEL Forge Chanipacha",
+    kicker: "NOXEL FORGE Chanipacha",
     title: "Lurta",
     titleAccent: "kamachi archimpi",
     subtitle: "NOXEL arkata sitiomastxa churta ukatx sapa nivelana exclusivo descuentonaka jikxatañataki.",
@@ -66,7 +66,7 @@ const ay: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Sitiomastxa churata",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Arkatanakapa",
     subtitle: "Mayni arkata copiyata sitiomastxa footeraru pegata.",
     copy: "Snippet copiyaña",
@@ -76,7 +76,7 @@ const ay: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Lurañataki wakicht'asktaxa?",
-    title: "NOXEL Forge ukaru tantachisiña",
+    title: "NOXEL FORGE ukaru tantachisiña",
     subtitle: "Jichha sint'ayata backlink archimasti lurañataki qalltaña."
   }
 };

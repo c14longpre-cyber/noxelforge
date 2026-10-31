@@ -8,7 +8,7 @@ const vi: ForgePartialTranslations = {
     badges: "Huy hiệu"
   },
   hero: {
-    kicker: "NOXEL Forge - Hệ sinh thái trao đổi backlink",
+    kicker: "NOXEL FORGE - Hệ sinh thái trao đổi backlink",
     title: "Xây dựng",
     titleAccent: "uy tín",
     subtitle: "Trao đổi backlink với các trang web đã được xác minh và lọc bởi Alfred. Chất lượng được đảm bảo, không thể có spam. Cho một, nhận một.",
@@ -46,11 +46,11 @@ const vi: ForgePartialTranslations = {
     descLabel: "Mô tả ngắn",
     contentLabel: "Nội dung chính",
     contentHint: "tùy chọn, giúp Alfred phân tích tốt hơn",
-    submitBtn: "Gửi đến NOXEL Forge",
+    submitBtn: "Gửi đến NOXEL FORGE",
     analyzing: "Đang phân tích..."
   },
   pricing: {
-    kicker: "Bảng giá NOXEL Forge",
+    kicker: "Bảng giá NOXEL FORGE",
     title: "Xây dựng",
     titleAccent: "mạng lưới uy tín",
     subtitle: "Hiển thị huy hiệu NOXEL trên trang web của bạn và mở khóa giảm giá độc quyền cho mọi gói.",
@@ -66,7 +66,7 @@ const vi: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Hiển thị trên trang web của bạn",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Huy hiệu",
     subtitle: "Sao chép và dán bất kỳ huy hiệu nào vào chân trang web của bạn.",
     copy: "Sao chép đoạn mã",
@@ -76,7 +76,7 @@ const vi: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Sẵn sàng để forge?",
-    title: "Tham gia NOXEL Forge",
+    title: "Tham gia NOXEL FORGE",
     subtitle: "Bắt đầu xây dựng mạng lưới backlink đã xác minh của bạn ngay hôm nay."
   }
 };

@@ -8,7 +8,7 @@ const ht: ForgePartialTranslations = {
     badges: "Badj"
   },
   hero: {
-    kicker: "NOXEL Forge - Ekosistèm Echanj Backlink",
+    kicker: "NOXEL FORGE - Ekosistèm Echanj Backlink",
     title: "Fòje",
     titleAccent: "otorite",
     subtitle: "Echanje backlink ak sit verifye filtre pa Alfred. Kalite garanti, spam enposib. Bay youn, resevwa youn.",
@@ -46,11 +46,11 @@ const ht: ForgePartialTranslations = {
     descLabel: "Deskripsyon kout",
     contentLabel: "Kontni prensipal",
     contentHint: "opsyonèl, ede Alfred analize pi byen",
-    submitBtn: "Soumèt nan NOXEL Forge",
+    submitBtn: "Soumèt nan NOXEL FORGE",
     analyzing: "Analiz ap fèt..."
   },
   pricing: {
-    kicker: "Pri NOXEL Forge",
+    kicker: "Pri NOXEL FORGE",
     title: "Bati",
     titleAccent: "rezo otorite ou",
     subtitle: "Afiche badj NOXEL sou sit ou epi debloke rabè eksklizif sou chak nivo.",
@@ -66,7 +66,7 @@ const ht: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Afiche sou sit ou",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Badj",
     subtitle: "Kopye epi kole nenpòt badj nan pyepaj sit ou.",
     copy: "Kopye kòd",
@@ -76,7 +76,7 @@ const ht: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Prè pou fòje?",
-    title: "Rejwenn NOXEL Forge",
+    title: "Rejwenn NOXEL FORGE",
     subtitle: "Kòmanse bati rezo backlink verifye ou jodi a."
   }
 };

@@ -2,7 +2,7 @@ import type { ForgeTranslations } from '../forge.translations';
 
 const fr: ForgeTranslations = {
   nav: { submit: 'Soumettre', dashboard: 'Tableau de bord', pricing: 'Tarifs', badges: 'Badges', back: '← Forge' },
-  hero: { kicker: 'NOXEL Forge — Écosystème d\'échange de backlinks', title: 'Forgez votre', titleAccent: 'autorité', subtitle: 'Échangez des backlinks avec des sites vérifiés filtrés par Alfred. Qualité garantie, spam impossible. Donnez un, recevez un.', ctaSubmit: 'Soumettre mon site', ctaDashboard: 'Mon tableau de bord' },
+  hero: { kicker: 'NOXEL FORGE — Écosystème d\'échange de backlinks', title: 'Forgez votre', titleAccent: 'autorité', subtitle: 'Échangez des backlinks avec des sites vérifiés filtrés par Alfred. Qualité garantie, spam impossible. Donnez un, recevez un.', ctaSubmit: 'Soumettre mon site', ctaDashboard: 'Mon tableau de bord' },
   stats: { forgePoints: 'Points Forge', forgePointsDesc: 'Gagnez des points à chaque échange', giveOne: 'Donnez un, recevez un', giveOneDesc: 'Vous donnez un backlink, vous en recevez un', alfredFilters: 'Alfred filtre', alfredFiltersDesc: 'Zéro spam, zéro contenu générique' },
   trust: { kicker: 'Trust Score Forge', subtitle: 'Chaque site reçoit un score sur 100 basé sur 6 signaux de qualité' },
   directory: { kicker: 'Annuaire', title: 'Sites Forge Vérifiés', empty: 'L\'annuaire est vide pour l\'instant', emptyDesc: 'Soyez le premier à soumettre votre site.', loading: 'Chargement...', previous: 'Précédent', next: 'Suivant' },
@@ -16,7 +16,7 @@ const fr: ForgeTranslations = {
     descLabel: 'Courte description',
     contentLabel: 'Contenu principal',
     contentHint: 'optionnel, aide Alfred à mieux analyser',
-    submitBtn: 'Soumettre à NOXEL Forge',
+    submitBtn: 'Soumettre à NOXEL FORGE',
     analyzing: 'Analyse en cours...',
     successTitle: 'Soumission reçue !',
     successAuto: 'Publié automatiquement !',
@@ -27,7 +27,7 @@ const fr: ForgeTranslations = {
     niches: { 'SEO': 'SEO', 'Marketing': 'Marketing', 'AI': 'IA', 'E-commerce': 'E-commerce', 'Web Dev': 'Développement web', 'Business': 'Business', 'Design': 'Design', 'Finance': 'Finance', 'Health': 'Santé', 'Education': 'Éducation', 'Other': 'Autre' },
   },
   pricing: {
-    kicker: 'Tarifs NOXEL Forge',
+    kicker: 'Tarifs NOXEL FORGE',
     title: 'Construisez votre',
     titleAccent: 'réseau d\'autorité',
     subtitle: 'Affichez le badge NOXEL sur votre site et déverrouillez des réductions exclusives.',
@@ -57,19 +57,19 @@ const fr: ForgeTranslations = {
     subtitle: 'Copiez et collez un badge dans le footer de votre site.',
     copy: 'Copier le snippet',
     copied: '✓ Copié !',
-    partner: 'Partenaire NOXEL Forge',
+    partner: 'Partenaire NOXEL FORGE',
     verified: 'Forge Vérifiée',
     exchange: 'Forge Exchange',
     optimized: 'Optimisé avec NOXEL SEO',
     infoTitle: 'Comment fonctionnent les réductions badge',
     infoDesc: 'Placez un badge dans le footer de votre site — pas seulement une page, mais partout sur le site. Alfred scanne votre footer spécifiquement à chaque soumission pour confirmer que le backlink est actif sur toutes les pages. Tant que votre badge footer pointe vers noxelforge.com ou noxelseo.com, votre réduction s\'applique de manière permanente — Silver 10%, Gold 15%, Platinum 20%, Diamond 25%.'
   },
-  cta: { kicker: 'Prêt à forger ?', title: 'Rejoindre NOXEL Forge', subtitle: 'Commencez à construire votre réseau de backlinks vérifiés dès aujourd\'hui.' },
+  cta: { kicker: 'Prêt à forger ?', title: 'Rejoindre NOXEL FORGE', subtitle: 'Commencez à construire votre réseau de backlinks vérifiés dès aujourd\'hui.' },
   email: {
-    magicLinkSubject: 'Votre lien de connexion NOXEL Forge',
+    magicLinkSubject: 'Votre lien de connexion NOXEL FORGE',
     magicLinkTitle: 'Votre lien magique',
     magicLinkDesc: 'Cliquez ci-dessous pour vous connecter instantanément — pas de mot de passe requis.',
-    magicLinkCta: 'Se connecter à NOXEL Forge →',
+    magicLinkCta: 'Se connecter à NOXEL FORGE →',
     magicLinkExpiry: 'Ce lien expire dans 15 minutes. Si vous n\'avez pas demandé ceci, vous pouvez ignorer sans risque cet e-mail.',
   },
 };

@@ -8,7 +8,7 @@ const ta: ForgePartialTranslations = {
     badges: "பதக்கங்கள்"
   },
   hero: {
-    kicker: "NOXEL Forge - பின்னிணைப்பு பரிமாற்ற சுற்றுச்சூழல்",
+    kicker: "NOXEL FORGE - பின்னிணைப்பு பரிமாற்ற சுற்றுச்சூழல்",
     title: "உங்கள்",
     titleAccent: "அதிகாரத்தை உருவாக்குங்கள்",
     subtitle: "Alfred வடிகட்டிய சரிபார்க்கப்பட்ட தளங்களுடன் பின்னிணைப்புகளை பரிமாறிக்கொள்ளுங்கள். தரம் உறுதி, ஸ்பேம் இல்லை. ஒன்று கொடு, ஒன்று பெறு.",
@@ -46,11 +46,11 @@ const ta: ForgePartialTranslations = {
     descLabel: "சுருக்கமான விளக்கம்",
     contentLabel: "முக்கிய உள்ளடக்கம்",
     contentHint: "விருப்பமானது, Alfred சிறப்பாக பகுப்பாய்வு செய்ய உதவுகிறது",
-    submitBtn: "NOXEL Forge க்கு சமர்ப்பி",
+    submitBtn: "NOXEL FORGE க்கு சமர்ப்பி",
     analyzing: "பகுப்பாய்வு செய்கிறது..."
   },
   pricing: {
-    kicker: "NOXEL Forge விலை நிர்ணயம்",
+    kicker: "NOXEL FORGE விலை நிர்ணயம்",
     title: "உங்கள்",
     titleAccent: "அதிகார நெட்வொர்க்கை உருவாக்குங்கள்",
     subtitle: "உங்கள் தளத்தில் NOXEL பதக்கத்தை காட்டி ஒவ்வொரு நிலையிலும் பிரத்யேக தள்ளுபடிகளை அணைக்கலாம்.",
@@ -66,7 +66,7 @@ const ta: ForgePartialTranslations = {
   },
   badge: {
     kicker: "உங்கள் தளத்தில் காட்டுங்கள்",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "பதக்கங்கள்",
     subtitle: "உங்கள் தள அடிக்குறிப்பில் எந்த பதக்கத்தையும் நகலெடுத்து ஒட்டுங்கள்.",
     copy: "குறியீட்டை நகலெடு",
@@ -76,7 +76,7 @@ const ta: ForgePartialTranslations = {
   },
   cta: {
     kicker: "உருவாக்க தயாரா?",
-    title: "NOXEL Forge இல் சேருங்கள்",
+    title: "NOXEL FORGE இல் சேருங்கள்",
     subtitle: "இன்றே உங்கள் சரிபார்க்கப்பட்ட பின்னிணைப்பு நெட்வொர்க்கை உருவாக்கத் தொடங்குங்கள்."
   }
 };

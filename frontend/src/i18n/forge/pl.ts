@@ -8,7 +8,7 @@ const pl: ForgePartialTranslations = {
     badges: "Odznaki"
   },
   hero: {
-    kicker: "NOXEL Forge - Ekosystem wymiany linków zwrotnych",
+    kicker: "NOXEL FORGE - Ekosystem wymiany linków zwrotnych",
     title: "Wykuj swoją",
     titleAccent: "autorytet",
     subtitle: "Wymieniaj linki zwrotne ze zweryfikowanymi witrynami filtrowanymi przez Alfred. Jakość gwarantowana, spam niemożliwy. Daj jeden, dostań jeden.",
@@ -46,11 +46,11 @@ const pl: ForgePartialTranslations = {
     descLabel: "Krótki opis",
     contentLabel: "Główna treść",
     contentHint: "opcjonalne, pomaga Alfred lepiej analizować",
-    submitBtn: "Prześlij do NOXEL Forge",
+    submitBtn: "Prześlij do NOXEL FORGE",
     analyzing: "Analizowanie..."
   },
   pricing: {
-    kicker: "Cennik NOXEL Forge",
+    kicker: "Cennik NOXEL FORGE",
     title: "Zbuduj swoją",
     titleAccent: "sieć autorytetu",
     subtitle: "Wyświetl odznakę NOXEL na swojej stronie i odblokuj ekskluzywne zniżki na każdym poziomie.",
@@ -66,7 +66,7 @@ const pl: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Wyświetl na swojej stronie",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Odznaki",
     subtitle: "Skopiuj i wklej dowolną odznakę w stopce swojej strony.",
     copy: "Kopiuj kod",
@@ -76,7 +76,7 @@ const pl: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Gotowy do kucia?",
-    title: "Dołącz do NOXEL Forge",
+    title: "Dołącz do NOXEL FORGE",
     subtitle: "Zacznij budować swoją zweryfikowaną sieć linków zwrotnych już dziś."
   }
 };

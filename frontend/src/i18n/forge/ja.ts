@@ -8,7 +8,7 @@ const ja: ForgePartialTranslations = {
     badges: "バッジ"
   },
   hero: {
-    kicker: "NOXEL Forge - バックリンク交換エコシステム",
+    kicker: "NOXEL FORGE - バックリンク交換エコシステム",
     title: "あなたの",
     titleAccent: "権威性",
     subtitle: "Alfredによる審査済みサイトとバックリンクを交換しましょう。品質保証、スパム不可。1つ提供して、1つ獲得。",
@@ -46,11 +46,11 @@ const ja: ForgePartialTranslations = {
     descLabel: "簡単な説明",
     contentLabel: "メインコンテンツ",
     contentHint: "任意。Alfredの分析精度向上に役立ちます",
-    submitBtn: "NOXEL Forgeに送信する",
+    submitBtn: "NOXEL FORGEに送信する",
     analyzing: "分析中..."
   },
   pricing: {
-    kicker: "NOXEL Forge 料金プラン",
+    kicker: "NOXEL FORGE 料金プラン",
     title: "あなたの",
     titleAccent: "権威ネットワークを構築",
     subtitle: "サイトにNOXELバッジを表示して、すべてのプランで限定割引を解除しましょう。",
@@ -66,7 +66,7 @@ const ja: ForgePartialTranslations = {
   },
   badge: {
     kicker: "サイトに表示する",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "バッジ",
     subtitle: "任意のバッジをコピーしてサイトのフッターに貼り付けてください。",
     copy: "スニペットをコピー",
@@ -76,7 +76,7 @@ const ja: ForgePartialTranslations = {
   },
   cta: {
     kicker: "フォージの準備はできましたか？",
-    title: "NOXEL Forgeに参加する",
+    title: "NOXEL FORGEに参加する",
     subtitle: "今すぐ審査済みバックリンクネットワークの構築を始めましょう。"
   }
 };

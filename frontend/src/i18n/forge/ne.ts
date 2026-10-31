@@ -8,7 +8,7 @@ const ne: ForgePartialTranslations = {
     badges: "ब्याजहरू"
   },
   hero: {
-    kicker: "NOXEL Forge - ब्याकलिङ्क एक्सचेन्ज इकोसिस्टम",
+    kicker: "NOXEL FORGE - ब्याकलिङ्क एक्सचेन्ज इकोसिस्टम",
     title: "आफ्नो",
     titleAccent: "अधिकार",
     subtitle: "Alfred द्वारा फिल्टर गरिएका प्रमाणित साइटहरूसँग ब्याकलिङ्क आदानप्रदान गर्नुहोस्। गुणस्तर ग्यारेन्टी, स्प्याम असम्भव। एउटा दिनुहोस्, एउटा पाउनुहोस्।",
@@ -46,11 +46,11 @@ const ne: ForgePartialTranslations = {
     descLabel: "छोटो विवरण",
     contentLabel: "मुख्य सामग्री",
     contentHint: "वैकल्पिक, Alfred लाई राम्रोसँग विश्लेषण गर्न मद्दत गर्छ",
-    submitBtn: "NOXEL Forge मा पेश गर्नुहोस्",
+    submitBtn: "NOXEL FORGE मा पेश गर्नुहोस्",
     analyzing: "विश्लेषण हुँदैछ..."
   },
   pricing: {
-    kicker: "NOXEL Forge मूल्य निर्धारण",
+    kicker: "NOXEL FORGE मूल्य निर्धारण",
     title: "आफ्नो",
     titleAccent: "अधिकार नेटवर्क",
     subtitle: "आफ्नो साइटमा NOXEL ब्याज प्रदर्शन गर्नुहोस् र हरेक तहमा विशेष छुट अनलक गर्नुहोस्।",
@@ -66,7 +66,7 @@ const ne: ForgePartialTranslations = {
   },
   badge: {
     kicker: "आफ्नो साइटमा प्रदर्शन गर्नुहोस्",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "ब्याजहरू",
     subtitle: "आफ्नो साइट फुटरमा कुनै पनि ब्याज कपी र पेस्ट गर्नुहोस्।",
     copy: "स्निपेट कपी गर्नुहोस्",
@@ -76,7 +76,7 @@ const ne: ForgePartialTranslations = {
   },
   cta: {
     kicker: "फोर्ज गर्न तयार हुनुहुन्छ?",
-    title: "NOXEL Forge मा सामेल हुनुहोस्",
+    title: "NOXEL FORGE मा सामेल हुनुहोस्",
     subtitle: "आज आफ्नो प्रमाणित ब्याकलिङ्क नेटवर्क निर्माण सुरु गर्नुहोस्।"
   }
 };

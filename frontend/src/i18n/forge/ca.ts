@@ -8,7 +8,7 @@ const ca: ForgePartialTranslations = {
     badges: "Insígnies"
   },
   hero: {
-    kicker: "NOXEL Forge - Ecosistema d'Intercanvi de Backlinks",
+    kicker: "NOXEL FORGE - Ecosistema d'Intercanvi de Backlinks",
     title: "Forja la teva",
     titleAccent: "autoritat",
     subtitle: "Intercanvia backlinks amb llocs verificats filtrats per Alfred. Qualitat garantida, spam impossible. Dona'n un, rep-ne un.",
@@ -46,11 +46,11 @@ const ca: ForgePartialTranslations = {
     descLabel: "Descripció breu",
     contentLabel: "Contingut principal",
     contentHint: "opcional, ajuda Alfred a analitzar millor",
-    submitBtn: "Enviar a NOXEL Forge",
+    submitBtn: "Enviar a NOXEL FORGE",
     analyzing: "Analitzant..."
   },
   pricing: {
-    kicker: "Preus de NOXEL Forge",
+    kicker: "Preus de NOXEL FORGE",
     title: "Construeix la teva",
     titleAccent: "xarxa d'autoritat",
     subtitle: "Mostra la insígnia NOXEL al teu lloc i desbloqueja descomptes exclusius en cada nivell.",
@@ -66,7 +66,7 @@ const ca: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Mostra-la al teu lloc",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Insígnies",
     subtitle: "Copia i enganxa qualsevol insígnia al peu del teu lloc.",
     copy: "Copiar fragment",
@@ -76,7 +76,7 @@ const ca: ForgePartialTranslations = {
   },
   cta: {
     kicker: "A punt per forjar?",
-    title: "Uneix-te a NOXEL Forge",
+    title: "Uneix-te a NOXEL FORGE",
     subtitle: "Comença a construir la teva xarxa de backlinks verificats avui mateix."
   }
 };

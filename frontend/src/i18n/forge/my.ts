@@ -8,7 +8,7 @@ const my: ForgePartialTranslations = {
     badges: "ဘတ်ဂျ်များ"
   },
   hero: {
-    kicker: "NOXEL Forge - ဘက်လင့်ခ်လဲလှယ်ရေး စနစ်",
+    kicker: "NOXEL FORGE - ဘက်လင့်ခ်လဲလှယ်ရေး စနစ်",
     title: "သင်၏",
     titleAccent: "အာဏာသိကျ္ခာ",
     subtitle: "Alfred စစ်ထုတ်ပြီးသော အတည်ပြုထားသောဆိုဒ်များနှင့် ဘက်လင့်ခ်များ လဲလှယ်ပါ။ အရည်အသွေး အာမခံ၊ spam မဖြစ်နိုင်ပါ။ တစ်ခုပေး၊ တစ်ခုရ။",
@@ -46,11 +46,11 @@ const my: ForgePartialTranslations = {
     descLabel: "အကျဉ်းချုပ် ဖော်ပြချက်",
     contentLabel: "အဓိက အကြောင်းအရာ",
     contentHint: "ရွေးချယ်နိုင်သည်၊ Alfred ပိုမိုကောင်းမွန်စွာ ခွဲခြမ်းစိတ်ဖြာနိုင်ရန် ကူညီသည်",
-    submitBtn: "NOXEL Forge သို့ တင်သွင်းရန်",
+    submitBtn: "NOXEL FORGE သို့ တင်သွင်းရန်",
     analyzing: "ခွဲခြမ်းစိတ်ဖြာနေသည်..."
   },
   pricing: {
-    kicker: "NOXEL Forge စျေးနှုန်း",
+    kicker: "NOXEL FORGE စျေးနှုန်း",
     title: "သင်၏",
     titleAccent: "အာဏာသိကျ္ခာ ကွန်ရက်",
     subtitle: "သင်၏ဆိုဒ်တွင် NOXEL ဘတ်ဂျ် ပြသပြီး အဆင့်တိုင်းတွင် အထူးလျှော့စျေးများ ရယူပါ။",
@@ -66,7 +66,7 @@ const my: ForgePartialTranslations = {
   },
   badge: {
     kicker: "သင်၏ဆိုဒ်တွင် ပြသရန်",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "ဘတ်ဂျ်များ",
     subtitle: "ဘတ်ဂျ်တစ်ခုခုကို သင်၏ဆိုဒ် footer တွင် ကူးယူ၍ ကပ်ထည့်ပါ။",
     copy: "ကုဒ် ကူးယူရန်",
@@ -76,7 +76,7 @@ const my: ForgePartialTranslations = {
   },
   cta: {
     kicker: "forge လုပ်ရန် အသင့်ဖြစ်ပြီလား?",
-    title: "NOXEL Forge တွင် ပါဝင်ပါ",
+    title: "NOXEL FORGE တွင် ပါဝင်ပါ",
     subtitle: "ယနေ့ပင် သင်၏ အတည်ပြုထားသော ဘက်လင့်ခ်ကွန်ရက်ကို တည်ဆောက်စတင်ပါ။"
   }
 };

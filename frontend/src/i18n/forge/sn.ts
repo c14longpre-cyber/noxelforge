@@ -8,7 +8,7 @@ const sn: ForgePartialTranslations = {
     badges: "Zvibhachi"
   },
   hero: {
-    kicker: "NOXEL Forge - Nzvimbo yokutsinhana kweBacklink",
+    kicker: "NOXEL FORGE - Nzvimbo yokutsinhana kweBacklink",
     title: "Gadzira",
     titleAccent: "simba rako",
     subtitle: "Tsinhana mabacklink nesaiti dzakaonekwa dzakaongorорwa naAlfred. Mhando yakavimbika, spam haingakwanisi. Ipa imwe, wana imwe.",
@@ -46,11 +46,11 @@ const sn: ForgePartialTranslations = {
     descLabel: "Tsanangudzo pfupi",
     contentLabel: "Zvinyorwa zvikuru",
     contentHint: "zvisadzidzwa, zvinobatsira Alfred kuongorora zviri nani",
-    submitBtn: "Tumira kuNOXEL Forge",
+    submitBtn: "Tumira kuNOXEL FORGE",
     analyzing: "Kuongorora..."
   },
   pricing: {
-    kicker: "Mutengo weNOXEL Forge",
+    kicker: "Mutengo weNOXEL FORGE",
     title: "Vaka",
     titleAccent: "netweki yesimba rako",
     subtitle: "Ratidza badge yeNOXEL pasaiti yako uye unzvenga zvikwereti zvakakosha pezvidhinha zvese.",
@@ -66,7 +66,7 @@ const sn: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Ratidza pasaiti yako",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Zvibhachi",
     subtitle: "Kopa uye unamidze badge ipi zvayo mufuta wesaiti yako.",
     copy: "Kopa snippet",
@@ -76,7 +76,7 @@ const sn: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Wagadzirira kuforge?",
-    title: "Batana neNOXEL Forge",
+    title: "Batana neNOXEL FORGE",
     subtitle: "Tanga kuvaka netweki yako yemabacklink akavimbika nhasi."
   }
 };

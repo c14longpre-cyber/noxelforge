@@ -8,7 +8,7 @@ const qu: ForgePartialTranslations = {
     badges: "Señalkuna"
   },
   hero: {
-    kicker: "NOXEL Forge - Backlink Aynaynin Ecosystem",
+    kicker: "NOXEL FORGE - Backlink Aynaynin Ecosystem",
     title: "Ruway kikiyki",
     titleAccent: "autoridad",
     subtitle: "Aynaykuy backlinkkunata Alfred llajtachiski sitiokunawan. Kalidad suyasqa, spam mana atikuqchu. Huqta quy, huqta chasqiy.",
@@ -46,11 +46,11 @@ const qu: ForgePartialTranslations = {
     descLabel: "Pichqa willakuy",
     contentLabel: "Hatun contenido",
     contentHint: "mana munasqachu, Alfred aswan allinta qhaway atinampaq yanapan",
-    submitBtn: "NOXEL Forge nisqaman apaykuy",
+    submitBtn: "NOXEL FORGE nisqaman apaykuy",
     analyzing: "Lliwmi qhawakuchkan..."
   },
   pricing: {
-    kicker: "NOXEL Forge Chanin",
+    kicker: "NOXEL FORGE Chanin",
     title: "Ruway kikiyki",
     titleAccent: "autoridad red",
     subtitle: "NOXEL señalta sitionkipi rikuchiy ayllunmi sapa tipopin chanin allichaykukunata paschan.",
@@ -66,7 +66,7 @@ const qu: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Sitionkipi rikuchiy",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Señalkuna",
     subtitle: "Mayqen señaltapas sitionkip chawpinpi copiaykuy churankitaq.",
     copy: "Snippet copiaykuy",
@@ -76,7 +76,7 @@ const qu: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Ruwanapaqchu?,",
-    title: "NOXEL Forge nisqaman yapakuy",
+    title: "NOXEL FORGE nisqaman yapakuy",
     subtitle: "Kunanmi llajtasqa backlink redniykita ruwayta qallariy."
   }
 };

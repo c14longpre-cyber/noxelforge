@@ -8,7 +8,7 @@ const tg: ForgePartialTranslations = {
     badges: "Нишонҳо"
   },
   hero: {
-    kicker: "NOXEL Forge - Экосистемаи мубодилаи беклинкҳо",
+    kicker: "NOXEL FORGE - Экосистемаи мубодилаи беклинкҳо",
     title: "Эътибори худро",
     titleAccent: "устувор созед",
     subtitle: "Беклинкҳоро бо сайтҳои тасдиқшудае, ки Alfred филтр кардааст, мубодила кунед. Сифат кафолатдор аст, спам имконнопазир аст. Як медиҳед, як мегиред.",
@@ -46,11 +46,11 @@ const tg: ForgePartialTranslations = {
     descLabel: "Тавсифи кӯтоҳ",
     contentLabel: "Мундариҷаи асосӣ",
     contentHint: "ихтиёрӣ, ба Alfred кӯмак мекунад беҳтар таҳлил кунад",
-    submitBtn: "Ба NOXEL Forge ирсол кунед",
+    submitBtn: "Ба NOXEL FORGE ирсол кунед",
     analyzing: "Таҳлил карда мешавад..."
   },
   pricing: {
-    kicker: "Нархгузории NOXEL Forge",
+    kicker: "Нархгузории NOXEL FORGE",
     title: "Шабакаи",
     titleAccent: "эътибори худро бисозед",
     subtitle: "Нишони NOXEL-ро дар сайти худ намоиш диҳед ва дар ҳар сатҳ тахфифҳои эксклюзивӣ ба даст оред.",
@@ -66,7 +66,7 @@ const tg: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Дар сайти худ намоиш диҳед",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Нишонҳо",
     subtitle: "Ҳар нишонеро нусхабардорӣ карда дар поёни сайти худ гузоред.",
     copy: "Қисматро нусхабардорӣ кунед",
@@ -76,7 +76,7 @@ const tg: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Омода ба оғоз ҳастед?",
-    title: "Ба NOXEL Forge шомил шавед",
+    title: "Ба NOXEL FORGE шомил шавед",
     subtitle: "Имрӯз сохтани шабакаи беклинкҳои тасдиқшудаи худро оғоз кунед."
   }
 };

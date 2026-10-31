@@ -8,7 +8,7 @@ const oc: ForgePartialTranslations = {
     badges: "Insignas"
   },
   hero: {
-    kicker: "NOXEL Forge - Eicosistèma d'escambi de backlinks",
+    kicker: "NOXEL FORGE - Eicosistèma d'escambi de backlinks",
     title: "Forgatz vòstra",
     titleAccent: "autoritat",
     subtitle: "Escambiètz backlinks amb sites verificats filtrats per Alfred. Qualitat garantida, spam impossible. Donatz un, recebètz un.",
@@ -46,11 +46,11 @@ const oc: ForgePartialTranslations = {
     descLabel: "Descripcion curta",
     contentLabel: "Contengut principal",
     contentHint: "facultatiu, ajuda Alfred a analysar melhor",
-    submitBtn: "Soumetre a NOXEL Forge",
+    submitBtn: "Soumetre a NOXEL FORGE",
     analyzing: "Analisi en cors..."
   },
   pricing: {
-    kicker: "Tarifs de NOXEL Forge",
+    kicker: "Tarifs de NOXEL FORGE",
     title: "Bastissètz vòstre",
     titleAccent: "ret d'autoritat",
     subtitle: "Affichat l'insigana NOXEL sus vòstre site e desverrolhatz remesas exclusivas sus cada nívèl.",
@@ -66,7 +66,7 @@ const oc: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Affichat sus vòstre site",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Insignas",
     subtitle: "Copiatz e colatz quina insigana que siá al pèd de pagina de vòstre site.",
     copy: "Copiar l'extrait",
@@ -76,7 +76,7 @@ const oc: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Prest a forjar?",
-    title: "Rejonh NOXEL Forge",
+    title: "Rejonh NOXEL FORGE",
     subtitle: "Començatz a bastir vòstre ret de backlinks verificats uèi."
   }
 };

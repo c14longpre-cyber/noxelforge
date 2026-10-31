@@ -205,7 +205,7 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
         {screen === "grid" && (
           <>
             <div style={{ marginBottom: 22 }}>
-              <h2 style={{ margin: 0, fontSize: 24, fontWeight: 900, color: "#fff", lineHeight: 1.1 }}>Access NOXEL Forge</h2>
+              <h2 style={{ margin: 0, fontSize: 24, fontWeight: 900, color: "#fff", lineHeight: 1.1 }}>Access NOXEL FORGE</h2>
               <p style={{ margin: "8px 0 0", fontSize: 13, color: "rgba(255,255,255,0.45)" }}>Secure authentication for your account.</p>
             </div>
 

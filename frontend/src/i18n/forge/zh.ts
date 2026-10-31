@@ -8,7 +8,7 @@ const zh: ForgePartialTranslations = {
     badges: "徽章"
   },
   hero: {
-    kicker: "NOXEL Forge - 外链交换生态系统",
+    kicker: "NOXEL FORGE - 外链交换生态系统",
     title: "锻造你的",
     titleAccent: "权威",
     subtitle: "与经 Alfred 筛选的认证网站交换外链。质量有保障，垃圾信息无处遁形。给一个，得一个。",
@@ -46,11 +46,11 @@ const zh: ForgePartialTranslations = {
     descLabel: "简短描述",
     contentLabel: "主要内容",
     contentHint: "可选，有助于 Alfred 更好地分析",
-    submitBtn: "提交至 NOXEL Forge",
+    submitBtn: "提交至 NOXEL FORGE",
     analyzing: "分析中..."
   },
   pricing: {
-    kicker: "NOXEL Forge 定价",
+    kicker: "NOXEL FORGE 定价",
     title: "构建你的",
     titleAccent: "权威网络",
     subtitle: "在您的网站上展示 NOXEL 徽章，即可解锁每个套餐的专属折扣。",
@@ -66,7 +66,7 @@ const zh: ForgePartialTranslations = {
   },
   badge: {
     kicker: "展示在您的网站上",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "徽章",
     subtitle: "复制并粘贴任意徽章到您网站的页脚。",
     copy: "复制代码片段",
@@ -76,7 +76,7 @@ const zh: ForgePartialTranslations = {
   },
   cta: {
     kicker: "准备好锻造了吗？",
-    title: "加入 NOXEL Forge",
+    title: "加入 NOXEL FORGE",
     subtitle: "立即开始构建您的认证外链网络。"
   }
 };

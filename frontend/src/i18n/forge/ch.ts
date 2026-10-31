@@ -8,7 +8,7 @@ const ch: ForgePartialTranslations = {
     badges: "Insignia"
   },
   hero: {
-    kicker: "NOXEL Forge - Ekosistema Tinuka' Backlink",
+    kicker: "NOXEL FORGE - Ekosistema Tinuka' Backlink",
     title: "Fatma' i",
     titleAccent: "aturidat-mu",
     subtitle: "Tulaika backlinks yan mañe'lu sitiyu ni ma'ma'ok ni Alfred. Kalidat garantisao, spam imposible. Na' un, na'i un.",
@@ -46,11 +46,11 @@ const ch: ForgePartialTranslations = {
     descLabel: "Discripsiñon Kadada",
     contentLabel: "Kontenidu Prinsipal",
     contentHint: "opsional, ayuda Alfred analisa mas maolek",
-    submitBtn: "Na'tuge' para NOXEL Forge",
+    submitBtn: "Na'tuge' para NOXEL FORGE",
     analyzing: "Analisando..."
   },
   pricing: {
-    kicker: "Presiu NOXEL Forge",
+    kicker: "Presiu NOXEL FORGE",
     title: "Fatma' i",
     titleAccent: "reti aturidat-mu",
     subtitle: "Na'lalå'la' i insignia NOXEL gi sitiyu-mu ya un abri diskuentos eksklusibu gi kada tiet.",
@@ -66,7 +66,7 @@ const ch: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Na'lalå'la' gi sitiyu-mu",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Insignia",
     subtitle: "Koppiha ya un pega kuatkiera insignia gi footer i sitiyu-mu.",
     copy: "Koppiha snippet",
@@ -76,7 +76,7 @@ const ch: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Listo para forha?",
-    title: "Fatchu NOXEL Forge",
+    title: "Fatchu NOXEL FORGE",
     subtitle: "Tutuhon fatma' i reti backlink ma'ma'ok-mu på'go."
   }
 };

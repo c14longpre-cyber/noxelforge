@@ -8,7 +8,7 @@ const mh: ForgePartialTranslations = {
     badges: "Badges"
   },
   hero: {
-    kicker: "NOXEL Forge - Backlink Exchange Ecosystem",
+    kicker: "NOXEL FORGE - Backlink Exchange Ecosystem",
     title: "Forge am",
     titleAccent: "māntin",
     subtitle: "Kallib backlinks ippān site korej verified eo Alfred ear filter. Qualiti guaranteed, spam ejjeļọk. Leļọk juon, bōk juon.",
@@ -46,11 +46,11 @@ const mh: ForgePartialTranslations = {
     descLabel: "Kọọt description",
     contentLabel: "Content pein",
     contentHint: "ejjelọk aikuij, kōjparok Alfred bwe en analyze wōt āinwōt ej ṃōkaj",
-    submitBtn: "Jibwe ñan NOXEL Forge",
+    submitBtn: "Jibwe ñan NOXEL FORGE",
     analyzing: "Ej analyze..."
   },
   pricing: {
-    kicker: "NOXEL Forge Wōnāān",
+    kicker: "NOXEL FORGE Wōnāān",
     title: "Kōṃṃan am",
     titleAccent: "authority network",
     subtitle: "Kwaḷọk NOXEL badge ilo am site im bōk discounts ko rej exclusive ilo tier ninja.",
@@ -66,7 +66,7 @@ const mh: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Kwaḷọk ilo am site",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Badges",
     subtitle: "Copy im paste badge eo kwō kōnan ilo footer am site.",
     copy: "Copy snippet",
@@ -76,7 +76,7 @@ const mh: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Kwō kōṃṃan bwe en forge?",
-    title: "Itok ñan NOXEL Forge",
+    title: "Itok ñan NOXEL FORGE",
     subtitle: "Jinoin kōṃṃan am verified backlink network rainin."
   }
 };

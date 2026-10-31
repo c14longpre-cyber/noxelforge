@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { getForgeT } from '../../i18n/forge.translations';
 import { HudButton } from '../../components/hud/HudButton';
 import type { ForgeTranslations } from '../../i18n/forge.translations';
 
+import ForgeTopbar from '../../components/ForgeTopbar';
 const getBadges = (t: ForgeTranslations) => [
   {
     id: 'partner',
@@ -77,11 +77,7 @@ export default function ForgeBadge() {
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', overflowY: 'auto' }}>
-      <nav className="forge-subbar" style={{ borderBottom: '1px solid var(--border)', height: 56, display: 'flex', alignItems: 'center', gap: 12, background: 'var(--bg2)', position: 'sticky', top: 0, zIndex: 100 }}>
-        <Link to="/forge" style={{ color: 'var(--muted)', fontSize: 13 }}>{t.nav.back}</Link>
-        <span style={{ color: 'var(--soft)' }}>·</span>
-        <span style={{ fontWeight: 900, fontSize: 15 }}>{t.nav.badges}</span>
-      </nav>
+      <ForgeTopbar active="badges" />
 
       <div style={{ maxWidth: 780, margin: '0 auto', padding: '48px 32px 80px' }}>
         <div className="nx-kicker" style={{ marginBottom: 12 }}>{t.badge.kicker}</div>

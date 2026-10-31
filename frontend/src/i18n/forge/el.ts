@@ -8,7 +8,7 @@ const el: ForgePartialTranslations = {
     badges: "Σήματα"
   },
   hero: {
-    kicker: "NOXEL Forge - Οικοσύστημα Ανταλλαγής Backlink",
+    kicker: "NOXEL FORGE - Οικοσύστημα Ανταλλαγής Backlink",
     title: "Σφυρηλάτησε την",
     titleAccent: "αυθεντία σου",
     subtitle: "Ανταλλάξτε backlinks με επαληθευμένους ιστότοπους φιλτραρισμένους από τον Alfred. Εγγυημένη ποιότητα, το spam είναι αδύνατο. Δώσε ένα, πάρε ένα.",
@@ -46,11 +46,11 @@ const el: ForgePartialTranslations = {
     descLabel: "Σύντομη περιγραφή",
     contentLabel: "Κύριο περιεχόμενο",
     contentHint: "προαιρετικό, βοηθά τον Alfred να αναλύσει καλύτερα",
-    submitBtn: "Υποβολή στο NOXEL Forge",
+    submitBtn: "Υποβολή στο NOXEL FORGE",
     analyzing: "Ανάλυση..."
   },
   pricing: {
-    kicker: "Τιμολόγηση NOXEL Forge",
+    kicker: "Τιμολόγηση NOXEL FORGE",
     title: "Χτίσε το",
     titleAccent: "δίκτυο αυθεντίας σου",
     subtitle: "Εμφάνισε το σήμα NOXEL στον ιστότοπό σου και ξεκλείδωσε αποκλειστικές εκπτώσεις σε κάθε βαθμίδα.",
@@ -66,7 +66,7 @@ const el: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Εμφάνισε στον ιστότοπό σου",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Σήματα",
     subtitle: "Αντιγράψτε και επικολλήστε οποιοδήποτε σήμα στο υποσέλιδο του ιστότοπού σας.",
     copy: "Αντιγραφή κώδικα",
@@ -76,7 +76,7 @@ const el: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Έτοιμος να σφυρηλατήσεις;",
-    title: "Γίνε μέλος του NOXEL Forge",
+    title: "Γίνε μέλος του NOXEL FORGE",
     subtitle: "Ξεκινήστε να χτίζετε το επαληθευμένο δίκτυο backlink σας σήμερα."
   }
 };

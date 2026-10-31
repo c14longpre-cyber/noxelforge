@@ -8,7 +8,7 @@ const hy: ForgePartialTranslations = {
     badges: "Կրծքանշաններ"
   },
   hero: {
-    kicker: "NOXEL Forge - Հետհղումների փոխանակման էկոհամակարգ",
+    kicker: "NOXEL FORGE - Հետհղումների փոխանակման էկոհամակարգ",
     title: "Կեղեք ձեր",
     titleAccent: "հեղինակությունը",
     subtitle: "Փոխանակեք հետհղումներ Alfred-ի կողմից ստուգված կայքերի հետ։ Որակը երաշխավորված է, սպամն անհնար է։ Տուր մեկ, ստացիր մեկ։",
@@ -46,11 +46,11 @@ const hy: ForgePartialTranslations = {
     descLabel: "Կարճ նկարագրություն",
     contentLabel: "Հիմնական բովանդակություն",
     contentHint: "կամընտիր, օգնում է Alfred-ին ավելի լավ վերլուծել",
-    submitBtn: "Ներկայացնել NOXEL Forge-ին",
+    submitBtn: "Ներկայացնել NOXEL FORGE-ին",
     analyzing: "Վերլուծվում է..."
   },
   pricing: {
-    kicker: "NOXEL Forge գնագոյացում",
+    kicker: "NOXEL FORGE գնագոյացում",
     title: "Կառուցեք ձեր",
     titleAccent: "հեղինակության ցանցը",
     subtitle: "Ցուցադրեք NOXEL կրծքանշանը ձեր կայքում և բացեք բացառիկ զեղչեր յուրաքանչյուր մակարդակում։",
@@ -66,7 +66,7 @@ const hy: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Ցուցադրեք ձեր կայքում",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Կրծքանշաններ",
     subtitle: "Պատճենեք և տեղադրեք ցանկացած կրծքանշան ձեր կայքի ստորոտում։",
     copy: "Պատճենել հատվածը",
@@ -76,7 +76,7 @@ const hy: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Պատրա՞ստ եք դարբնել։",
-    title: "Միացեք NOXEL Forge-ին",
+    title: "Միացեք NOXEL FORGE-ին",
     subtitle: "Սկսեք կառուցել ձեր հաստատված հետհղումների ցանցը այսօր։"
   }
 };

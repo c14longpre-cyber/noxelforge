@@ -8,7 +8,7 @@ const ny: ForgePartialTranslations = {
     badges: "Zizindikiro"
   },
   hero: {
-    kicker: "NOXEL Forge - Ekosistemu ya Kusinthana Malinks",
+    kicker: "NOXEL FORGE - Ekosistemu ya Kusinthana Malinks",
     title: "Lembera",
     titleAccent: "ulamuliro wako",
     subtitle: "Sinthana malinks ndi masaiti otsimikiziridwa osazingidwa ndi Alfred. Ubwino wotsimikizika, spam nthawi zonse. Pereka imodzi, peza imodzi.",
@@ -46,11 +46,11 @@ const ny: ForgePartialTranslations = {
     descLabel: "Mfundo yafupi",
     contentLabel: "Zomwe zili mkati",
     contentHint: "osafunikira, imathandiza Alfred kusanthula bwino",
-    submitBtn: "Tumiza ku NOXEL Forge",
+    submitBtn: "Tumiza ku NOXEL FORGE",
     analyzing: "Kukufikira..."
   },
   pricing: {
-    kicker: "Mitengo ya NOXEL Forge",
+    kicker: "Mitengo ya NOXEL FORGE",
     title: "Manga",
     titleAccent: "netiweki yako ya ulamuliro",
     subtitle: "Onetsa chizindikiro cha NOXEL pa saiti yako ndikutsegula diskawunti zapadera pa mlingo uliwonse.",
@@ -66,7 +66,7 @@ const ny: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Onetsa pa saiti yako",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Zizindikiro",
     subtitle: "Kopira ndikumata chizindikiro chilichonse pa folder ya saiti yako.",
     copy: "Kopira snippet",
@@ -76,7 +76,7 @@ const ny: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Wakonzeka kufanja?",
-    title: "Lowani ku NOXEL Forge",
+    title: "Lowani ku NOXEL FORGE",
     subtitle: "Yamba kumanga netiweki yako ya malinks otsimikiziridwa lero."
   }
 };

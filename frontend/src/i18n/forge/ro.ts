@@ -8,7 +8,7 @@ const ro: ForgePartialTranslations = {
     badges: "Insigne"
   },
   hero: {
-    kicker: "NOXEL Forge - Ecosistem de schimb de backlink-uri",
+    kicker: "NOXEL FORGE - Ecosistem de schimb de backlink-uri",
     title: "Forjează-ți",
     titleAccent: "autoritatea",
     subtitle: "Schimbă backlink-uri cu site-uri verificate filtrate de Alfred. Calitate garantată, spam imposibil. Dai unul, primești unul.",
@@ -46,11 +46,11 @@ const ro: ForgePartialTranslations = {
     descLabel: "Scurtă descriere",
     contentLabel: "Conținut principal",
     contentHint: "opțional, ajută Alfred să analizeze mai bine",
-    submitBtn: "Trimite la NOXEL Forge",
+    submitBtn: "Trimite la NOXEL FORGE",
     analyzing: "Se analizează..."
   },
   pricing: {
-    kicker: "Prețuri NOXEL Forge",
+    kicker: "Prețuri NOXEL FORGE",
     title: "Construiește-ți",
     titleAccent: "rețeaua de autoritate",
     subtitle: "Afișează insigna NOXEL pe site-ul tău și deblochează reduceri exclusive pentru fiecare nivel.",
@@ -66,7 +66,7 @@ const ro: ForgePartialTranslations = {
   },
   badge: {
     kicker: "Afișează pe site-ul tău",
-    title: "NOXEL Forge",
+    title: "NOXEL FORGE",
     titleAccent: "Insigne",
     subtitle: "Copiază și lipește orice insignă în subsolul site-ului tău.",
     copy: "Copiază codul",
@@ -76,7 +76,7 @@ const ro: ForgePartialTranslations = {
   },
   cta: {
     kicker: "Gata să forjezi?",
-    title: "Alătură-te la NOXEL Forge",
+    title: "Alătură-te la NOXEL FORGE",
     subtitle: "Începe să îți construiești rețeaua de backlink-uri verificate astăzi."
   }
 };

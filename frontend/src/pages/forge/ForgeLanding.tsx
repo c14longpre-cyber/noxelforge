@@ -1,13 +1,10 @@
-import { useEffect, useRef, useState, lazy, Suspense } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { useForgeT } from '../../hooks/useForgeT';
-import { useAuthStore } from '../../auth/authContext';
 import ForgeAccessModal from '../../components/ForgeAccessModal';
 import Footer from '../../components/Footer';
-import { HudButton } from '../../components/hud/HudButton';
 import HudRouterLink from '../../components/HudRouterLink';
-import type { MemberStatus, AnnuaireItem } from '../../types/forge';
-const NoxelInterface = lazy(() => import('../../components/NoxelInterface'));
+import type { AnnuaireItem } from '../../types/forge';
+import ForgeTopbar from '../../components/ForgeTopbar';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const NICHES = ['SEO','Marketing','AI','E-commerce','Web Dev','Business','Design'];
@@ -21,38 +18,12 @@ const TIER_CONFIG: Record<string, { color: string; icon: string; image: string; 
 };
 
 export default function ForgeLanding() {
-  const { t, lang, changeLang } = useForgeT();
-  const [showMap, setShowMap] = useState(false);
+  const { t, lang } = useForgeT();
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const { isAuthenticated, user, logout } = useAuthStore();
-  const [membreCharge, setMembre] = useState<MemberStatus['membre'] | null>(null);
   // Directory page loaded for (page, niche): loading until the last answer matches the current filters
   const [charge, setCharge] = useState<{ cle: string; items: AnnuaireItem[] } | null>(null);
   const [nicheFilter, setNicheFilter] = useState('');
   const [page, setPage] = useState(1);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const navRef = useRef<HTMLElement>(null);
-  const menuBtnRef = useRef<HTMLButtonElement>(null);
-
-  // Menu mobile : Échap le ferme (et rend le focus au bouton), un clic hors de la barre aussi.
-  useEffect(() => {
-    if (!menuOpen) return;
-    function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') { setMenuOpen(false); menuBtnRef.current?.focus(); }
-    }
-    function onPointer(e: PointerEvent) {
-      if (navRef.current && !navRef.current.contains(e.target as Node)) setMenuOpen(false);
-    }
-    document.addEventListener('keydown', onKey);
-    document.addEventListener('pointerdown', onPointer);
-    return () => {
-      document.removeEventListener('keydown', onKey);
-      document.removeEventListener('pointerdown', onPointer);
-    };
-  }, [menuOpen]);
-
-
-  const membre = isAuthenticated ? membreCharge : null; // signed out: never show a stale member
   const cle = `${page}|${nicheFilter}`;
   const loading = charge?.cle !== cle;
   const annuaire = charge?.items ?? [];
@@ -73,61 +44,13 @@ export default function ForgeLanding() {
     return () => { actif = false; };
   }, [nicheFilter, page]);
 
-  useEffect(() => {
-    if (!isAuthenticated) return;
-    let actif = true;
-    fetch(`${API_BASE}/api/forge/members/status`, { credentials: 'include' })
-      .then(res => res.ok ? res.json() : null)
-      .then(data => { if (actif) setMembre(data?.membre ?? null); })
-      .catch(() => { if (actif) setMembre(null); });
-    return () => { actif = false; };
-  }, [isAuthenticated]);
 
 
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', overflowY: 'auto' }}>
 
-      {/* NAV */}
-      <nav ref={navRef} className="forge-topbar">
-        <div className="forge-topbar__brand">
-          <img src="/NOXEL_FORGE_LOGO.svg" alt="Forge" className="forge-topbar__logo" />
-        </div>
-        <div className="forge-topbar__actions">
-          <button onClick={() => setShowMap(true)} className="forge-topbar__lang"><span><span className="forge-topbar__lang-icon" aria-hidden="true">🌐 </span>{lang.toUpperCase()}</span></button>
-          {showMap && (
-            <Suspense fallback={null}>
-              <NoxelInterface locale={lang} onChange={(l) => { changeLang(l); setShowMap(false); }} onClose={() => setShowMap(false)} />
-            </Suspense>
-          )}
-          <div id="forge-mobile-menu" className="forge-topbar__links" data-open={menuOpen}>
-            <Link to="/forge/badge" className="forge-topbar__link">{t.nav.badges}</Link>
-            <Link to="/forge/pricing" className="forge-topbar__link">{t.nav.pricing}</Link>
-            <Link to="/forge/dashboard" className="forge-topbar__link">{t.nav.dashboard}</Link>
-            {isAuthenticated && (
-              <>
-                {membre?.tier_abonnement && (<Link to="/forge/pricing" style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 14px', borderRadius: 20, fontSize: 12, fontWeight: 800, textDecoration: 'none', textTransform: 'capitalize', background: (TIER_CONFIG[membre.tier_abonnement]?.color || '#888') + '20', color: TIER_CONFIG[membre.tier_abonnement]?.color || '#888', border: `1px solid ${(TIER_CONFIG[membre.tier_abonnement]?.color || '#888')}40` }}><img src={TIER_CONFIG[membre.tier_abonnement]?.image || '/tiers/Bronze_tier.png'} alt={membre.tier_abonnement} style={{ width: 14, height: 14, verticalAlign: 'middle' }} /><span style={{marginLeft:6}}>{membre.tier_abonnement}</span>{membre.tier_abonnement !== 'diamond' && <span style={{ opacity: 0.7, marginLeft: 4 }}>· Upgrade ↗</span>}</Link>)}
-                <button onClick={() => { setMenuOpen(false); logout(); }} className="forge-topbar__link">{user?.name || 'Account'} (logout)</button>
-              </>
-            )}
-          </div>
-          {!isAuthenticated && (
-            <HudButton action="continue" compact label="Sign in" onClick={() => { setMenuOpen(false); setShowAuthModal(true); }} />
-          )}
-          <HudRouterLink to="/forge/submit" action="new-project" compact label={t.nav.submit} />
-          <button
-            ref={menuBtnRef}
-            type="button"
-            className="forge-topbar__menu-btn"
-            aria-label="Menu"
-            aria-expanded={menuOpen}
-            aria-controls="forge-mobile-menu"
-            onClick={() => setMenuOpen(o => !o)}
-          >
-            <span aria-hidden="true">{menuOpen ? '✕' : '☰'}</span>
-          </button>
-        </div>
-      </nav>
+      <ForgeTopbar active="home" />
 
       {/* HERO */}
       <section style={{ padding: '72px 32px 56px', textAlign: 'center', borderBottom: '1px solid var(--border)', background: 'linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%)' }}>
@@ -257,7 +180,7 @@ export default function ForgeLanding() {
         <HudRouterLink to="/forge/submit" action="new-project" compact label={t.cta.title} />
       </section>
       <Footer
-        brand="NOXEL Forge"
+        brand="NOXEL FORGE"
         siteUrl="https://noxelforge.com"
         contactEmail="founder@noxel360.com"
         links={[

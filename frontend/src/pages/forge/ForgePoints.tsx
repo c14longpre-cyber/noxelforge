@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { HudButton } from '../../components/hud/HudButton';
 import type { ForgePoints, PointsHistoryEntry } from '../../types/forge';
 
+import ForgeTopbar from '../../components/ForgeTopbar';
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 const REWARDS = [
@@ -40,13 +41,7 @@ export default function ForgePoints() {
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', overflowY: 'auto' }}>
-      <nav className="forge-subbar" style={{ borderBottom: '1px solid var(--border)', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--bg2)', position: 'sticky', top: 0, zIndex: 100 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <Link to="/forge/dashboard" style={{ color: 'var(--muted)', fontSize: 13 }}>← Dashboard</Link>
-          <span style={{ color: 'var(--soft)' }}>·</span>
-          <span style={{ fontWeight: 900, fontSize: 15 }}>Forge Points</span>
-        </div>
-      </nav>
+      <ForgeTopbar active="points" />
 
       <div style={{ maxWidth: 960, margin: '0 auto', padding: '32px 32px 80px' }}>
         {loading ? (
