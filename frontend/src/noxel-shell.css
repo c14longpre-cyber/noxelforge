@@ -149,3 +149,10 @@
   .nx-page { padding: 16px 16px 32px; }
   .nx-pricing-grid, .nx-pricing-grid--4 { grid-template-columns: 1fr; }
 }
+
+/* ── Pied de page des pages statiques (même rendu que components/Footer.tsx) ── */
+.nx-foot { max-width: 1400px; margin: 32px auto 0; padding: 24px 24px 20px; border-top: 1px solid rgba(255, 255, 255, 0.07); display: flex; flex-direction: column; gap: 16px; }
+.nx-foot__links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; align-items: center; }
+.nx-foot__links a, .nx-foot__links button { font-family: inherit; font-size: 14px; font-weight: 700; color: #3ddc84; text-decoration: none; background: none; border: 0; padding: 0; cursor: pointer; }
+.nx-foot__copy { font-size: 13px; color: rgba(255, 255, 255, 0.4); border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 16px; }
+@media (max-width: 600px) { .nx-bar__nav--static { display: none !important; } }

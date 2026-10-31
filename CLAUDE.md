@@ -106,6 +106,11 @@ noxelforge/
 - **Spam gate**: spamGate.service.ts runs asynchronously; may not catch all spam before publication
 - **CORS origin**: Mismatch between .env CORS_ORIGIN and actual deploy URL breaks browser requests
 
+### 9. Look commun NOXEL Shell 1.0
+- `frontend/src/noxel-shell.css` is copied identically into noxel360, noxelforge and noxelspectra (model: NOXEL SEO); any change goes everywhere with a version bump in its header
+- Header: `components/ForgeTopbar.tsx` on every page (logo · nav · Submit · language · tier medal · account menu with the Stripe portal); footer: `components/Footer.tsx` (same file as NOXEL360); pricing page uses `.nx-pricing-grid` / `.nx-pcard`
+- Module names always uppercase: NOXEL360, NOXEL SEO, NOXEL FORGE, NOXEL NEXUS, NOXEL SPECTRA
+
 ## Agent Roles
 
 ### 🧪 `testeur_forge` — Test & Validation Agent
