@@ -144,7 +144,7 @@ test("webhook: checkout.session.completed sets the paid tier from the session me
   reset();
   await stripeService.gererWebhookForge({
     type: "checkout.session.completed",
-    data: { object: { metadata: { userId: "u-new", tier: "gold" }, customer: "cus_1", subscription: "sub_1" } },
+    data: { object: { metadata: { product: "forge", userId: "u-new", tier: "gold" }, customer: "cus_1", subscription: "sub_1" } },
   });
   const upsert = writes.find((w) => w.table === "forge_members" && w.op === "upsert");
   assert.equal(upsert?.row.user_id, "u-new");

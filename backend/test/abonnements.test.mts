@@ -54,3 +54,16 @@ test("the 14-day refund is once per customer", async () => {
   assert.equal(await remb.remboursementDejaUtilise("cus_1", "sub_1"), false, "the same subscription keeps its own row");
   assert.equal(await remb.remboursementDejaUtilise("cus_2", "sub_9"), false);
 });
+
+test("the Forge webhook only acts on Forge objects when the Stripe account is shared with NOXEL SEO / SPECTRA", () => {
+  // Checkout sessions
+  assert.equal(svc.sessionForge({ product: "forge", userId: "u", tier: "gold" }), true);
+  assert.equal(svc.sessionForge({ userId: "u", tier: "gold", billing: "monthly", badgeInstalle: "false" }), true, "former Forge checkout");
+  assert.equal(svc.sessionForge({ tier: "gold", userId: "u" }), false, "NOXEL SEO checkout");
+  assert.equal(svc.sessionForge({ product: "spectra", spectraUserId: "u", spectraTier: "gold" }), false, "NOXEL SPECTRA checkout");
+  // Subscriptions: never a Forge plan, an immediate cancellation or a 14-day refund on another product's subscription
+  assert.equal(svc.abonnementForge({ metadata: {}, items: { data: [{ price: { id: "price_cad_silver_m" } }] } }), true);
+  assert.equal(svc.abonnementForge({ metadata: {}, items: { data: [{ price: { id: "price_1TnJ6hFty4wGWMC7Wnoj1my4" } }] } }), true, "former USD price");
+  assert.equal(svc.abonnementForge({ metadata: { tier: "gold", userId: "u" }, items: { data: [{ price: { id: "price_seo_gold" } }] } }), false);
+  assert.equal(svc.abonnementForge({ metadata: { product: "spectra" }, items: { data: [{ price: { id: "price_cad_silver_m" } }] } }), false);
+});

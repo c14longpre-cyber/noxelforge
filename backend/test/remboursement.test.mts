@@ -172,7 +172,7 @@ test("webhook customer.subscription.deleted within 14 days: member back to bronz
   const nowS = Math.floor(Date.now() / 1000);
   const status = await send({
     id: "evt_1", object: "event", type: "customer.subscription.deleted",
-    data: { object: { id: "sub_1", object: "subscription", customer: "cus_1", latest_invoice: "in_1", start_date: nowS - 2 * JOUR, canceled_at: nowS } },
+    data: { object: { id: "sub_1", object: "subscription", customer: "cus_1", latest_invoice: "in_1", start_date: nowS - 2 * JOUR, canceled_at: nowS, metadata: { product: "forge" } } },
   });
   assert.equal(status, 200);
   assert.equal(tables.forge_members[0].tier_abonnement, "bronze");
