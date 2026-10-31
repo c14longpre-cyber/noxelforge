@@ -273,7 +273,7 @@ See `backend/.env.example`:
 Last updated: October 10, 2026
 Agents: testeur_forge, relecteur_forge, redacteur_forge
 
-## Consentement cookies — NOXEL Consent 1.4.0 (commun aux sites NOXEL)
+## Consentement cookies — NOXEL Consent 1.4.1 (commun aux sites NOXEL)
 
 - **Fichiers** : `frontend/public/consent/` (`noxel-consent.js`, `noxel-consent.css`, `sites.js`), chargés dans le `<head>` AVANT tout outil facultatif. Le même moteur est copié à l'identique dans noxel360, noxelseo, noxelforge et noxelspectra : toute modification se fait partout, version incrémentée dans l'en-tête du fichier.
 - **Tout traceur passe par le kit** : script facultatif écrit `<script type="text/plain" data-consent="analytics|marketing|preferences" data-src="…">`, SDK démarré par `NoxelConsent.register()` ou rendu seulement si `NoxelConsent.has(catégorie)` (hook `src/components/consent/useNoxelConsent.ts`). Jamais de GTM, gtag, pixel, `<noscript>` de suivi ou widget tiers actif en direct. Déclarer l'outil dans `providers` et, pour un composant React, sa catégorie dans `enabledCategories`.
