@@ -50,6 +50,23 @@ export function tierPourAbonnement(status: string | null | undefined, tier: Tier
   return 'garder';
 }
 
+// Le compte Stripe peut être partagé avec NOXEL SEO et NOXEL SPECTRA, et chaque webhook reçoit alors
+// les événements de tous les produits. FORGE n'agit (forfait, annulation immédiate, remboursement de
+// 14 jours) que sur SES objets : metadata.product = "forge" (posé au checkout depuis le 31 oct. 2026),
+// sinon un prix FORGE (CAD ou ancien USD), sinon les clés que seul le checkout FORGE a toujours posées.
+export const PRODUIT = 'forge';
+
+export function sessionForge(meta: Record<string, string> | null | undefined): boolean {
+  if (!meta) return false;
+  if (meta.product) return meta.product === PRODUIT;
+  return 'badgeInstalle' in meta;  // anciens checkouts FORGE (SEO et SPECTRA ne posent jamais cette clé)
+}
+
+export function abonnementForge(sub: { metadata?: Record<string, string> | null; items?: { data?: { price?: { id?: string } | null }[] } }): boolean {
+  if (sub.metadata?.product) return sub.metadata.product === PRODUIT;
+  return tierDuPrix(sub.items?.data?.[0]?.price?.id) !== null;
+}
+
 export class ErreurAbonnement extends Error {
   constructor(public status: number, public code: string, message: string) { super(message); }
 }
@@ -95,7 +112,8 @@ export async function creerCheckoutForge(params: {
     client_reference_id: userId,
     line_items: [{ price: priceId, quantity: 1 }],
     discounts: discounts.length > 0 ? discounts : undefined,
-    metadata: { userId, tier, billing, badgeInstalle: String(badgeInstalle) },
+    metadata: { product: PRODUIT, userId, tier, billing, badgeInstalle: String(badgeInstalle) },
+    subscription_data: { metadata: { product: PRODUIT, userId, tier } },
     success_url: `${process.env.FRONTEND_URL}/forge/dashboard?success=true&tier=${tier}`,
     cancel_url: `${process.env.FRONTEND_URL}/forge/pricing?cancelled=true`,
   });
@@ -108,6 +126,7 @@ export async function gererWebhookForge(event: Stripe.Event): Promise<void> {
 
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session;
+    if (!sessionForge(session.metadata)) return;  // checkout de NOXEL SEO ou NOXEL SPECTRA
     const { userId, tier } = session.metadata || {};
     if (!userId || !tier) return;
 
@@ -123,6 +142,7 @@ export async function gererWebhookForge(event: Stripe.Event): Promise<void> {
 
   if (event.type === 'customer.subscription.updated') {
     const sub = event.data.object as Stripe.Subscription;
+    if (!abonnementForge(sub)) return;  // abonnement d'un autre produit NOXEL : ni forfait, ni annulation, ni remboursement
     const customerId = sub.customer as string;
     const previousSub = event.data.previous_attributes as any;
 
@@ -148,6 +168,7 @@ export async function gererWebhookForge(event: Stripe.Event): Promise<void> {
 
   if (event.type === 'customer.subscription.deleted') {
     const sub = event.data.object as Stripe.Subscription;
+    if (!abonnementForge(sub)) return;  // jamais de remboursement FORGE sur un abonnement SEO ou SPECTRA
 
     // Look the member up by the subscription that ended (a customer can have had several)
     const rows = must(await supabase.from('forge_members')

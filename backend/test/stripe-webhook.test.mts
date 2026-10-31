@@ -65,11 +65,11 @@ async function send(event: object, { badSignature = false } = {}) {
 
 const completed = {
   id: "evt_completed", object: "event", type: "checkout.session.completed",
-  data: { object: { id: "cs_1", object: "checkout.session", customer: "cus_1", subscription: "sub_1", metadata: { userId: "u-1", tier: "gold" } } },
+  data: { object: { id: "cs_1", object: "checkout.session", customer: "cus_1", subscription: "sub_1", metadata: { product: "forge", userId: "u-1", tier: "gold" } } },
 };
 const deleted = {
   id: "evt_deleted", object: "event", type: "customer.subscription.deleted",
-  data: { object: { id: "sub_1", object: "subscription", customer: "cus_1" } },
+  data: { object: { id: "sub_1", object: "subscription", customer: "cus_1", metadata: { product: "forge" } } },
 };
 
 function reset() { queries = []; fail = false; updatedRows = [{ user_id: "u-1" }]; }
