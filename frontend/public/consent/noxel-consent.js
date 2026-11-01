@@ -1,11 +1,13 @@
-/* NOXEL Consent 1.4.1 — no dependencies, no remote requests by default.
+/* NOXEL Consent 1.5.0 — no dependencies, no remote requests by default.
    1.1.0 : relais du choix entre les sites NOXEL (relayDomains), voir README « Mémoire entre les sites NOXEL ».
    1.2.0 : boutons HUD NOXEL (dessins du kit HUD de NOXEL SPECTRA) et charte NOXEL.
    1.3.0 : bannière ouverte à l'arrivée même sans outil facultatif (showWithoutCategories) et bouton Fermer
            (fermer = continuer sans accepter ; sur un site sans outil facultatif, simple information non relayée).
    1.4.0 : openOnArrival — la fenêtre de préférences complète s'ouvre à l'arrivée tant qu'aucun choix n'existe ;
            « Fermer sans modifier » (ou Échap) = continuer sans accepter. Interface exclue de la traduction automatique du navigateur.
-   1.4.1 : noms des modules en majuscules (NOXEL FORGE, NOXEL SPECTRA), comme sur les sites. Aucun changement de comportement. */
+   1.4.1 : noms des modules en majuscules (NOXEL FORGE, NOXEL SPECTRA), comme sur les sites. Aucun changement de comportement.
+   1.5.0 : textes bilingues dans la configuration : siteName, privacyUrl, et name / purpose de chaque outil acceptent
+           { fr, en } en plus d'une chaîne ; le moteur prend la langue affichée (repli sur l'autre langue). */
 (() => {
   'use strict';
   if (window.NoxelConsent) return;
@@ -53,6 +55,8 @@
       dismiss: 'Close and continue without accepting', dismissInfo: 'Close' }
   };
   const t = words[lang];
+  // Valeur de configuration en chaîne ou { fr, en } (1.5.0)
+  const pick = v => (v && typeof v === 'object') ? String(v[lang] ?? v.fr ?? v.en ?? '') : (v == null ? '' : String(v));
   const categories = new Set((cfg.enabledCategories || []).filter(x => keys.includes(x)));
   const services = new Map();
   const activeCategories = new Set();
@@ -122,8 +126,8 @@
     window.dispatchEvent(new CustomEvent('noxel:consentchange', { detail: { action, previous: old, receipt: get(), categories: receipt?.categories || empty() } }));
   }
   function safePrivacyLink(parent) {
-    if (!cfg.privacyUrl) return;
-    try { const url = new URL(cfg.privacyUrl, location.href); if (!['https:', 'http:'].includes(url.protocol)) return;
+    const privacy = pick(cfg.privacyUrl); if (!privacy) return;
+    try { const url = new URL(privacy, location.href); if (!['https:', 'http:'].includes(url.protocol)) return;
       parent.append(node('a', t.policy, { href: url.href, class: 'nx-consent-link' })); } catch (_) {}
   }
   function detect() {
@@ -224,7 +228,7 @@
     if (banner.hidden) return;
     // Fermer : continuer sans accepter (refus) ; sur un site sans outil facultatif, simple information (non relayée).
     banner.append(button(infoOnly ? t.dismissInfo : t.dismiss, () => choose(empty(), infoOnly ? 'dismiss-info' : 'dismiss'), 'nx-consent-dismiss nx-hud--icon', 'close'));
-    banner.append(node('p', cfg.siteName, { class: 'nx-consent-brand' }), node('h2', t.title), node('p', infoOnly ? t.noneIntro : t.intro));
+    banner.append(node('p', pick(cfg.siteName), { class: 'nx-consent-brand' }), node('h2', t.title), node('p', infoOnly ? t.noneIntro : t.intro));
     if (!infoOnly) {
       const actions = node('div', null, { class: 'nx-consent-actions' });
       actions.append(button(t.reject, reject, '', 'reject'), button(t.accept, accept, '', 'accept'), button(t.customize, open, '', 'customize'));
@@ -247,7 +251,7 @@
       const providers = (cfg.providers || []).filter(p => p.category === category);
       if (providers.length) {
         section.append(node('h4', t.vendors)); const list = node('ul');
-        for (const provider of providers) { const item = node('li', String(provider.name || '') + (provider.purpose ? ' — ' + provider.purpose : '')); list.append(item); }
+        for (const provider of providers) { const item = node('li', pick(provider.name) + (pick(provider.purpose) ? ' — ' + pick(provider.purpose) : '')); list.append(item); }
         section.append(list);
       }
       dialog.append(section);
