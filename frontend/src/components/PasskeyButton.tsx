@@ -16,14 +16,7 @@ export default function PasskeyButton({ onSuccess, onError, onPending }: Props) 
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const inputStyle: React.CSSProperties = {
-    width: "100%", padding: "11px 14px", borderRadius: 8,
-    border: "1px solid rgba(255,255,255,0.12)",
-    background: "rgba(255,255,255,0.04)",
-    color: "#fff", fontSize: 14, fontFamily: "inherit",
-    outline: "none", boxSizing: "border-box", marginBottom: 10,
-  };
-
+  
   const handleLogin = async () => {
     setLoading(true);
     try {
@@ -85,47 +78,21 @@ export default function PasskeyButton({ onSuccess, onError, onPending }: Props) 
 
   if (mode === "idle") {
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      <div className="nxl-passkey">
         <HudButton action="continue" compact label="Sign in with Passkey" busy={loading} busyLabel="Authenticating..."
           onClick={handleLogin} style={{ color: "#fff" }} />
-        <button
-          type="button"
-          onClick={() => setMode("register")}
-          style={{
-            background: "none", border: "none", color: "rgba(193,140,255,0.6)",
-            fontSize: 12, cursor: "pointer", fontFamily: "inherit", fontWeight: 600,
-            textAlign: "center", textDecoration: "underline", textUnderlineOffset: 3,
-          }}
-        >
-          Create a new passkey
-        </button>
+        <button type="button" className="nxl-link nxl-link--violet" onClick={() => setMode("register")}>Create a new passkey →</button>
       </div>
     );
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="your@email.com"
-        onKeyDown={(e) => e.key === "Enter" && handleRegister()}
-        style={inputStyle}
-      />
+    <div className="nxl-form">
+      <input className="nxl-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)}
+        placeholder="your@email.com" onKeyDown={(e) => e.key === "Enter" && handleRegister()} />
       <HudButton action="new-project" compact label="Create Passkey" busy={loading} busyLabel="Setting up..."
         disabled={!email.trim()} onClick={handleRegister} style={{ color: "#fff" }} />
-      <button
-        type="button"
-        onClick={() => setMode("idle")}
-        style={{
-          background: "none", border: "none", color: "rgba(255,255,255,0.4)",
-          fontSize: 12, cursor: "pointer", fontFamily: "inherit", fontWeight: 600,
-          textAlign: "center",
-        }}
-      >
-        Back
-      </button>
+      <button type="button" className="nxl-link" onClick={() => setMode("idle")}>← Back</button>
     </div>
   );
 }
