@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { useAuthStore } from "../auth/authContext";
 import PasskeyButton from "./PasskeyButton";
 import { HudButton } from "./hud/HudButton";
+import "../noxel-login.css";
 import type { PublicUser } from "../types/forge";
 
 declare global {
@@ -30,13 +31,6 @@ const API_BASE = import.meta.env.VITE_API_URL ?? "";
 
 type Screen = "grid" | "email" | "magic";
 
-const inputStyle: React.CSSProperties = {
-  width: "100%", padding: "11px 14px", borderRadius: 8,
-  border: "1px solid rgba(255,255,255,0.12)",
-  background: "rgba(255,255,255,0.04)",
-  color: "#fff", fontSize: 14, fontFamily: "inherit",
-  outline: "none", boxSizing: "border-box",
-};
 
 function writeStored(user: PublicUser | null | undefined) {
   // Champs publics seulement (jamais password_hash ni providerId).
@@ -169,67 +163,25 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
   ];
 
   // A JSX element, not a component declared during render (it would be remounted on every render)
-  const backBtn = (
-    <button type="button" onClick={() => setScreen("grid")} style={{
-      background: "none", border: "none", color: "rgba(255,255,255,0.4)",
-      cursor: "pointer", fontFamily: "inherit", fontSize: 13, fontWeight: 600,
-      display: "flex", alignItems: "center", gap: 6, marginBottom: 20, padding: 0,
-    }}>Back</button>
-  );
+  const backBtn = <button type="button" className="nxl-back" onClick={() => setScreen("grid")}>← Back</button>;
 
+  // Look commun NOXEL Login 1.0 (src/noxel-login.css), identique sur NOXEL SEO, NOXEL FORGE, NOXEL360 et NOXEL SPECTRA
   return createPortal(
-    <div onClick={onClose} style={{
-      position: "fixed", inset: 0, zIndex: 2147483647,
-      background: "radial-gradient(circle at 30% 20%, rgba(61,220,132,0.08), transparent 30%), radial-gradient(circle at 75% 30%, rgba(112,42,165,0.08), transparent 30%), rgba(2,6,15,0.85)",
-      backdropFilter: "blur(12px)", display: "grid", placeItems: "center", padding: 24,
-    }}>
-      <div onClick={(e) => e.stopPropagation()} style={{
-        width: "100%", maxWidth: 500, borderRadius: 24, padding: "32px 28px 28px",
-        background: "linear-gradient(180deg, rgba(10,16,26,0.98), rgba(6,10,18,0.99))",
-        boxShadow: "0 0 0 1px rgba(61,220,132,0.18), 0 0 60px rgba(61,220,132,0.08)",
-        position: "relative",
-      }}>
-        <div style={{
-          position: "absolute", top: 0, left: "10%", right: "10%", height: 1,
-          background: "linear-gradient(90deg, transparent, rgba(61,220,132,0.7), transparent)",
-          boxShadow: "0 0 16px rgba(61,220,132,0.4)", borderRadius: "0 0 8px 8px",
-        }} />
-
-        <button type="button" onClick={onClose} style={{
-          position: "absolute", top: 16, right: 16, width: 36, height: 36, borderRadius: 10,
-          background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)",
-          color: "rgba(255,255,255,0.5)", cursor: "pointer",
-          display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16,
-        }}>X</button>
+    <div className="nxl-overlay" onClick={onClose}>
+      <div className="nxl-card" role="dialog" aria-modal="true" aria-labelledby="nxl-title" onClick={(e) => e.stopPropagation()}>
+        <button type="button" className="nxl-close" aria-label="Close" onClick={onClose}>✕</button>
 
         {screen === "grid" && (
           <>
-            <div style={{ marginBottom: 22 }}>
-              <h2 style={{ margin: 0, fontSize: 24, fontWeight: 900, color: "#fff", lineHeight: 1.1 }}>Access NOXEL FORGE</h2>
-              <p style={{ margin: "8px 0 0", fontSize: 13, color: "rgba(255,255,255,0.45)" }}>Secure authentication for your account.</p>
+            <div className="nxl-head">
+              <h2 id="nxl-title" className="nxl-title">Access NOXEL FORGE</h2>
+              <p className="nxl-sub">One NOXEL account for NOXEL SEO, NOXEL FORGE and NOXEL SPECTRA.</p>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 12 }}>
+            <div className="nxl-providers">
               {providers.map((p) => (
-                <button key={p.id} type="button" onClick={p.comingSoon ? undefined : p.onClick}
-                  disabled={p.comingSoon}
-                  style={{
-                    display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-                    gap: 6, padding: "18px 10px", borderRadius: 14,
-                    background: "rgba(255,255,255,0.04)",
-                    border: "1px solid rgba(61,220,132,0.15)",
-                    cursor: p.comingSoon ? "not-allowed" : "pointer",
-                    opacity: p.comingSoon ? 0.45 : 1,
-                    transition: "all 0.15s", position: "relative",
-                  }}
-                  onMouseEnter={(e) => { if (!p.comingSoon) (e.currentTarget as HTMLButtonElement).style.background = "rgba(61,220,132,0.08)"; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.04)"; }}
-                >
-                  <div>{p.icon}</div>
-                  <div style={{ fontSize: 13, fontWeight: 800, color: "#fff" }}>{p.label}</div>
-                  {p.comingSoon && (
-                    <div style={{ fontSize: 9, fontWeight: 700, color: "rgba(255,255,255,0.4)", letterSpacing: 0.5 }}>COMING SOON</div>
-                  )}
+                <button key={p.id} type="button" className="nxl-provider" onClick={p.onClick}>
+                  {p.icon}<span className="nxl-provider__name">{p.label}</span>
                 </button>
               ))}
             </div>
@@ -239,47 +191,28 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
               onError={(msg) => setNotice(msg)}
               onPending={(msg) => setNotice(msg)}
             />
-            {notice && <div role="status" style={{ fontSize: 12, color: "#3ddc84", padding: "8px 12px", marginTop: 8, background: "rgba(61,220,132,0.08)", borderRadius: 8, border: "1px solid rgba(61,220,132,0.2)" }}>{notice}</div>}
+            {notice && <div role="status" className="nxl-msg nxl-msg--ok">{notice}</div>}
 
-            <button type="button" onClick={() => setScreen("magic")} style={{
-              width: "100%", padding: "11px", borderRadius: 12, marginTop: 8,
-              background: "rgba(61,220,132,0.07)", border: "1px solid rgba(61,220,132,0.2)",
-              color: "#3ddc84", fontWeight: 700, fontSize: 13, cursor: "pointer", fontFamily: "inherit",
-              display: "flex", alignItems: "center", justifyContent: "center", gap: 8, transition: "all 0.15s",
-            }}>
-              Sign in with Magic Link (no password)
-            </button>
-
-            <button type="button" onClick={() => setScreen("email")} style={{
-              width: "100%", padding: "11px", borderRadius: 12, marginTop: 8,
-              background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)",
-              color: "rgba(255,255,255,0.65)", fontWeight: 700, fontSize: 13, cursor: "pointer", fontFamily: "inherit",
-              display: "flex", alignItems: "center", justifyContent: "center", gap: 8, transition: "all 0.15s",
-            }}>
-              Sign in with email / password
-            </button>
+            <button type="button" className="nxl-wide nxl-wide--magic" onClick={() => setScreen("magic")}>Sign in with Magic Link (no password)</button>
+            <button type="button" className="nxl-wide" onClick={() => setScreen("email")}>Sign in with email / password</button>
           </>
         )}
 
         {screen === "magic" && (
           <>
             {backBtn}
-            <h2 style={{ margin: "0 0 6px", fontSize: 22, fontWeight: 900, color: "#fff" }}>Magic Link</h2>
-            <p style={{ margin: "0 0 20px", fontSize: 13, color: "rgba(255,255,255,0.45)", lineHeight: 1.5 }}>
-              Enter your email and we will send you a secure login link.
-            </p>
+            <h2 id="nxl-title" className="nxl-h2">Magic Link</h2>
+            <p className="nxl-lead">Enter your email and we'll send you a secure sign-in link, no password needed.</p>
             {magicStatus === "sent" ? (
-              <div style={{ padding: "24px", borderRadius: 12, textAlign: "center", background: "rgba(61,220,132,0.07)", border: "1px solid rgba(61,220,132,0.25)" }}>
-                <div style={{ color: "#3ddc84", fontWeight: 800, fontSize: 16, marginBottom: 8 }}>Check your inbox!</div>
-                <div style={{ color: "rgba(255,255,255,0.55)", fontSize: 13 }}>
-                  We sent a login link to <strong style={{ color: "#fff" }}>{magicEmail}</strong>. It expires in 15 minutes.
-                </div>
+              <div className="nxl-sent" role="status">
+                <div className="nxl-sent__title">Check your inbox!</div>
+                <div className="nxl-sent__text">We sent a sign-in link to <strong>{magicEmail}</strong>. It expires in 15 minutes.</div>
               </div>
             ) : (
-              <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                <input type="email" value={magicEmail} onChange={(e) => setMagicEmail(e.target.value)}
-                  placeholder="your@email.com" onKeyDown={(e) => e.key === "Enter" && handleMagicLink()} style={inputStyle} />
-                {magicMessage && <div style={{ fontSize: 12, color: "#ff5c7a", padding: "8px 12px", background: "rgba(255,92,122,0.08)", borderRadius: 8, border: "1px solid rgba(255,92,122,0.2)" }}>{magicMessage}</div>}
+              <div className="nxl-form">
+                <input className="nxl-input" type="email" value={magicEmail} onChange={(e) => setMagicEmail(e.target.value)}
+                  placeholder="your@email.com" onKeyDown={(e) => e.key === "Enter" && handleMagicLink()} />
+                {magicMessage && <div className="nxl-msg nxl-msg--error">{magicMessage}</div>}
                 <HudButton action="continue" compact label="Send Magic Link" busy={magicStatus === "loading"} busyLabel="Sending..."
                   disabled={!magicEmail.trim()} onClick={handleMagicLink} style={{ color: "#fff" }} />
               </div>
@@ -290,33 +223,28 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
         {screen === "email" && (
           <>
             {backBtn}
-            <h2 style={{ margin: "0 0 18px", fontSize: 22, fontWeight: 900, color: "#fff" }}>Sign in with email</h2>
-            <div style={{ display: "flex", gap: 4, background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: 4, marginBottom: 14 }}>
+            <h2 id="nxl-title" className="nxl-h2" style={{ marginBottom: 18 }}>Sign in with email</h2>
+            <div className="nxl-tabs" role="tablist">
               {(["login", "register"] as const).map((m) => (
-                <button key={m} type="button" onClick={() => { setEmailMode(m); setEmailError(""); }} style={{
-                  flex: 1, padding: "8px", borderRadius: 7, border: "none", cursor: "pointer",
-                  fontFamily: "inherit", fontWeight: 700, fontSize: 13, transition: "all 0.15s",
-                  background: emailMode === m ? "rgba(61,220,132,0.15)" : "transparent",
-                  color: emailMode === m ? "#3ddc84" : "rgba(255,255,255,0.4)",
-                }}>{m === "login" ? "Sign In" : "Create Account"}</button>
+                <button key={m} type="button" role="tab" className="nxl-tab" aria-selected={emailMode === m}
+                  onClick={() => { setEmailMode(m); setEmailError(""); }}>{m === "login" ? "Sign In" : "Create Account"}</button>
               ))}
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              {emailMode === "register" && <input type="text" value={emailName} onChange={(e) => setEmailName(e.target.value)} placeholder="Your name" style={inputStyle} />}
-              <input type="email" value={emailAddr} onChange={(e) => setEmailAddr(e.target.value)} placeholder="your@email.com" onKeyDown={(e) => e.key === "Enter" && handleEmailAuth()} style={inputStyle} />
-              <input type="password" value={emailPass} onChange={(e) => setEmailPass(e.target.value)} placeholder="Password (min 6 characters)" onKeyDown={(e) => e.key === "Enter" && handleEmailAuth()} style={inputStyle} />
-              {notice && <div role="status" style={{ fontSize: 12, color: "#3ddc84", padding: "8px 12px", background: "rgba(61,220,132,0.08)", borderRadius: 8, border: "1px solid rgba(61,220,132,0.2)" }}>{notice}</div>}
-              {emailError && <div style={{ fontSize: 12, color: "#ff5c7a", padding: "8px 12px", background: "rgba(255,92,122,0.08)", borderRadius: 8, border: "1px solid rgba(255,92,122,0.2)" }}>{emailError}</div>}
+            <div className="nxl-form">
+              {emailMode === "register" && <input className="nxl-input" type="text" value={emailName} onChange={(e) => setEmailName(e.target.value)} placeholder="Your name" />}
+              <input className="nxl-input" type="email" value={emailAddr} onChange={(e) => setEmailAddr(e.target.value)} placeholder="your@email.com" onKeyDown={(e) => e.key === "Enter" && handleEmailAuth()} />
+              <input className="nxl-input" type="password" value={emailPass} onChange={(e) => setEmailPass(e.target.value)} placeholder="Password (min 6 characters)" onKeyDown={(e) => e.key === "Enter" && handleEmailAuth()} />
+              {notice && <div role="status" className="nxl-msg nxl-msg--ok">{notice}</div>}
+              {emailError && <div className="nxl-msg nxl-msg--error">{emailError}</div>}
               <HudButton action={emailMode === "login" ? "continue" : "new-project"} compact
                 label={emailMode === "login" ? "Sign In" : "Create Account"} busy={emailLoading} busyLabel="Please wait..."
                 onClick={handleEmailAuth} style={{ color: "#fff" }} />
+              <button type="button" className="nxl-link nxl-link--green" onClick={() => setScreen("magic")}>Forgot your password? Use the Magic Link instead →</button>
             </div>
           </>
         )}
 
-        <p style={{ margin: "20px 0 0", fontSize: 11, color: "rgba(255,255,255,0.2)", textAlign: "center" }}>
-          By signing in you agree to our Terms of Service. We never sell your data.
-        </p>
+        <p className="nxl-legal">By signing in you agree to our Terms of Service. We never sell your data.</p>
       </div>
     </div>,
     overlayRoot

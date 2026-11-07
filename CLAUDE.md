@@ -274,6 +274,10 @@ See `backend/.env.example`:
 Last updated: October 10, 2026
 Agents: testeur_forge, relecteur_forge, redacteur_forge
 
+## Fenêtre de connexion commune
+
+- **Fenêtre de connexion — NOXEL Login 1.0** : `frontend/src/noxel-login.css` est copié à l'identique dans noxelseo, noxelforge, noxel360 et noxelspectra (modèle : la fenêtre de NOXEL FORGE). Même carte, titre « Access NOXEL <MODULE> », tuiles de fournisseurs avec vrais logos (seulement ceux qui fonctionnent, jamais de « bientôt »), passkey HUD, lien magique vert, courriel / mot de passe, mention en bas. Chaque site garde ses propres méthodes de connexion. Toute modification du fichier se fait partout, version incrémentée dans son en-tête.
+
 ## Consentement cookies — NOXEL Consent 1.5.0 (commun aux sites NOXEL)
 
 - **Fichiers** : `frontend/public/consent/` (`noxel-consent.js`, `noxel-consent.css`, `sites.js`), chargés dans le `<head>` AVANT tout outil facultatif. Le même moteur est copié à l'identique dans noxel360, noxelseo, noxelforge et noxelspectra : toute modification se fait partout, version incrémentée dans l'en-tête du fichier.
