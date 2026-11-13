@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { useForgeT } from '../../hooks/useForgeT';
-import ForgeAccessModal from '../../components/ForgeAccessModal';
 import Footer from '../../components/Footer';
 import HudRouterLink from '../../components/HudRouterLink';
 import type { AnnuaireItem } from '../../types/forge';
 import ForgeTopbar from '../../components/ForgeTopbar';
+// Fenêtre de connexion chargée à l'ouverture seulement
+const ForgeAccessModal = lazy(() => import('../../components/ForgeAccessModal'));
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const NICHES = ['SEO','Marketing','AI','E-commerce','Web Dev','Business','Design'];
@@ -191,7 +192,7 @@ export default function ForgeLanding() {
           { label: "Privacy", href: "/policies/privacy.html" },
         ]}
       />
-      <ForgeAccessModal open={showAuthModal} onClose={() => setShowAuthModal(false)} />
+      {showAuthModal && <Suspense fallback={null}><ForgeAccessModal open={showAuthModal} onClose={() => setShowAuthModal(false)} /></Suspense>}
     </div>
   );
 }
