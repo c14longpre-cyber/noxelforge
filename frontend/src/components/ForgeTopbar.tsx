@@ -86,6 +86,9 @@ export default function ForgeTopbar({ active }: { active: ForgeSection }) {
         {link('pricing', '/forge/pricing', t.nav.pricing)}
       </nav>
 
+      {/* Alfred, personnage de NOXEL FORGE (comme Chroma dans SPECTRA) */}
+      <img src="/alfred-header.webp" alt="Alfred, NOXEL FORGE" className="nx-bar__mascot" width={125} height={150} />
+
       <div className="nx-bar__right">
         <HudRouterLink to="/forge/submit" action="new-project" compact label={t.nav.submit} />
 
