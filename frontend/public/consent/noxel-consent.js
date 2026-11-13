@@ -1,4 +1,4 @@
-/* NOXEL Consent 1.5.0 — no dependencies, no remote requests by default.
+/* NOXEL Consent 1.6.0 — no dependencies, no remote requests by default.
    1.1.0 : relais du choix entre les sites NOXEL (relayDomains), voir README « Mémoire entre les sites NOXEL ».
    1.2.0 : boutons HUD NOXEL (dessins du kit HUD de NOXEL SPECTRA) et charte NOXEL.
    1.3.0 : bannière ouverte à l'arrivée même sans outil facultatif (showWithoutCategories) et bouton Fermer
@@ -7,7 +7,9 @@
            « Fermer sans modifier » (ou Échap) = continuer sans accepter. Interface exclue de la traduction automatique du navigateur.
    1.4.1 : noms des modules en majuscules (NOXEL FORGE, NOXEL SPECTRA), comme sur les sites. Aucun changement de comportement.
    1.5.0 : textes bilingues dans la configuration : siteName, privacyUrl, et name / purpose de chaque outil acceptent
-           { fr, en } en plus d'une chaîne ; le moteur prend la langue affichée (repli sur l'autre langue). */
+           { fr, en } en plus d'une chaîne ; le moteur prend la langue affichée (repli sur l'autre langue).
+   1.6.0 : petite bannière à l'arrivée (coin inférieur gauche, une phrase, Refuser / Accepter de même poids, Personnaliser ouvre
+           la fenêtre complète) ; sites.js passe openOnArrival à false. openOnArrival: true reste possible. */
 (() => {
   'use strict';
   if (window.NoxelConsent) return;
@@ -36,7 +38,9 @@
       relayShort: 'Ce choix vaut pour tous les sites NOXEL.',
       noneIntro: 'Ce site n’utilise aucun outil facultatif : pas de mesure d’audience ni de publicité. Les outils nécessaires à son fonctionnement restent actifs.',
       noneRelay: 'Sur les autres sites NOXEL, votre choix vous sera demandé une fois, puis il vous suivra d’un site à l’autre.',
-      dismiss: 'Fermer et continuer sans accepter', dismissInfo: 'Fermer' },
+      dismiss: 'Fermer et continuer sans accepter', dismissInfo: 'Fermer',
+      short: 'Mesure d’audience et publicité désactivées tant que vous ne les acceptez pas. Votre choix vaut pour tous les sites NOXEL.',
+      rejectShort: 'Refuser', acceptShort: 'Accepter', customizeShort: 'Personnaliser', policyShort: 'Confidentialité' },
     en: { title: 'Your privacy', intro: 'You choose which optional tools can run on this site. Tools required for the requested service remain active.',
       accept: 'Accept all', reject: 'Reject all', customize: 'Customize', save: 'Save my choices', close: 'Close without changes',
       settings: 'Privacy preferences', policy: 'Privacy policy', necessary: 'Necessary', always: 'Always active',
@@ -52,7 +56,9 @@
       relayShort: 'This choice applies to all NOXEL sites.',
       noneIntro: 'This site uses no optional tools: no audience measurement and no advertising. Tools required for the requested service remain active.',
       noneRelay: 'On the other NOXEL sites, you will be asked once, then your choice follows you from one site to another.',
-      dismiss: 'Close and continue without accepting', dismissInfo: 'Close' }
+      dismiss: 'Close and continue without accepting', dismissInfo: 'Close',
+      short: 'Audience measurement and advertising stay off unless you accept them. Your choice applies to all NOXEL sites.',
+      rejectShort: 'Reject', acceptShort: 'Accept', customizeShort: 'Customize', policyShort: 'Privacy' }
   };
   const t = words[lang];
   // Valeur de configuration en chaîne ou { fr, en } (1.5.0)
@@ -226,16 +232,20 @@
     const infoOnly = categories.size === 0;
     banner.replaceChildren(); banner.hidden = valid(receipt) || cfg.openOnArrival === true || (infoOnly && cfg.showWithoutCategories !== true);
     if (banner.hidden) return;
-    // Fermer : continuer sans accepter (refus) ; sur un site sans outil facultatif, simple information (non relayée).
+    // 1.6.0 : petite bannière. Fermer = continuer sans accepter (refus) ; sur un site sans outil facultatif, simple information (non relayée).
     banner.append(button(infoOnly ? t.dismissInfo : t.dismiss, () => choose(empty(), infoOnly ? 'dismiss-info' : 'dismiss'), 'nx-consent-dismiss nx-hud--icon', 'close'));
-    banner.append(node('p', pick(cfg.siteName), { class: 'nx-consent-brand' }), node('h2', t.title), node('p', infoOnly ? t.noneIntro : t.intro));
+    const text = node('p', null, { class: 'nx-consent-short' });
+    text.append(node('strong', pick(cfg.siteName) + ' · ' + t.title), document.createTextNode(' ' + (infoOnly ? t.noneIntro : t.short) + ' '));
+    const privacy = pick(cfg.privacyUrl);
+    if (privacy) { try { const url = new URL(privacy, location.href); if (['https:', 'http:'].includes(url.protocol)) text.append(node('a', t.policyShort, { href: url.href, class: 'nx-consent-link' })); } catch (_) {} }
+    banner.append(text);
     if (!infoOnly) {
+      // Refuser et Accepter : même taille, même style (Loi 25 : refuser aussi facile qu'accepter).
       const actions = node('div', null, { class: 'nx-consent-actions' });
-      actions.append(button(t.reject, reject, '', 'reject'), button(t.accept, accept, '', 'accept'), button(t.customize, open, '', 'customize'));
+      const labelled = (short, full, action, hud) => { const el = button(short, action, '', hud); el.setAttribute('aria-label', full); return el; };
+      actions.append(labelled(t.rejectShort, t.reject, reject, 'reject'), labelled(t.acceptShort, t.accept, accept, 'accept'), labelled(t.customizeShort, t.customize, open, 'customize'));
       banner.append(actions);
     }
-    const foot = node('div', null, { class: 'nx-consent-foot' });
-    if (relayEnabled) foot.append(node('p', infoOnly ? t.noneRelay : t.relayShort)); safePrivacyLink(foot); banner.append(foot);
   }
   function open() {
     if (!root || dialog.open) return;
@@ -330,6 +340,6 @@
     window.dispatchEvent(new CustomEvent('noxel:consentready', { detail: { receipt: get() } }));
   }
   window.NoxelConsent = Object.freeze({ open, close, acceptAll: accept, rejectAll: reject, has, getReceipt: get, register, relayUrl,
-    refresh: () => { detect(); renderBanner(); return scheduleActivation(); }, version: '1.4.1' });
+    refresh: () => { detect(); renderBanner(); return scheduleActivation(); }, version: '1.6.0' });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true }); else boot();
 })();
