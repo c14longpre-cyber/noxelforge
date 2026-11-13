@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom';
 import { useForgeT } from '../hooks/useForgeT';
 import { useAuthStore } from '../auth/authContext';
 import { LANGUAGES_115 } from '../i18n/languages';
-import ForgeAccessModal from './ForgeAccessModal';
 import HudRouterLink from './HudRouterLink';
 import { HudButton } from './hud/HudButton';
 import type { MemberStatus } from '../types/forge';
 
 const NoxelInterface = lazy(() => import('./NoxelInterface'));
+// Fenêtre de connexion (passkeys…) chargée à l'ouverture seulement
+const ForgeAccessModal = lazy(() => import('./ForgeAccessModal'));
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 export type ForgeSection = 'home' | 'dashboard' | 'partners' | 'badges' | 'pricing' | 'submit' | 'points' | 'admin';
@@ -142,7 +143,7 @@ export default function ForgeTopbar({ active }: { active: ForgeSection }) {
           <NoxelInterface locale={lang} onChange={(l) => { changeLang(l); setShowLang(false); }} onClose={() => setShowLang(false)} />
         </Suspense>
       )}
-      {showLogin && <ForgeAccessModal open={showLogin} onClose={() => setShowLogin(false)} />}
+      {showLogin && <Suspense fallback={null}><ForgeAccessModal open={showLogin} onClose={() => setShowLogin(false)} /></Suspense>}
     </header>
   );
 }
