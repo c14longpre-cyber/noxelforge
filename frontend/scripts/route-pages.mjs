@@ -97,13 +97,14 @@ export function renderRoute(indexHtml, page) {
   html = setAttr(html, /(<meta name="twitter:description" content=")[^"]*(")/, esc(page.description), "twitter:description");
   html = html.replace(
     /("@type": "BreadcrumbList",\s*"itemListElement": \[)[\s\S]*?(\])/,
-    `$1\n        {"@type": "ListItem", "position": 1, "name": "NOXEL FORGE", "item": "${ORIGIN}/forge"},\n        {"@type": "ListItem", "position": 2, "name": "${page.crumb}", "item": "${url}"}\n      $2`
+    (_m, a, b) => `${a}\n        {"@type": "ListItem", "position": 1, "name": "NOXEL FORGE", "item": "${ORIGIN}/forge"},\n        {"@type": "ListItem", "position": 2, "name": "${page.crumb}", "item": "${url}"}\n      ${b}`
   );
   // La FAQ de l'accueil ne décrit pas cette page : JSON-LD et section retirés.
   html = html.replace(/\s*<script type="application\/ld\+json">\s*\{\s*"@context": "https:\/\/schema\.org",\s*"@type": "FAQPage"[\s\S]*?<\/script>/, "");
   const fallbackRe = /(<div id="root">\s*<div [^>]*>)[\s\S]*?(<\/div>\s*<\/div>\s*(?:<script type="module"|<\/body>))/;
   if (!fallbackRe.test(html)) throw new Error("route-pages: texte de secours introuvable");
-  html = html.replace(fallbackRe, `$1${page.body}\n      $2`);
+  // Fonction de remplacement : les « $20 » du texte ne doivent pas être lus comme $2 + "0"
+  html = html.replace(fallbackRe, (_m, a, b) => `${a}${page.body}\n      ${b}`);
   return html;
 }
 
