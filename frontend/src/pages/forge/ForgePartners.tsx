@@ -6,12 +6,15 @@ import type { PartnerSubmission, PartnerSuggestion } from '../../types/forge';
 import { HudButton } from '../../components/hud/HudButton';
 
 import ForgeTopbar from '../../components/ForgeTopbar';
+import { useAuthStore } from '../../auth/authContext';
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const NICHES = ['SEO','Marketing','AI','E-commerce','Web Dev','Business','Design','Finance','Health','Education'];
 const TIER_COLORS: Record<string,string> = { bronze:'#CD7F32', silver:'#A8A9AD', gold:'#FFD700', platinum:'#E5E4E2', diamond:'#B9F2FF' };
 const TIER_IMAGES: Record<string,string> = { bronze:'/tiers/Bronze_tier.png', silver:'/tiers/Silver_tier.png', gold:'/tiers/Gold_tier.png', platinum:'/tiers/Platinum_tier.png', diamond:'/tiers/Diamond_tier.png' };
 
 export default function ForgePartners() {
+  // Recommendations only for a signed-in member: a visitor never sees a block that appears then vanishes (layout shift)
+  const { isAuthenticated } = useAuthStore();
   // Directory page loaded for (page, niche): loading until the last answer matches the current filters
   const [charge, setCharge] = useState<{ cle: string; items: PartnerSubmission[] } | null>(null);
   const [nicheFilter, setNicheFilter] = useState('');
@@ -54,6 +57,7 @@ export default function ForgePartners() {
   }, [nicheFilter, page]);
 
   useEffect(() => {
+    if (!isAuthenticated) return;
     let actif = true;
     (async () => {
       try {
@@ -66,7 +70,7 @@ export default function ForgePartners() {
       finally { if (actif) setLoadingReco(false); }
     })();
     return () => { actif = false; };
-  }, []);
+  }, [isAuthenticated]);
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', overflowY: 'auto' }}>
@@ -85,7 +89,7 @@ export default function ForgePartners() {
           ))}
         </div>
 
-        {(loadingReco || recommandations.length > 0) && (
+        {isAuthenticated && (loadingReco || recommandations.length > 0) && (
           <div style={{ marginBottom: 28 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
               <span style={{ fontSize: 16 }}>🎯</span>
@@ -137,7 +141,7 @@ export default function ForgePartners() {
         </div>
 
         {loading ? (
-          <div style={{ textAlign: 'center', color: 'var(--muted)', padding: 60, fontSize: 14 }}>Loading partners...</div>
+          <div style={{ textAlign: 'center', color: 'var(--muted)', padding: 60, fontSize: 14, minHeight: 320 }}>Loading partners...</div>
         ) : partenaires.length === 0 ? (
           <div className="nx-card" style={{ textAlign: 'center', padding: 60 }}>
             <div style={{ fontSize: 40, marginBottom: 12 }}>🤝</div>
