@@ -22,7 +22,7 @@ export const ROUTE_PAGES = [
     route: "forge/pricing",
     title: "NOXEL FORGE Pricing — Bronze free, Silver to Diamond in CAD",
     description:
-      "NOXEL FORGE plans: Bronze is free, Silver $20, Gold $40, Platinum $60 and Diamond $80 CAD per month, or 17% less billed yearly. 14-day refund.",
+      "NOXEL FORGE pricing: Bronze is free, Silver $20, Gold $40, Platinum $60 and Diamond $80 CAD per month, or about 17% less billed yearly.",
     crumb: "Pricing",
     body: `
         <h1>NOXEL FORGE pricing: one free plan and four paid tiers in Canadian dollars</h1>
@@ -36,11 +36,14 @@ export const ROUTE_PAGES = [
         </ul>
         <p>Prices are in Canadian dollars. Yearly billing saves about 17%. A member who displays the NOXEL FORGE or NOXEL SEO badge on their site gets the badge discount of their tier. A subscription cancelled within 14 days of its start is refunded automatically, and plan changes, cancellation, cards and invoices are handled in the Stripe customer portal.</p>
         <p>Bronze members can browse but cannot propose or accept an exchange: exchanges start at Silver. Every exchange is verified by the server on both sites before it counts.</p>
+        <h2>Which plan fits your site</h2>
+        <p>Bronze suits a site owner who wants to look around first: browse the partners, check their niches and see how the network works, at no cost. Silver is the first plan for a real exchange: submit your site, get the Alfred review and propose or accept backlink exchanges. Gold, Platinum and Diamond add priority review, more visibility in the directory and a higher badge discount, for agencies and sites that exchange often.</p>
+        <p>Every plan follows the same rules: one member per proven domain, links checked on both sites by the server, and no paid links or link farms. The tier changes how fast and how visibly you work in the network, never the quality bar a partner must meet.</p>
         <nav><a href="/forge">NOXEL FORGE home</a> · <a href="/forge/partners">Verified partners</a> · <a href="/forge/badge">NOXEL FORGE badge</a> · <a href="/forge/submit">Submit your site</a></nav>`,
   },
   {
     route: "forge/partners",
-    title: "NOXEL FORGE Partners — directory of verified backlink partners",
+    title: "NOXEL FORGE Partners — verified backlink directory",
     description:
       "Browse NOXEL FORGE partners: sites with a proven domain and a reviewed submission, filtered by niche, ready for verified backlink exchanges.",
     crumb: "Partners",
@@ -49,6 +52,11 @@ export const ROUTE_PAGES = [
         <p>The NOXEL FORGE partners directory lists member sites that proved they own their domain and passed the Alfred review. Filter it by niche (SEO, marketing, AI, e-commerce, web development, business, design, finance, health, education) to find partners close to your topic.</p>
         <p>Signed-in members also get recommendations from the NOXEL FORGE matchmaking engine, which compares niches, Trust Scores, recent activity and freshness, and can propose an exchange in one click. An exchange counts only when the server has found a link to the partner on a page of each member's own domain.</p>
         <p>A site appears in the directory only while its domain is proven by a meta tag, a file or a DNS record, and while its NOXEL FORGE badge is verified. Sites that break the exchange guidelines are removed.</p>
+        <h2>How a partner gets listed</h2>
+        <p>A site joins the NOXEL FORGE partners directory in three steps. The member proves ownership of the domain with a meta tag, a file in /.well-known/ or a DNS TXT record. A page of that domain is then submitted and reviewed by Alfred, who checks content quality, niche relevance and the exchange guidelines. Finally the NOXEL FORGE badge is installed on the site and verified by the server.</p>
+        <h2>What makes an exchange count</h2>
+        <p>An exchange is complete only when the server finds a link to the partner on a page of each member's own domain. A link that disappears gets a 7-day grace period, then the exchange is marked broken. Proposals expire after 14 days, and both links must be verified within 60 days. That is why the directory lists real sites with real, checked links instead of a list of URLs.</p>
+        <p>Browsing is free with the Bronze plan; proposing and accepting exchanges starts with Silver. Sites that break the guidelines, with spam, thin pages or paid link schemes, are removed from the directory and their exchanges are closed.</p>
         <nav><a href="/forge">NOXEL FORGE home</a> · <a href="/forge/pricing">Pricing</a> · <a href="/forge/submit">Submit your site</a> · <a href="/forge/badge">NOXEL FORGE badge</a></nav>`,
   },
   {
@@ -61,6 +69,11 @@ export const ROUTE_PAGES = [
         <h1>Submit your site to NOXEL FORGE</h1>
         <p>Submitting your site to NOXEL FORGE puts one page of your domain in front of the partner network. Alfred, the NOXEL FORGE reviewer, checks content quality, niche relevance and the exchange guidelines before the page joins the directory.</p>
         <p>The submitted page must belong to your proven domain: prove ownership once with a meta tag, a file in /.well-known/ or a DNS TXT record. Site submission with the Alfred review is included from the Silver plan; Bronze members can browse the directory for free.</p>
+        <h2>What Alfred checks</h2>
+        <p>Alfred reads the page the way a careful editor would. He looks at whether the content is original and useful, whether it matches the niche you chose, and whether the page follows the NOXEL FORGE guidelines: no spam, no thin or generated filler, no hidden links and no paid link schemes. He criticizes the page, never the person, and explains what to change when a submission is not accepted.</p>
+        <h2>What happens next</h2>
+        <p>Once the page is accepted, your site appears in the partners directory with its niche, and other members can find it. Your Trust Score is built from six signals collected by the server: technical health from a NOXEL SEO scan, domain age, publishing frequency, content quality from Alfred, and authority and spam checked by the NOXEL team. You can then propose exchanges to partners close to your topic, and each exchange counts once both links are verified on both sites.</p>
+        <p>You can submit again at any time when your content changes: the new page gets its own review.</p>
         <nav><a href="/forge">NOXEL FORGE home</a> · <a href="/forge/pricing">Pricing</a> · <a href="/forge/partners">Verified partners</a> · <a href="/forge/badge">NOXEL FORGE badge</a></nav>`,
   },
   {
@@ -73,6 +86,11 @@ export const ROUTE_PAGES = [
         <h1>The NOXEL FORGE badge</h1>
         <p>The NOXEL FORGE badge shows visitors that your site is a verified member of the NOXEL FORGE network. While the badge is detected, your site stays public in the partner directory, and paid plans get a 10% to 25% badge discount.</p>
         <p>NOXEL checks every badge on the 1st and the 15th of the month. If a badge is missing, a 7-day grace period starts and the site is checked every day; after that the badge is suspended until it is detected again.</p>
+        <h2>Why a badge</h2>
+        <p>Backlink networks are easy to fake. The badge is a public, visible commitment: your site says it belongs to a network where every link is checked and every member has proven the domain it owns. Visitors can click it to discover NOXEL FORGE, and other members know the site is still active, because a badge that disappears is noticed within days.</p>
+        <h2>Installing the badge</h2>
+        <p>The badge page gives you a short piece of HTML to paste in the footer of your site, or in any template shown on every page. It loads a small image and a link to NOXEL FORGE; it sets no cookie and runs no tracking script. Once it is in place, the server detects it at the next check and the badge becomes verified. A NOXEL SEO badge is accepted too, so a site already showing its NOXEL SEO score does not need a second badge.</p>
+        <p>The badge discount applies to the paid plans: 10% on Silver, 15% on Gold, 20% on Platinum and 25% on Diamond, as long as the badge stays verified.</p>
         <nav><a href="/forge">NOXEL FORGE home</a> · <a href="/forge/pricing">Pricing</a> · <a href="/forge/partners">Verified partners</a> · <a href="/forge/submit">Submit your site</a></nav>`,
   },
 ];
