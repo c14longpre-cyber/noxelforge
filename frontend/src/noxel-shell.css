@@ -1,5 +1,7 @@
 /* ============================================================
-   NOXEL Shell 1.1 — en-tête, page de prix et pied de page communs
+   NOXEL Shell 1.2 — en-tête, page de prix et pied de page communs
+   1.2 : personnage du module dans la barre du haut (.nx-bar__mascot, 150 px de haut, avant les pastilles de droite,
+         caché sous 1100 px) : NX360 (NOXEL360), Alfred (NOXEL FORGE) ; SPECTRA garde ses classes pour Chroma.
    1.1 : même barre du haut sur les 4 sites (NOXEL SEO compris), logo dans un carré de 150 × 150 px
          à 100 % de zoom ; la barre n'est plus collante (trop haute) ; mobile inchangé (logo 46 px).
    Modèle : NOXEL SEO (barre du haut, cartes de prix, pied de page).
@@ -22,6 +24,9 @@
 .nx-bar__logo { width: 150px; height: 150px; object-fit: contain; display: block; }
 .nx-bar__nav { display: flex; align-items: center; gap: 4px; margin-left: 12px; min-width: 0; }
 .nx-bar__right { margin-left: auto; display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+.nx-bar__mascot { height: 150px; width: auto; display: block; margin-left: auto; pointer-events: none; filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.3)); }
+.nx-bar__mascot + .nx-bar__right { margin-left: 18px; }
+@media (max-width: 1100px) { .nx-bar__mascot { display: none; } .nx-bar__mascot + .nx-bar__right { margin-left: auto; } }
 
 /* Liens du menu : mêmes que la barre latérale de NOXEL SEO (.nav-item) */
 .nx-nav {
