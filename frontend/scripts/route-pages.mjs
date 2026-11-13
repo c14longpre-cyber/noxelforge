@@ -73,7 +73,7 @@ export const ROUTE_PAGES = [
         <p>Alfred reads the page the way a careful editor would. He looks at whether the content is original and useful, whether it matches the niche you chose, and whether the page follows the NOXEL FORGE guidelines: no spam, no thin or generated filler, no hidden links and no paid link schemes. He criticizes the page, never the person, and explains what to change when a submission is not accepted.</p>
         <h2>What happens next</h2>
         <p>Once the page is accepted, your site appears in the partners directory with its niche, and other members can find it. Your Trust Score is built from six signals collected by the server: technical health from a NOXEL SEO scan, domain age, publishing frequency, content quality from Alfred, and authority and spam checked by the NOXEL team. You can then propose exchanges to partners close to your topic, and each exchange counts once both links are verified on both sites.</p>
-        <p>You can submit again at any time when your content changes: the new page gets its own review.</p>
+        <p>You can submit again at any time when your content changes: the new page gets its own review. Before you submit, a free NOXEL SEO scan of the page is a good way to catch technical problems first, since technical health is one of the six Trust Score signals and a clean page makes a stronger case to future partners.</p>
         <nav><a href="/forge">NOXEL FORGE home</a> · <a href="/forge/pricing">Pricing</a> · <a href="/forge/partners">Verified partners</a> · <a href="/forge/badge">NOXEL FORGE badge</a></nav>`,
   },
   {
@@ -90,7 +90,7 @@ export const ROUTE_PAGES = [
         <p>Backlink networks are easy to fake. The badge is a public, visible commitment: your site says it belongs to a network where every link is checked and every member has proven the domain it owns. Visitors can click it to discover NOXEL FORGE, and other members know the site is still active, because a badge that disappears is noticed within days.</p>
         <h2>Installing the badge</h2>
         <p>The badge page gives you a short piece of HTML to paste in the footer of your site, or in any template shown on every page. It loads a small image and a link to NOXEL FORGE; it sets no cookie and runs no tracking script. Once it is in place, the server detects it at the next check and the badge becomes verified. A NOXEL SEO badge is accepted too, so a site already showing its NOXEL SEO score does not need a second badge.</p>
-        <p>The badge discount applies to the paid plans: 10% on Silver, 15% on Gold, 20% on Platinum and 25% on Diamond, as long as the badge stays verified.</p>
+        <p>The badge discount applies to the paid plans: 10% on Silver, 15% on Gold, 20% on Platinum and 25% on Diamond, as long as the badge stays verified. If you redesign your site, check that the badge is still in the new footer: a missing badge starts the grace period, and your site leaves the public directory if the badge is not back within 7 days.</p>
         <nav><a href="/forge">NOXEL FORGE home</a> · <a href="/forge/pricing">Pricing</a> · <a href="/forge/partners">Verified partners</a> · <a href="/forge/submit">Submit your site</a></nav>`,
   },
 ];
