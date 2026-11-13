@@ -1,5 +1,5 @@
 /* Select a configuration and load it BEFORE noxel-consent.js.
-   openOnArrival (1.4.0) : la fenêtre de préférences s'ouvre à l'arrivée sur tous les sites NOXEL tant qu'aucun choix n'existe.
+   1.6.0 : petite bannière à l'arrivée tant qu'aucun choix n'existe (openOnArrival: false) ; Personnaliser ouvre la fenêtre complète.
    No optional vendor is enabled here: declare the actual tools first (window.NOXEL_CONSENT_CONFIG in the page).
    Langue : choix du visiteur gardé par le site, sinon navigateur français, sinon <html lang> ; le moteur affiche fr ou en.
    privacyUrl : vide tant que le site n'a pas de politique publiée (noxelforge.com, noxelspectra.com au 13/10/2026).
@@ -35,5 +35,5 @@ window.NOXEL_CONSENT_RELAY_DOMAINS = ['noxel360.com', 'noxelseo.com', 'noxelforg
   const language = chosen || (/^fr\b/i.test(navigator.language || '') ? 'fr' : (document.documentElement.lang || 'fr'));
   const site = window.NOXEL_CONSENT_SITES[hostname] || { siteName: 'NOXEL', policyVersion: '1', privacyUrl: '' };
   window.NOXEL_CONSENT_CONFIG = Object.assign({ storageKey: 'noxel.consent.v1', retentionDays: 180, enabledCategories: [], providers: [],
-    relayDomains: window.NOXEL_CONSENT_RELAY_DOMAINS, showWithoutCategories: true, openOnArrival: true, language }, window.NOXEL_CONSENT_NETWORK, site, window.NOXEL_CONSENT_CONFIG || {});
+    relayDomains: window.NOXEL_CONSENT_RELAY_DOMAINS, showWithoutCategories: true, openOnArrival: false, language }, window.NOXEL_CONSENT_NETWORK, site, window.NOXEL_CONSENT_CONFIG || {});
 })();
