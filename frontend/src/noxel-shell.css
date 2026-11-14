@@ -1,5 +1,7 @@
 /* ============================================================
-   NOXEL Shell 1.2.1 — en-tête, page de prix et pied de page communs
+   NOXEL Shell 1.3 — en-tête, page de prix et pied de page communs
+   1.3 : recherche « app ou guides » dans la barre du haut (.nx-search, nx-search.js), entre le personnage et
+         les pastilles, comme NOXEL SEO ; index propre à chaque site (/search-index.json).
    1.2.1 : textes discrets plus lisibles (blanc 62 % au lieu de 40 %, contraste au moins 4,5:1 sur le fond) :
            pied de page (.nx-foot__copy), courriel du menu, bascule mensuel/annuel, sous-titre des cartes de prix.
    1.2 : personnage du module dans la barre du haut (.nx-bar__mascot, 150 px de haut, avant les pastilles de droite,
@@ -165,3 +167,38 @@
 .nx-foot__links a, .nx-foot__links button { font-family: inherit; font-size: 14px; font-weight: 700; color: #3ddc84; text-decoration: none; background: none; border: 0; padding: 0; cursor: pointer; }
 .nx-foot__copy { font-size: 13px; color: rgba(255, 255, 255, 0.62); border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 16px; }
 @media (max-width: 600px) { .nx-bar__nav--static { display: none !important; } }
+
+/* ── 1.3 : recherche de la barre du haut (NOXEL Search, nx-search.js), comme NOXEL SEO ──
+   Premier élément de .nx-bar__right : personnage · recherche · pastilles. */
+.nx-search { position: relative; flex: 0 0 220px; width: 220px; }
+.nx-search__field {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px; border-radius: 10px;
+  border: 1px solid var(--border, #10dada59); background: rgba(255, 255, 255, 0.045);
+  color: rgba(255, 255, 255, 0.62); transition: border-color 0.13s;
+}
+.nx-search__field:focus-within { border-color: rgba(61, 220, 132, 0.35); }
+.nx-search__field svg { flex-shrink: 0; }
+.nx-search__input {
+  flex: 1; min-width: 0; background: transparent; border: 0; outline: none; box-shadow: none;
+  margin: 0; padding: 0; height: auto; min-height: 0; line-height: 1.4; -webkit-appearance: none; appearance: none;
+  color: rgba(255, 255, 255, 0.93); font: inherit; font-size: 13px;
+}
+.nx-search__input::placeholder { color: rgba(255, 255, 255, 0.62); }
+.nx-search__input::-webkit-search-cancel-button { display: none; }
+.nx-search__list {
+  position: absolute; top: calc(100% + 8px); right: 0; width: 320px; max-height: 380px; overflow-y: auto; z-index: 220;
+  background: #0c0f1a; border: 1px solid var(--border, #10dada59); border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4); text-align: left;
+}
+.nx-search__item {
+  display: flex; flex-direction: column; gap: 2px; padding: 10px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06); color: rgba(255, 255, 255, 0.93); text-decoration: none;
+}
+.nx-search__item:last-child { border-bottom: 0; }
+.nx-search__item:hover, .nx-search__item[aria-selected="true"] { background: rgba(61, 220, 132, 0.08); }
+.nx-search__kind { font-size: 11px; color: rgba(255, 255, 255, 0.62); text-transform: uppercase; letter-spacing: 0.04em; }
+.nx-search__title { font-size: 13px; font-weight: 600; }
+.nx-search__desc { font-size: 12px; color: rgba(255, 255, 255, 0.62); }
+.nx-search__empty { padding: 12px 14px; font-size: 13px; color: rgba(255, 255, 255, 0.62); }
+@media (max-width: 900px) { .nx-search { display: none; } }

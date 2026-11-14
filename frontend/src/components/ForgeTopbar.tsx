@@ -1,9 +1,10 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForgeT } from '../hooks/useForgeT';
 import { useAuthStore } from '../auth/authContext';
 import { LANGUAGES_115 } from '../i18n/languages';
 import HudRouterLink from './HudRouterLink';
+import NxSearch from './NxSearch';
 import { HudButton } from './hud/HudButton';
 import type { MemberStatus } from '../types/forge';
 
@@ -31,6 +32,13 @@ function initials(name?: string | null): string {
  */
 export default function ForgeTopbar({ active }: { active: ForgeSection }) {
   const { t, lang, changeLang } = useForgeT();
+  const go = useNavigate();
+  // Pages de l'app ouvertes sans recharger (recherche de la barre du haut, NOXEL Shell 1.3)
+  const openInApp = (url: string) => {
+    if (!url.startsWith('/forge')) return false;
+    go(url);
+    return true;
+  };
   const { isAuthenticated, user, logout } = useAuthStore();
   const [statut, setStatut] = useState<MemberStatus | null>(null);
   const [showLang, setShowLang] = useState(false);
@@ -91,6 +99,7 @@ export default function ForgeTopbar({ active }: { active: ForgeSection }) {
       <img src="/alfred-header.webp" alt="Alfred, NOXEL FORGE" className="nx-bar__mascot" width={125} height={150} />
 
       <div className="nx-bar__right">
+        <NxSearch lang={lang} navigate={openInApp} />
         <HudRouterLink to="/forge/submit" action="new-project" compact label={t.nav.submit} />
 
         <button type="button" className="nx-pill" onClick={() => setShowLang(true)} aria-label="Language">

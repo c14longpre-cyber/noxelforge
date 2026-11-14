@@ -1,0 +1,13 @@
+[
+{"k":"app","t":{"fr":"Accueil NOXEL FORGE","en":"NOXEL FORGE home"},"d":{"fr":"Échanges de liens vérifiés entre vrais sites","en":"Verified link exchanges between real sites"},"u":"/forge"},
+{"k":"app","t":{"fr":"Tableau de bord","en":"Dashboard"},"d":{"fr":"Votre Trust Score, vos échanges et vos rappels","en":"Your Trust Score, exchanges and reminders"},"u":"/forge/dashboard"},
+{"k":"app","t":{"fr":"Partenaires","en":"Partners"},"d":{"fr":"Répertoire des membres et suggestions de partenaires","en":"Member directory and partner suggestions"},"u":"/forge/partners"},
+{"k":"app","t":{"fr":"Soumettre une page","en":"Submit a page"},"d":{"fr":"Proposer une page de votre domaine vérifié","en":"Submit a page from your verified domain"},"u":"/forge/submit"},
+{"k":"app","t":{"fr":"Badge NOXEL FORGE","en":"NOXEL FORGE badge"},"d":{"fr":"Installer le badge et vérifier votre domaine","en":"Install the badge and verify your domain"},"u":"/forge/badge"},
+{"k":"app","t":"Forge Points","d":{"fr":"Vos points et leur historique","en":"Your points and their history"},"u":"/forge/points"},
+{"k":"app","t":{"fr":"Forfaits","en":"Pricing"},"d":{"fr":"Bronze, Silver, Gold, Platinum et Diamond, en dollars canadiens","en":"Bronze, Silver, Gold, Platinum and Diamond, in Canadian dollars"},"u":"/forge/pricing"},
+{"k":"app","t":{"fr":"Confidentialité","en":"Privacy"},"u":"/policies/privacy.html"},
+{"k":"app","t":"NOXEL SEO","d":{"fr":"Audit SEO, AEO et GEO (signal technique du Trust Score)","en":"SEO, AEO and GEO audit (technical signal of the Trust Score)"},"u":"https://www.noxelseo.com/"},
+{"k":"app","t":"NOXEL SPECTRA","d":{"fr":"Images et vidéo plus légères","en":"Lighter images and video"},"u":"https://www.noxelspectra.com/"},
+{"k":"app","t":"NOXEL360","d":{"fr":"Tableau de bord et guides Learn","en":"Dashboard and Learn guides"},"u":"https://noxel360.com/learn/"}
+]
