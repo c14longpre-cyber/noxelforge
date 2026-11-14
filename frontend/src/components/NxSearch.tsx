@@ -16,7 +16,7 @@ declare global {
 export default function NxSearch({ navigate, index, lang }: { navigate?: (url: string) => boolean; index?: string; lang?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const nav = useRef(navigate);
-  nav.current = navigate;
+  useEffect(() => { nav.current = navigate; });
 
   useEffect(() => {
     if (!ref.current) return;
