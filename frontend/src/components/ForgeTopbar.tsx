@@ -41,6 +41,7 @@ export default function ForgeTopbar({ active }: { active: ForgeSection }) {
   };
   const { isAuthenticated, user, logout } = useAuthStore();
   const [statut, setStatut] = useState<MemberStatus | null>(null);
+  const [statutLu, setStatutLu] = useState(false);
   const [showLang, setShowLang] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
@@ -52,8 +53,8 @@ export default function ForgeTopbar({ active }: { active: ForgeSection }) {
     let actif = true;
     fetch(`${API_BASE}/api/forge/members/status`, { credentials: 'include' })
       .then(r => (r.ok ? r.json() : null))
-      .then(d => { if (actif) setStatut(d && d.membre ? d : null); })
-      .catch(() => { if (actif) setStatut(null); });
+      .then(d => { if (actif) { setStatut(d && d.membre ? d : null); setStatutLu(true); } })
+      .catch(() => { if (actif) { setStatut(null); setStatutLu(true); } });
     return () => { actif = false; };
   }, [isAuthenticated]);
 
@@ -77,7 +78,8 @@ export default function ForgeTopbar({ active }: { active: ForgeSection }) {
   }
 
   const meta = LANGUAGES_115.find(l => l.code === lang);
-  const tier = isAuthenticated ? statut?.membre?.tier_abonnement : undefined;
+  // Médaille du forfait pour tout compte connecté, comme NOXEL SEO : Bronze tant qu'aucun forfait payé (ou pas encore membre)
+  const tier = isAuthenticated && statutLu ? (statut?.membre?.tier_abonnement || 'bronze') : undefined;
   const link = (section: ForgeSection, to: string, label: string) => (
     <Link to={to} className="nx-nav" aria-current={active === section ? 'page' : undefined} onClick={() => setNavOpen(false)}>{label}</Link>
   );
