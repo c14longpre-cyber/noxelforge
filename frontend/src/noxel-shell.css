@@ -1,5 +1,7 @@
 /* ============================================================
-   NOXEL Shell 1.2 — en-tête, page de prix et pied de page communs
+   NOXEL Shell 1.2.1 — en-tête, page de prix et pied de page communs
+   1.2.1 : textes discrets plus lisibles (blanc 62 % au lieu de 40 %, contraste au moins 4,5:1 sur le fond) :
+           pied de page (.nx-foot__copy), courriel du menu, bascule mensuel/annuel, sous-titre des cartes de prix.
    1.2 : personnage du module dans la barre du haut (.nx-bar__mascot, 150 px de haut, avant les pastilles de droite,
          caché sous 1100 px) : NX360 (NOXEL360), Alfred (NOXEL FORGE) ; SPECTRA garde ses classes pour Chroma.
    1.1 : même barre du haut sur les 4 sites (NOXEL SEO compris), logo dans un carré de 150 × 150 px
@@ -68,7 +70,7 @@
 }
 .nx-menu__head { padding: 8px 10px 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.07); margin-bottom: 4px; }
 .nx-menu__name { font-size: 13px; font-weight: 700; color: #fff; }
-.nx-menu__mail { font-size: 11px; color: rgba(255, 255, 255, 0.4); overflow: hidden; text-overflow: ellipsis; }
+.nx-menu__mail { font-size: 11px; color: rgba(255, 255, 255, 0.62); overflow: hidden; text-overflow: ellipsis; }
 .nx-menu__item {
   display: block; width: 100%; padding: 8px 10px; border-radius: 8px; border: none; background: none;
   color: rgba(255, 255, 255, 0.75); font-family: inherit; font-size: 13px; line-height: 1.3; text-align: left; text-decoration: none; cursor: pointer;
@@ -108,7 +110,7 @@
 .nx-cycle__track { display: flex; background: rgba(255, 255, 255, 0.05); border-radius: 99px; padding: 4px; gap: 4px; border: 1px solid rgba(255, 255, 255, 0.08); }
 .nx-cycle__btn {
   padding: 8px 20px; border-radius: 99px; border: none; background: transparent;
-  color: rgba(255, 255, 255, 0.4); font-family: inherit; font-weight: 700; font-size: 13px; line-height: 1.2; cursor: pointer;
+  color: rgba(255, 255, 255, 0.62); font-family: inherit; font-weight: 700; font-size: 13px; line-height: 1.2; cursor: pointer;
   display: flex; align-items: center; gap: 6px; transition: all 0.2s;
 }
 .nx-cycle__btn[aria-pressed="true"] { background: rgba(61, 220, 132, 0.15); color: #3ddc84; }
@@ -139,7 +141,7 @@
 .nx-pcard__price { font-size: 24px; font-weight: 900; }
 .nx-pcard__price--text { font-size: 18px; }
 .nx-pcard__period { font-size: 12px; font-weight: 500; color: rgba(255, 255, 255, 0.58); }
-.nx-pcard__sub { font-size: 11px; color: rgba(255, 255, 255, 0.4); }
+.nx-pcard__sub { font-size: 11px; color: rgba(255, 255, 255, 0.62); }
 .nx-pcard__note { font-size: 10px; color: rgba(255, 255, 255, 0.58); }
 .nx-pcard__items { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 6px; margin: 5px 0; flex: 1; }
 .nx-pcard__items li { font-size: 11px; color: rgba(255, 255, 255, 0.75); display: flex; gap: 6px; align-items: flex-start; }
@@ -161,5 +163,5 @@
 .nx-foot { max-width: 1400px; margin: 32px auto 0; padding: 24px 24px 20px; border-top: 1px solid rgba(255, 255, 255, 0.07); display: flex; flex-direction: column; gap: 16px; }
 .nx-foot__links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; align-items: center; }
 .nx-foot__links a, .nx-foot__links button { font-family: inherit; font-size: 14px; font-weight: 700; color: #3ddc84; text-decoration: none; background: none; border: 0; padding: 0; cursor: pointer; }
-.nx-foot__copy { font-size: 13px; color: rgba(255, 255, 255, 0.4); border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 16px; }
+.nx-foot__copy { font-size: 13px; color: rgba(255, 255, 255, 0.62); border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 16px; }
 @media (max-width: 600px) { .nx-bar__nav--static { display: none !important; } }

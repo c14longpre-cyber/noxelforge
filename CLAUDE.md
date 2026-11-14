@@ -112,7 +112,7 @@ noxelforge/
 - `/forge/pricing`, `/forge/partners`, `/forge/submit`, `/forge/badge` get their own HTML at build time (`frontend/scripts/route-pages.mjs`, run after `vite build`): title, description, canonical, og/twitter, breadcrumb and fallback text of the page; `frontend/vercel.json` rewrites them before the SPA catch-all. `CanonicalUpdater` (App.tsx) only fixes the canonical after React starts, which a crawler reading raw HTML never sees. A new public page goes in ROUTE_PAGES, the rewrite and `public/sitemap.xml`; keep its prices in sync with ForgePricing.tsx
 - Partners page: the "Recommended for you" block is shown (and fetched) only for a signed-in member, so visitors get no layout shift
 
-### 9. Look commun NOXEL Shell 1.2
+### 9. Look commun NOXEL Shell 1.2.1 (1.2.1 : textes discrets à 62 % de blanc, contraste 4,5:1)
 - `frontend/src/noxel-shell.css` is copied identically into noxel360, noxelforge and noxelspectra (model: NOXEL SEO); any change goes everywhere with a version bump in its header
 - Header: `components/ForgeTopbar.tsx` on every page (logo · nav · Submit · language · tier medal · account menu with the Stripe portal); footer: `components/Footer.tsx` (same file as NOXEL360); pricing page uses `.nx-pricing-grid` / `.nx-pcard`
 - Module names always uppercase: NOXEL360, NOXEL SEO, NOXEL FORGE, NOXEL NEXUS, NOXEL SPECTRA
