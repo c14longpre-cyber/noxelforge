@@ -19,3 +19,12 @@
 .noxel-hud--icon-only .noxel-hud__loading{font-size:11px}
 @keyframes hud-spin{to{transform:rotate(360deg)}}@keyframes hud-spin-reverse{to{transform:rotate(-360deg)}}@keyframes hud-pulse{50%{opacity:.35}}
 @media(prefers-reduced-motion:reduce){.noxel-hud,.noxel-hud__graphic{transition:none}.noxel-hud .hud-orbit,.noxel-hud .hud-segments,.noxel-hud__loading span{animation:none!important}.noxel-hud:hover:not(:disabled) .noxel-hud__graphic{transform:none}}
+
+/* 1.1 — cadran pendant l'exécution (comme le scan de NOXEL SEO) : piste violette, remplissage vert */
+.noxel-hud__gauge{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.noxel-hud[aria-busy=true] .noxel-hud__svg,.noxel-hud[aria-busy=true] .noxel-hud__loading,.noxel-hud[aria-busy=true] .noxel-hud__progress{display:none}
+.noxel-hud__gauge-fill{transition:stroke-dasharray .6s ease-out}
+.noxel-hud__gauge-sweep{animation:hud-gauge-sweep 1.6s ease-in-out infinite alternate}
+.noxel-hud__gauge-text{fill:#f5f5f5;font-weight:800;font-size:26px;font-variant-numeric:tabular-nums}
+@keyframes hud-gauge-sweep{from{stroke-dashoffset:0}to{stroke-dashoffset:-72}}
+@media(prefers-reduced-motion:reduce){.noxel-hud__gauge-sweep{animation:none}.noxel-hud__gauge-fill{transition:none}}

@@ -22,9 +22,14 @@ function Graphic({action,busy=false,progress}: {action:HudAction;busy?:boolean;p
   return <span className="noxel-hud__graphic" aria-hidden="true">
     {/* Chaînes SVG internes fournies dans ce kit, jamais du contenu utilisateur. */}
     <svg className="noxel-hud__svg" viewBox="0 0 128 128" focusable="false" dangerouslySetInnerHTML={{__html:HUD_MARKUP[action]}} />
-    {busy && <span className="noxel-hud__loading">{percentage===undefined ? <span>···</span> : `${percentage}%`}</span>}
-    {busy && percentage!==undefined && <svg className="noxel-hud__progress" viewBox="0 0 128 128">
-      <circle cx="64" cy="64" r="31" fill="none" stroke="#3DDC84" strokeWidth="2.5" pathLength="100" strokeDasharray={`${percentage} 100`} transform="rotate(-90 64 64)" />
+    {/* En cours : cadran façon test de vitesse (piste violette qui se remplit de vert). Pourcentage réel seulement
+        s'il est connu ; sinon un segment vert parcourt la piste, sans chiffre inventé. */}
+    {busy && <svg className="noxel-hud__gauge" viewBox="0 0 128 128" focusable="false">
+      <path d="M 18 92 A 46 46 0 0 1 110 92" fill="none" stroke="#A855F7" strokeWidth="11" strokeLinecap="round" />
+      <path d="M 18 92 A 46 46 0 0 1 110 92" fill="none" stroke="#3DDC84" strokeWidth="11" strokeLinecap="round" pathLength="100"
+        className={percentage===undefined ? 'noxel-hud__gauge-sweep' : 'noxel-hud__gauge-fill'}
+        strokeDasharray={percentage===undefined ? '28 100' : `${percentage} 100`} />
+      <text x="64" y="88" textAnchor="middle" className="noxel-hud__gauge-text">{percentage===undefined ? '···' : `${percentage}%`}</text>
     </svg>}
   </span>;
 }
