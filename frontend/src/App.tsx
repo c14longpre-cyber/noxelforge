@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-route
 import { lazy, Suspense, useEffect } from "react";
 import { AuthProvider } from "./auth/AuthStore";
 import ForgeLanding from "./pages/forge/ForgeLanding";
+import ForgeNivo from './components/ForgeNivo';
 
 const ForgeDashboard = lazy(() => import("./pages/forge/ForgeDashboard"));
 const ForgeSubmit = lazy(() => import("./pages/forge/ForgeSubmit"));
@@ -58,6 +59,7 @@ export default function App() {
             <Route path="/forge/admin" element={<ForgeAdmin />} />
           </Routes>
         </Suspense>
+        <ForgeNivo />
       </BrowserRouter>
     </AuthProvider>
   );
