@@ -4,6 +4,7 @@ import { useAuthStore } from "../auth/authContext";
 import PasskeyButton from "./PasskeyButton";
 import { HudButton } from "./hud/HudButton";
 import type { PublicUser } from "../types/forge";
+import { avertissementNavigateurIntegre, navigateurIntegre } from "../inAppBrowser";
 
 declare global {
   interface Window {
@@ -46,6 +47,8 @@ function writeStored(user: PublicUser | null | undefined) {
 
 export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
   const { loginWithGoogle, refreshAuth } = useAuthStore();
+  // Navigateur d'une appli (Facebook, LinkedIn…) : Google y refuse souvent la connexion
+  const inApp = navigateurIntegre();
   const googleInitialized = useRef(false);
 
   const [screen, setScreen] = useState<Screen>(
@@ -209,6 +212,11 @@ export default function ForgeAccessModal({ open, onClose, defaultTab }: Props) {
               <p style={{ margin: "8px 0 0", fontSize: 13, color: "rgba(255,255,255,0.45)" }}>Secure authentication for your account.</p>
             </div>
 
+            {inApp && (
+              <p role="note" style={{ margin: "0 0 14px", padding: "10px 12px", borderRadius: 10, border: "1px solid rgba(255,183,77,0.45)", background: "rgba(255,183,77,0.08)", color: "#ffd59a", fontSize: 13, lineHeight: 1.45 }}>
+                {avertissementNavigateurIntegre(inApp, /^fr\b/i.test(navigator.language || ""))}
+              </p>
+            )}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 12 }}>
               {providers.map((p) => (
                 <button key={p.id} type="button" onClick={p.comingSoon ? undefined : p.onClick}
