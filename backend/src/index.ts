@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import { contratOk } from "./lib/contratOk";
 import forgeRoutes from "./routes/forge/forge.routes";
 import stripeForgeRoutes, { stripeWebhookHandler } from "./routes/forge/stripe.forge.routes";
+import ssoRoutes from "./routes/sso.routes";
 import authRoutes from "./routes/auth.routes";
 import authMagicRoutes from "./routes/auth.magic";
 import authMicrosoftRoutes from "./routes/auth.microsoft";
@@ -43,6 +44,7 @@ app.use("/api/trust-score", trustScorePublicRoutes);
 app.use("/api/forge", forgeRoutes);
 app.use("/api/forge/stripe", stripeForgeRoutes);
 
+app.use("/api/auth", ssoRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/auth/magic", authMagicRoutes);
 app.use("/api/auth", authMicrosoftRoutes);

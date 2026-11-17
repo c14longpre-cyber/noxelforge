@@ -7,6 +7,7 @@ import HudRouterLink from './HudRouterLink';
 import NxSearch from './NxSearch';
 import { HudButton } from './hud/HudButton';
 import type { MemberStatus } from '../types/forge';
+import { lienSso } from '../noxelSso';
 
 const NoxelInterface = lazy(() => import('./NoxelInterface'));
 // Fenêtre de connexion (passkeys…) chargée à l'ouverture seulement
@@ -136,6 +137,9 @@ export default function ForgeTopbar({ active }: { active: ForgeSection }) {
                   <button role="menuitem" type="button" className="nx-menu__item" onClick={() => { setUserOpen(false); gererAbonnement(); }}>Manage subscription</button>
                 )}
                 {statut?.est_admin && <Link role="menuitem" to="/forge/admin" className="nx-menu__item" onClick={() => setUserOpen(false)}>Admin</Link>}
+                {/* Autres outils NOXEL, déjà connecté (NOXEL SSO) */}
+                <a role="menuitem" href={lienSso(API_BASE, 'seo', '/app')} className="nx-menu__item">NOXEL SEO ↗</a>
+                <a role="menuitem" href={lienSso(API_BASE, 'spectra', '/')} className="nx-menu__item">NOXEL SPECTRA ↗</a>
                 <button role="menuitem" type="button" className="nx-menu__item nx-menu__item--danger" onClick={() => { setUserOpen(false); logout(); }}>Logout</button>
               </div>
             )}
