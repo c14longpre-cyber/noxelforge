@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { AuthContext, type AuthContextValue, type AuthUser } from "./authContext";
 
+import { accepterPassageSso } from "../noxelSso";
+
 const API_BASE = import.meta.env.VITE_API_URL ?? "";
 const IS_DEV = import.meta.env.DEV;
 const STORAGE_KEY = "nxl_forge_user";
@@ -41,6 +43,8 @@ function clearStored() {
 
 // Session from the API (cookie), else the copy kept in localStorage; never touches React state
 async function lireSession(): Promise<AuthUser | null> {
+  // Arrivée depuis NOXEL SEO ou NOXEL SPECTRA (?nxsso=) : la session s'ouvre d'abord (une seule fois)
+  await accepterPassageSso(API_BASE);
   try {
     const res = await fetch(API_BASE + "/api/auth/me", {
       credentials: "include",
