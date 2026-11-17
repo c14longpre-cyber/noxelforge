@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import AccessCodeRedeem from '../../components/AccessCodeRedeem';
 import Footer from '../../components/Footer';
 import { Link } from 'react-router-dom';
 import { useForgeT } from '../../hooks/useForgeT';
@@ -84,15 +85,18 @@ export default function ForgePricing() {
   const [badgeInstalle, setBadgeInstalle] = useState(false);
   const [loading, setLoading] = useState<string | null>(null);
   const [tierActuel, setTierActuel] = useState<string | null>(null);
+  const [connecte, setConnecte] = useState(false);
+  const [offreFin, setOffreFin] = useState<string | null>(null);
   // Langue choisie dans l'en-tête (forge_lang), comme les autres pages
   const { t } = useForgeT();
 
   useEffect(() => {
     fetch(`${API_BASE}/api/forge/members/status`, { credentials: 'include' })
-      .then(r => (r.ok ? r.json() : null))
+      .then(r => { setConnecte(r.ok); return r.ok ? r.json() : null; })
       .then(d => {
         setBadgeInstalle(d?.membre?.badge_installe === true);
         setTierActuel(d?.membre?.tier_abonnement ?? null);
+        setOffreFin(d?.membre?.tier_expires_at ?? null);
       })
       .catch(() => {});
   }, []);
@@ -214,6 +218,7 @@ export default function ForgePricing() {
             <div className="nx-info__desc">{t.pricing.badgeInfoDesc}</div>
           </div>
         </div>
+        {connecte && <AccessCodeRedeem expiresAt={offreFin} onDone={() => window.location.reload()} />}
       </main>
       <Footer
         brand="NOXEL FORGE"
