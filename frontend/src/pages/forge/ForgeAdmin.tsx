@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { HudButton } from '../../components/hud/HudButton';
 
+import AdminAccessCodes from '../../components/AdminAccessCodes';
 import ForgeTopbar from '../../components/ForgeTopbar';
 // Admin page (FORGE_ADMIN_EMAILS): entry of the authority and spam signals, per member.
 // Every other signal is collected by the server; this page only shows them.
@@ -166,6 +167,8 @@ export default function ForgeAdmin() {
           <div style={{ textAlign: 'center', color: 'var(--muted)', padding: 60, fontSize: 14 }}>Chargement…</div>
         ) : (
           <>
+            <AdminAccessCodes />
+            <h2 style={{ margin: '8px 0 12px', fontSize: 18, fontWeight: 900 }}>Trust Score des membres</h2>
             <div style={{ display: 'flex', gap: 8, marginBottom: 16, flexWrap: 'wrap' }}>
               {([['a_verifier', `À vérifier (${nbAVerifier})`], ['tous', `Tous (${membres.length})`]] as const).map(([cle, label]) => (
                 <button key={cle} type="button" onClick={() => setFiltre(cle)}

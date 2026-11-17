@@ -20,6 +20,7 @@ import {
   getAnnuaire,
 } from '../../controllers/forge/submissions.controller';
 import { getSuggestions } from '../../controllers/forge/matchmaking.controller';
+import { adminCreerCodes, adminListerCodes, echanger } from '../../controllers/forge/codesAcces.controller';
 import { listerEchanges, proposer, accepter, refuser, declarer } from '../../controllers/forge/exchanges.controller';
 
 const router = Router();
@@ -56,6 +57,11 @@ router.post('/trust-score/recalculate', requireAuth, recalculerMonScore);
 router.get('/admin/trust-scores', requireAuth, requireAdmin, listerTrustScoresAdmin);
 router.post('/admin/trust-score/:userId', requireAuth, requireAdmin, saisirSignauxAdmin);
 router.post('/admin/trust-score/:userId/recalculate', requireAuth, requireAdmin, recalculerTrustScoreAdmin);
+
+// Codes d'accès (table access_codes partagée, product = 'forge')
+router.get('/admin/codes', requireAuth, requireAdmin, adminListerCodes);
+router.post('/admin/codes', requireAuth, requireAdmin, adminCreerCodes);
+router.post('/codes/redeem', requireAuth, echanger);
 
 // ============================================================
 // MATCHMAKING
