@@ -28,7 +28,7 @@ export interface ForgePoints {
 }
 
 export interface MemberStatus {
-  membre: { tier_abonnement: string; url_site?: string | null; niche?: string | null; statut?: string };
+  membre: { tier_abonnement: string; tier_expires_at?: string | null; url_site?: string | null; niche?: string | null; statut?: string };
   est_admin?: boolean;
   trust_score: TrustScoreRow | null;
   points: ForgePoints;

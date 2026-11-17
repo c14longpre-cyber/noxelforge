@@ -14,6 +14,7 @@ import authGithubRoutes from "./routes/auth.github";
 import trustScorePublicRoutes from "./routes/forge/trustScore.public.routes";
 import { initForgeBadgeCron } from "./cron/forgeBadgeCron";
 import { initAuthCleanupCron } from "./cron/authCleanupCron";
+import { initForgeOffresCron } from "./cron/forgeOffresCron";
 import { initForgeExchangeCron } from "./cron/forgeExchangeCron";
 
 const app = express();
@@ -58,6 +59,7 @@ app.use((err: any, _req: express.Request, res: express.Response, _next: express.
 
 initForgeBadgeCron();
 initAuthCleanupCron();
+initForgeOffresCron();
 initForgeExchangeCron();
 
 app.listen(PORT, () => console.log("NOXEL Forge Backend - Port " + PORT));

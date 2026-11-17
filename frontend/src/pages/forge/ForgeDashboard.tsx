@@ -6,6 +6,7 @@ import HudRouterLink from '../../components/HudRouterLink';
 import { TRUST_SCORE_SERVER_COMPUTED, TRUST_SCORE_PENDING_LABEL, TRUST_SCORE_PENDING_MESSAGE, TRUST_SCORE_VERIFYING_LABEL, TRUST_SCORE_VERIFYING_MESSAGE, trustScoreAwaitingVerification } from '../../config/trustScore';
 import type { MemberStatus, Soumission } from '../../types/forge';
 
+import AccessCodeRedeem from '../../components/AccessCodeRedeem';
 import ForgeTopbar from '../../components/ForgeTopbar';
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const TIER_COLORS: Record<string, string> = { bronze: '#CD7F32', silver: '#A8A9AD', gold: '#FFD700', platinum: '#E5E4E2', diamond: '#B9F2FF' };
@@ -273,6 +274,8 @@ export default function ForgeDashboard() {
             </div>
           )}
         </div>
+
+        <AccessCodeRedeem expiresAt={statut.membre.tier_expires_at ?? null} onDone={fetchDashboard} />
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import Stripe from 'stripe';
 import { getSupabase } from '../../lib/supabaseClient';
 import { rembourserAnnulation, annulerMaintenantSiDansFenetre } from './remboursement.service';
 import { must } from '../../lib/supabaseCheck';
+import { effacerOffre } from './codesAcces.service';
 
 function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2026-06-24.dahlia' });
@@ -138,6 +139,7 @@ export async function gererWebhookForge(event: Stripe.Event): Promise<void> {
       stripe_subscription_id: session.subscription as string,
       updated_at: new Date().toISOString(),
     }, { onConflict: 'user_id' }), 'forge_members upsert (checkout.session.completed)');
+    await effacerOffre({ userId });  // le forfait payé remplace un forfait offert par un code
   }
 
   if (event.type === 'customer.subscription.updated') {
@@ -158,6 +160,7 @@ export async function gererWebhookForge(event: Stripe.Event): Promise<void> {
       must(await supabase.from('forge_members')
         .update({ tier_abonnement: newTier, ...(newTier === 'bronze' ? {} : { stripe_subscription_id: sub.id }), updated_at: new Date().toISOString() })
         .eq('stripe_customer_id', customerId), 'forge_members update (customer.subscription.updated)');
+      if (newTier !== 'bronze') await effacerOffre({ customerId });
     }
 
     // Cancellation at period end requested within the 14 days: cancel now -> subscription.deleted -> refund
