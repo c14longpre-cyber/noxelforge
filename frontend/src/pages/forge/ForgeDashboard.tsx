@@ -264,7 +264,10 @@ export default function ForgeDashboard() {
                 <div key={s.id} style={{ background: 'var(--surface)', borderRadius: 10, padding: '12px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10, border: '1px solid var(--border)' }}>
                   <div>
                     <div style={{ fontWeight: 700, fontSize: 13, marginBottom: 2 }}>{s.titre}</div>
-                    <a href={s.url_soumise} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--g)', fontSize: 11 }}>{s.url_soumise}</a>
+                    <a href={s.url_soumise} target="_blank" rel="noopener" style={{ color: 'var(--g)', fontSize: 11 }}>{s.url_soumise}</a>
+                    {s.statut === 'rejete' && s.alfred_raison && (
+                      <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 6, maxWidth: 640 }}>🤵 Alfred : {s.alfred_raison}</div>
+                    )}
                   </div>
                   <span style={{ background: s.statut === 'approuve' || s.statut === 'auto_share' ? 'var(--g-dim)' : s.statut === 'pending' ? 'rgba(255,183,77,0.12)' : 'rgba(255,92,122,0.12)', color: s.statut === 'approuve' || s.statut === 'auto_share' ? 'var(--ok)' : s.statut === 'pending' ? 'var(--warn)' : 'var(--danger)', padding: '3px 10px', borderRadius: 20, fontSize: 11, fontWeight: 800 }}>
                     {s.statut === 'auto_share' ? '⚡ Published' : s.statut === 'approuve' ? '✅ Approved' : s.statut === 'pending' ? '⏳ In review' : '❌ Rejected'}
