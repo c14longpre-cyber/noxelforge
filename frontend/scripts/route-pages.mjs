@@ -39,7 +39,8 @@ export const ROUTE_PAGES = [
         <h2>Which plan fits your site</h2>
         <p>Bronze suits a site owner who wants to look around first: browse the partners, check their niches and see how the network works, at no cost. Silver is the first plan for a real exchange: submit your site, get the Alfred review and propose or accept backlink exchanges. Gold, Platinum and Diamond add priority review, more visibility in the directory and a higher badge discount, for agencies and sites that exchange often.</p>
         <p>Every plan follows the same rules: one member per proven domain, links checked on both sites by the server, and no paid links or link farms. The tier changes how fast and how visibly you work in the network, never the quality bar a partner must meet.</p>
-        <nav><a href="/forge">NOXEL FORGE home</a> · <a href="/forge/partners">Verified partners</a> · <a href="/forge/badge">NOXEL FORGE badge</a> · <a href="/forge/submit">Submit your site</a></nav>`,
+        <nav><a href="/forge">NOXEL FORGE home</a> · <a href="/forge/partners">Verified partners</a> · <a href="/forge/badge">NOXEL FORGE badge</a> · <a href="/forge/submit">Submit your site</a></nav>
+        <footer><p><a href="/policies/privacy.html">Privacy policy / Politique de confidentialité</a> · Person in charge of the protection of personal information: Christian Longpré, founder of NOXEL360 Inc. — <a href="mailto:legal@noxel360.com">legal@noxel360.com</a></p></footer>`,
   },
   {
     route: "forge/partners",
@@ -57,7 +58,8 @@ export const ROUTE_PAGES = [
         <h2>What makes an exchange count</h2>
         <p>An exchange is complete only when the server finds a link to the partner on a page of each member's own domain. A link that disappears gets a 7-day grace period, then the exchange is marked broken. Proposals expire after 14 days, and both links must be verified within 60 days. That is why the directory lists real sites with real, checked links instead of a list of URLs.</p>
         <p>Browsing is free with the Bronze plan; proposing and accepting exchanges starts with Silver. Sites that break the guidelines, with spam, thin pages or paid link schemes, are removed from the directory and their exchanges are closed.</p>
-        <nav><a href="/forge">NOXEL FORGE home</a> · <a href="/forge/pricing">Pricing</a> · <a href="/forge/submit">Submit your site</a> · <a href="/forge/badge">NOXEL FORGE badge</a></nav>`,
+        <nav><a href="/forge">NOXEL FORGE home</a> · <a href="/forge/pricing">Pricing</a> · <a href="/forge/submit">Submit your site</a> · <a href="/forge/badge">NOXEL FORGE badge</a></nav>
+        <footer><p><a href="/policies/privacy.html">Privacy policy / Politique de confidentialité</a> · Person in charge of the protection of personal information: Christian Longpré, founder of NOXEL360 Inc. — <a href="mailto:legal@noxel360.com">legal@noxel360.com</a></p></footer>`,
   },
   {
     route: "forge/submit",
@@ -74,7 +76,8 @@ export const ROUTE_PAGES = [
         <h2>What happens next</h2>
         <p>Once the page is accepted, your site appears in the partners directory with its niche, and other members can find it. Your Trust Score is built from six signals collected by the server: technical health from a NOXEL SEO scan, domain age, publishing frequency, content quality from Alfred, and authority and spam checked by the NOXEL team. You can then propose exchanges to partners close to your topic, and each exchange counts once both links are verified on both sites.</p>
         <p>You can submit again at any time when your content changes: the new page gets its own review. Before you submit, a free NOXEL SEO scan of the page is a good way to catch technical problems first, since technical health is one of the six Trust Score signals and a clean page makes a stronger case to future partners.</p>
-        <nav><a href="/forge">NOXEL FORGE home</a> · <a href="/forge/pricing">Pricing</a> · <a href="/forge/partners">Verified partners</a> · <a href="/forge/badge">NOXEL FORGE badge</a></nav>`,
+        <nav><a href="/forge">NOXEL FORGE home</a> · <a href="/forge/pricing">Pricing</a> · <a href="/forge/partners">Verified partners</a> · <a href="/forge/badge">NOXEL FORGE badge</a></nav>
+        <footer><p><a href="/policies/privacy.html">Privacy policy / Politique de confidentialité</a> · Person in charge of the protection of personal information: Christian Longpré, founder of NOXEL360 Inc. — <a href="mailto:legal@noxel360.com">legal@noxel360.com</a></p></footer>`,
   },
   {
     route: "forge/badge",
@@ -91,7 +94,8 @@ export const ROUTE_PAGES = [
         <h2>Installing the badge</h2>
         <p>The badge page gives you a short piece of HTML to paste in the footer of your site, or in any template shown on every page. It loads a small image and a link to NOXEL FORGE; it sets no cookie and runs no tracking script. Once it is in place, the server detects it at the next check and the badge becomes verified. A NOXEL SEO badge is accepted too, so a site already showing its NOXEL SEO score does not need a second badge.</p>
         <p>The badge discount applies to the paid plans: 10% on Silver, 15% on Gold, 20% on Platinum and 25% on Diamond, as long as the badge stays verified. If you redesign your site, check that the badge is still in the new footer: a missing badge starts the grace period, and your site leaves the public directory if the badge is not back within 7 days.</p>
-        <nav><a href="/forge">NOXEL FORGE home</a> · <a href="/forge/pricing">Pricing</a> · <a href="/forge/partners">Verified partners</a> · <a href="/forge/submit">Submit your site</a></nav>`,
+        <nav><a href="/forge">NOXEL FORGE home</a> · <a href="/forge/pricing">Pricing</a> · <a href="/forge/partners">Verified partners</a> · <a href="/forge/submit">Submit your site</a></nav>
+        <footer><p><a href="/policies/privacy.html">Privacy policy / Politique de confidentialité</a> · Person in charge of the protection of personal information: Christian Longpré, founder of NOXEL360 Inc. — <a href="mailto:legal@noxel360.com">legal@noxel360.com</a></p></footer>`,
   },
   {
     route: "forge/guidelines",
@@ -120,7 +124,8 @@ export const ROUTE_PAGES = [
         <p>A real site with an identifiable owner and a proven domain, pages that are useful to a reader of the niche with original content, and honest promises without guaranteed results or invented figures.</p>
         <h2>When a rule is broken</h2>
         <p>The submission is refused and Alfred gives the reason. A site that clearly or repeatedly breaks the guidelines is removed from the directory, its exchanges are closed and its domain can be blocked.</p>
-        <nav><a href="/forge">NOXEL FORGE home</a> · <a href="/forge/submit">Submit your site</a> · <a href="/forge/partners">Verified partners</a> · <a href="/forge/pricing">Pricing</a></nav>`,
+        <nav><a href="/forge">NOXEL FORGE home</a> · <a href="/forge/submit">Submit your site</a> · <a href="/forge/partners">Verified partners</a> · <a href="/forge/pricing">Pricing</a></nav>
+        <footer><p><a href="/policies/privacy.html">Privacy policy / Politique de confidentialité</a> · Person in charge of the protection of personal information: Christian Longpré, founder of NOXEL360 Inc. — <a href="mailto:legal@noxel360.com">legal@noxel360.com</a></p></footer>`,
   },
 ];
 
