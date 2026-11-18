@@ -227,6 +227,7 @@ Frontend: Push to GitHub → Vercel auto-deploys
 - **Alfred safety guardrails**: Add additional checks to prevent Alfred from approving spam submissions
 
 ### Medium Priority
+- **Several sites per account** (asked Nov 18, 2026): today one account = one member = one proven domain (`forge_members.user_id` unique, subdomains are separate domains), so app.noxelspectra.com, video.noxelspectra.com and noxelforge.com cannot be submitted from the founder account. Planned: several proven domains per account (useful for agencies), each with its own Trust Score, badge and submissions
 - **Matchmaking V1.5**: Add "opportune moment" signals (user just published, high engagement this week)
 - **Match justification text**: Have Alfred explain why two partners were matched (transparency)
 - **Dynamic pricing**: Tier pricing should adjust by company size / domain age (future experiment)
