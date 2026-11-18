@@ -64,19 +64,45 @@ Trust Score du membre: ${input.trustScore}/100
 Âge du compte: ${input.ageCompteDays} jours`;
 }
 
+/** Models tried in order: ALFRED_MODEL (Railway) or the historical one, then a current one if the first is retired. */
+export function modelesAlfred(): string[] {
+  const premier = process.env.ALFRED_MODEL || 'claude-sonnet-4-6';
+  return [...new Set([premier, 'claude-sonnet-5-5'])];
+}
+
+/** Alfred's verdict even when the model wraps the JSON in a sentence or a code fence. */
+export function lireVerdict(text: string): any {
+  const brut = text.replace(/```json|```/g, '').trim();
+  try { return JSON.parse(brut); } catch { /* try the first {...} block */ }
+  const m = brut.match(/\{[\s\S]*\}/);
+  if (!m) throw new Error('Réponse sans JSON');
+  return JSON.parse(m[0]);
+}
+
 async function analyserAvecClaude(input: AlfredInput): Promise<AlfredResult> {
-  const response = await anthropic.messages.create({
-    model: 'claude-sonnet-4-6', max_tokens: 1000, system: ALFRED_SYSTEM,
-    messages: [{ role: 'user', content: construireMessageAlfred(input) }],
-  });
-  const text = response.content.filter((b: any) => b.type === 'text').map((b: any) => b.text).join('');
-  try {
-    const parsed = JSON.parse(text.replace(/```json|```/g, '').trim());
-    return { verdict: parsed.verdict, score: parsed.score ?? 50, raison: parsed.raison ?? 'Analyse complétée', blacklister: parsed.blacklister ?? false, details: { points_forts: parsed.points_forts ?? [], points_faibles: parsed.points_faibles ?? [], analyse_at: new Date().toISOString() } };
-  } catch (parseError) {
-    console.error('[Alfred] JSON parse error. Raw response:', text);
-    throw new Error('Failed to parse Alfred response: ' + (parseError as any).message);
+  let derniereErreur: unknown = null;
+  for (const model of modelesAlfred()) {
+    try {
+      const response = await anthropic.messages.create({
+        model, max_tokens: 1000, system: ALFRED_SYSTEM,
+        messages: [{ role: 'user', content: construireMessageAlfred(input) }],
+      });
+      const text = response.content.filter((b: any) => b.type === 'text').map((b: any) => b.text).join('');
+      let parsed: any;
+      try { parsed = lireVerdict(text); } catch (parseError) {
+        console.error('[Alfred] JSON parse error. Raw response:', text);
+        throw new Error('Failed to parse Alfred response: ' + (parseError as any).message);
+      }
+      const verdict = ['approuve', 'rejete', 'blacklist'].includes(parsed.verdict) ? parsed.verdict : 'rejete';
+      return { verdict, score: parsed.score ?? 50, raison: parsed.raison ?? 'Analyse complétée', blacklister: parsed.blacklister ?? false, details: { modele: model, points_forts: parsed.points_forts ?? [], points_faibles: parsed.points_faibles ?? [], analyse_at: new Date().toISOString() } };
+    } catch (err: any) {
+      derniereErreur = err;
+      // Retired or unknown model: try the next one; any other error stops here
+      if (err?.status === 404 || err?.error?.error?.type === 'not_found_error') { console.warn(`[Alfred] modèle ${model} indisponible, essai suivant`); continue; }
+      throw err;
+    }
   }
+  throw derniereErreur ?? new Error('Aucun modèle Alfred disponible');
 }
 
 export async function runAlfred(input: AlfredInput): Promise<AlfredResult> {
@@ -88,7 +114,7 @@ export async function runAlfred(input: AlfredInput): Promise<AlfredResult> {
     return result;
   } catch (error) {
     console.error('[Alfred] Erreur:', error);
-    return { verdict: 'rejete', score: 0, raison: 'Analyse indisponible. Réessaie dans quelques minutes.', blacklister: false, details: { erreur: 'timeout', analyse_at: new Date().toISOString() } };
+    return { verdict: 'rejete', score: 0, raison: 'Analyse indisponible. Réessaie dans quelques minutes.', blacklister: false, details: { erreur: String((error as any)?.message ?? error).slice(0, 300), statut_http: (error as any)?.status ?? null, analyse_at: new Date().toISOString() } };
   }
 }
 
