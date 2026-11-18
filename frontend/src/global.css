@@ -248,3 +248,8 @@ html, body, #root {
   }
 }
 
+
+/* Niche menus (join form, submit, My sites): dark list, never white on white */
+.forge-niche-select { color-scheme: dark; }
+.forge-niche-select option { background-color: #07090f; color: #3ddc84; }
+.forge-niche-select option:checked { background: linear-gradient(#a855f7, #a855f7); color: #fff; }
