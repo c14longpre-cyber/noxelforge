@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HudButton } from '../../components/hud/HudButton';
 import ExchangesPanel from '../../components/ExchangesPanel';
+import MySites from '../../components/MySites';
 import HudRouterLink from '../../components/HudRouterLink';
 import { TRUST_SCORE_SERVER_COMPUTED, TRUST_SCORE_PENDING_LABEL, TRUST_SCORE_PENDING_MESSAGE, TRUST_SCORE_VERIFYING_LABEL, TRUST_SCORE_VERIFYING_MESSAGE, trustScoreAwaitingVerification } from '../../config/trustScore';
 import type { MemberStatus, Soumission } from '../../types/forge';
@@ -260,6 +261,8 @@ export default function ForgeDashboard() {
             </div>
           </div>
         )}
+
+        <MySites />
 
         <ExchangesPanel />
 

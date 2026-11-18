@@ -28,11 +28,11 @@ export const ROUTE_PAGES = [
         <h1>NOXEL FORGE pricing: one free plan and four paid tiers in Canadian dollars</h1>
         <p>NOXEL FORGE pricing starts with Bronze, a free plan to browse the directory of verified partners. Paid tiers unlock submissions, the Alfred review and backlink exchanges with members of a close niche.</p>
         <ul>
-          <li>Bronze — free: directory access, view all NOXEL FORGE partners, NOXEL badge (display only).</li>
-          <li>Silver — $20 CAD per month or $199 per year: submit your site, Alfred review, Forge Points, 10% badge discount.</li>
-          <li>Gold — $40 CAD per month or $399 per year: priority Alfred review, 1.5x Forge Points, 15% badge discount, verified partner badge.</li>
-          <li>Platinum — $60 CAD per month or $599 per year: VIP Alfred review, 2x Forge Points, 20% badge discount, advanced placement.</li>
-          <li>Diamond — $80 CAD per month or $799 per year: elite Alfred review, 3x Forge Points, 25% badge discount, featured listing.</li>
+          <li>Bronze — free: 1 site, directory access, view all NOXEL FORGE partners, NOXEL badge (display only).</li>
+          <li>Silver — $20 CAD per month or $199 per year: 1 site, submit your site, Alfred review, Forge Points, 10% badge discount.</li>
+          <li>Gold — $40 CAD per month or $399 per year: up to 3 sites, priority Alfred review, 1.5x Forge Points, 15% badge discount, verified partner badge.</li>
+          <li>Platinum — $60 CAD per month or $599 per year: up to 10 sites, VIP Alfred review, 2x Forge Points, 20% badge discount, advanced placement.</li>
+          <li>Diamond — $80 CAD per month or $799 per year: up to 25 sites for agencies, elite Alfred review, 3x Forge Points, 25% badge discount, featured listing.</li>
         </ul>
         <p>Prices are in Canadian dollars. Yearly billing saves about 17%. A member who displays the NOXEL FORGE or NOXEL SEO badge on their site gets the badge discount of their tier. A subscription cancelled within 14 days of its start is refunded automatically, and plan changes, cancellation, cards and invoices are handled in the Stripe customer portal.</p>
         <p>Bronze members can browse but cannot propose or accept an exchange: exchanges start at Silver. Every exchange is verified by the server on both sites before it counts.</p>

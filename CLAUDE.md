@@ -59,6 +59,7 @@ noxelforge/
   2. Cron job (daily 9AM Toronto; full check on the 1st/15th, grace members every day) triggers badgeChecker → Alfred review → Trust Score update
   3. Badge states (`forge_badges.statut`): non_verifie → verifie → grace (7 days, badge missing) → suspendu; back to verifie as soon as the badge is detected again. There is no separate "published" state: a member is public (directory, `/api/trust-score`) while the badge is `verifie`
 - **Anti-spoofing / domain ownership** (`domainOwnership.ts`): a member's domain is public (matchmaking, directory, public Trust Score, exchanges, submissions, Trust Score recalculation) only once proven by a meta tag `noxel-forge-verification`, the file `/.well-known/noxel-forge-verification.txt` or a DNS TXT record, with a per-member token (`jetonDomaine`); `POST /api/forge/members/domain/verify`; one member per proven domain (unique partial index on `forge_members.domaine`). A submission must be a page of the member's proven domain
+- **Several sites per account** (Nov 18, 2026, `services/forge/sites.service.ts`, table `forge_sites`, migration `backend/supabase/migrations/20261118_forge_sites.sql`, run by hand): the first site stays in `forge_members`; the others are in `forge_sites` (`GET/POST /api/forge/sites`, `POST /api/forge/sites/verify`, `DELETE /api/forge/sites/:domaine`, "My sites" on the dashboard, `components/MySites.tsx`). Sites in all, first included: Bronze 1, Silver 1, Gold 3, Platinum 10, Diamond 25 (`SITES_PAR_FORFAIT`, shown on the pricing cards and in route-pages.mjs: keep in sync; same numbers for NOXEL SEO badges). Each site proves its domain with its own token; a proven domain belongs to one account across both tables. A submission may be a page of any proven site of the account. Trust Score, badge and exchanges still use the first site. A plan downgrade keeps existing sites but blocks adding new ones
 - **Badge cron**: forgeBadgeCron.ts runs daily (full check on the 1st/15th, grace members the other days); failure = alert user, no auto-retry
 - **Badge revocation**: Blacklist system for spam/abuse (via spamGate.service.ts)
 
@@ -227,7 +228,6 @@ Frontend: Push to GitHub → Vercel auto-deploys
 - **Alfred safety guardrails**: Add additional checks to prevent Alfred from approving spam submissions
 
 ### Medium Priority
-- **Several sites per account** (asked Nov 18, 2026): today one account = one member = one proven domain (`forge_members.user_id` unique, subdomains are separate domains), so app.noxelspectra.com, video.noxelspectra.com and noxelforge.com cannot be submitted from the founder account. Planned: several proven domains per account (useful for agencies), each with its own Trust Score, badge and submissions
 - **Matchmaking V1.5**: Add "opportune moment" signals (user just published, high engagement this week)
 - **Match justification text**: Have Alfred explain why two partners were matched (transparency)
 - **Dynamic pricing**: Tier pricing should adjust by company size / domain age (future experiment)
