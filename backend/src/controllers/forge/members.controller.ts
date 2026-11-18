@@ -18,7 +18,8 @@ export async function registerMembre(req: Request, res: Response): Promise<void>
   const userId = (req as any).userId;
   // tier_abonnement sent by the client is ignored: every new account starts on the free tier,
   // only the Stripe webhook (gererWebhookForge) changes it after a real payment
-  const { url_site, niche } = req.body;
+  const { url_site } = req.body;
+  const niche = typeof req.body.niche === 'string' ? req.body.niche.trim().slice(0, 80) : null;
   const tier_abonnement = 'bronze';
   // The site must be a real domain name; it becomes public only once its ownership is proven
   const domaine = normaliserDomaine(url_site);
