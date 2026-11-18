@@ -81,3 +81,21 @@ test("only proven sites count for submissions; proof by meta tag marks the site 
   await sites.retirerSite("u1", "app.exemple.ca");
   assert.deepEqual(await sites.domainesProuves("u1"), ["premier.ca"]);
 });
+
+test("before the migration (no forge_sites table) the first site still works", async () => {
+  const orig = supabaseClient.getSupabase;
+  supabaseClient.getSupabase = () => {
+    const base = fakeSupabase();
+    return { from(t: string) {
+      if (t !== "forge_sites") return base.from(t);
+      const q: any = { select: () => q, eq: () => q, not: () => q,
+        then: (ok: any, ko: any) => Promise.resolve({ data: null, error: { code: "42P01", message: 'relation "forge_sites" does not exist' } }).then(ok, ko) };
+      return q;
+    } };
+  };
+  try {
+    tables = { forge_members: [membre("silver")] };
+    assert.deepEqual(await sites.domainesProuves("u1"), ["premier.ca"]);
+    assert.equal(await sites.domaineProuveParAutre("autre.ca", "u1"), false);
+  } finally { supabaseClient.getSupabase = orig; }
+});

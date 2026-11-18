@@ -7,6 +7,17 @@ import { must } from '../../lib/supabaseCheck';
 import { normaliserDomaine } from './trustScorePublic';
 import { instructions, jetonDomaine, verifierPropriete, type DepsPropriete } from './domainOwnership';
 
+/** forge_sites rows; an empty list while the migration has not been run (table missing), so nothing else breaks. */
+async function lignesSites(requete: PromiseLike<{ data: any; error: any }>): Promise<any[]> {
+  const { data, error } = await requete;
+  if (error) {
+    const absente = error.code === '42P01' || error.code === 'PGRST205' || /forge_sites/.test(String(error.message ?? '')) && /exist|schema cache/i.test(String(error.message ?? ''));
+    if (absente) return [];
+    throw new Error(`forge_sites select: ${error.message}`);
+  }
+  return Array.isArray(data) ? data : [];
+}
+
 /** Sites in all per plan, the first site included. Shown on the pricing cards: keep them in sync. */
 export const SITES_PAR_FORFAIT: Record<string, number> = { bronze: 1, silver: 1, gold: 3, platinum: 10, diamond: 25 };
 
@@ -25,8 +36,8 @@ export async function domaineProuveParAutre(domaine: string, userId: string): Pr
   const sb = getSupabase();
   const m = must(await sb.from('forge_members').select('user_id').eq('domaine', domaine).not('domaine_verifie_at', 'is', null), 'forge_members select') ?? [];
   if ((m as any[]).some((r) => r.user_id !== userId)) return true;
-  const s = must(await sb.from('forge_sites').select('user_id').eq('domaine', domaine).not('domaine_verifie_at', 'is', null), 'forge_sites select') ?? [];
-  return (s as any[]).some((r) => r.user_id !== userId);
+  const s = await lignesSites(sb.from('forge_sites').select('user_id').eq('domaine', domaine).not('domaine_verifie_at', 'is', null));
+  return s.some((r) => r.user_id !== userId);
 }
 
 /** The account's sites: the first one (forge_members) then the others, with the proof instructions while unproven. */
@@ -34,9 +45,9 @@ export async function listerSites(userId: string): Promise<{ tier: string; limit
   const sb = getSupabase();
   const membre = must(await sb.from('forge_members').select('tier_abonnement,url_site,domaine,niche,domaine_verifie_at').eq('user_id', userId).maybeSingle(), 'forge_members select');
   if (!membre) return null;
-  const autres = must(await sb.from('forge_sites').select('domaine,url_site,niche,domaine_verifie_at,created_at').eq('user_id', userId), 'forge_sites select') ?? [];
+  const autres = await lignesSites(sb.from('forge_sites').select('domaine,url_site,niche,domaine_verifie_at,created_at').eq('user_id', userId));
   // Oldest first (sorted here: no order() so that simple query mocks keep working)
-  const tries = [...(Array.isArray(autres) ? autres : [])].sort((a: any, b: any) => String(a.created_at ?? '').localeCompare(String(b.created_at ?? '')));
+  const tries = [...autres].sort((a: any, b: any) => String(a.created_at ?? '').localeCompare(String(b.created_at ?? '')));
   const site = (r: any, principal: boolean): SiteForge => {
     const domaine = r.domaine ?? normaliserDomaine(r.url_site) ?? '';
     return {
