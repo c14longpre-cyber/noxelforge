@@ -54,6 +54,8 @@ export interface Soumission {
   description?: string | null;
   niche?: string | null;
   created_at?: string;
+  /** Why Alfred (or the URL check) refused it, shown to the member */
+  alfred_raison?: string | null;
 }
 
 export interface AnnuaireItem {
