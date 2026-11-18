@@ -5,4 +5,5 @@
   <url><loc>https://noxelforge.com/forge/pricing</loc><priority>0.8</priority></url>
   <url><loc>https://noxelforge.com/forge/partners</loc><priority>0.7</priority></url>
   <url><loc>https://noxelforge.com/forge/badge</loc><priority>0.6</priority></url>
+  <url><loc>https://noxelforge.com/forge/guidelines</loc><priority>0.5</priority></url>
 </urlset>

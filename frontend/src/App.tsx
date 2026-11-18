@@ -11,6 +11,7 @@ const ForgePoints = lazy(() => import("./pages/forge/ForgePoints"));
 const ForgeBadge = lazy(() => import("./pages/forge/ForgeBadge"));
 const ForgePricing = lazy(() => import("./pages/forge/ForgePricing"));
 const ForgeAdmin = lazy(() => import("./pages/forge/ForgeAdmin"));
+const ForgeGuidelines = lazy(() => import("./pages/forge/ForgeGuidelines"));
 
 function PageLoader() {
   return (
@@ -57,6 +58,7 @@ export default function App() {
             <Route path="/forge/badge" element={<ForgeBadge />} />
             <Route path="/forge/pricing" element={<ForgePricing />} />
             <Route path="/forge/admin" element={<ForgeAdmin />} />
+            <Route path="/forge/guidelines" element={<ForgeGuidelines />} />
           </Routes>
         </Suspense>
         <ForgeNivo />

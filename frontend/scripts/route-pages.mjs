@@ -93,6 +93,35 @@ export const ROUTE_PAGES = [
         <p>The badge discount applies to the paid plans: 10% on Silver, 15% on Gold, 20% on Platinum and 25% on Diamond, as long as the badge stays verified. If you redesign your site, check that the badge is still in the new footer: a missing badge starts the grace period, and your site leaves the public directory if the badge is not back within 7 days.</p>
         <nav><a href="/forge">NOXEL FORGE home</a> · <a href="/forge/pricing">Pricing</a> · <a href="/forge/partners">Verified partners</a> · <a href="/forge/submit">Submit your site</a></nav>`,
   },
+  {
+    route: "forge/guidelines",
+    title: "NOXEL FORGE network guidelines — accepted and refused sites",
+    description:
+      "Which sites NOXEL FORGE accepts and refuses: no sexual content, violence, weapons sales, drugs, gambling, hate, scams or link schemes.",
+    crumb: "Guidelines",
+    body: `
+        <h1>NOXEL FORGE network guidelines: which sites are accepted and which are refused</h1>
+        <p>NOXEL FORGE connects real, useful sites through verified backlink exchanges. So that every exchanged link stays a recommendation a member can defend, some kinds of sites are refused whatever their niche. Alfred, the NOXEL FORGE reviewer, applies these guidelines to every submission and explains his decision.</p>
+        <h2>Refused sites</h2>
+        <ul>
+          <li>Sexual content and nudity: pornography, nudity, sexual services, adult dating, suggestive content.</li>
+          <li>Violence: violent or shocking content, gore, glorification of violence or terrorism.</li>
+          <li>Weapons: sale of weapons, ammunition, accessories or parts, making weapons or explosives.</li>
+          <li>Drugs and substances: sale or promotion of illegal drugs, prescription drugs without a prescription or controlled substances.</li>
+          <li>Gambling: online casinos, betting and lotteries.</li>
+          <li>Hate and harassment: content that targets people for their origin, religion, sex, orientation, disability or any other trait.</li>
+          <li>Scams: fraud, phishing, get-rich-quick promises, pyramid schemes, fake reviews.</li>
+          <li>Illegal activities: counterfeits, piracy, malware, sale of personal data.</li>
+          <li>Dangerous misinformation: fake cures and false health or safety claims.</li>
+          <li>Link manipulation: link farms, private blog networks, link selling, mass-generated thin pages, parked domains.</li>
+        </ul>
+        <p>Legal, regulated activities are still accepted when the site informs without promoting what is refused, for example a sport shooting club, a hunting outfitter, a health prevention organization or a medical sex education site.</p>
+        <h2>What the network looks for</h2>
+        <p>A real site with an identifiable owner and a proven domain, pages that are useful to a reader of the niche with original content, and honest promises without guaranteed results or invented figures.</p>
+        <h2>When a rule is broken</h2>
+        <p>The submission is refused and Alfred gives the reason. A site that clearly or repeatedly breaks the guidelines is removed from the directory, its exchanges are closed and its domain can be blocked.</p>
+        <nav><a href="/forge">NOXEL FORGE home</a> · <a href="/forge/submit">Submit your site</a> · <a href="/forge/partners">Verified partners</a> · <a href="/forge/pricing">Pricing</a></nav>`,
+  },
 ];
 
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");

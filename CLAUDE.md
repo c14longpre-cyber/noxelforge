@@ -110,6 +110,8 @@ noxelforge/
 - **Spam gate**: spamGate.service.ts runs asynchronously; may not catch all spam before publication
 - **CORS origin**: Mismatch between .env CORS_ORIGIN and actual deploy URL breaks browser requests
 
+- **Network guidelines** (`/forge/guidelines`, `pages/forge/ForgeGuidelines.tsx` fr/en + static text in `scripts/route-pages.mjs`): sites refused whatever their niche (sexual content/nudity, violence, weapons sales, drugs, gambling, hate, scams, illegal activities, dangerous misinformation, link manipulation); legal regulated activities that inform without promoting stay accepted (e.g. sport shooting club). The same list is in the Alfred prompt (`alfred.forge.service.ts`): change both together. Choosing the niche "Other" (submit form and join form) asks for the niche in a text field (sent as `Other: <text>`, 60 chars, server cap 80) and shows the guidelines notice
+
 ### 8b. Public pages and canonical
 - `/` redirects to `/forge` (301), so the home canonical is `https://noxelforge.com/forge`
 - `/forge/pricing`, `/forge/partners`, `/forge/submit`, `/forge/badge` get their own HTML at build time (`frontend/scripts/route-pages.mjs`, run after `vite build`): title, description, canonical, og/twitter, breadcrumb and fallback text of the page; `frontend/vercel.json` rewrites them before the SPA catch-all. `CanonicalUpdater` (App.tsx) only fixes the canonical after React starts, which a crawler reading raw HTML never sees. A new public page goes in ROUTE_PAGES, the rewrite and `public/sitemap.xml`; keep its prices in sync with ForgePricing.tsx

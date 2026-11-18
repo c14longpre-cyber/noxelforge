@@ -8,7 +8,8 @@ import { normaliserDomaine } from '../../services/forge/trustScorePublic';
 export async function creerSoumission(req: Request, res: Response): Promise<void> {
   const supabase = getSupabase();
   const userId = (req as any).userId;
-  const { url_soumise, titre, description, contenu, niche } = req.body;
+  const { url_soumise, titre, description, contenu } = req.body;
+  const niche = typeof req.body.niche === 'string' ? req.body.niche.trim().slice(0, 80) : null;
   if (!url_soumise || !titre) { res.status(400).json({ error: 'URL et titre obligatoires.' }); return; }
   const membre = must(await supabase.from('forge_members').select('*').eq('user_id', userId).maybeSingle(), 'forge_members select');
   if (!membre) { res.status(403).json({ error: 'Tu n\'es pas membre de NOXEL Forge.' }); return; }

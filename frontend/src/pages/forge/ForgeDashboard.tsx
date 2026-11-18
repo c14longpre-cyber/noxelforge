@@ -20,6 +20,8 @@ export default function ForgeDashboard() {
   const [badgeMsg, setBadgeMsg] = useState('');
   const [joining, setJoining] = useState(false);
   const [joinForm, setJoinForm] = useState({ url_site: '', niche: '' });
+  const [nicheAutre, setNicheAutre] = useState('');
+  const estFr = (navigator.language || 'en').toLowerCase().startsWith('fr');
   const [joinError, setJoinError] = useState('');
   const [verifyingDomain, setVerifyingDomain] = useState(false);
   const [domainMsg, setDomainMsg] = useState('');
@@ -71,13 +73,14 @@ export default function ForgeDashboard() {
 
   async function handleJoin() {
     if (!joinForm.url_site) { setJoinError('Site URL is required.'); return; }
+    if (joinForm.niche === 'Other' && !nicheAutre.trim()) { setJoinError(estFr ? 'Précise ta niche (champ « Autre »).' : 'Please specify your niche ("Other" field).'); return; }
     setJoining(true); setJoinError('');
     try {
       const res = await fetch(`${API_BASE}/api/forge/members/register`, {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(joinForm),
+        body: JSON.stringify({ ...joinForm, niche: joinForm.niche === 'Other' ? `Other: ${nicheAutre.trim().slice(0, 60)}` : joinForm.niche }),
       });
       const data = await res.json();
       if (!res.ok) { setJoinError(data.error || 'Registration failed.'); return; }
@@ -116,6 +119,17 @@ export default function ForgeDashboard() {
               background-color: #07090f; background: linear-gradient(#a855f7, #a855f7); color: #a855f7;
             }
           `}</style>
+          {joinForm.niche === 'Other' && (
+            <div style={{ marginTop: 10 }}>
+              <input value={nicheAutre} onChange={(e) => setNicheAutre(e.target.value)} maxLength={60}
+                placeholder={estFr ? 'Précise ta niche (ex. : rénovation, tourisme…)' : 'Specify your niche (e.g. renovation, tourism…)'}
+                style={{ width: '100%', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--r)', padding: '11px 14px', color: 'var(--text)', fontSize: 14, outline: 'none', boxSizing: 'border-box' }} />
+              <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 6, lineHeight: 1.5 }}>
+                ⚠ {estFr ? 'Certains sites sont refusés quelle que soit leur niche (contenu sexuel, violence, vente d’armes, drogues, jeux d’argent, haine, arnaques…).' : 'Some sites are refused whatever their niche (sexual content, violence, weapons sales, drugs, gambling, hate, scams…).'}{' '}
+                <a href="/forge/guidelines" target="_blank" rel="noopener" style={{ color: 'var(--g)' }}>{estFr ? 'Règles du réseau' : 'Network guidelines'} →</a>
+              </div>
+            </div>
+          )}
         </div>
         {joinError && <div style={{ color: 'var(--danger)', fontSize: 13 }}>{joinError}</div>}
         <HudButton action="continue" compact label="Join Forge" busy={joining} busyLabel="Joining..." onClick={handleJoin} />
