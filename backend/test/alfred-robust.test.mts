@@ -23,3 +23,12 @@ test("modelesAlfred uses ALFRED_MODEL first and keeps a current fallback", () =>
   assert.equal(alfred.modelesAlfred()[0], "claude-sonnet-4-6");
   if (before !== undefined) process.env.ALFRED_MODEL = before;
 });
+
+test("Alfred prompt: a pending Trust Score is shown as pending, never 0", () => {
+  const msg = alfred.construireMessageAlfred({
+    userId: "u", urlSoumise: "https://exemple.ca/", titre: "Mon outil", niche: "SEO",
+    trustScore: null, tierForge: "diamond", ageCompteDays: 0, scanComplete: false, badgeInstalle: false,
+  });
+  assert.ok(msg.includes("en attente de vérification"));
+  assert.ok(!msg.includes("0/100"));
+});
