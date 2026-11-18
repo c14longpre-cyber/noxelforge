@@ -4,7 +4,7 @@ import type { FetchFn, SignalCollecte } from './types';
 import { fetchSur } from '../../../lib/safeFetch';
 
 // Content quality of the member's home page, rated 0-100 by Alfred (same model as the submission review).
-export const MODELE_ALFRED = 'claude-sonnet-4-6';
+export const MODELE_ALFRED = process.env.ALFRED_MODEL || 'claude-sonnet-4-6';
 export const TEXTE_MAX = 8000;
 export const TEXTE_MIN = 200;
 
