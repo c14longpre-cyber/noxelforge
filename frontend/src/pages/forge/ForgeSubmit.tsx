@@ -18,6 +18,7 @@ const X = {
     otherLabel: 'Précise ta niche', otherPh: 'Ex. : rénovation, tourisme, agriculture…', otherRequired: 'Précise ta niche (champ « Autre »).',
     rulesTitle: 'Avant de choisir « Autre »', rulesText: 'Certains sites sont refusés dans NOXEL FORGE, quelle que soit leur niche : contenu sexuel ou nudité, violence, vente d’armes, drogues, jeux d’argent, haine, arnaques, activités illégales et manipulation des liens.',
     rulesLink: 'Lire les règles du réseau', rulesFooter: 'Règles du réseau : sites acceptés et refusés',
+    sitesHint: 'La page doit appartenir à un de tes sites vérifiés (tableau de bord, « Mes sites »).',
   },
   en: {
     url: 'https://mysite.com/my-article', title: 'Title of your article or page', selectNiche: 'Select a niche',
@@ -27,6 +28,7 @@ const X = {
     otherLabel: 'Specify your niche', otherPh: 'E.g. renovation, tourism, farming…', otherRequired: 'Please specify your niche ("Other" field).',
     rulesTitle: 'Before choosing "Other"', rulesText: 'Some sites are refused in NOXEL FORGE whatever their niche: sexual content or nudity, violence, weapons sales, drugs, gambling, hate, scams, illegal activities and link manipulation.',
     rulesLink: 'Read the network guidelines', rulesFooter: 'Network guidelines: accepted and refused sites',
+    sitesHint: 'The page must belong to one of your verified sites (dashboard, "My sites").',
   },
 };
 
@@ -115,7 +117,7 @@ export default function ForgeSubmit() {
                 </label>
                 <input name="url_soumise" value={form.url_soumise} onChange={handleChange} placeholder={x.url}
                   style={{ width: '100%', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--r)', padding: '11px 14px', color: 'var(--text)', fontSize: 14, outline: 'none', boxSizing: 'border-box' }} />
-                <div style={{ fontSize: 11, color: 'var(--soft)', marginTop: 5 }}>{t.submit.urlHint}</div>
+                <div style={{ fontSize: 11, color: 'var(--soft)', marginTop: 5 }}>{t.submit.urlHint} {x.sitesHint}</div>
               </div>
 
               <div>

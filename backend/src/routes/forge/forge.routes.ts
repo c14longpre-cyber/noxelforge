@@ -13,6 +13,10 @@ import {
   verifierMonBadge,
   recalculerMonScore,
   verifierMonDomaine,
+  getMesSites,
+  postAjouterSite,
+  postVerifierSite,
+  deleteSite,
 } from '../../controllers/forge/members.controller';
 import {
   creerSoumission,
@@ -37,6 +41,12 @@ router.get('/members/status', requireAuth, getMonStatut);
 
 // Preuve de propriété du domaine (balise meta, fichier .well-known ou DNS TXT)
 router.post('/members/domain/verify', requireAuth, verifierMonDomaine);
+
+// Plusieurs sites par compte (limite selon le forfait)
+router.get('/sites', requireAuth, getMesSites);
+router.post('/sites', requireAuth, postAjouterSite);
+router.post('/sites/verify', requireAuth, postVerifierSite);
+router.delete('/sites/:domaine', requireAuth, deleteSite);
 
 // ============================================================
 // BADGES

@@ -5,6 +5,7 @@ import { getTrustScore } from '../../services/forge/trustScore.service';
 import { getSupabase } from '../../lib/supabaseClient';
 import { must } from '../../lib/supabaseCheck';
 import { normaliserDomaine } from '../../services/forge/trustScorePublic';
+import { domainesProuves } from '../../services/forge/sites.service';
 export async function creerSoumission(req: Request, res: Response): Promise<void> {
   const supabase = getSupabase();
   const userId = (req as any).userId;
@@ -14,9 +15,10 @@ export async function creerSoumission(req: Request, res: Response): Promise<void
   const membre = must(await supabase.from('forge_members').select('*').eq('user_id', userId).maybeSingle(), 'forge_members select');
   if (!membre) { res.status(403).json({ error: 'Tu n\'es pas membre de NOXEL Forge.' }); return; }
   // The submitted page must be on the member's own, proven domain (it then appears in the public directory)
-  if (!membre.domaine_verifie_at) { res.status(403).json({ error: 'Vérifie d’abord la propriété de ton domaine (tableau de bord).' }); return; }
-  const domaineMembre = membre.domaine ?? normaliserDomaine(membre.url_site);
-  if (!domaineMembre || normaliserDomaine(url_soumise) !== domaineMembre) { res.status(400).json({ error: `La page soumise doit être sur ton site (${domaineMembre ?? 'domaine du membre'}).` }); return; }
+  // The page must be on one of the account's proven sites (first site or other sites, forge_sites)
+  const prouves = await domainesProuves(userId);
+  if (prouves.length === 0) { res.status(403).json({ error: 'Vérifie d’abord la propriété de ton domaine (tableau de bord).' }); return; }
+  if (!prouves.includes(normaliserDomaine(url_soumise) ?? '')) { res.status(400).json({ error: `La page soumise doit être sur un de tes sites vérifiés (${prouves.join(', ')}).` }); return; }
   if (membre.tier_abonnement === 'bronze') { res.status(403).json({ error: 'Bronze = lecture seule. Upgrade vers Silver pour soumettre.' }); return; }
   const spamResult = await runSpamGate({ url: url_soumise, titre, description, contenu, userId, tier: membre.tier_abonnement });
   if (!spamResult.passe) { res.status(400).json({ error: 'Rejeté par Spam Gate.', raison: spamResult.raison, type: spamResult.type }); return; }

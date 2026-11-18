@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import * as trustScoreServeur from '../../services/forge/trustScoreServeur';
 import { estAdmin } from '../../middleware/requireAdmin';
 import { reactiverMembre, verifierBadgeSurSite } from '../../services/forge/badgeChecker.service';
+import { domaineProuveParAutre, listerSites, ajouterSite, verifierSite, retirerSite } from '../../services/forge/sites.service';
 import { determinerFlux, rappelsMembre } from '../../services/forge/alfred.forge.service';
 import { getSupabase } from '../../lib/supabaseClient';
 import { must } from '../../lib/supabaseCheck';
@@ -10,8 +11,8 @@ import { jetonDomaine, instructions, verifierPropriete } from '../../services/fo
 
 // Another member already proved this domain
 async function domainePrisParAutre(domaine: string, userId: string): Promise<boolean> {
-  const rows = must(await getSupabase().from('forge_members').select('user_id').eq('domaine', domaine).not('domaine_verifie_at', 'is', null), 'forge_members select') ?? [];
-  return rows.some((r: any) => r.user_id !== userId);
+  // Checks both the first sites (forge_members) and the other sites of each account (forge_sites)
+  return domaineProuveParAutre(domaine, userId);
 }
 export async function registerMembre(req: Request, res: Response): Promise<void> {
   const supabase = getSupabase();
@@ -107,4 +108,26 @@ export async function verifierMonDomaine(req: Request, res: Response): Promise<v
     throw new Error(`forge_members update: ${error.message}`);
   }
   res.json({ ok: true, verifie: true, domaine, methode: r.methode });
+}
+
+// ─── Several sites per account (forge_sites) ─────────────────────────────────
+export async function getMesSites(req: Request, res: Response): Promise<void> {
+  const etat = await listerSites((req as any).userId);
+  if (!etat) { res.status(404).json({ ok: false, error: 'Membre non trouvé.' }); return; }
+  res.json({ ok: true, ...etat });
+}
+export async function postAjouterSite(req: Request, res: Response): Promise<void> {
+  const r = await ajouterSite((req as any).userId, req.body?.url_site, req.body?.niche);
+  if (!r.ok) { res.status(r.status).json({ ok: false, error: r.error }); return; }
+  res.status(201).json({ ok: true, site: r.site });
+}
+export async function postVerifierSite(req: Request, res: Response): Promise<void> {
+  const r = await verifierSite((req as any).userId, req.body?.domaine);
+  if (!r.ok) { res.status(r.status).json({ ok: false, error: r.error }); return; }
+  res.json(r);
+}
+export async function deleteSite(req: Request, res: Response): Promise<void> {
+  const r = await retirerSite((req as any).userId, req.params.domaine);
+  if (!r.ok) { res.status(r.status ?? 400).json({ ok: false, error: r.error }); return; }
+  res.json({ ok: true });
 }
