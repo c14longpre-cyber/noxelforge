@@ -21,8 +21,15 @@ const BADGE_PATTERNS = [
   /noxel-verified/i,
 ];
 
+/** The site address as the member typed it ("noxelseo.com") gets https:// so it can be fetched. */
+export function urlAVerifier(urlSite: string): string {
+  const s = String(urlSite ?? '').trim();
+  return /^https?:\/\//i.test(s) ? s : `https://${s.replace(/^\/+/, '')}`;
+}
+
 export async function verifierBadgeSurSite(urlSite: string): Promise<boolean> {
   try {
+    urlSite = urlAVerifier(urlSite);
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 10000);
     const response = await badgeDeps.fetch(urlSite, {
