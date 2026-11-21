@@ -14,10 +14,13 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { ROUTE_PAGES_FR } from "./route-pages-fr.mjs";
 
 const ORIGIN = "https://noxelforge.com";
 
-export const ROUTE_PAGES = [
+const ROUTE_PAGES_EN = [
+  // Accueil anglais : garde le titre, le texte de secours et la FAQ de index.html, reçoit seulement ses liens hreflang.
+  { route: "forge", fr: "fr/forge", crumb: null },
   {
     route: "forge/pricing",
     title: "NOXEL FORGE Pricing — Bronze free, Silver to Diamond in CAD",
@@ -129,6 +132,12 @@ export const ROUTE_PAGES = [
   },
 ];
 
+for (const p of ROUTE_PAGES_EN) if (!p.fr) p.fr = `fr/${p.route}`;
+for (const p of ROUTE_PAGES_FR) p.lang = "fr";
+
+/** Pages anglaises et leur version française (Loi 96) : chaque paire se renvoie par hreflang. */
+export const ROUTE_PAGES = [...ROUTE_PAGES_EN, ...ROUTE_PAGES_FR];
+
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 
 function setAttr(html, re, value, label) {
@@ -137,27 +146,44 @@ function setAttr(html, re, value, label) {
 }
 
 export function renderRoute(indexHtml, page) {
+  const fr = page.lang === "fr";
   const url = `${ORIGIN}/${page.route}`;
+  const enUrl = `${ORIGIN}/${fr ? page.en : page.route}`;
+  const frUrl = `${ORIGIN}/${fr ? page.route : page.fr}`;
+  const homeUrl = `${ORIGIN}/${fr ? "fr/forge" : "forge"}`;
   let html = indexHtml;
-  html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(page.title)}</title>`);
+  if (fr) html = html.replace(/<html lang="en">/, '<html lang="fr">');
+  if (page.title) {
+    html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(page.title)}</title>`);
+    html = setAttr(html, /(<meta name="description" content=")[^"]*(")/, esc(page.description), "description");
+    html = setAttr(html, /(<meta property="og:title" content=")[^"]*(")/, esc(page.title), "og:title");
+    html = setAttr(html, /(<meta property="og:description" content=")[^"]*(")/, esc(page.description), "og:description");
+    html = setAttr(html, /(<meta name="twitter:title" content=")[^"]*(")/, esc(page.title), "twitter:title");
+    html = setAttr(html, /(<meta name="twitter:description" content=")[^"]*(")/, esc(page.description), "twitter:description");
+  }
   html = setAttr(html, /(<link rel="canonical" href=")[^"]*(")/, url, "canonical");
-  html = setAttr(html, /(<meta name="description" content=")[^"]*(")/, esc(page.description), "description");
-  html = setAttr(html, /(<meta property="og:title" content=")[^"]*(")/, esc(page.title), "og:title");
-  html = setAttr(html, /(<meta property="og:description" content=")[^"]*(")/, esc(page.description), "og:description");
   html = setAttr(html, /(<meta property="og:url" content=")[^"]*(")/, url, "og:url");
-  html = setAttr(html, /(<meta name="twitter:title" content=")[^"]*(")/, esc(page.title), "twitter:title");
-  html = setAttr(html, /(<meta name="twitter:description" content=")[^"]*(")/, esc(page.description), "twitter:description");
+  // hreflang : la page anglaise et sa version française se renvoient l'une à l'autre (x-default = anglais)
+  html = html.replace(/(<link rel="canonical" href="[^"]*" \/>)/, `$1
+    <link rel="alternate" hreflang="en" href="${enUrl}" />
+    <link rel="alternate" hreflang="fr" href="${frUrl}" />
+    <link rel="alternate" hreflang="x-default" href="${enUrl}" />`);
+  const items = [`{"@type": "ListItem", "position": 1, "name": "NOXEL FORGE", "item": "${homeUrl}"}`];
+  if (page.crumb) items.push(`{"@type": "ListItem", "position": 2, "name": "${page.crumb}", "item": "${url}"}`);
   html = html.replace(
     /("@type": "BreadcrumbList",\s*"itemListElement": \[)[\s\S]*?(\])/,
-    (_m, a, b) => `${a}\n        {"@type": "ListItem", "position": 1, "name": "NOXEL FORGE", "item": "${ORIGIN}/forge"},\n        {"@type": "ListItem", "position": 2, "name": "${page.crumb}", "item": "${url}"}\n      ${b}`
+    (_m, a, b) => `${a}\n        ${items.join(",\n        ")}\n      ${b}`
   );
+  // Lien visible vers la version française dans le texte lisible sans JavaScript
+  const frLink = (h) => (fr ? h : h.replace("</footer>", `<p><a href="/${page.fr}" hreflang="fr" lang="fr">Version française</a></p></footer>`));
+  if (!page.body) return frLink(html); // accueil anglais : texte de secours et FAQ de index.html gardés
   // La FAQ de l'accueil ne décrit pas cette page : JSON-LD et section retirés.
   html = html.replace(/\s*<script type="application\/ld\+json">\s*\{\s*"@context": "https:\/\/schema\.org",\s*"@type": "FAQPage"[\s\S]*?<\/script>/, "");
   const fallbackRe = /(<div id="root">\s*<div [^>]*>)[\s\S]*?(<\/div>\s*<\/div>\s*(?:<script type="module"|<\/body>))/;
   if (!fallbackRe.test(html)) throw new Error("route-pages: texte de secours introuvable");
   // Fonction de remplacement : les « $20 » du texte ne doivent pas être lus comme $2 + "0"
   html = html.replace(fallbackRe, (_m, a, b) => `${a}${page.body}\n      ${b}`);
-  return html;
+  return frLink(html);
 }
 
 export function writeRoutePages(dist) {

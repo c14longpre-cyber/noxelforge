@@ -59,6 +59,14 @@ export default function App() {
             <Route path="/forge/pricing" element={<ForgePricing />} />
             <Route path="/forge/admin" element={<ForgeAdmin />} />
             <Route path="/forge/guidelines" element={<ForgeGuidelines />} />
+            {/* Version française des pages publiques (Loi 96) : mêmes pages, langue fr (useForgeT) */}
+            <Route path="/fr" element={<Navigate to="/fr/forge" replace />} />
+            <Route path="/fr/forge" element={<ForgeLanding />} />
+            <Route path="/fr/forge/submit" element={<ForgeSubmit />} />
+            <Route path="/fr/forge/partners" element={<ForgePartners />} />
+            <Route path="/fr/forge/badge" element={<ForgeBadge />} />
+            <Route path="/fr/forge/pricing" element={<ForgePricing />} />
+            <Route path="/fr/forge/guidelines" element={<ForgeGuidelines />} />
           </Routes>
         </Suspense>
         <ForgeNivo />
