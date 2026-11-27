@@ -111,7 +111,7 @@ export default function Footer({
   locale = 'en',
 }: FooterProps) {
   // Liens vers les autres sites NOXEL : pas de noreferrer (le choix de consentement voyage dans le lien)
-  const isNoxel = (href: string) => /^https:\/\/(www\.)?(noxel360|noxelseo|noxelforge|noxelspectra)\.com/.test(href);
+  const isNoxel = (href: string) => /^https:\/\/(www\.)?(noxel360|noxelseo|noxelforge|noxelspectra|noxelmarketing)\.com/.test(href);
   const localizeHref = (href: string) => href;
   void locale;
   const year = new Date().getFullYear();

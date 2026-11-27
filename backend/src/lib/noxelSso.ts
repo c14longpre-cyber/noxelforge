@@ -1,5 +1,5 @@
-// NOXEL SSO 1.0 — passage d'une session d'un site NOXEL à l'autre par un lien.
-// Fichier identique dans noxelseo, noxelforge et noxelspectra (backend). Logique pure, testée sans réseau.
+// NOXEL SSO 1.1 — passage d'une session d'un site NOXEL à l'autre par un lien.
+// Fichier identique dans noxelseo, noxelforge, noxelspectra et noxelmarketing (backend). Logique pure, testée sans réseau.
 //
 // Le site d'origine (déjà connecté) signe un jeton de 60 secondes, à usage unique, destiné à UN site, et ouvre
 // la page voulue de ce site avec ?nxsso=<jeton> ; la page l'envoie aussitôt à SA propre API
@@ -9,15 +9,16 @@
 // le lien ouvre simplement l'autre site (connexion demandée comme avant).
 import crypto from "crypto";
 
-export type SiteNoxel = "seo" | "forge" | "spectra";
-export const SITES: readonly SiteNoxel[] = ["seo", "forge", "spectra"];
+export type SiteNoxel = "seo" | "forge" | "spectra" | "marketing";
+export const SITES: readonly SiteNoxel[] = ["seo", "forge", "spectra", "marketing"];
 
 const FRONTS: Record<SiteNoxel, string> = {
   seo: "https://www.noxelseo.com",
   forge: "https://noxelforge.com",
   spectra: "https://app.noxelspectra.com",
+  marketing: "https://noxelmarketing.com",
 };
-export const ACCUEIL: Record<SiteNoxel, string> = { seo: "/app", forge: "/forge/dashboard", spectra: "/" };
+export const ACCUEIL: Record<SiteNoxel, string> = { seo: "/app", forge: "/forge/dashboard", spectra: "/", marketing: "/app" };
 
 /** Adresse publique d'un site (remplaçable par NOXEL_SSO_<SITE>_FRONT pour les essais) */
 export function front(site: SiteNoxel, env: Record<string, string | undefined> = process.env): string {

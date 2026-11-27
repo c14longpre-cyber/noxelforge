@@ -7,6 +7,7 @@
 window.NOXEL_CONSENT_SITES = {
   'noxelseo.com': { siteName: 'NOXEL SEO', policyVersion: 'seo-3', privacyUrl: '/privacy' },
   'noxelforge.com': { siteName: 'NOXEL FORGE', policyVersion: 'forge-4', privacyUrl: '/policies/privacy.html' },
+  'noxelmarketing.com': { siteName: 'NOXEL MARKETING', policyVersion: 'marketing-2', privacyUrl: '/policies/privacy.html' },
   'noxel360.com': { siteName: 'NOXEL360', policyVersion: '360-3', privacyUrl: '/privacy' },
   'noxelspectra.com': { siteName: 'NOXEL SPECTRA', policyVersion: 'spectra-4', privacyUrl: { fr: '/#confidentialite', en: '/en/#privacy' } },
   'app.noxelspectra.com': { siteName: 'NOXEL SPECTRA', policyVersion: 'spectra-app-4', privacyUrl: { fr: 'https://www.noxelspectra.com/#confidentialite', en: 'https://www.noxelspectra.com/en/#privacy' } },
@@ -25,7 +26,7 @@ window.NOXEL_CONSENT_NETWORK = {
   ]
 };
 /* Sites NOXEL entre lesquels le choix est relayé par les liens (1.1.0). */
-window.NOXEL_CONSENT_RELAY_DOMAINS = ['noxel360.com', 'noxelseo.com', 'noxelforge.com', 'noxelspectra.com', 'app.noxelspectra.com', 'video.noxelspectra.com'];
+window.NOXEL_CONSENT_RELAY_DOMAINS = ['noxel360.com', 'noxelseo.com', 'noxelforge.com', 'noxelmarketing.com', 'noxelspectra.com', 'app.noxelspectra.com', 'video.noxelspectra.com'];
 (function () {
   const hostname = location.hostname.replace(/^www\./, '');
   // Langue de la bannière : choix du visiteur gardé par le site (NOXEL360 noxel.language, SEO noxel-lang,
