@@ -1,7 +1,7 @@
-// NOXEL SSO 1.0 (navigateur) — fichier identique dans noxelseo, noxelforge et noxelspectra (frontend/src/noxelSso.ts).
+// NOXEL SSO 1.1 (navigateur) — fichier identique dans noxelseo, noxelforge, noxelspectra et noxelmarketing (frontend/src/noxelSso.ts).
 // Arrivée : la page ouverte avec ?nxsso=<jeton> l'envoie à sa propre API, qui ouvre la session, puis le retire de l'adresse.
 // Départ : lienSso() mène à l'autre site par l'API d'ici, qui y joint un jeton si le compte est connecté.
-export type SiteNoxel = "seo" | "forge" | "spectra";
+export type SiteNoxel = "seo" | "forge" | "spectra" | "marketing";
 
 let enCours: Promise<boolean> | null = null;
 
