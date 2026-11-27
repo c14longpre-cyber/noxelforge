@@ -7,7 +7,7 @@
 window.NOXEL_CONSENT_SITES = {
   'noxelseo.com': { siteName: 'NOXEL SEO', policyVersion: 'seo-3', privacyUrl: '/privacy' },
   'noxelforge.com': { siteName: 'NOXEL FORGE', policyVersion: 'forge-4', privacyUrl: '/policies/privacy.html' },
-  'noxelmarketing.com': { siteName: 'NOXEL MARKETING', policyVersion: 'marketing-2', privacyUrl: '/policies/privacy.html' },
+  'noxelmarketing.com': { siteName: 'NOXEL MARKETING', policyVersion: 'marketing-3', privacyUrl: '/policies/privacy.html' },
   'noxel360.com': { siteName: 'NOXEL360', policyVersion: '360-3', privacyUrl: '/privacy' },
   'noxelspectra.com': { siteName: 'NOXEL SPECTRA', policyVersion: 'spectra-4', privacyUrl: { fr: '/#confidentialite', en: '/en/#privacy' } },
   'app.noxelspectra.com': { siteName: 'NOXEL SPECTRA', policyVersion: 'spectra-app-4', privacyUrl: { fr: 'https://www.noxelspectra.com/#confidentialite', en: 'https://www.noxelspectra.com/en/#privacy' } },
